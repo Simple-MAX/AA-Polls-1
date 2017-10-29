@@ -4,7 +4,7 @@
 *                                                   *
 *         Developed by : Bachir Bouchemla           *
 *                                                   *
-*     Date of development : Mid September 2017      *
+*      Date of development : Late October 2017      *
 *                                                   *
 *   Copyrights @ MicroAA Labs | BluDay | botprizm   *
 *                                                   *
