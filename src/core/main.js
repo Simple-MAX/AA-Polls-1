@@ -21,6 +21,15 @@ var previousIndex   = 0;
 
 const MAIN_VIEW_INDEX = 0;
 
+const SCRIPT_PATHS = [
+    "networking/backend.js",
+    "user/auth.js"
+];
+
+const DEFERRED_SCRIPTS = [
+    "networking/backend.js"
+];
+
 // Vanilla JS default onload function
 window.onload = function()
 {
@@ -39,6 +48,27 @@ window.onload = function()
     // Sets everything
     initialize();
     */
+
+    /* Loops through all scripts from an array
+     * and initializes given script at given index
+     * with a true or false stated deferred option
+     */
+    for (let i = 0; i < SCRIPT_PATHS.length; i++) {
+        // Deferred boolean statement, default value is false
+        let deferred = false;
+
+        // Loops through constant deferred scripts
+        for (let j = 0; j < DEFERRED_SCRIPTS; j++) {
+            // Checks whether current script is deferred or not
+            if (SCRIPT_PATHS[i] == DEFERRED_SCRIPTS[j]) {
+                // Sets it to true
+                deferred = true;
+            }
+        }
+
+        // Adds the script to the page
+        include(SCRIPT_PATHS[i], deferred);
+    }
 }
 
 // Initiatlizes the main interval 
