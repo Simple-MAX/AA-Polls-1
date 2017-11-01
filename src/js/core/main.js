@@ -60,10 +60,8 @@ window.onload = function()
         // Loops through constant deferred scripts
         for (let j = 0; j < DEFERRED_SCRIPTS; j++) {
             // Checks whether current script is deferred or not
-            if (SCRIPT_PATHS[i] == DEFERRED_SCRIPTS[j]) {
-                // Sets it to true
+            if (SCRIPT_PATHS[i] == DEFERRED_SCRIPTS[j])
                 deferred = true;
-            }
         }
 
         // Adds the script to the page
