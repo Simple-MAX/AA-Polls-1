@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    border: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -69,4 +70,61 @@
 
 .nav-meny-container > li:active{
     background-color: #999;
+}
+
+
+
+/*     LOGIN     */
+
+.login-container {
+    width: 400px;
+    height: 380px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.login-content {
+    background-color: #eee;
+    width: 400px;
+    height: 380px;
+}
+
+.login-content > h1 {
+    width: 400px;
+    padding: 40px 0;
+    background-color: #eee;
+    color: #111;
+    text-align: center;
+    display: block;
+}
+
+.login-content > input {
+    color: #111;
+    width: 80%;
+    height: 30px;
+    margin: 0 10%;
+    margin-bottom: 45px;
+    display: block;
+    transition: all 0.3s ease-in-out;
+    border-bottom: 2px solid #111;
+    background-color: #eee;
+}
+
+.login-content > p {
+    color: #111;
+    margin-left: 10%;
+    font-size: 17px;
+}
+
+#login-submit {
+    width: 40%;
+    height: 40px;
+    margin: 20px 30%;
+    border-bottom: 2px solid #111;
+    background-color: #111;
+    color: #fff;
 }
