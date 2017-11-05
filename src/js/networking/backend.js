@@ -13,6 +13,12 @@
 * /**************************************************
 */
 
+// Constant variables 
+const apiUrl = API_URL;
+
+// Regular variables 
+var url = API_URL;
+
 // Attempts to authenticate the user and executes a final action
 function loginUser() {
     // Gets the appropriate elements and it's values
@@ -26,7 +32,7 @@ function loginUser() {
     var urlParams = createUrlParams(["email", "password"], [email, pass]);
 
     // A constant url link with a type of string, to prevent updates
-    var url = API_PATH + "user.php" + urlParams;
+    url = `${API_URL}${endpoint.user}${urlParams}`;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
@@ -45,18 +51,12 @@ function loginUser() {
             */
             userData = result["data"];
 
-            /* Test sequence (not relevant)
-            const value = "Welcome Mr." + userData["last_name"];
-
-            document.getElementById("status").innerHTML = value;
-
-            showView(3, false, true);
-            */
+            // Work in progress            
         } else {
-            // TODO
+            // TODO - Result of error
         }
     } else if (typeof result == "string") {
-        // TODO
+        // TODO - Result of error from local script
     }
 }
 
