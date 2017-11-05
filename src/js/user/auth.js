@@ -20,7 +20,7 @@ function loginUser() {
     // Gets the appropriate elements and it's values
     const email   = document.getElementById("login-email").value;
     const pass    = document.getElementById("login-pass").value;
-
+    
     /* Creates a string and executes the createUrlParams function
      * and returns a string output which is valid for URL requests.
      * This passes some desired key names and values in separate arrays
@@ -55,7 +55,7 @@ function loginUser() {
             // TODO
         }
     } else if (typeof result == "string") {
-        // TODO
+        document.getElementById("status-test").innerHTML = result;
     }
 }
 
