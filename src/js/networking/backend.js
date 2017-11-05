@@ -32,7 +32,7 @@ function loginUser() {
     var urlParams = createUrlParams(["email", "password"], [email, pass]);
 
     // A constant url link with a type of string, to prevent updates
-    url = `${API_URL}${endpoint.user}${urlParams}`;
+    url = `${apiUrl}${endpoint.user}${urlParams}`;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
