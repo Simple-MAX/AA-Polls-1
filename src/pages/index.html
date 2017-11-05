@@ -1,12 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html lang="sv">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../css/main-style.css">
+
         <title>AA-Polls</title>
 
         <script type="text/javascript" src="../js/core/main.js"></script>
+        <script type="text/javascript" src="../../lib/jquery/jquery-3.2.1.min.js"></script>
     </head>
     <body>
         <header>
@@ -17,6 +19,7 @@
                             <h1>Mental hälsa</h1>
                             <h4>Administrationpanel</h4>
                         </div>
+
                         <div class="nav-meny-container">
                             <li>Statistik</li>
                             <li>Frågor</li>
@@ -29,9 +32,16 @@
             <div class="login-container">
                 <div class="login-content">
                     <h1>Logga in</h1>
-                    <p>Email</p><input id="login-email" type="Email">
-                    <p>Password</p><input id="login-pass" type="password">
-                    <input id="login-submit" placeholder="Password" type="submit" onclick="loginUser()">
+
+                    <p>Email</p><input id="login-email" type="email" />
+                    <p>Password</p><input id="login-pass" type="password" />
+
+                    <input 
+                        id="login-submit" 
+                        placeholder="Password" 
+                        value="Logga in" 
+                        type="submit"
+                    />
 
                     <!-- Testing only -->
                     <p id="status-test">nAn</p>

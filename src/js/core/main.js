@@ -14,7 +14,7 @@
 */
 
 // Regular Variables
-var views;
+var views = [];
 
 var currentIndex    = 0;
 var previousIndex   = 0;
@@ -23,34 +23,20 @@ var previousIndex   = 0;
 const MAIN_VIEW_INDEX = 0;
 
 const SCRIPT_PATHS = [
-    "../js/networking/backend.js",
-    "../js/networking/config.js",
-    "../js/user/auth.js"
+    "networking/backend.js",
+    "networking/config.js",
+    "user/auth.js"
 ];
 
 const DEFERRED_SCRIPTS = [
-    "../js/networking/backend.js"
+    "networking/backend.js",
+    "networking/config.js",
+    "user/auth.js"
 ];
 
 // Vanilla JS default onload function
 window.onload = function()
 {
-    /*
-    // Appends different views to an array
-    views = [
-        document.getElementById("login-view"),
-        document.getElementById("register-view"),
-        document.getElementById("reset-view"),
-        document.getElementById("home-view")
-    ];
-
-    // Assigns the back button to an exisiting back button element
-    backBtn = document.getElementById("back");
-
-    // Sets everything
-    initialize();
-    */
-
     /* Loops through all scripts from an array
      * and initializes given script at given index
      * with a true or false stated deferred option
@@ -62,13 +48,17 @@ window.onload = function()
         // Loops through constant deferred scripts
         for (let j = 0; j < DEFERRED_SCRIPTS; j++) {
             // Checks whether current script is deferred or not
-            if (SCRIPT_PATHS[i] == DEFERRED_SCRIPTS[j])
+            if (SCRIPT_PATHS[i] == DEFERRED_SCRIPTS[j] && 
+                DEFERRED_SCRIPTS[j] != null)
                 deferred = true;
         }
 
         // Adds the script to the page
-        include(SCRIPT_PATHS[i], deferred);
+        include("../js/" +  SCRIPT_PATHS[i], deferred);
     }
+
+    // Triggers the primary essential function
+    initialize();
 }
 
 // Initiatlizes the main interval 
@@ -77,7 +67,7 @@ function initialize() {
     console.log("Loaded!");
 
     // Shows the primary view with no animation
-    showView(MAIN_VIEW_INDEX);
+    // showView(MAIN_VIEW_INDEX);
 }
 
 // Shows a view from a specified index, with optional animation and reset options
@@ -128,13 +118,13 @@ function goBack() {
 /* Includes a specified script to the current webpage,
  * which can be accessed globally and locally
  */
-function include(uri, deferred = true) {
+function include(uri, deferred = false) {
     // Creates a new script element, with mandatory options
     let script = document.createElement("script");
 
     // Default options
-    script.src      = uri;
     script.type     = "text/javascript";
+    script.src      = uri;
     script.defer    = deferred;
 
     // Appends the newly created element to the head element

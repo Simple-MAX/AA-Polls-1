@@ -13,6 +13,8 @@
 * /**************************************************
 */
 
+var url = "";
+
 // Attempts to authenticate the user and executes a final action
 function loginUser() {
     // Gets the appropriate elements and it's values
@@ -26,7 +28,7 @@ function loginUser() {
     var urlParams = createUrlParams(["email", "password"], [email, pass]);
 
     // A constant url link with a type of string, to prevent updates
-    var url = API_PATH + "user.php" + urlParams;
+    url = `${apiUrl}${endpoint.user}${urlParams}`;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
