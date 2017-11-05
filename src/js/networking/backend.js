@@ -22,7 +22,7 @@ function createUrlParams(keys, values) {
     var params = "?";
 
     // Loops through all key array values
-    for (let i = 0; i < key.length; i++) {
+    for (let i = 0; i < keys.length; i++) {
         /* Checks whether the specified index value in values array
          * is empty or not, if it is, assign it to "0" instead
          */
@@ -37,7 +37,7 @@ function createUrlParams(keys, values) {
         /* If the current index is not the last, add an ampersand for
          * mulitple parameters which might be given or not
          */
-        if (i != key.length - 1) params += "&";
+        if (i != keys.length - 1) params += "&";
     }
 
     // Finally returns the result as a string

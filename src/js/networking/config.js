@@ -23,13 +23,13 @@
  */
 
 // Constant variables
-const API_DOMAIN    = "http://localhost:8080";
+const API_DOMAIN    = "http://localhost";
 const API_PATH      = "/AA-Polls/lib/api/";
 
 const API_URL = API_DOMAIN + API_PATH;
 
 const endpoint = {
-    user: "user",
+    user: "user.php",
     poll: "poll"
 };
 
