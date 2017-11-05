@@ -45,13 +45,10 @@ function loginUser() {
             */
             userData = result["data"];
 
-            /* Test sequence (not relevant)
+            // Test sequence (not relevant)
             const value = "Welcome Mr." + userData["last_name"];
 
-            document.getElementById("status").innerHTML = value;
-
-            showView(3, false, true);
-            */
+            document.getElementById("status-test").innerHTML = value;
         } else {
             // TODO
         }

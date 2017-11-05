@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../css/main-style.css">
         <title>AA-Polls</title>
+
+        <script type="text/javascript" src="../js/core/main.js"></script>
     </head>
     <body>
         <header>
@@ -29,7 +31,10 @@
                     <h1>Logga in</h1>
                     <p>Email</p><input id="login-email" type="Email">
                     <p>Password</p><input id="login-pass" type="password">
-                    <input id="login-submit" placeholder="Password" type="submit">
+                    <input id="login-submit" placeholder="Password" type="submit" onclick="loginUser()">
+
+                    <!-- Testing only -->
+                    <p id="status-test">nAn</p>
                 </div>
             </div>
 

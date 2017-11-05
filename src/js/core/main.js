@@ -13,21 +13,23 @@
 * /**************************************************
 */
 
-// Variables
+// Regular Variables
 var views;
 
 var currentIndex    = 0;
 var previousIndex   = 0;
 
+// Constant variables
 const MAIN_VIEW_INDEX = 0;
 
 const SCRIPT_PATHS = [
-    "networking/backend.js",
-    "user/auth.js"
+    "../js/networking/backend.js",
+    "../js/networking/config.js",
+    "../js/user/auth.js"
 ];
 
 const DEFERRED_SCRIPTS = [
-    "networking/backend.js"
+    "../js/networking/backend.js"
 ];
 
 // Vanilla JS default onload function
@@ -136,6 +138,6 @@ function include(uri, deferred = true) {
     script.defer    = deferred;
 
     // Appends the newly created element to the head element
-    document.getElementsByName("head").item(0).appendChild(script);
+    document.head.appendChild(script);
 }
 
