@@ -23,7 +23,7 @@
  */
 
 // Constant variables
-const API_DOMAIN    = "http://localhost";
+const API_DOMAIN    = "http://192.168.10.215";
 const API_PATH      = "/AA-Polls/lib/api/";
 
 const API_URL = API_DOMAIN + API_PATH;

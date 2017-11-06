@@ -41,7 +41,7 @@ function loginUser() {
      */
     if (typeof result == "object") {
         // If the result was successful and successfully authenticated, else
-        if (result["success"]) {
+        if (result["success"] && result["data"] != null) {
             /* Assign a global variable to the "data" object,
             * given from the current, finished request output
             */
@@ -52,7 +52,7 @@ function loginUser() {
 
             document.getElementById("status-test").innerHTML = value;
         } else {
-            // TODO
+            document.getElementById("status-test").innerHTML = "Incorrect credentials";
         }
     } else if (typeof result == "string") {
         document.getElementById("status-test").innerHTML = result;
