@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="sv">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../css/main-style.css">
+
+        <title>AA-Polls</title>
+
+        <script type="text/javascript" src="../js/core/main.js"></script>
+        <script type="text/javascript" src="../../lib/jquery/jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="nav-main">
+                    <div class="nav-container">
+                        <div class="nav-logo-container">
+                            <h1>Mental hälsa</h1>
+                            <h4>Administrationpanel</h4>
+                        </div>
+
+                        <div class="nav-meny-container">
+                            <li>Statistik</li>
+                            <li>Frågor</li>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+           <div class="form-main">
+                <div class="form-wrapper">
+                    <div class="form-date">
+                        <input id="form-date">
+                    </div>
+                    <div class="form-container">
+                        <div class="form-col-0">
+                            <h2>Inledande</h2>
+                            <div class="form-col-1-input">
+                                <input></input>
+                            </div>
+                            <div class="form-col-1-input">
+                                <input></input>    
+                            </div>
+                            <div class="form-col-1-input">
+                                <input></input>   
+                            </div>
+                            
+                        </div>
+                        <div class="form-col-1">
+                            <h2>Detalijerat</h2>
+                            <p>Prognos (Lång resp. kort sikt)</p>
+                            <div class="form-col-2-input">
+                                    <input></input>
+                                    <textarea class="form-input-textarea" placeholder="Ytterligare prognos"></textarea> 
+                            </div>
+                            <div class="form-col-2-input">
+                                <div class="form-col-2-input-divider">
+                                    <input type="range" name="" min="0" max="10">
+                                    <input></input>
+                                    <input placeholder="Ytterligare prognos"></input>
+                                </div>
+                                <div class="form-col-2-input-divider">
+                                    <input type="range" name="" min="0" max="10">
+                                    <input></input>
+                                    <input placeholder="Ytterligare prognos"></input>
+                                </div>
+                                <input id="form-submit" value="Skicka" type="submit" onclick="formnSubmit()"
+                            />   
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+           </div>
+
+        </main>
+        <footer>
+        </footer> 
+        <script>
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; 
+            var yyyy = today.getFullYear();
+            today = dd+'-'+mm+'-'+yyyy;
+
+            document.getElementById("form-date").value =
+            today;
+        </script>
+    </body> 
+</html> 
