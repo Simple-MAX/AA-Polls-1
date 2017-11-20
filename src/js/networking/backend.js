@@ -13,6 +13,39 @@
 * /**************************************************
 */
 
+/*
+{
+  "poll_id": "AA-P-123456789",
+  "poll": {
+    "id": "123456789",
+    "date": "2017-11-18T22:00:30",
+    "general_rate": 0,
+    "initial": {
+      "group": "nAn",
+      "estimation_total": "nAn",
+      "max_low": "nAn"
+    },
+    "details": {
+      "prognosis": {
+        option: "nAn",
+        info: ""
+      },
+      "influences": {
+        rate: 0,
+        option: "nAn",
+        info: ""
+      },
+      "actions": {
+        rate: 0,
+        option: "nAn",
+        info: ""
+      }
+    }
+  }
+}
+*/
+
+
 // Creates parameters for a url with key and value arrays
 function createUrlParams(keys, values) {
     /* First string needs a question mark after endpoint,
