@@ -233,7 +233,7 @@ input[type=range]::-webkit-slider-thumb {
     background: #ffffff;
     cursor: pointer;
     border: 1px #000 solid ;
-    margin-top: -5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    margin-top: -10px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   }
   
   /* All the same stuff for Firefox */
@@ -243,7 +243,7 @@ input[type=range]::-webkit-slider-thumb {
     background: #ffffff;
     cursor: pointer;
     border: 1px #000 solid ;
-    margin-top: -5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    margin-top: -10px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   }
   
   /* All the same stuff for IE */
@@ -253,7 +253,7 @@ input[type=range]::-webkit-slider-thumb {
     background: #ffffff;
     cursor: pointer;
     border: 1px #000 solid ;
-    margin-top: -5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    margin-top: -10px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   }
 
   input[type=range]::-webkit-slider-runnable-track {
