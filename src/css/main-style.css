@@ -3,17 +3,21 @@
     margin: 0;
     border: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    letter-spacing: 0.5px;
 }
 
 /*      NAV    */
-
 .nav-main {
     width: 100%;
     height: 100px;
     display: block;
+    background-color: #8a199e;
+    border-bottom: 10px solid #810097;
+}
+
+.admin-panel.nav-main {
     background-color: #222;
-    border-bottom: 5px solid #999;
 }
 
 .nav-container {
@@ -36,7 +40,6 @@
     display: block;
     text-align: left;
     color: #fafafa;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: 700; 
 }
 
@@ -45,31 +48,48 @@
     display: block;
     text-align: left;
     color: #999;
-    font-family: Arial, Helvetica, sans-serif; 
+}
+
+.admin-panel .nav-logo-container > h4 {
+    color: #8a199e;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+}
+
+.admin-panel .nav-logo-container > h1 {
+    font-size: 2em;
+    letter-spacing: 2.5px;
 }
 
 .nav-meny-container {
-    width: 30%;
+    width: 25%;
     display: block;
-    margin-left: 20%;
-    margin-top: 50px;
-    height: 50px;
+    margin-left: 25%;
+    margin-top: 40px;
+    height: 60px;
     float: right;
 }
 
 .nav-meny-container > li{
     width: 50%;
     display: block;
-    height: 50px;
+    height: 60px;
     float: left;
     color: #fff;
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 40px;
+    line-height: 55px;
+    transition: 0.3s background-color linear;
 }
 
 .nav-meny-container > li:active{
-    background-color: #999;
+    background-color: #8a199e;
+}
+.nav-meny-container > li:hover{
+    background-color: #8a199e;
+}
+
+.nav-meny-container > .active{
+    background-color: #8a199e;
 }
 
 
@@ -110,7 +130,7 @@
     margin-bottom: 45px;
     display: block;
     transition: all 0.3s ease-in-out;
-    border-bottom: 2px solid #111;
+    border-bottom: 2px solid #8a199e;
     background-color: #eee;
 }
 
@@ -124,10 +144,9 @@
     width: 40%;
     height: 40px;
     margin: 20px 30%;
-    border-bottom: 2px solid #111;
-    background-color: #111;
+    border-bottom: 2px solid #8a199e;;
+    background-color: #8a199e;;
     color: #fff;
-
     cursor: pointer;
 }
 
@@ -140,71 +159,101 @@
     height: 800px;
 }
 
-.form-wrapper {
+.form-main .form-wrapper {
     width: 65%;
     margin: 0 17.5%;
     height: 800px;
     display: block;
 }
 
-.form-date-container {
+.form-main .form-date-container {
     width: 100%;
     height: 50px;
 
 }
 
-.form-container {
+.form-main .form-container {
     width: 100%;
     height: 750px;
 }
 
-.form-col-0 {
+.form-main .form-col-0 {
     width: 100%;
-    height: 20%;
+    height: 15%;
     margin: 2.5% 0;
 }
 
-.form-col-1 {
+.form-main h2 {
+    color: #810097;
+}
+
+.form-main .form-col-1 {
     width: 100%;
-    height: 80%;
+    height: 85%;
     margin: 2.5% 0;
 }
 
-.form-col-1-input {
-    width: 24%;
-    margin-right:  9%;
+.form-main .form-col-1-input {
+    width: 33%;
     display: block;
     float: left;
 }
 
 .form-main input {
     border: 1px #111 solid;
-    border-radius: 3px;
+    border-radius: 4px;
     color: #111;
     height: 30px;
+    margin: 15px 0;
 }
 
-.form-col-2-input-divider {
+.form-main .form-col-2-input-divider {
     width: 45%;
-    margin: 2.5%;
+    margin: 30px 0;
+    margin-right: 2.5%;
     float: left;
     display: block;
 }
 
-.form-input-textarea {
+.form-main .form-input-textarea {
     width: 70%;
     margin-right: 30%;
     border: 1px #111 solid;
     border-radius: 3px;
     color: #111;
-    height: 110px;
+    height: 140px;
+    resize: none;
+}
+
+.form-main .form-input-button {
+    width: 32%;
+    margin:0 34%;
+    background-color: #8a199e;
+    color: #fff;
+    border: 0px;
+    height: 35px;
+}
+
+.form-main .form-col-2-input-divider > input {
+    width: 90%;
+    margin-right: 10%;
+}
+
+.form-main .form-col-2-input-divider > textarea {
+    width: 90%;
+    margin-right: 10%;
+    border: 1px #111 solid;
+    border-radius: 3px;
+    color: #111;
+    height: 140px;
     resize: none;
 }
 
 input[type=range] {
     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-    width: 100%; /* Specific width is required for Firefox. */
+    width: 90%; /* Specific width is required for Firefox. */
     background: transparent; /* Otherwise white in Chrome */
+    border: 0px;
   }
   
   input[type=range]::-webkit-slider-thumb {

@@ -19,11 +19,6 @@
                             <h1>Mental hälsa</h1>
                             <h4>Administrationpanel</h4>
                         </div>
-
-                        <div class="nav-meny-container">
-                            <li>Statistik</li>
-                            <li>Frågor</li>
-                        </div>
                     </div>
                 </div>
             </nav>
@@ -36,7 +31,7 @@
                     </div>
                     <div class="form-container">
                         <div class="form-col-0">
-                            <h2>Inledande</h2>
+                            <h2>Bedömning</h2>
                             <div class="form-col-1-input">
                                 <p>Grupp</p>
                                 <input>
@@ -55,24 +50,23 @@
                             <h2>Detalijerat</h2>
                             <p>Prognos (Lång resp. kort sikt)</p>
                             <div class="form-col-2-input">
-                                    <p>Prognos (Lång resp. kort sikt)</p>
-                                    <input>
+                                    <input placeholder="Prognosalternativ">
                                     <textarea class="form-input-textarea" placeholder="Ytterligare prognos"></textarea> 
                             </div>
                             <div class="form-col-2-input">
                                 <div class="form-col-2-input-divider">
-                                    <p>Påverkandefaktorer</p>
-                                    <input type="range" name="" min="0" max="10">
-                                    <input>
-                                    <input placeholder="Ytterligare prognos">
+                                    <h4>Påverkandefaktorer</h4>
+                                    <input type="range" name="" min="0" max="10" value="2">
+                                    <input placeholder="Åtgärdsalternativ">
+                                    <textarea placeholder="Ytterligare prognos"></textarea>
                                 </div>
                                 <div class="form-col-2-input-divider">
-                                    <p>Åtgärder</p>
-                                    <input type="range" name="" min="0" max="10">
-                                    <input>
-                                    <input placeholder="Ytterligare prognos">
+                                    <h4>Åtgärder</h4>
+                                    <input type="range" name="" min="0" max="10" value="2">
+                                    <input placeholder="Påverkansalternativ">
+                                    <textarea placeholder="Ytterligare prognos"></textarea>
                                 </div>
-                                <input id="form-submit" value="Skicka" type="submit" onclick="formnSubmit()"
+                                <input class="form-input-button" id="form-submit" value="Skicka" type="submit" onclick="formnSubmit()"
                             />   
                             </div>    
                         </div>
