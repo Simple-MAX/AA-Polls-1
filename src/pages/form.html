@@ -26,49 +26,54 @@
         <main>
            <div class="form-main">
                 <div class="form-wrapper">
-                    <div class="form-date">
-                        <input id="form-date">
+                    <div class="form-left-divider">
+                        <input orient="vertical" type="range" id="vertical-input">
                     </div>
-                    <div class="form-container">
-                        <div class="form-col-0">
-                            <h2>Bedömning</h2>
-                            <div class="form-col-1-input">
-                                <p>Grupp</p>
-                                <input>
-                            </div>
-                            <div class="form-col-1-input">
-                                <p>Skattning totalt</p>
-                                <input>    
-                            </div>
-                            <div class="form-col-1-input">
-                                <p>Lägst resp. högst</p>
-                                <input>   
-                            </div>
-                            
+                    <div class="form-right-divider">
+                        <div class="form-date">
+                            <input id="form-date">
                         </div>
-                        <div class="form-col-1">
-                            <h2>Detalijerat</h2>
-                            <p>Prognos (Lång resp. kort sikt)</p>
-                            <div class="form-col-2-input">
-                                    <input placeholder="Prognosalternativ">
-                                    <textarea class="form-input-textarea" placeholder="Ytterligare prognos"></textarea> 
+                        <div class="form-container">
+                            <div class="form-col-0">
+                                <h2>Bedömning</h2>
+                                <div class="form-col-1-input">
+                                    <p>Grupp</p>
+                                    <input>
+                                </div>
+                                <div class="form-col-1-input">
+                                    <p>Skattning totalt</p>
+                                    <input>    
+                                </div>
+                                <div class="form-col-1-input">
+                                    <p>Lägst resp. högst</p>
+                                    <input>   
+                                </div>
+                                
                             </div>
-                            <div class="form-col-2-input">
-                                <div class="form-col-2-input-divider">
-                                    <h4>Påverkandefaktorer</h4>
-                                    <input type="range" name="" min="0" max="10" value="2">
-                                    <input placeholder="Åtgärdsalternativ">
-                                    <textarea placeholder="Ytterligare prognos"></textarea>
+                            <div class="form-col-1">
+                                <h2>Detalijerat</h2>
+                                <p>Prognos (Lång resp. kort sikt)</p>
+                                <div class="form-col-2-input">
+                                        <input placeholder="Prognosalternativ">
+                                        <textarea class="form-input-textarea" placeholder="Ytterligare prognos"></textarea> 
                                 </div>
-                                <div class="form-col-2-input-divider">
-                                    <h4>Åtgärder</h4>
-                                    <input type="range" name="" min="0" max="10" value="2">
-                                    <input placeholder="Påverkansalternativ">
-                                    <textarea placeholder="Ytterligare prognos"></textarea>
-                                </div>
-                                <input class="form-input-button" id="form-submit" value="Skicka" type="submit" onclick="formnSubmit()"
-                            />   
-                            </div>    
+                                <div class="form-col-2-input">
+                                    <div class="form-col-2-input-divider">
+                                        <h4>Påverkandefaktorer</h4>
+                                        <input type="range" name="" min="0" max="10" value="2">
+                                        <input placeholder="Åtgärdsalternativ">
+                                        <textarea placeholder="Ytterligare prognos"></textarea>
+                                    </div>
+                                    <div class="form-col-2-input-divider">
+                                        <h4>Åtgärder</h4>
+                                        <input type="range" name="" min="0" max="10" value="2">
+                                        <input placeholder="Påverkansalternativ">
+                                        <textarea placeholder="Ytterligare prognos"></textarea>
+                                    </div>
+                                    <input class="form-input-button" id="form-submit" value="Skicka" type="submit" onclick="formnSubmit()"
+                                />   
+                                </div>    
+                            </div>
                         </div>
                     </div>
                 </div>

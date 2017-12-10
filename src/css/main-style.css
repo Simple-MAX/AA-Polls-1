@@ -168,6 +168,27 @@
     display: block;
 }
 
+.form-main .form-left-divider {
+    width: 5%;
+    float: left;
+    display: block;
+    height: 70vh;
+}
+
+.form-main .form-left-divider > input{
+    height: 70vh;
+    width: 70%;
+    margin: 0 15%;
+    -webkit-appearance: slider-vertical;
+    writing-mode: bt-lr; 
+}
+
+.form-main .form-right-divider {
+    width: 95%;
+    float: right;
+    display: block;
+}
+
 .form-main .form-date-container {
     width: 100%;
     height: 50px;
