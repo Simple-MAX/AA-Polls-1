@@ -178,7 +178,7 @@
 .form-main .form-left-divider > input{
     height: 70vh;
     width: 70%;
-    margin: 0 15%;
+    padding: 0 15%;
     -webkit-appearance: slider-vertical;
     writing-mode: bt-lr; 
 }
@@ -228,6 +228,19 @@
     color: #111;
     height: 30px;
     margin: 15px 0;
+}
+
+.form-main select {
+    border: 1px #111 solid;
+    border-radius: 4px;
+    color: #111;
+    height: 30px;
+    margin: 15px 0;
+    width: 90%;
+}
+
+.form-main .form-col-2-input > select {
+    width: 70%;
 }
 
 .form-main .form-col-2-input-divider {

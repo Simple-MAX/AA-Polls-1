@@ -31,22 +31,22 @@
                     </div>
                     <div class="form-right-divider">
                         <div class="form-date">
-                            <input id="form-date">
+                            <input id="date">
                         </div>
                         <div class="form-container">
                             <div class="form-col-0">
                                 <h2>Bedömning</h2>
                                 <div class="form-col-1-input">
                                     <p>Grupp</p>
-                                    <input>
+                                    <input id="judge-group">
                                 </div>
                                 <div class="form-col-1-input">
                                     <p>Skattning totalt</p>
-                                    <input>    
+                                    <input id="tot-tax">    
                                 </div>
                                 <div class="form-col-1-input">
                                     <p>Lägst resp. högst</p>
-                                    <input>   
+                                    <input id="low-high">   
                                 </div>
                                 
                             </div>
@@ -54,21 +54,27 @@
                                 <h2>Detalijerat</h2>
                                 <p>Prognos (Lång resp. kort sikt)</p>
                                 <div class="form-col-2-input">
-                                        <input placeholder="Prognosalternativ">
-                                        <textarea class="form-input-textarea" placeholder="Ytterligare prognos"></textarea> 
+                                        <select id="prognos-alt">
+                                            <option value="Prognosalternativ">Prognosalternativ</option>
+                                        </select>
+                                        <textarea id="prognos-text" class="form-input-textarea" placeholder="Ytterligare prognos"></textarea> 
                                 </div>
                                 <div class="form-col-2-input">
                                     <div class="form-col-2-input-divider">
                                         <h4>Påverkandefaktorer</h4>
-                                        <input type="range" name="" min="0" max="10" value="2">
-                                        <input placeholder="Åtgärdsalternativ">
-                                        <textarea placeholder="Ytterligare prognos"></textarea>
+                                        <input id="impact-factor-range" type="range" name="" min="0" max="10" value="2">
+                                        <select id="impact-factor-alt">
+                                            <option value="Åtgärdsalternativ">Åtgärdsalternativ</option>
+                                        </select>
+                                        <textarea id="impact-factor-text" placeholder="Ytterligare prognos"></textarea>
                                     </div>
                                     <div class="form-col-2-input-divider">
                                         <h4>Åtgärder</h4>
-                                        <input type="range" name="" min="0" max="10" value="2">
-                                        <input placeholder="Påverkansalternativ">
-                                        <textarea placeholder="Ytterligare prognos"></textarea>
+                                        <input id="action-range" type="range" name="" min="0" max="10" value="2">
+                                        <select id="action-alt">
+                                            <option value="Påverkansalternativ">Påverkansalternativ</option>
+                                        </select>
+                                        <textarea id="action-text" placeholder="Ytterligare prognos"></textarea>
                                     </div>
                                     <input class="form-input-button" id="form-submit" value="Skicka" type="submit" onclick="formnSubmit()"
                                 />   
@@ -89,7 +95,7 @@
             var yyyy = today.getFullYear();
             today = dd+'-'+mm+'-'+yyyy;
 
-            document.getElementById("form-date").value =
+            document.getElementById("date").value =
             today;
         </script>
     </body> 
