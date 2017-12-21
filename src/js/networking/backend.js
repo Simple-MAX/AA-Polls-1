@@ -17,18 +17,25 @@
 {
   "poll_id": "AA-P-123456789",
   "poll": {
-    "id": "123456789",
+    "user_id": "123456789",
     "date": "2017-11-18T22:00:30",
     "general_rate": 0,
     "initial": {
       "group": "nAn",
-      "estimation_total": "nAn",
-      "max_low": "nAn"
+      "estimation_total": 0,
+      "min": 0,
+      "max": 0
     },
     "details": {
       "prognosis": {
-        option: "nAn",
-        info: ""
+        "short": {
+          option: "nAn",
+          info: ""
+        }, 
+        "long": {
+          option: "nAn",
+          info: ""
+        }
       },
       "influences": {
         rate: 0,
@@ -44,7 +51,6 @@
   }
 }
 */
-
 
 // Creates parameters for a url with key and value arrays
 function createUrlParams(keys, values) {

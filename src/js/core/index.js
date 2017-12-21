@@ -1,6 +1,6 @@
 /****************************************************
 *                                                   *
-*                 BluDay - main.js                  *
+*                BluDay - index.js                  *
 *                                                   *
 *         Developed by : Bachir Bouchemla           *
 *                                                   *
@@ -23,20 +23,29 @@ var previousIndex   = 0;
 const MAIN_VIEW_INDEX = 0;
 
 const SCRIPT_PATHS = [
-    "networking/backend.js",
-    "networking/config.js",
-    "user/auth.js"
+    "../js/networking/backend.js",
+    "../js/networking/config.js",
+    "../js/user/auth.js",
+    "../js/statistics/statistics.js",
+    "../../lib/Chart/Chart.js"
 ];
 
-const DEFERRED_SCRIPTS = [
-    "networking/backend.js",
-    "networking/config.js",
-    "user/auth.js"
-];
+const DEFERRED_SCRIPTS = [  ];
 
 // Vanilla JS default onload function
 window.onload = function()
 {
+    // Triggers the primary essential function
+    initialize();
+
+    renderStatistics("statistics");
+}
+
+// Initiatlizes the main interval 
+function initialize() {
+    // Logs initial message
+    console.log("Loaded!");
+
     /* Loops through all scripts from an array
      * and initializes given script at given index
      * with a true or false stated deferred option
@@ -45,29 +54,20 @@ window.onload = function()
         // Deferred boolean statement, default value is false
         let deferred = false;
 
-        // Loops through constant deferred scripts
-        for (let j = 0; j < DEFERRED_SCRIPTS; j++) {
-            // Checks whether current script is deferred or not
-            if (SCRIPT_PATHS[i] == DEFERRED_SCRIPTS[j] && 
-                DEFERRED_SCRIPTS[j] != null)
-                deferred = true;
+        // Only if "DEFERRED_SCRIPTS" is greater than zero.
+        if (DEFERRED_SCRIPTS.length > 0) {
+            // Loops through constant deferred scripts
+            for (let j = 0; j < DEFERRED_SCRIPTS; j++) {
+                // Checks whether current script is deferred or not
+                if (SCRIPT_PATHS[i] == DEFERRED_SCRIPTS[j] && 
+                    DEFERRED_SCRIPTS[j] != null)
+                    deferred = true;
+            }
         }
 
         // Adds the script to the page
-        include("../js/" +  SCRIPT_PATHS[i], deferred);
+        include(SCRIPT_PATHS[i], deferred);
     }
-
-    // Triggers the primary essential function
-    initialize();
-}
-
-// Initiatlizes the main interval 
-function initialize() {
-    // Logs initial message
-    console.log("Loaded!");
-
-    // Shows the primary view with no animation
-    // showView(MAIN_VIEW_INDEX);
 }
 
 // Shows a view from a specified index, with optional animation and reset options
@@ -113,6 +113,15 @@ function showView(index, anim = false, reset = false) {
 function goBack() {
     // Goes back to the previous index and resets the current index
     showView(previousIndex, false, true);
+}
+
+// Locates and fetches a specified HTML element
+function getElement(id) {
+    // Finds element with given id
+    element = document.getElementById(id);
+
+    // Returns the element
+    return element;
 }
 
 /* Includes a specified script to the current webpage,
