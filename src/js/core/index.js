@@ -26,26 +26,22 @@ const SCRIPT_PATHS = [
     "../js/networking/backend.js",
     "../js/networking/config.js",
     "../js/user/auth.js",
+    "../../lib/Chart/Chart.js",
     "../js/statistics/statistics.js",
-    "../../lib/Chart/Chart.js"
+    "../js/statistics/config.js",
 ];
 
-const DEFERRED_SCRIPTS = [  ];
+const DEFERRED_SCRIPTS = [];
 
 // Vanilla JS default onload function
-window.onload = function()
+window.onloadstart = function()
 {
     // Triggers the primary essential function
     initialize();
-
-    renderStatistics("statistics");
 }
 
 // Initiatlizes the main interval 
 function initialize() {
-    // Logs initial message
-    console.log("Loaded!");
-
     /* Loops through all scripts from an array
      * and initializes given script at given index
      * with a true or false stated deferred option
@@ -132,8 +128,8 @@ function include(uri, deferred = false) {
     let script = document.createElement("script");
 
     // Default options
-    script.type     = "text/javascript";
     script.src      = uri;
+    script.type     = "text/javascript";
     script.defer    = deferred;
 
     // Appends the newly created element to the head element
