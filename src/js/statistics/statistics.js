@@ -26,6 +26,10 @@ const DEFAULT_STATS = {
     }
 };
 
+window.onload = function() {
+    renderStatistics("canvas");
+}
+
 /* Fetches relevant and requested polls in
  * string format and parses it with JSON.parse(),
  * then loops through and fetches the lowest value

@@ -7,6 +7,11 @@
     letter-spacing: 0.5px;
 }
 
+.title {
+    text-align: center;
+    margin: 30px;
+}
+
 /*      NAV    */
 .nav-main {
     width: 100%;
@@ -92,4 +97,49 @@
 
 .nav-meny-container > .active{
     background-color: #8a199e;
+}
+
+.wrapper {
+    width: 75%;
+    margin: auto;
+    padding: 0;
+}
+
+.wrapper .table {
+    width: 90%;
+    height: 500px;
+    margin: auto;
+    padding: 0;
+}
+
+.table .table-body {
+    
+}
+
+.table .table-row {
+    display: block;
+
+    border: 1px solid #000;
+    border-top: 0;
+
+    height: 50px;
+    width: 100%;
+
+    margin: 0;
+}
+
+.table .table-head {
+    display: block;
+
+    border: 1px solid #000;
+    border-left: 0;
+    border-right: 0;
+
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+
+    margin: 0;
+
+    text-align: left;
 }

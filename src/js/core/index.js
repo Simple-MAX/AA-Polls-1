@@ -34,7 +34,7 @@ const SCRIPT_PATHS = [
 const DEFERRED_SCRIPTS = [];
 
 // Vanilla JS default onload function
-window.onloadstart = function()
+window.onload = function()
 {
     // Triggers the primary essential function
     initialize();
