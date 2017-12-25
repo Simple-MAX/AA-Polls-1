@@ -96,22 +96,50 @@
 }
 
 .wrapper {
-    width: 75%;
-    margin: auto;
-    padding: 0;
+    width: 35%;
+    height: auto;
+    display: block;
+    margin: 30px auto;
 }
 
-.wrapper .table {
-    width: 90%;
-    margin: auto;
-
-    border-collapse: collapse;
+.wrapper > h1{
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
-.table td, th {
-    padding: 10px;
-    
-    border: 1px solid #555;
 
-    text-align: left;
+
+.box-list {
+    width: 100%;
+    height: auto;
+}
+
+.box-row {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+    display: block;
+    border-radius: 5px;
+    background-color: #eee;
+    transition: 0.2s all ease-in;
+}
+
+.box-row:hover {
+    transform: scale(1.01);
+    border: 1px solid #ddd;
+    background-color: #ddd;
+    cursor: pointer; 
+}
+
+.box-row > h3, p{
+    margin: 2.5px 15px;
+    float: left;
+    display: block;
+}
+
+.box-row > p{
+    margin: 6px 8px;
+    float: right;
+    font-weight: 100; 
 }
