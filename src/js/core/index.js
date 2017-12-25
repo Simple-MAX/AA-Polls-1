@@ -29,6 +29,7 @@ const SCRIPT_PATHS = [
     "../../lib/Chart/Chart.js",
     "../js/statistics/statistics.js",
     "../js/statistics/config.js",
+    "../js/misc/table.js"
 ];
 
 const DEFERRED_SCRIPTS = [];

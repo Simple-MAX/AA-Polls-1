@@ -96,15 +96,30 @@
 }
 
 .wrapper {
-    width: 35%;
+    width: 30%;
     height: auto;
     display: block;
     margin: 30px auto;
 }
 
-.wrapper > h1{
+.wrapper > h1 {
     font-weight: 700;
     margin-bottom: 20px;
+}
+
+.wrapper .table {
+    width: 90%;
+    margin: auto;
+
+    border-collapse: collapse;
+}
+
+.table td, th {
+    padding: 10px;
+    
+    border: 1px solid #555;
+
+    text-align: left;
 }
 
 .box-list {
