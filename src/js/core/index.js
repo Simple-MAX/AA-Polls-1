@@ -34,10 +34,9 @@ const SCRIPT_PATHS = [
 const DEFERRED_SCRIPTS = [];
 
 // Vanilla JS default onload function
-window.onload = function()
-{
+window.onload = function() {
     // Triggers the primary essential function
-    initialize();
+    // initialize();
 }
 
 // Initiatlizes the main interval 
@@ -106,19 +105,13 @@ function showView(index, anim = false, reset = false) {
 }
 
 // Goes back to the previous index if navigated beyond once
-function goBack() {
-    // Goes back to the previous index and resets the current index
-    showView(previousIndex, false, true);
-}
+function goBack() { showView(previousIndex, false, true); }
 
-// Locates and fetches a specified HTML element
-function getElement(id) {
-    // Finds element with given id
-    element = document.getElementById(id);
+// Locates and fetches a specified element
+function getElement(id) { return document.getElementById(id); }
 
-    // Returns the element
-    return element;
-}
+// Gets the function of a specific element
+function getElementType(id) { return (typeof document.getElementById(id)); }
 
 /* Includes a specified script to the current webpage,
  * which can be accessed globally and locally

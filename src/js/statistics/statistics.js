@@ -54,6 +54,7 @@ function getStatsAverage() {
 
 }
 
+// Renders a chart using the Chart.js library with given stats
 function renderStatistics(canvasId, stats = DEFAULT_STATS) {
     let finalMin        = stats.chart.min, 
         finalMax        = stats.chart.max, 

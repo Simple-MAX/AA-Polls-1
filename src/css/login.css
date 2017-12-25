@@ -7,11 +7,6 @@
     letter-spacing: 0.5px;
 }
 
-.title {
-    text-align: center;
-    margin: 30px;
-}
-
 /*      NAV    */
 .nav-main {
     width: 100%;
@@ -68,54 +63,58 @@
     letter-spacing: 2.5px;
 }
 
-.nav-meny-container {
-    width: 25%;
-    display: block;
-    margin-left: 25%;
-    margin-top: 40px;
-    height: 60px;
-    float: right;
-}
 
-.nav-meny-container > li{
-    width: 50%;
-    display: block;
-    height: 60px;
-    float: left;
-    color: #fff;
-    text-align: center;
-    line-height: 55px;
-    transition: 0.3s background-color linear;
-}
 
-.nav-meny-container > li:active{
-    background-color: #8a199e;
-}
-.nav-meny-container > li:hover{
-    background-color: #8a199e;
-}
 
-.nav-meny-container > .active{
-    background-color: #8a199e;
-}
-
-.wrapper {
-    width: 75%;
-    margin: auto;
-    padding: 0;
-}
-
-.wrapper .table {
-    width: 90%;
-    margin: auto;
-
-    border-collapse: collapse;
-}
-
-.table td, th {
-    padding: 10px;
+body {
     
-    border: 1px solid #555;
-
-    text-align: left;
+    background-color: whitesmoke;
 }
+
+
+/*     LOGIN     */
+
+.login-content {
+    width: 600px;
+    height: 350px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5%;
+    margin: auto;
+    background-color: white;
+}
+
+.login-content > label {
+    width: 400px;
+    color: #333;
+    font-size: 1em;
+    display: block;
+    margin-left: 10%;
+}
+
+.login-content > input {
+    color: #333;
+    width: 80%;
+    height: 30px;
+    margin: 2% 10%;
+    margin-bottom: 3em;
+    display: block;
+    transition: all 0.3s ease-in-out;
+    border-bottom: 2px solid #8a199e;
+}
+
+
+
+#login-submit {
+    width: 40%;
+    height: 40px;
+    margin: 20px 30%;
+    border-bottom: 2px solid #8a199e;;
+    background-color: #8a199e;;
+    color: #fff;
+    cursor: pointer;
+}
+

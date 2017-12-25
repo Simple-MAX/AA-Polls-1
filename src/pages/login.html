@@ -3,11 +3,11 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/main-style.css">
+        <link rel="stylesheet" type="text/css" href="../css/login.css">
 
         <title>AA-Polls</title>
         
-        <script type="text/javascript" src="../js/core/index.js"></script>
+        <script type="text/javascript" src="../js/core/main.js"></script>
         <script type="text/javascript" src="../../lib/jquery/jquery-3.2.1.min.js"></script>
     </head>
     <body>
@@ -24,8 +24,21 @@
             </nav>
         </header>
         <main>
+           
+            <div class="login-content">
+                
+                <label><b>Username</b></label>
+                <input type="text" placeholder="E-Mail adress" name="uname" required>
+
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                
+                <button type="submit" id="login-submit">Login</button>
+            </div>
+            
+            
         </main>
         <footer>
         </footer> 
     </body> 
-</html>
+</html> 
