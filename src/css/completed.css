@@ -7,10 +7,6 @@
     letter-spacing: 0.5px;
 }
 
-.title {
-    text-align: center;
-    margin: 30px;
-}
 
 /*      NAV    */
 .nav-main {
@@ -52,7 +48,7 @@
 }
 
 .admin-panel .nav-logo-container > h4 {
-    color: #8a199e;
+    color: #999;
     letter-spacing: 2.2px;
     font-weight: 100;
     font-size: 1.3em;
@@ -73,7 +69,7 @@
     float: right;
 }
 
-.nav-meny-container > li{
+.nav-meny-container > a > li{
     width: 50%;
     display: block;
     height: 60px;
@@ -84,34 +80,62 @@
     transition: 0.3s background-color linear;
 }
 
-.nav-meny-container > li:active{
+.nav-meny-container > a > li:active{
     background-color: #8a199e;
 }
-.nav-meny-container > li:hover{
+.nav-meny-container > a > li:hover{
     background-color: #8a199e;
 }
 
-.nav-meny-container > .active{
+.nav-meny-container > a > .active{
     background-color: #8a199e;
 }
 
 .wrapper {
-    width: 75%;
-    margin: auto;
-    padding: 0;
+    width: 35%;
+    height: auto;
+    display: block;
+    margin: 30px 32.5%;
 }
 
-.wrapper .table {
-    width: 90%;
-    margin: auto;
-
-    border-collapse: collapse;
+.wrapper > h1{
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
-.table td, th {
-    padding: 10px;
-    
-    border: 1px solid #555;
 
-    text-align: left;
+
+.forms-list {
+    width: 100%;
+    height: auto;
+}
+
+.forms-list > .div-form {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+    display: block;
+    border-radius: 5px;
+    background-color: #eee;
+    transition: 0.2s all ease-in;
+}
+
+.forms-list > .div-form:hover {
+    transform: scale(1.01);
+    border: 1px solid #ddd;
+    background-color: #ddd;
+    cursor: pointer; 
+}
+
+.forms-list > .div-form > h3, p{
+    margin: 2.5px 15px;
+    float: left;
+    display: block;
+}
+
+.forms-list > .div-form > p{
+    margin: 6px 8px;
+    float: right;
+    font-weight: 100; 
 }
