@@ -47,7 +47,7 @@
     color: #999;
 }
 
-.admin-panel .nav-logo-container > h4 {
+.nav-logo-container > h4 {
     color: #999;
     letter-spacing: 2.2px;
     font-weight: 100;
@@ -55,7 +55,7 @@
     line-height: 1.5em;
 }
 
-.admin-panel .nav-logo-container > h1 {
+.nav-logo-container > h1 {
     font-size: 2em;
     letter-spacing: 2.5px;
 }

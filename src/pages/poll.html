@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../css/main-style.css">
 
-        <title>AA-Polls</title>
+        <title>Formulär - AA-Polls </title>
 
         <script type="text/javascript" src="../js/core/index.js"></script>
         <script type="text/javascript" src="../../lib/jquery/jquery-3.2.1.min.js"></script>
@@ -17,7 +17,9 @@
                     <div class="nav-container">
                         <div class="nav-logo-container">
                             <h1>Mental hälsa</h1>
-                            <h4>Administrationpanel</h4>
+                            <h4>Användarpanel</h4>
+                        </div>
+                        <div class="nav-meny-container">
                         </div>
                     </div>
                 </div>
@@ -44,8 +46,7 @@
                                     <p>Skattning totalt</p>
                                     <input id="tot-tax"/>    
                                 </div>
-                            
-                            <!--- Min resp. Max värde ska ha en picker på 1-10 skala  --->
+                            <!--- Min resp. Max värde ska ha en picker på 1-10 skala  -->
                                 <div class="form-col-1-input">
                                     <p>Lägsta värde</p>
                                     <input id="min"/>   
@@ -54,61 +55,50 @@
                                     <p>Högsta värde</p>
                                     <input id="max"/>   
                                 </div>
-                                
                             </div>
-                        
-                        <!-- Dessa två kolumner ska ligga brevid, intill varandra. 50% var. Först kort sen lång sikt. --->
-                            <div class="form-col-1">
+                            <div class="form-col-2-input">
                                 <h2>Detaljerat</h2>
-                                <div class="form-col-2-input">
-                                    <p>Prognos på kort sikt</p>
-                                        <!--- Du ska kunna välja flera alternativ. Multi select! Värderna ska även hämtas från DB -->
-                                        <select id="prog-short-option">
-                                            <option value="Prognosalternativ">Prognosalternativ</option>
-                                            <option value="Prognosalternativ2">Prognosalternativ2</option>
-                                            <option value="Prognosalternativ3">Prognosalternativ3</option>
-                                            <option value="Prognosalternativ">Prognosalternativ4</option>
-                                            <option value="Prognosalternativ2">Prognosalternativ5</option>
-                                        </select>
-                                        <textarea id="prog-short-info" class="form-input-textarea" placeholder="Ytterligare prognos"></textarea> 
+                                <div class="form-col-2-input-divider">
+                                    <h4>Prognos på kort sikt</h4>
+                                    <input id="prog-short-rate" type="range" name="" min="0" max="10" value="2">
+                                    <select id="prog-short-option">
+                                        <option value="Prognosalternativ">Prognosalternativ</option>
+                                    </select>
+                                    <textarea id="prog-short-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
-                                
-                                <div class="form-col-2-input">
-                                    <p>Prognos på lång sikt</p>
-                                        <select id="prog-long-option">
-                                            <option value="Prognosalternativ">Prognosalternativ</option>
-                                            <option value="Prognosalternativ2">Prognosalternativ2</option>
-                                            <option value="Prognosalternativ3">Prognosalternativ3</option>
-                                            <option value="Prognosalternativ">Prognosalternativ4</option>
-                                            <option value="Prognosalternativ2">Prognosalternativ5</option>
-                                        </select>
-                                        <textarea id="prog-long-info" class="form-input-textarea" placeholder="Ytterligare prognos"></textarea> 
+                                <div class="form-col-2-input-divider">
+                                    <h4>Prognos på lång sikt</h4>
+                                    <input id="prog-long-rate" type="range" name="" min="0" max="10" value="2">
+                                    <select id="prog-long-option">
+                                        <option value="Prognosalternativ">Prognosalternativ</option>
+                                    </select>
+                                    <textarea id="prog-long-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
-                                    
-                                <div class="form-col-2-input">
-                                    <div class="form-col-2-input-divider">
-                                        <h4>Påverkandefaktorer</h4>
-                                        <input id="influences-rate" type="range" name="" min="0" max="10" value="2">
-                                        <select id="influences-option">
-                                            <option value="Påverkansalternativ">Påverkansalternativ</option>
-                                        </select>
-                                        <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
-                                    </div>
-                                    <div class="form-col-2-input-divider">
-                                        <h4>Åtgärder</h4>
-                                        <input id="actions-rate" type="range" name="" min="0" max="10" value="2">
-                                        <select id="actions-option">
-                                            <option value="Åtgärdsalternativ">Åtgärdsalternativ</option>
-                                        </select>
-                                        <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
-                                    </div>
-                                    <input class="form-input-button" id="form-submit" value="Skicka in bedömning" type="submit" onclick="formnSubmit()"
-                                />   
-                                </div>    
                             </div>
+
+                            <div class="form-col-2-input">
+                                <div class="form-col-2-input-divider">
+                                    <h4>Påverkandefaktorer</h4>
+                                    <input id="influences-rate" type="range" name="" min="0" max="10" value="2">
+                                    <select id="influences-option">
+                                        <option value="Påverkansalternativ">Påverkansalternativ</option>
+                                    </select>
+                                    <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
+                                </div>
+                                <div class="form-col-2-input-divider">
+                                    <h4>Åtgärder</h4>
+                                    <input id="actions-rate" type="range" name="" min="0" max="10" value="2">
+                                    <select id="actions-option">
+                                        <option value="Åtgärdsalternativ">Åtgärdsalternativ</option>
+                                    </select>
+                                    <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
+                                </div>
+                                <input class="form-input-button" id="form-submit" value="Skicka in bedömning" type="submit" onclick="formnSubmit()"/>   
+                            </div>    
                         </div>
                     </div>
                 </div>
+            </div>
            
 
         </main>
@@ -119,7 +109,7 @@
             var dd = today.getDate();
             var mm = today.getMonth()+1; 
             var yyyy = today.getFullYear();
-            today = dd+'-'+mm+'-'+yyyy;
+            today = dd+' - '+mm+' - '+yyyy;
 
             document.getElementById("date").value =
             today;

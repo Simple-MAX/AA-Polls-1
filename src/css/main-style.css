@@ -46,15 +46,15 @@
     color: #999;
 }
 
-.admin-panel .nav-logo-container > h4 {
-    color: #8a199e;
+.nav-logo-container > h4 {
+    color: #999;
     letter-spacing: 2.2px;
     font-weight: 100;
     font-size: 1.3em;
     line-height: 1.5em;
 }
 
-.admin-panel .nav-logo-container > h1 {
+.nav-logo-container > h1 {
     font-size: 2em;
     letter-spacing: 2.5px;
 }
@@ -68,7 +68,7 @@
     float: right;
 }
 
-.nav-meny-container > li{
+.nav-meny-container > a > li{
     width: 50%;
     display: block;
     height: 60px;
@@ -79,17 +79,16 @@
     transition: 0.3s background-color linear;
 }
 
-.nav-meny-container > li:active{
+.nav-meny-container > a > li:active{
     background-color: #8a199e;
 }
-.nav-meny-container > li:hover{
-    background-color: #8a199e;
-}
-
-.nav-meny-container > .active{
+.nav-meny-container > a > li:hover{
     background-color: #8a199e;
 }
 
+.nav-meny-container > a > .active{
+    background-color: #8a199e;
+}
 
 
 /*     LOGIN     */
@@ -233,6 +232,12 @@
     height: 30px;
     margin: 15px 0;
     width: 90%;
+}
+
+.form-main .form-col-2-input {
+    display: inline-block;
+    width: 100%;
+    height: auto;
 }
 
 .form-main .form-col-2-input > select {
@@ -379,5 +384,107 @@ input[type=range]::-webkit-slider-thumb {
   }
   input[type=range]:focus::-ms-fill-upper {
     background: linear-gradient(to right, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+  }
+
+
+
+
+
+
+
+  /*     VERTICAL    */
+
+
+
+  .form-left-divider input[type=range] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    height: 100%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+    border: 0px;
+  }
+  
+  .form-left-divider input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+  
+  .form-left-divider input[type=range]:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+  }
+  
+  .form-left-divider input[type=range]::-ms-track {
+    height: 100%;
+    cursor: pointer;
+  
+    /* Hides the slider so custom styles can be added */
+    background: transparent; 
+    border-color: transparent;
+    color: transparent;
+  }
+
+  /* Special styling for WebKit/Blink */
+  .form-left-divider input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 5px;
+    width: 30px;
+    background: #ffffff;
+    cursor: pointer;
+    border: 1px #000 solid ;
+    margin-left: 0px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  }
+  
+  /* All the same stuff for Firefox */
+  .form-left-divider input[type=range]::-moz-range-thumb {
+    height: 5px;
+    width: 30px;
+    background: #ffffff;
+    cursor: pointer;
+    border: 1px #000 solid ;
+    margin-left: 0px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  }
+  
+  /* All the same stuff for IE */
+  .form-left-divider input[type=range]::-ms-thumb {
+    height: 5px;
+    width: 30px;
+    background: #ffffff;
+    cursor: pointer;
+    border: 1px #000 solid ;
+    margin-left: 0px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  }
+
+  .form-left-divider input[type=range]::-webkit-slider-runnable-track {
+    width: 30px;
+    height: 100%;
+    cursor: pointer;
+    background: -webkit-linear-gradient(top, #fff832 0%,#ff3535 100%); /* Chrome10-25,Safari5.1-6 */
+  }
+  
+  .form-left-divider input[type=range]:focus::-webkit-slider-runnable-track {
+    background: -webkit-linear-gradient(top, #fff831 0%,#ff3530 100%); /* Chrome10-25,Safari5.1-6 */
+  }
+
+  
+  .form-left-divider input[type=range]::-moz-range-track {
+    width: 30px;
+    height: 100%;
+    cursor: pointer;
+    background: -moz-linear-gradient(top, #fff832 0%, #ff3535 100%); /* FF3.6-15 */
+  }
+  
+  .form-left-divider input[type=range]::-ms-fill-lower {
+    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+  }
+  .form-left-divider input[type=range]:focus::-ms-fill-lower {
+    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+  }
+  .form-left-divider input[type=range]::-ms-fill-upper {
+    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+  }
+  .form-left-divider input[type=range]:focus::-ms-fill-upper {
+    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
