@@ -95,15 +95,13 @@
     width: 35%;
     height: auto;
     display: block;
-    margin: 30px 32.5%;
+    margin: 30px auto;
 }
 
 .wrapper > h1{
     font-weight: 700;
     margin-bottom: 20px;
 }
-
-
 
 .box-list {
     width: 100%;
