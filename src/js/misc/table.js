@@ -29,8 +29,10 @@ const DEFAULT_TABLE_DATA = {
     ]
 };
 
-const TABLE_DATA_TYPES = {
-    String: 
+const DataValueTypes = {
+    Text: "text",
+    Checkbox: "checkbox",
+    Func: "function"
 }; 
 
 // Proceeds to check whether the given data structure is correct
@@ -45,21 +47,38 @@ function checkTableDataStructure(tempData) {
             for (let i = 0; i < this.headCount; i++) {
                 if (typeof finalData.head[i] != "string")
                     finalData.head[i] = finalData.head[i].toString();
-                else if (typeof finalData.head[i] == "")
+                else if (finalData.head[i] == "")
                     finalData.head[i] = "No title";
-
-                let typeCheckerArr = [
-                    [ finalData.head[i], "string" ],
-                    [ finalData.data[0], "object" ],
-                    [ finalData.data[0].values.value, "string" ],
-                    [ finalData.values[0].values.type, "string" ]
-                ];
             }
         } else finalData.head = DEFAULT_TABLE_DATA.head;
 
         if (typeof finalData.data == "array") {
             for (let i = 0; i < this.dataLength; i++) {
-                if (typeof finalData.data[i].values.value != "string")
+                if (typeof finalData.data[i].values.value != "string") {
+                    finalData.data[i].values.value = 
+                        finalData.data[i].values.value.toString();
+                }
+                
+                switch (finalData.data[i].values.type) {
+                    case DataValueTypes.Checkbox:
+                        finalData.data[i].values.value = "";
+                        break;
+                    case DataValueTypes.Text:
+                        if (typeof finalData.data[i].values.value != "string") {
+                            finalData.data[i].values.value = 
+                                finalData.data[i].values.value.toString();
+                        } else if (finalData.data[i].values.value == "")
+                            finalData.data[i].values.value = "nAn";
+                        break;
+                    case DataValueTypes.Func:
+                        if (typeof finalData.data[i].values.value != "function")
+                            finalData.data[i].values.value = function() {
+                                alert("Default function assigned");
+                            }
+                        break;
+                    default:
+                        finalData.data[i].values.value = "";
+                }
             }
         } else finalData.data = DEFAULT_TABLE_DATA.data;
     } else finalData = DEFAULT_TABLE_DATA;
@@ -73,9 +92,10 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA) {
 
     let finalData = checkTableDataStructure(data);
 
-    const dataValuesLength = finalData.data.length;
+    const dataLength = finalData.data.length;
+    const headLength = finalData.head.length;
 
-    for (let i = 0; i < dataValuesLength; i++) {
+    for (let i = 0; i < dataLength; i++) {
 
     }
 }
