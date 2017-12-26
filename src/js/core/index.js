@@ -27,9 +27,21 @@ const DEFERRED_SCRIPTS  = [];
 
 // Default vanilla JS onload function
 window.onload = function() {
+    // Initial function in primary sequence
+    initialize();
+}
+
+// Initiatlizes the main interval 
+function initialize() {
+    // Determines whether user is welcome or not
+    quickAuth();
+}
+
+// Token based authentication for quick access
+function quickAuth() {
     // Constant document url variable
     const currentUrl = document.location.href;
-
+    
     // If current token exists, try to authenticate
     if (stringContains(currentUrl, "login") && tokenExists())
         tokenAuthentication(getToken(), redirectToPage("results.html"));
@@ -37,8 +49,8 @@ window.onload = function() {
         redirectToPage("login.html");
 }
 
-// Initiatlizes the main interval 
-function initialize() {
+// Loads constant valued scripts with specific options
+function loadScripts() {
     /* Loops through all scripts from an array
      * and initializes given script at given index
      * with a true or false stated deferred option
@@ -126,6 +138,7 @@ function getElement(id) { return document.getElementById(id); }
 // Gets the function of a specific element
 function getElementType(id) { return (typeof document.getElementById(id)); }
 
+// Returns a boolean value based on the existance of substring
 function stringContains(string, value) { return string.includes(value); }
 
 /* Includes a specified script to the current webpage,
