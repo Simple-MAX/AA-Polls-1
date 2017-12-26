@@ -7,8 +7,14 @@
 
         <title>AA-Polls</title>
         
-        <script type="text/javascript" src="../js/core/index.js"></script>
         <script type="text/javascript" src="../../lib/jquery/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../../lib/Chart/Chart.js"></script>
+        <script type="text/javascript" src="../js/networking/backend.js"></script>
+        <script type="text/javascript" src="../js/networking/config.js"></script>
+        <script type="text/javascript" src="../js/core/store.js"></script>
+        <script type="text/javascript" src="../js/user/auth.js"></script>
+        <script type="text/javascript" src="../js/core/index.js"></script>
+        <script type="text/javascript" src="../js/statistics/statistics.js"></script>
     </head>
     <body>
         <header>
@@ -67,12 +73,11 @@
                         <select class="date-picker-to" id="prog-short-option">
                             <option value="Group1">Date Picker To</option>
                         </select>
-                    </div>
-                        
+                    </div>        
                 </div>
                     
                 <div class="diagram-slider">
-                    <canvas id="canvas"></canvas>
+                    <canvas id="chart"></canvas>
                 </div>  
 
                 <div class="export">

@@ -15,7 +15,7 @@
 
 // Constant variabless
 const DEFAULT_TABLE_DATA = {
-    head: ["Title", "Added"],
+    head: ["Title", "Admin"],
     data: [
         {
             values: {
@@ -37,7 +37,6 @@ const DEFAULT_TABLE_DATA = {
 const DataValueTypes = {
     Text: "text",
     Checkbox: "checkbox",
-    Func: "function"
 }; 
 
 // Regular variables
@@ -108,20 +107,21 @@ function checkTableDataStructure(tempData) {
                  */
                 switch (finalData.data[i].values.type) {
                     case DataValueTypes.Checkbox:
+                        // Sets an empty string value to save space
                         finalData.data[i].values.value = "";
+
+                        // Set current data values onclick to null
+                        finalData.data[i].values.onclick = null;
                         break;
                     case DataValueTypes.Text:
+                        /* Reset current data values "value" type to string,
+                         * turn it to a string and set the value to "nAn" otherwise.
+                         */
                         if (typeof finalData.data[i].values.value != "string") {
                             finalData.data[i].values.value = 
                                 finalData.data[i].values.value.toString();
                         } else if (finalData.data[i].values.value == "")
                             finalData.data[i].values.value = "nAn";
-                        break;
-                    case DataValueTypes.Func:
-                        if (typeof finalData.data[i].values.value != "function")
-                            finalData.data[i].values.value = function() {
-                                alert("Default function assigned");
-                            }
                         break;
                     default:
                         finalData.data[i].values.value = "";
@@ -130,7 +130,6 @@ function checkTableDataStructure(tempData) {
 
             // If there are more data rows than head rows and is not equal
             if (colCount > headCount) {
-                alert("lol");
                 // Max iteration value for compensation
                 let compensationValue = colCount - finalData.data.length;
 
@@ -190,8 +189,10 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA) {
 
     // Loops through data for each row and creates a new row data element
     for (let j = 0; j < finalData.data.length; j++) {
+        // Initiates a new table data element
         let tableData = document.createElement("td");
 
+        // Checks the data values "type" datatype
         switch (finalData.data[j].values.type) {
             case DataValueTypes.Text:
                 // Assign inner HTML value to current finalData.data value
@@ -209,8 +210,8 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA) {
                 checkBox.setAttribute("id", checkBoxId);
 
                 /* Assigns checkbox onclick function and attribute to current
-                    * finalData.data[j].values.onclick functions
-                    */
+                * finalData.data[j].values.onclick functions
+                */
                 checkBox.onclick = () => finalData.data[j].values.onclick(checkBoxId);
 
                 // Append checkbox to current row data

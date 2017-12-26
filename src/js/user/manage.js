@@ -13,8 +13,6 @@
 * /**************************************************
 */
 
-var url = "";
-
 // Attempts to authenticate the user and executes a final action
 function loginUser() {
     // Gets the appropriate elements and it's values
@@ -27,13 +25,10 @@ function loginUser() {
      */
     var urlParams = createUrlParams(["email", "password"], [email, pass]);
 
-    // A constant url link with a type of string, to prevent updates
-    url = `${API_URL}${endpoint.user}${urlParams}`;
-
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */
-    var result = execAjaxRequest(url);
+    var result = execAjaxRequest(`${API_URL}${endpoint.user}${urlParams}`);
 
     /* If result is an object type, it will return
      * some data with from the endpoint, regardless whether it's
@@ -47,12 +42,11 @@ function loginUser() {
             */
             userData = result["data"];
 
-            // Test sequence (not relevant)
-            const value = "Welcome Mr." + userData["last_name"];
+            storeToken(userData["last_name"]);
 
-            document.getElementById("status-test").innerHTML = value;
+            
         } else {
-            document.getElementById("status-test").innerHTML = "Incorrect credentials";
+            alert("Failed");
         }
     } else if (typeof result == "string") {
         document.getElementById("status-test").innerHTML = result;

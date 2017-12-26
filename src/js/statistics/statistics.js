@@ -27,7 +27,7 @@ const DEFAULT_STATS = {
 };
 
 window.onload = function() {
-    renderStatistics("canvas");
+    renderStatistics("chart");
 }
 
 /* Fetches relevant and requested polls in

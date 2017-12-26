@@ -7,8 +7,12 @@
 
         <title>AA-Polls</title>
         
-        <script type="text/javascript" src="../js/core/main.js"></script>
         <script type="text/javascript" src="../../lib/jquery/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../js/networking/backend.js"></script>
+        <script type="text/javascript" src="../js/networking/config.js"></script>
+        <script type="text/javascript" src="../js/core/store.js"></script>
+        <script type="text/javascript" src="../js/user/auth.js"></script>
+        <script type="text/javascript" src="../js/core/index.js"></script>
     </head>
     <body>
         <header>
@@ -24,19 +28,15 @@
             </nav>
         </header>
         <main>
-           
-            <div class="login-content">
-                
+            <div class="login-content">     
                 <label><b>Username</b></label>
-                <input type="text" placeholder="E-Mail adress" name="uname" required>
+                <input type="text" placeholder="E-Mail adress" name="uname" id="email" required />
 
                 <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" placeholder="Enter Password" name="psw" id="password" required />
                 
-                <button type="submit" id="login-submit">Login</button>
-            </div>
-            
-            
+                <button type="submit" id="login-submit" onclick="loginUser('email', 'password')">Login</button>
+            </div>      
         </main>
         <footer>
         </footer> 

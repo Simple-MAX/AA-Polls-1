@@ -23,7 +23,7 @@
  */
 
 // Constant variables
-const API_DOMAIN    = "http://127.0.0.1";
+const API_DOMAIN    = "http://localhost";
 const API_PATH      = "/api/";
 
 const API_URL = API_DOMAIN + API_PATH;

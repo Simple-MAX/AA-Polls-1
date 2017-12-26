@@ -34,10 +34,16 @@ const SCRIPT_PATHS = [
 
 const DEFERRED_SCRIPTS = [];
 
-// Vanilla JS default onload function
+// Default vanilla JS onload function
 window.onload = function() {
-    // Triggers the primary essential function
-    // initialize();
+    // Constant document url variable
+    const currentUrl = document.location.href;
+
+    // If current token exists, try to authenticate
+    if (stringContains(currentUrl, "login") && tokenExists())
+        tokenAuthentication(getToken(), redirectToPage("results.html"));
+    else if (!stringContains(currentUrl, "login") && !tokenExists())
+        redirectToPage("login.html");
 }
 
 // Initiatlizes the main interval 
@@ -108,11 +114,28 @@ function showView(index, anim = false, reset = false) {
 // Goes back to the previous index if navigated beyond once
 function goBack() { showView(previousIndex, false, true); }
 
+// Redirects user to the main site or panel
+function redirectToPage(page) { 
+    // Constant url variable
+    const currentUrl = document.location.href;
+
+    // Removes filename from current url
+    let fileName = currentUrl.split("/").slice(-1);
+
+    // Replaces old filename with empty value
+    let pagePath = currentUrl.replace(fileName, "");
+
+    // Redirects user to requested page
+    document.location.href = `${pagePath}${page}`;
+}
+
 // Locates and fetches a specified element
 function getElement(id) { return document.getElementById(id); }
 
 // Gets the function of a specific element
 function getElementType(id) { return (typeof document.getElementById(id)); }
+
+function stringContains(string, value) { return string.includes(value); }
 
 /* Includes a specified script to the current webpage,
  * which can be accessed globally and locally

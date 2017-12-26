@@ -13,27 +13,32 @@
 * /**************************************************
 */
 
-var url = "";
-
 // Attempts to authenticate the user and executes a final action
-function loginUser() {
-    // Gets the appropriate elements and it's values
-    const email   = document.getElementById("login-email").value;
-    const pass    = document.getElementById("login-pass").value;
-    
+function loginUser(email = "", password = "", token = "", callback) {
     /* Creates a string and executes the createUrlParams function
      * and returns a string output which is valid for URL requests.
      * This passes some desired key names and values in separate arrays
      */
-    var urlParams = createUrlParams(["email", "password"], [email, pass]);
+    var urlParams = "";
+    
+    if (email != "" && password != "") {
+        // Gets the appropriate elements and it's values
+        const credentials = [
+            document.getElementById(email).value,
+            document.getElementById(password).value
+        ];
 
-    // A constant url link with a type of string, to prevent updates
-    url = `${API_URL}${endpoint.user}${urlParams}`;
+        // Parses parameters for url correctly
+        urlParams = createUrlParams(["email", "password"], credentials);
+    } else if (token != "") {
+        // Set token as url parameter
+        urlParams = createUrlParams(["token"], [token]);
+    }
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */
-    var result = execAjaxRequest(url);
+    var result = execAjaxRequest(`${API_URL}${endpoint.user}${urlParams}`);
 
     /* If result is an object type, it will return
      * some data with from the endpoint, regardless whether it's
@@ -45,18 +50,21 @@ function loginUser() {
             /* Assign a global variable to the "data" object,
             * given from the current, finished request output
             */
-            userData = result["data"];
+            let userData = result["data"];
 
-            // Test sequence (not relevant)
-            const value = "Welcome Mr." + userData["last_name"];
+            // If current token is not stored, replace the existing one
+            if (getToken() != userData["token"])
+                setToken(userData["token"]);
 
-            document.getElementById("status-test").innerHTML = value;
-        } else {
-            document.getElementById("status-test").innerHTML = "Incorrect credentials";
-        }
-    } else if (typeof result == "string") {
-        document.getElementById("status-test").innerHTML = result;
-    }
+            // Redirect user to the main site or panel
+            //callback();
+        } else logOut();
+    } else if (typeof result == "string") alert("Authentication failed");
+}
+
+// Token based authentication
+function tokenAuthentication(token, callback) {
+    loginUser("", "", token, callback);
 }
 
 // Registers the given user, returns result data
@@ -70,4 +78,11 @@ function registerUser(email, pass) {
 function resetUser(email) {
     // Gets the appropriate elements and it's values
     var email = document.getElementById("login-email").value;
+}
+
+// Removes existing token and redirects user to login site
+function logOut() {
+    setToken("");
+
+    redirectToPage("login.html");
 }
