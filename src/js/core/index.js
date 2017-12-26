@@ -22,17 +22,8 @@ var previousIndex   = 0;
 // Constant variables
 const MAIN_VIEW_INDEX = 0;
 
-const SCRIPT_PATHS = [
-    "../js/networking/backend.js",
-    "../js/networking/config.js",
-    "../js/user/auth.js",
-    "../../lib/Chart/Chart.js",
-    "../js/statistics/statistics.js",
-    "../js/statistics/config.js",
-    "../js/misc/table.js"
-];
-
-const DEFERRED_SCRIPTS = [];
+const SCRIPT_PATHS      = [];
+const DEFERRED_SCRIPTS  = [];
 
 // Default vanilla JS onload function
 window.onload = function() {
