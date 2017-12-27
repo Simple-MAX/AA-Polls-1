@@ -45,7 +45,7 @@
 .nav-logo-container > h1 {
     height: 30px;
     display: block;
-    text-align: left;
+    text-align: center;
     color: #fafafa;
     font-weight: 700; 
 }
@@ -165,11 +165,12 @@
 .poll-panel {
     width: 100%;
     height: 800px;
+    background-color: #f9f9f9;
 }
 
 .poll-panel .form-wrapper {
-    width: 65%;
-    margin: 0 17.5%;
+    width: 1024px;
+    margin: 0 auto;
     height: 800px;
     display: block;
 }
@@ -235,7 +236,8 @@
 }
 
 .poll-panel .form-col-1-input > label{
-    font-size: 14px;
+    display: block;
+    font-weight: bold;
     /* position: absolute;
     display: block;
     top: 0;
@@ -244,32 +246,43 @@
 }
 
 .poll-panel input {
-    border: 1px #999 solid;
-    border-radius: 4px;
-    color: #111;
+    border: 2px #c0c0c0 solid;
+    border-radius: 5px;
+    color: #6b6b6b;
     height: 30px;
     margin: 7px 0;
     width: 90%;
     padding: 0 7px;
+    font-size: 17px;
+    letter-spacing: 1px;
 }
 
 .poll-panel output {
     display: block ;
-    width: 5%;
-    height: 40px;
-    float: right;
-    line-height: 43px;
-    margin: 0 2.5%;
+    width: 6%;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    margin: 0 9.4%;
+    color: #6b6b6b;
+    text-align: center;
+    margin-top: 7px;
+    margin-left: 0.6%;
 }
 
 .form-left-divider output{
-    width: 31%;
-    margin-right: 69%;  
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 41px;
+    left: -11px; 
     float: none;
-    text-align: center;
     margin: 0;
-    height: 60px;
-    line-height: 100px
+    line-height: 30px;
+    border: 2px #c0c0c0 solid;
+    border-radius: 5px;
+    color: #6b6b6b;
+    text-align: center;
 }
 
 .date-wrapper {
@@ -281,7 +294,7 @@
 
 .date-wrapper span {
     color: #ff5cf4;
-    font-size: 11px;
+    font-size: 12px;
 }
 .poll-panel #date {
     width: 90px;
@@ -290,17 +303,20 @@
     color: #fff;
     border: 0px;
     background-color: #810097;  
+    font-size: 10px;
+    cursor: pointer;
 }
 
 .poll-panel select {
-    border: 1px #999 solid;
+    border: 2px #c0c0c0 solid;
     border-radius: 4px;
-    color: #111;
+    color: #6b6b6b;
     height: 30px;
     margin: 15px 0;
     width: 90%;
     padding: 0 7px;
     -webkit-appearance: none;
+    font-size: 13px;
 }
 
 .poll-panel .form-col-2-input {
@@ -323,9 +339,9 @@
 .poll-panel .form-input-textarea {
     width: 70%;
     margin-right: 30%;
-    border: 1px #999 solid;
-    border-radius: 3px;
-    color: #111;
+    border: 2px #c0c0c0 solid;
+    border-radius: 5px;
+    color: #6b6b6b;
     height: 140px;
     resize: none;
 }
@@ -337,7 +353,8 @@
     color: #fff;
     border: 0px;
     height: 35px;
-    margin-bottom: 60px
+    margin-bottom: 60px;
+    font-size: 12px;
 }
 
 .poll-panel .form-col-2-input-divider > input {
@@ -346,17 +363,18 @@
 
 .poll-panel .form-col-2-input-divider > textarea {
     width: 90%;
-    border: 1px #999 solid;
-    border-radius: 3px;
-    color:#111 ;
+    border: 2px #c0c0c0 solid;
+    border-radius: 4px;
+    color: #6b6b6b;
     height: 140px;
     resize: none;
     padding: 7px 8px;
+    font-size: 13px;
 }
 
 .poll-panel input[type=range] {
     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-    width: 90%; /* Specific width is required for Firefox. */
+    width: 82%; /* Specific width is required for Firefox. */
     background: transparent; /* Otherwise white in Chrome */
     border: 0px;
     padding: 0;
@@ -388,7 +406,8 @@
     width: 10px;
     background: #ffffff;
     cursor: pointer;
-    border: 0.5px #999 solid ;
+    
+    543   
     margin-top: -3.5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   }
   
@@ -416,13 +435,15 @@
     width: 100%;
     height: 30px;
     cursor: pointer;
-    border: 0.5px #999 solid ;
+    border: 3px #c0c0c0 solid;
+    border-radius: 2px;
     background: -webkit-linear-gradient(left, #fff832 0%,#ff3535 100%); /* Chrome10-25,Safari5.1-6 */
   }
   
   .poll-panel input[type=range]:focus::-webkit-slider-runnable-track {
     background: -webkit-linear-gradient(left, #fff831 0%,#ff3530 100%); /* Chrome10-25,Safari5.1-6 */
-    border: 0.5px #999 solid ;
+    border: 3px #c0c0c0 solid;
+    border-radius: 2px;
   }
 
   
@@ -430,7 +451,8 @@
     width: 100%;
     height: 30px;
     cursor: pointer;
-    border: 0.5px #999 solid ;
+    border: 3px #c0c0c0 solid;
+    border-radius: 2px;
     background: -moz-linear-gradient(left, #fff832 0%, #ff3535 100%); /* FF3.6-15 */
   }
   
@@ -481,9 +503,10 @@
   
   .poll-panel input[type=range] {
     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-    width: 90%; /* Specific width is required for Firefox. */
+    width: 84%; /* Specific width is required for Firefox. */
     background: transparent; /* Otherwise white in Chrome */
     border: 0px;
+    float: left;
     padding: 0;
     
   }
@@ -591,16 +614,25 @@
 
 @media (max-width: 1024px) {
     .poll-panel .form-wrapper {
-        width: 80%;
-        margin: 0 10%;
+        width: 768px;
+        margin: 0 auto;
         height: 800px;
         display: block;
     }
 }
 @media (max-width: 768px) {
     .poll-panel .form-wrapper {
-        width: 95%;
-        margin: 0 2.5%;
+        width: 568px;
+        margin: 0 auto;
+        height: 800px;
+        display: block;
+    }
+}
+
+@media (max-width: 568px) {
+    .poll-panel .form-wrapper {
+        width: 320px;
+        margin: 0 auto;
         height: 800px;
         display: block;
     }
