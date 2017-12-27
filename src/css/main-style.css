@@ -259,7 +259,7 @@
     height: 40px;
     float: right;
     line-height: 43px;
-    margin: 0 2.5%
+    margin: 0 2.5%;
 }
 
 .form-left-divider output{
@@ -468,10 +468,15 @@
 
   .poll-panel #verticalIdIn {
     transform: rotate(90deg);
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform:rotate(90deg); 
     width: 600px;
     position: absolute;
-    top: 47px;
+    top: 367px;
     left: -297px;
+    display: block;
+    height: 10px
   }
   
   .poll-panel input[type=range] {
