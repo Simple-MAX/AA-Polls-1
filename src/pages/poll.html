@@ -29,7 +29,7 @@
                     </div>
                     <div class="nav-main-purple-cont">
                         <div class="date-wrapper">
-                            <input id="date">
+                            <span>Datum</span><input id="date">
                         </div>
                     </div>
                 </div>
@@ -47,20 +47,20 @@
                             <div class="form-col-0">
                                 <h2>Bedömning</h2>
                                 <div class="form-col-1-input"/>
-                                    <p>Grupp</p>
+                                    <label>Grupp</label>
                                     <input id="judge-group"/>
                                 </div>
                                 <div class="form-col-1-input">
-                                    <p>Skattning totalt</p>
+                                    <label>Skattning totalt</label>
                                     <input id="tot-tax"/>    
                                 </div>
                             <!--- Min resp. Max värde ska ha en picker på 1-10 skala  -->
                                 <div class="form-col-1-input">
-                                    <p>Lägsta värde</p>
+                                    <label>Lägsta värde</label>
                                     <input id="min"/>   
                                 </div>
                                 <div class="form-col-1-input">
-                                    <p>Högsta värde</p>
+                                    <label>Högsta värde</label>
                                     <input id="max"/>   
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                                     <input type="range" name="progShortnameIn" id="progShortIdIn" value="5" min="0" max="10" oninput="progShortIdOut.value = progShortIdIn.value">
                                     <output name="progShortnameOut" id="progShortIdOut">5</output>
                                     <select id="prog-short-option">
-                                        <option value="Prognosalternativ">Prognosalternativ &#x25BC;</option>
+                                        <option value="Prognosalternativ">Prognosalternativ</option>
                                     </select>
                                     <textarea id="prog-short-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
@@ -80,7 +80,7 @@
                                     <input type="range" name="progLongnameIn" id="progLongIdIn" value="5" min="0" max="10" oninput="progLongIdOut.value = progLongIdIn.value">
                                     <output name="progLongnameOut" id="progLongIdOut">5</output>
                                     <select id="prog-long-option">
-                                        <option value="Prognosalternativ">Prognosalternativ &#x25BC;</option>
+                                        <option value="Prognosalternativ">Prognosalternativ</option>
                                     </select>
                                     <textarea id="prog-long-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
@@ -92,7 +92,7 @@
                                     <input type="range" name="influencesNameIn" id="influencesIdIn" value="5" min="0" max="10" oninput="influencesIdOut.value = influencesIdIn.value">
                                     <output name="influencesNameOut" id="influencesIdOut">5</output>
                                     <select id="influences-option">
-                                        <option value="Påverkansalternativ">Påverkansalternativ &#x25BC;</option>
+                                        <option value="Påverkansalternativ">Påverkansalternativ</option>
                                     </select>
                                     <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
@@ -101,7 +101,7 @@
                                     <input type="range" name="actionsNameIn" id="actionsIdIn" value="5" min="0" max="10" oninput="actionsIdOut.value = actionsIdIn.value">
                                     <output name="actionsNameOut" id="actionsIdOut">5</output>
                                     <select id="actions-option">
-                                        <option value="Åtgärdsalternativ">Åtgärdsalternativ &#x25BC;</option>
+                                        <option value="Åtgärdsalternativ">Åtgärdsalternativ</option>
                                     </select>
                                     <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>

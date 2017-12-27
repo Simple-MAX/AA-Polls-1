@@ -24,11 +24,11 @@
 }
 
 .nav-logo-container {
-    width: 50%;
+    width: 225px;
     display: block;
     height: 60px;
-    margin: 20px 0;
-    float: left;
+    padding: 20px 0;
+    margin: 0 auto;
 }
 
 .nav-logo-container > h1 {
@@ -47,7 +47,7 @@
 }
 
 .admin-panel .nav-logo-container > h4 {
-    color: #8a199e;
+    color: #999;
     letter-spacing: 2.2px;
     font-weight: 100;
     font-size: 1.3em;
@@ -71,14 +71,14 @@ body {
 /*     LOGIN     */
 
 .login-content {
-    width: 600px;
+    width: 500px;
     height: 350px;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 5%;
+    padding: 50px;
     margin: auto;
     background-color: white;
 }
@@ -112,5 +112,22 @@ body {
     background-color: #8a199e;;
     color: #fff;
     cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+    .login-content {
+        width: 320px;
+        height: 320px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        padding-top: 50px;
+        margin: auto;
+        background-color: white;
+    }
 }
 
