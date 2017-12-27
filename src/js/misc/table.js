@@ -45,7 +45,55 @@ let colCount = 0;
 
 // Vanilla JS default onload function
 window.onload = function() {
-    appendDataToTable("user-table");
+    // Initialize script
+    initialize();
+}
+
+// Initializes the main function
+function initialize() {
+    // Sets rowCount to one
+    rowCount = 1;
+
+    // Initialization of row data container
+    let tableData = [];
+
+    // User row data structure as object
+    let userDataObject = {
+        head: ["Name", "Admin", "Superuser"],
+        data: [
+            {
+                values: {
+                    value: "",
+                    type: "text",
+                    onclick: null
+                }
+            },
+            {
+                values: {
+                    value: "",
+                    type: "checkbox",
+                    onclick: (obj) => alert(getElement(obj).checked)
+                }
+            },
+            {
+                values: {
+                    value: "",
+                    type: "checkbox",
+                    onclick: (obj) => alert(getElement(obj).checked)
+                }
+            }
+        ]
+    };
+
+    // Add fake data temporarily
+    tableData.push(userDataObject);
+    tableData.push(userDataObject);
+    
+    // Loop through and add row based on current index of iteration
+    for (var i = 0; i < tableData.length; i++) {
+        // Append fetched data to user table
+        appendDataToTable("user-table", tableData[i]);
+    }
 }
 
 // Proceeds to check whether the given data structure is correct
@@ -64,22 +112,28 @@ function checkTableDataStructure(tempData) {
      * else assign finalData to default table object
      */
     if (typeof finalData == "object") {
-        /* Proceed if finalData.head data type is array,
-         * else, assign default head to finalData.head
-         */
-        if (typeof finalData.head == "array" && headCount > 0) {
-            // Loops through entire head
-            for (let i = 0; i < headCount; i++) {
-                /* If current head data type is not string,
-                 * else set head string in current iteration to "No title"
-                 */
-                if (typeof finalData.head[i] != "string")
-                    finalData.head[i] = finalData.head[i].toString();
-                else if (finalData.head[i] == "")
-                    finalData.head[i] = "No title";
+        // If rowCount is greater than zero, remove head
+        if (rowCount <= 1) {
+            /* Proceed if finalData.head data type is array,
+            * else, assign default head to finalData.head.
+            * If rowCount is greater than zero, remove head
+            */
+            if (typeof finalData.head == "object" && headCount > 0) {
+                // Loops through entire head
+                for (let i = 0; i < headCount; i++) {
+                    /* If current head data type is not string,
+                    * else set head string in current iteration to "No title"
+                    */
+                    if (typeof finalData.head[i] != "string")
+                        finalData.head[i] = finalData.head[i].toString();
+                    else if (finalData.head[i] == "")
+                        finalData.head[i] = "No title";
+                }
+            } else if (typeof finalData.head != "object" && finalData.head != null) {
+                // Set finalData head to a default head
+                finalData.head = DEFAULT_TABLE_DATA.head;
             }
-        } else if (finalData.head != null)
-            finalData.head = DEFAULT_TABLE_DATA.head;
+        } else finalData.head = null;
 
         // If there are more data rows than head rows and is not equal
         if (dataLength > headCount && headCount > 0) {
@@ -153,7 +207,7 @@ function checkTableDataStructure(tempData) {
 }
 
 // Adds given data to a specified table with id
-function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA) {
+function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
     // Gets table element with the help of tableId
     let table = document.getElementById(tableId);
 
@@ -187,11 +241,17 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA) {
         table.appendChild(tableRow);
     }
 
+    // Custom row id
+    const rowId = id = rowCount ? `AA-${id}` : id;
+
     // Initiates a new table row element
     let tableRow = document.createElement("tr");
     
     // Assigns a class name to the element
     tableRow.className = "table table-row";
+    
+    // Assign new row with unique id
+    tableRow.setAttribute("id", rowId);
 
     // Loops through data for each row and creates a new row data element
     for (let j = 0; j < finalData.data.length; j++) {
@@ -208,12 +268,8 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA) {
                 // Initialize a new input or checkbox element
                 let checkBox = document.createElement("input");
 
-                // Custom checkbox id
-                const checkBoxId = `AA-CheckBox-${rowCount}`;
-
                 // Sets tabla data attribute/s
                 checkBox.setAttribute("type", "checkbox");
-                checkBox.setAttribute("id", checkBoxId);
 
                 /* Assigns checkbox onclick function and attribute to current
                 * finalData.data[j].values.onclick functions
@@ -225,12 +281,12 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA) {
                 break;
         }
 
-        // Increment row count
-        rowCount++;
-
         // Appends data to current row
         tableRow.appendChild(tableData);
     }
+
+    // Increment row count
+    rowCount++;
 
     // Appends current row to the table
     table.appendChild(tableRow);

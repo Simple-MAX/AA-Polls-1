@@ -57,9 +57,10 @@ function loginUser(email = "", password = "", token = "", callback) {
                 setToken(userData["token"]);
 
             // Redirect user to the main site or panel
-            //callback();
+            callback();
         } else logOut();
-    } else if (typeof result == "string") alert("Authentication failed");
+    } else if (typeof result == "string") 
+        alert("Authentication failed");
 }
 
 // Token based authentication

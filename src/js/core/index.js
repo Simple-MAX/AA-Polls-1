@@ -31,7 +31,7 @@ window.onload = function() {
     initialize();
 }
 
-// Initiatlizes the main interval 
+// Initiatlizes the main function
 function initialize() {
     // Determines whether user is welcome or not
     quickAuth();
@@ -41,7 +41,7 @@ function initialize() {
 function quickAuth() {
     // Constant document url variable
     const currentUrl = document.location.href;
-    
+
     // If current token exists, try to authenticate
     if (stringContains(currentUrl, "login") && tokenExists())
         tokenAuthentication(getToken(), redirectToPage("results.html"));
