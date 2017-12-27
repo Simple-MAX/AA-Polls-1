@@ -13,8 +13,9 @@
         <script type="text/javascript" src="../js/core/store.js"></script>
         <script type="text/javascript" src="../js/user/auth.js"></script>
         <script type="text/javascript" src="../js/core/index.js"></script>
+
     </head>
-    <body>
+    <body class="poll-panel">
         <header>
             <nav>
                 <div class="nav-main">
@@ -26,6 +27,11 @@
                         <div class="nav-meny-container">
                         </div>
                     </div>
+                    <div class="nav-main-purple-cont">
+                        <div class="date-wrapper">
+                            <input id="date">
+                        </div>
+                    </div>
                 </div>
             </nav>
         </header>
@@ -33,12 +39,10 @@
            <div class="form-main">
                 <div class="form-wrapper">
                     <div class="form-left-divider">
-                        <input orient="vertical" type="range" id="vertical-input">
+                            <output name="verticalNameOut" id="verticalIdOut">5</output>
+                        <input orient="vertical" type="range" name="verticalNameIn" id="verticalIdIn" value="5" min="0" max="10" oninput="verticalIdOut.value = verticalIdIn.value">                       
                     </div>
                     <div class="form-right-divider">
-                        <div class="form-date">
-                            <input id="date">
-                        </div>
                         <div class="form-container">
                             <div class="form-col-0">
                                 <h2>Bedömning</h2>
@@ -64,17 +68,19 @@
                                 <h2>Detaljerat</h2>
                                 <div class="form-col-2-input-divider">
                                     <h4>Prognos på kort sikt</h4>
-                                    <input id="prog-short-rate" type="range" name="" min="0" max="10" value="2">
+                                    <input type="range" name="progShortnameIn" id="progShortIdIn" value="5" min="0" max="10" oninput="progShortIdOut.value = progShortIdIn.value">
+                                    <output name="progShortnameOut" id="progShortIdOut">5</output>
                                     <select id="prog-short-option">
-                                        <option value="Prognosalternativ">Prognosalternativ</option>
+                                        <option value="Prognosalternativ">Prognosalternativ &#x25BC;</option>
                                     </select>
                                     <textarea id="prog-short-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
                                 <div class="form-col-2-input-divider">
                                     <h4>Prognos på lång sikt</h4>
-                                    <input id="prog-long-rate" type="range" name="" min="0" max="10" value="2">
+                                    <input type="range" name="progLongnameIn" id="progLongIdIn" value="5" min="0" max="10" oninput="progLongIdOut.value = progLongIdIn.value">
+                                    <output name="progLongnameOut" id="progLongIdOut">5</output>
                                     <select id="prog-long-option">
-                                        <option value="Prognosalternativ">Prognosalternativ</option>
+                                        <option value="Prognosalternativ">Prognosalternativ &#x25BC;</option>
                                     </select>
                                     <textarea id="prog-long-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
@@ -83,17 +89,19 @@
                             <div class="form-col-2-input">
                                 <div class="form-col-2-input-divider">
                                     <h4>Påverkandefaktorer</h4>
-                                    <input id="influences-rate" type="range" name="" min="0" max="10" value="2">
+                                    <input type="range" name="influencesNameIn" id="influencesIdIn" value="5" min="0" max="10" oninput="influencesIdOut.value = influencesIdIn.value">
+                                    <output name="influencesNameOut" id="influencesIdOut">5</output>
                                     <select id="influences-option">
-                                        <option value="Påverkansalternativ">Påverkansalternativ</option>
+                                        <option value="Påverkansalternativ">Påverkansalternativ &#x25BC;</option>
                                     </select>
                                     <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
                                 <div class="form-col-2-input-divider">
                                     <h4>Åtgärder</h4>
-                                    <input id="actions-rate" type="range" name="" min="0" max="10" value="2">
+                                    <input type="range" name="actionsNameIn" id="actionsIdIn" value="5" min="0" max="10" oninput="actionsIdOut.value = actionsIdIn.value">
+                                    <output name="actionsNameOut" id="actionsIdOut">5</output>
                                     <select id="actions-option">
-                                        <option value="Åtgärdsalternativ">Åtgärdsalternativ</option>
+                                        <option value="Åtgärdsalternativ">Åtgärdsalternativ &#x25BC;</option>
                                     </select>
                                     <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>

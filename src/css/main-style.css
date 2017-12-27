@@ -10,10 +10,21 @@
 /*      NAV    */
 .nav-main {
     width: 100%;
-    height: 100px;
+    height: 140px;
     display: block;
     background-color: #222;
     border-bottom: 10px solid #810097;
+}
+
+.poll-panel .nav-main {
+    border-bottom: 0px;
+}
+
+.nav-main-purple-cont {
+    width: 100%;
+    height: 40px;
+    background-color: #810097;
+    display: block;
 }
 
 .nav-container {
@@ -151,122 +162,149 @@
 /*    FORM     */
 
 
-.form-main {
+.poll-panel {
     width: 100%;
     height: 800px;
 }
 
-.form-main .form-wrapper {
+.poll-panel .form-wrapper {
     width: 65%;
     margin: 0 17.5%;
     height: 800px;
     display: block;
 }
 
-.form-main .form-left-divider {
-    width: 5%;
+.poll-panel .form-left-divider {
+    width: 3%;
     float: left;
     display: block;
     height: 70vh;
+    margin: 0 1%;
 }
 
-.form-main .form-left-divider > input{
-    height: 70vh;
-    width: 70%;
-    padding: 0 15%;
+.poll-panel .form-left-divider > input{
+    height: 100%;
+    width: 100%;
     -webkit-appearance: slider-vertical;
     writing-mode: bt-lr; 
 }
 
-.form-main .form-right-divider {
+.poll-panel .form-right-divider {
     width: 95%;
     float: right;
     display: block;
 }
 
-.form-main .form-date-container {
+.poll-panel .form-date-container {
     width: 100%;
     height: 50px;
 
 }
 
-.form-main .form-container {
+.poll-panel .form-container {
     width: 100%;
     height: 750px;
 }
 
-.form-main .form-col-0 {
+.poll-panel .form-col-0 {
     width: 100%;
     height: 15%;
     margin: 2.5% 0;
 }
 
-.form-main h2 {
+.poll-panel h2 {
     color: #810097;
 }
 
-.form-main .form-col-1 {
+.poll-panel .form-col-1 {
     width: 100%;
     height: 85%;
     margin: 2.5% 0;
 }
 
-.form-main .form-col-1-input {
+.poll-panel .form-col-1-input {
     width: 25%;
     display: block;
     float: left;
 }
 
-.form-main input {
-    border: 1px #111 solid;
+.poll-panel input {
+    border: 1px #999 solid;
     border-radius: 4px;
     color: #111;
     height: 30px;
-    margin: 15px 0;
+    margin: 7px 0;
     width: 90%;
+    padding: 0 7px;
 }
 
-.form-main #date {
+.poll-panel output {
+    display: block ;
+    width: 5%;
+    height: 40px;
+    float: right;
+    line-height: 43px;
+    margin: 0 2.5%
+}
+
+.form-left-divider output{
+    width: 100%;
+    float: none;
+    text-align: center;
+    margin: 0;
+    height: 65px;
+    line-height: 100px
+}
+
+.date-wrapper {
+    width: 60%;
+    margin: 0 20%;
+    height: 40px;
+    display: block;
+}
+.poll-panel #date {
     width: 25%;
 }
 
-.form-main select {
-    border: 1px #111 solid;
+.poll-panel select {
+    border: 1px #999 solid;
     border-radius: 4px;
     color: #111;
     height: 30px;
     margin: 15px 0;
     width: 90%;
+    padding: 0 7px;
+    -webkit-appearance: none;
 }
 
-.form-main .form-col-2-input {
+.poll-panel .form-col-2-input {
     display: inline-block;
     width: 100%;
     height: auto;
 }
 
-.form-main .form-col-2-input > select {
+.poll-panel .form-col-2-input > select {
     width: 70%;
 }
 
-.form-main .form-col-2-input-divider {
+.poll-panel .form-col-2-input-divider {
     width: 50%;
     margin: 30px 0;
     float: left;
     display: block;
 }
 
-.form-main .form-input-textarea {
+.poll-panel .form-input-textarea {
     width: 70%;
     margin-right: 30%;
-    border: 1px #111 solid;
+    border: 1px #999 solid;
     border-radius: 3px;
     color: #111;
     height: 140px;
     resize: none;
 }
 
-.form-main .form-input-button {
+.poll-panel .form-input-button {
     width: 32%;
     margin:0 34%;
     background-color: #8a199e;
@@ -275,38 +313,38 @@
     height: 35px;
 }
 
-.form-main .form-col-2-input-divider > input {
+.poll-panel .form-col-2-input-divider > input {
     width: 90%;
-    margin-right: 10%;
 }
 
-.form-main .form-col-2-input-divider > textarea {
+.poll-panel .form-col-2-input-divider > textarea {
     width: 90%;
-    margin-right: 10%;
-    border: 1px #111 solid;
+    border: 1px #999 solid;
     border-radius: 3px;
-    color: #111;
+    color:#111 ;
     height: 140px;
     resize: none;
+    padding: 7px 8px;
 }
 
-input[type=range] {
+.form-right-divider input[type=range] {
     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
     width: 90%; /* Specific width is required for Firefox. */
     background: transparent; /* Otherwise white in Chrome */
     border: 0px;
+    padding: 0;
   }
   
-  input[type=range]::-webkit-slider-thumb {
+  .form-right-divider input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
   }
   
-  input[type=range]:focus {
+  .form-right-divider input[type=range]:focus {
     outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
   }
   
-  input[type=range]::-ms-track {
-    width: 100%;
+  .form-right-divider input[type=range]::-ms-track {
+    height: 100%;
     cursor: pointer;
   
     /* Hides the slider so custom styles can be added */
@@ -316,29 +354,29 @@ input[type=range] {
   }
 
   /* Special styling for WebKit/Blink */
-input[type=range]::-webkit-slider-thumb {
+  .form-right-divider input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 50px;
+    height: 32px;
     width: 10px;
     background: #ffffff;
     cursor: pointer;
     border: 1px #000 solid ;
-    margin-top: -10px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    margin-top: -1px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   }
   
   /* All the same stuff for Firefox */
-  input[type=range]::-moz-range-thumb {
-    height: 50px;
+  .form-right-divider input[type=range]::-moz-range-thumb {
+    height: 32px;
     width: 10px;
     background: #ffffff;
     cursor: pointer;
     border: 1px #000 solid ;
-    margin-top: -10px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    margin-top: -1px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   }
   
   /* All the same stuff for IE */
-  input[type=range]::-ms-thumb {
-    height: 50px;
+  .form-right-divider input[type=range]::-ms-thumb {
+    height: 32px;
     width: 10px;
     background: #ffffff;
     cursor: pointer;
@@ -346,26 +384,26 @@ input[type=range]::-webkit-slider-thumb {
     margin-top: -10px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   }
 
-  input[type=range]::-webkit-slider-runnable-track {
+  .form-right-divider input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 30px;
     cursor: pointer;
     background: -webkit-linear-gradient(left, #fff832 0%,#ff3535 100%); /* Chrome10-25,Safari5.1-6 */
   }
   
-  input[type=range]:focus::-webkit-slider-runnable-track {
+  .form-right-divider input[type=range]:focus::-webkit-slider-runnable-track {
     background: -webkit-linear-gradient(left, #fff831 0%,#ff3530 100%); /* Chrome10-25,Safari5.1-6 */
   }
 
   
-  input[type=range]::-moz-range-track {
+  .form-right-divider input[type=range]::-moz-range-track {
     width: 100%;
     height: 30px;
     cursor: pointer;
     background: -moz-linear-gradient(left, #fff832 0%, #ff3535 100%); /* FF3.6-15 */
   }
   
-  input[type=range]::-ms-track {
+  .form-right-divider input[type=range]::-ms-track {
     width: 100%;
     height: 10px;
     cursor: pointer;
@@ -374,25 +412,22 @@ input[type=range]::-webkit-slider-thumb {
     border-width: 16px 0;
     color: transparent;
   }
-  input[type=range]::-ms-fill-lower {
+  .form-right-divider input[type=range]::-ms-fill-lower {
     background: linear-gradient(to right, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
-  input[type=range]:focus::-ms-fill-lower {
+  .form-right-divider input[type=range]:focus::-ms-fill-lower {
     background: linear-gradient(to right, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
-  input[type=range]::-ms-fill-upper {
+  .form-right-divider input[type=range]::-ms-fill-upper {
     background: linear-gradient(to right, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
-  input[type=range]:focus::-ms-fill-upper {
+  .form-right-divider input[type=range]:focus::-ms-fill-upper {
     background: linear-gradient(to right, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
-
-
-
 
 
 
@@ -400,95 +435,86 @@ input[type=range]::-webkit-slider-thumb {
   /*     VERTICAL    */
 
 
+/*
 
-  .form-left-divider input[type=range] {
-    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-    height: 100%; /* Specific width is required for Firefox. */
-    background: transparent; /* Otherwise white in Chrome */
-    border: 0px;
-  }
-  
-  .form-left-divider input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-  }
   
   .form-left-divider input[type=range]:focus {
-    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+    outline: none;
   }
   
   .form-left-divider input[type=range]::-ms-track {
     height: 100%;
     cursor: pointer;
   
-    /* Hides the slider so custom styles can be added */
     background: transparent; 
     border-color: transparent;
     color: transparent;
   }
-
-  /* Special styling for WebKit/Blink */
+*/
   .form-left-divider input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 5px;
-    width: 30px;
+    -webkit-appearance: slider-vertical;
+    height: 5px !important;
+    width: 100% !important;
     background: #ffffff;
     cursor: pointer;
     border: 1px #000 solid ;
-    margin-left: 0px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    margin-left: -2px;
   }
   
-  /* All the same stuff for Firefox */
   .form-left-divider input[type=range]::-moz-range-thumb {
     height: 5px;
-    width: 30px;
+    width: 100%;
     background: #ffffff;
     cursor: pointer;
     border: 1px #000 solid ;
-    margin-left: 0px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    margin-left: -2px; 
   }
   
-  /* All the same stuff for IE */
+  
   .form-left-divider input[type=range]::-ms-thumb {
     height: 5px;
     width: 30px;
     background: #ffffff;
     cursor: pointer;
     border: 1px #000 solid ;
-    margin-left: 0px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    margin-left: -2px;
   }
-
+/*
   .form-left-divider input[type=range]::-webkit-slider-runnable-track {
     width: 30px;
-    height: 100%;
+    height: 100px;
+    -webkit-appearance: none;
     cursor: pointer;
-    background: -webkit-linear-gradient(top, #fff832 0%,#ff3535 100%); /* Chrome10-25,Safari5.1-6 */
+    background: -webkit-linear-gradient(top, #fff832 0%,#ff3535 100%); 
   }
   
   .form-left-divider input[type=range]:focus::-webkit-slider-runnable-track {
-    background: -webkit-linear-gradient(top, #fff831 0%,#ff3530 100%); /* Chrome10-25,Safari5.1-6 */
+    background: -webkit-linear-gradient(top, #fff831 0%,#ff3530 100%); 
   }
 
   
   .form-left-divider input[type=range]::-moz-range-track {
     width: 30px;
-    height: 100%;
+    height: 100px;
     cursor: pointer;
-    background: -moz-linear-gradient(top, #fff832 0%, #ff3535 100%); /* FF3.6-15 */
+    background: -moz-linear-gradient(top, #fff832 0%, #ff3535 100%); 
   }
   
   .form-left-divider input[type=range]::-ms-fill-lower {
-    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    background: linear-gradient(to top, #fff832 0%,#ff3535 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 );
   }
   .form-left-divider input[type=range]:focus::-ms-fill-lower {
-    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); 
   }
   .form-left-divider input[type=range]::-ms-fill-upper {
-    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); 
   }
   .form-left-divider input[type=range]:focus::-ms-fill-upper {
-    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    background: linear-gradient(to top, #fff832 0%,#ff3535 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); 
   }
+  
+*/
