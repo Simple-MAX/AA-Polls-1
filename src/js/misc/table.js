@@ -109,9 +109,6 @@ function checkTableDataStructure(tempData) {
                     case DataValueTypes.Checkbox:
                         // Sets an empty string value to save space
                         finalData.data[i].values.value = "";
-
-                        // Set current data values onclick to null
-                        finalData.data[i].values.onclick = null;
                         break;
                     case DataValueTypes.Text:
                         /* Reset current data values "value" type to string,
@@ -122,6 +119,9 @@ function checkTableDataStructure(tempData) {
                                 finalData.data[i].values.value.toString();
                         } else if (finalData.data[i].values.value == "")
                             finalData.data[i].values.value = "nAn";
+
+                        // Set current data values onclick to null
+                        finalData.data[i].values.onclick = null;
                         break;
                     default:
                         finalData.data[i].values.value = "";
