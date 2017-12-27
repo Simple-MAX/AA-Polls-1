@@ -68,7 +68,11 @@ function checkTableDataStructure(tempData) {
          * else, assign default head to finalData.head
          */
         if (typeof finalData.head == "array" && headCount > 0) {
+            // Loops through entire head
             for (let i = 0; i < headCount; i++) {
+                /* If current head data type is not string,
+                 * else set head string in current iteration to "No title"
+                 */
                 if (typeof finalData.head[i] != "string")
                     finalData.head[i] = finalData.head[i].toString();
                 else if (finalData.head[i] == "")
@@ -96,7 +100,9 @@ function checkTableDataStructure(tempData) {
          * else assign finalData.data to default data array
          */
         if (typeof finalData.data == "object") {
+            // Loops through all data
             for (let i = 0; i < dataLength; i++) {
+                // If current data values value data type is not string
                 if (typeof finalData.data[i].values.value != "string") {
                     finalData.data[i].values.value = 
                         finalData.data[i].values.value.toString();
