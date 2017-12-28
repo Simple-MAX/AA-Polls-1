@@ -54,9 +54,7 @@ function loginUser(email = "", password = "", token = "", callback = null) {
                 /* Creates a cloned callback function and passes
                  * fetched data as parameter for external and quick access
                  */
-                const execCallback = function(passedData) {
-                    callback(passedData);
-                };
+                const execCallback = (passedData) => callback(passedData);
 
                 // Executes the cloned function
                 execCallback(result);
@@ -73,6 +71,11 @@ function loginUser(email = "", password = "", token = "", callback = null) {
 
 // Token based authentication
 function tokenAuthentication(token, callback) {
+    /* Terminate authentication before 
+     * hand if token is empty
+     */
+    if (token == "") return;
+
     // Returns user data
     return loginUser("", "", token, callback);
 }

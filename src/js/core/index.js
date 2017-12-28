@@ -44,45 +44,92 @@ window.onload = function() {
 
 // Initiatlizes the main function
 function initialize() {
+    // Gets current page name
+    const currentPage = getCurrentPage(true, true);
+
+    // Gets stored token
+    const token = getToken();    
+
+    // Declaration of final function for listener
+    let listenerFunc;
+
+    // Adds listener to elements for different pages
+    switch (currentPage) {
+        case Pages.Login:
+            // Declares listener accordingly
+            listenerFunc = function() {
+                let values = [ 
+                    getElementValue("email"),
+                    getElementValue("password") 
+                ];
+                
+                loginUser(values[0], values[1], "", (result) => handleCurrentUser(result));
+            }
+
+            // Adds listener function to element
+            addListener("login-submit", () => listenerFunc());
+            break;
+    }
     // Determines whether user is welcome or not
-    quickAuth();
+    if (token != "" && currentPage == Pages.Login)
+        quickAuth((result) => handleCurrentUser(result));
+    else if (token == "" && currentPage != Pages.Login)
+        redirectToPage(Pages.Login);
 
     // Proceed if user is not undefined or non-existent
-    if (getToken() != "" && currentUserData != null) {
-        // Determines what function to run on current page
-        switch (getCurrentPage(true, true)) {
-            case Pages.Users:
-                // Loads user table with results
-                loadUserTable();
-                break;
+    if (currentUserData != null) {
+        // If token is not empty
+        if (currentUserData.token != "") {
+            // Determines what function to run on current page
+            switch (currentPage) {
+                case Pages.Users:
+                    // Loads user table with results
+                    loadUserTable();
+                    break;
+            }
         }
     }
 }
 
 // Adds on click functions to specified elements
 function addListener(id, func, type = "click") {
-    // Adds listener to function
-    getElementById(id).addListener(type, () => func());
+    // Gets the element with id
+    let element = getElement(id);
+    
+    // Adds listener to element with function
+    element.addEventListener(type, () => func());
 }
 
 // Token based authentication for quick access
-function quickAuth() {
-    // Get current page name
+function quickAuth(callback = null) {
+    // Gets stored token
+    const token = getToken();
+
+    // Terminates if token is empty and returns false for failure
+    if (token == "") {
+        // Handles and redirects user to login screen
+        handleCurrentUser(null);
+
+        // Terminates
+        return;
+    }
+
+    // Getscurrent page name
     const currentPage = getCurrentPage(true, true);
 
     // If current token exists, try to authenticate
-    tokenAuthentication(getToken(), function(result) { 
-        // If data was successfully fetched from endpoint, else log out
-        if (result.success && result.data != null) {
-            /* Determines what sequence to to choose and execute,
-             * depending on url location and current page
-             */
-            if (currentPage == Pages.Login) {
-                // If token is not null, redirect user
-                redirectToPage(INITIAL_PANEL_PAGE);
-            }
-        } else logOut();
-    });
+    let result = tokenAuthentication(token);
+
+    // Call a custom and passed callback function
+    if (callback != null) {
+        /* Creates a cloned callback function and passes
+         * fetched data as parameter for external and quick access
+         */
+        const execCallback = (passedData) => callback(passedData);
+
+        // Executes the cloned function
+        execCallback(result);
+    }
 }
 
 // Fetches users, formats data and appends them to users table 
@@ -148,8 +195,23 @@ function goBack() { showView(previousIndex, false, true); }
 // Locates and fetches a specified element
 function getElement(id) { return document.getElementById(id); }
 
-// Gets the function of a specific element
-function getElementType(id) { return (typeof document.getElementById(id)); }
+// Gets the type of a specific element
+function getElementType(id) { return (typeof getElement(id)); }
+
+// Gets the value of a specific element
+function getElementValue(id) { return getElement(id).value; }
+
+// Creates an element instance
+function createElement(type, id = "") {
+    // Create a new element with given type
+    let element = document.createElement(type);
+
+    // If id is not empty, assign it
+    if (id != "") element.setAttributes("id", id);
+
+    // Return newly created element
+    return element;
+}
 
 // Returns a boolean value based on the existance of substring
 function stringContains(string, value) { return string.includes(value); }

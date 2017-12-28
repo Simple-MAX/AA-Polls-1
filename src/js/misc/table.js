@@ -174,7 +174,7 @@ function checkTableDataStructure(tempData) {
 // Adds given data to a specified table with id
 function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
     // Gets table element with the help of tableId
-    let table = document.getElementById(tableId);
+    let table = getElement(tableId);
 
     // Analyzes given table data and returns an appropriate value
     let finalData = checkTableDataStructure(data);
@@ -185,7 +185,7 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
     // Adds head values to each row if initialized
     if (finalData.head != null) {
         // Initiates a new table row element
-        let tableRow = document.createElement("tr");
+        let tableRow = createElement("tr");
     
         // Assigns a class name to the element
         tableRow.className = "table table-row";
@@ -193,7 +193,7 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
         // Loops through finalData.head and creates new head rows
         for (let j = 0; j < finalData.head.length; j++) {
             // Initialization of table row head element
-            let tableHead = document.createElement("th");
+            let tableHead = createElement("th");
 
             // Sets table row head value to finalData.head with given index
             tableHead.innerHTML = finalData.head[j];
@@ -213,18 +213,15 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
     const rowId = id = rowCount ? `AA-${id}` : id;
 
     // Initiates a new table row element
-    let tableRow = document.createElement("tr");
+    let tableRow = createElement("tr", rowId);
     
     // Assigns a class name to the element
     tableRow.className = "table table-row";
-    
-    // Assign new row with unique id
-    tableRow.setAttribute("id", rowId);
 
     // Loops through data for each row and creates a new row data element
     for (let j = 0; j < finalData.data.length; j++) {
         // Initiates a new table data element
-        let tableData = document.createElement("td");
+        let tableData = createElement("td");
 
         // Checks the data values "type" datatype
         switch (finalData.data[j].values.type) {
@@ -234,14 +231,10 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
                 break;
             case DataValueTypes.Checkbox:
                 // Initialize a new input or checkbox element
-                let checkBox = document.createElement("input");
-
-                // Custom checkbox id
-                let checkBoxId = `${rowId}-CB-${checkBoxColCount}`;
+                let checkBox = createElement("input", `${rowId}-CB-${checkBoxColCount}`);
 
                 // Sets tabla data attribute/s
                 checkBox.setAttribute("type", "checkbox");
-                checkBox.setAttribute("id", );
 
                 // Sets default value for checkbox
                 finalData.data[j].values.value == "1"
@@ -251,9 +244,8 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
                 /* Assigns checkbox onclick function and attribute to current
                 * finalData.data[j].values.onclick functions
                 */
-                checkBox.onclick = () => {
+                checkBox.onclick = () => 
                     finalData.data[j].values.onclick(checkBoxId);
-                };
 
                 // Append checkbox to current row data
                 tableData.appendChild(checkBox);
