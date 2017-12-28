@@ -173,7 +173,7 @@ function loadUserTable() {
     let userTableData = [];
 
     // Column titles for head
-    const headTitles = ["Namn", "Admin", "Superuser"];
+    const headTitles = ["Namn", "Email", "Admin", "Superuser"];
 
     // Loops through each user and adds specific keys and values
     for (let i = 0; i < users.data.length; i++) {
@@ -186,6 +186,13 @@ function loadUserTable() {
                 values: {
                     value: `${currentUser.first_name} ${currentUser.last_name}`,
                     type: "text",
+                    onclick: (id, obj) => alert("haha")
+                }
+            },
+            {
+                values: {
+                    value: currentUser.email,
+                    type: "text",
                     onclick: (id, obj) => null
                 }
             },
@@ -193,14 +200,28 @@ function loadUserTable() {
                 values: {
                     value: currentUser.admin,
                     type: "checkbox",
-                    onclick: (id, obj) => null
+                    onclick: (id, obj) => {
+                        value = 0;
+
+                        if (getElement(id).checked) value = 1;
+
+                        if (currentUserData.super_user == "1")
+                            changeUserType(currentUserData.token, currentUser.id, "Admin", value);
+                    }
                 }
             },
             {
                 values: {
                     value: currentUser.super_user,
                     type: "checkbox",
-                    onclick: (id, obj) => null
+                    onclick: (id, obj) => {
+                        value = 0;
+
+                        if (getElement(id).checked) value = 1;
+
+                        if (currentUserData.super_user == "1")
+                            changeUserType(currentUserData.token, currentUser.id, "SuperUser", value);
+                    }
                 }
             },
         ];

@@ -204,7 +204,8 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
     }
 
     // Counts each checkbox in one row
-    let checkBoxColCount = 0;
+    let checkBoxColCount    = 1;
+    let textValueColCount   = 1;
 
     // Custom row id
     const rowId = id = rowCount ? `AA-${id}` : id;
@@ -224,15 +225,23 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
         switch (finalData.data[j].values.type) {
             case DataValueTypes.Text:
                 // Custom text id
-                let textId = `${rowId}-T-${checkBoxColCount}`;
+                let textId = `${rowId}-T-${textValueColCount}`;
+
+                // Assigns custom id to text value or table data
+                tableData.setAttribute("id", textId);
 
                 /* Assigns text onclick function and attribute to current
                  * finalData.data[j].values.onclick function
                  */
-                tableData.onclick = (obj) => finalData.data[j].values.onclick(textId);
+                tableData.onclick = (obj) => finalData.data[j].values.onclick(textId, obj);
 
                 // Assign inner HTML value to current finalData.data value
                 tableData.innerHTML = finalData.data[j].values.value;
+
+                /* Increment by one for existance 
+                 * of text value in a column
+                 */
+                textValueColCount++;
                 break;
             case DataValueTypes.Checkbox:
                 // Custom checkbox id
@@ -248,8 +257,8 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
                 if (finalData.data[j].values.value == CheckBoxValues.ON)
                     checkBox.setAttribute("checked", true);
 
-                /* Assigns checkbox onclick function and attribute to current
-                 * finalData.data[j].values.onclick function
+                /* Assigns checkbox onclick function and attribute to
+                 * current finalData.data[j].values.onclick function
                  */
                 checkBox.onclick = function(obj) {
                     // Add or remove "checked" attribute 
@@ -262,13 +271,15 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
                     finalData.data[j].values.onclick(checkBoxId, obj);
                 }
 
+                /* Increment by one for existance 
+                 * of checkbox in a column
+                 */
+                checkBoxColCount++;
+
                 // Append checkbox to current row data
-                tableData.appendChild(checkBox);
+                tableData.appendChild(checkBox);       
                 break;
         }
-
-        // Increment by one for existance of checkbox in a column
-        checkBoxColCount++;
 
         // Appends data to current row
         tableRow.appendChild(tableData);
