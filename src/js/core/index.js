@@ -58,16 +58,23 @@ function initialize() {
         case Pages.Login:
             // Declares listener accordingly
             listenerFunc = function() {
+                // Used to minimize and shortify this script
                 let values = [ 
                     getElementValue("email"),
                     getElementValue("password") 
                 ];
                 
+                // Adds login function to this function
                 loginUser(values[0], values[1], "", (result) => handleCurrentUser(result));
             }
 
             // Adds listener function to element
             addListener("login-submit", () => listenerFunc());
+            addListener("password", (e) => { e.keyCode == 13 ? listenerFunc() : null }, "keyup");
+            break;
+        case Pages.Users:
+            // Adds fake data to users table
+            insertData("user-table");
             break;
     }
     // Determines whether user is welcome or not
@@ -97,7 +104,7 @@ function addListener(id, func, type = "click") {
     let element = getElement(id);
     
     // Adds listener to element with function
-    element.addEventListener(type, () => func());
+    element.addEventListener(type, (e) => func(e));
 }
 
 // Token based authentication for quick access
@@ -129,6 +136,29 @@ function quickAuth(callback = null) {
 
         // Executes the cloned function
         execCallback(result);
+    }
+}
+
+// Handles the user by storing token and redirecting to the panel
+function handleCurrentUser(result) {
+    // Gets current page name
+    const currentPage = getCurrentPage(true, true);
+
+    // If data was successfully fetched from endpoint, else log out
+    if (result != null) {
+        if (result.success && result.data != null) {
+            /* Determines what sequence to to choose and execute,
+            * depending on url location and current page
+            */
+            if (currentPage == Pages.Login) {
+                // Store current token with the newer one
+                if (getToken() != currentUserData.token)
+                    setToken(currentUserData.token)
+
+                // If token is not null, redirect user
+                redirectToPage(INITIAL_PANEL_PAGE);
+            }
+        } else logOut();
     }
 }
 
@@ -207,7 +237,7 @@ function createElement(type, id = "") {
     let element = document.createElement(type);
 
     // If id is not empty, assign it
-    if (id != "") element.setAttributes("id", id);
+    if (id != "") element.setAttribute("id", id);
 
     // Return newly created element
     return element;
@@ -216,12 +246,14 @@ function createElement(type, id = "") {
 // Returns a boolean value based on the existance of substring
 function stringContains(string, value) { return string.includes(value); }
 
+/* (Temporarily unavailable)
+
 // Loads constant valued scripts with specific options
 function loadScripts() {
     /* Loops through all scripts from an array
      * and initializes given script at given index
      * with a true or false stated deferred option
-     */
+     * /
     for (let i = 0; i < SCRIPT_PATHS.length; i++) {
         // Deferred boolean statement, default value is false
         let deferred = false;
@@ -244,7 +276,7 @@ function loadScripts() {
 
 /* Includes a specified script to the current webpage,
  * which can be accessed globally and locally
- */
+ * /
 function include(uri, deferred = false) {
     // Creates a new script element, with mandatory options
     let script = document.createElement("script");
@@ -257,6 +289,8 @@ function include(uri, deferred = false) {
     // Appends the newly created element to the head element
     document.head.appendChild(script);
 }
+
+*/
 
 // Redirects user to the main site or panel
 function redirectToPage(page) { 
