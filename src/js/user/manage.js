@@ -15,8 +15,11 @@
 
 // Attempts to fetch all users based on current user status
 function fetchUsers(token, callback) {
+    // Data variable to return
+    let data;
+
     // Creates a new array for possible parameters
-    let params = {  };
+    let params = {};
 
     /* Gets the appropriate values and store them
      * according to a determined structure below
@@ -27,23 +30,26 @@ function fetchUsers(token, callback) {
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */
-    let result = execAjaxRequest(`${API_URL}${endpoint.user}`, params);
+    let result = execAjaxRequest(USER_API_URL, params);
 
     /* If result is an object type, it will return
      * some data with from the endpoint, regardless whether it's
      * successful or not. If not, it will return an error string.
      */
     if (typeof result == "object") {
-        // If the result was successful and successfully authenticated, else
+        // If the result was successful
         if (result["success"] && result["data"] != null) {
+            // Stores fetched users locally
+            fetchedUsersData = result["data"];
+
             // Call a custom and passed function
             callback();
-
-            // Return data that contains multiple users
-            return result;
         }
+
+        // Assigns fetched data to data variable
+        data = result;
     } else if (typeof result == "string") alert("Authentication failed");
 
-    // Return nullified data
-    return null;
+    // Returns final data
+    return data;
 }

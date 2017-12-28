@@ -13,13 +13,13 @@
 * /**************************************************
 */
 
-// Regular variables
-var currentUserData;
-
 // Attempts to authenticate the user and executes a final action
-function loginUser(email = "", password = "", token = "", callback) {
+function loginUser(email = "", password = "", token = "", callback = null) {
+    // Data variable to return
+    let data;
+
     // Creates a new array for possible parameters
-    let params = {  };
+    let params = {};
     
     /* Gets the appropriate values and store them
      * according to a determined structure below
@@ -35,35 +35,45 @@ function loginUser(email = "", password = "", token = "", callback) {
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */
-    let result = request(`${API_URL}${endpoint.user}`, params);
+    let result = request(USER_API_URL, params);
 
     /* If result is an object type, it will return
      * some data with from the endpoint, regardless whether it's
      * successful or not. If not, it will return an error string.
      */
     if (typeof result == "object") {
-        // If the result was successful and successfully authenticated, else
+        // If the result was successful
         if (result["success"] && result["data"] != null) {
             /* Assign a global variable to the "data" object,
              * given from the current, finished request output
              */
             currentUserData = result["data"];
 
-            // If current token is not stored, replace the existing one
-            if (getToken() != currentUserData["token"])
-                setToken(userData["token"]);
-
             // Call a custom and passed callback function
-            callback(userData["token"]);
-        } else logOut();
+            if (callback != null) {
+                /* Creates a cloned callback function and passes
+                 * fetched data as parameter for external and quick access
+                 */
+                const execCallback = function(passedData) {
+                    callback(passedData);
+                };
+
+                // Executes the cloned function
+                execCallback(result);
+            }
+        }
+
+        // Assigns fetched data to data variable
+        data = result;
     } else if (typeof result == "string") alert("Authentication failed");
 
     // Return fetched data
-    return null;
+    return data;
 }
 
 // Token based authentication
 function tokenAuthentication(token, callback) {
+    // Returns user data
     return loginUser("", "", token, callback);
 }
 
@@ -84,5 +94,5 @@ function resetUser(email) {
 function logOut() {
     setToken("");
 
-    redirectToPage("login.html");
+    redirectToPage("login");
 }

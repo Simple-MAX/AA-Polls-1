@@ -14,8 +14,6 @@
 */
 
 // Constant variables
-const D_T_DATA = DEFAULT_TABLE_DATA;
-
 const DEFAULT_TABLE_DATA = {
     head: ["Title", "Admin"],
     data: [
@@ -41,6 +39,8 @@ const DataValueTypes = {
     Checkbox: "checkbox",
 }; 
 
+const CheckBoxValues = { ON: 1, OFF: 0 };
+
 // Regular variables
 let rowCount = 0;
 let colCount = 0;
@@ -49,21 +49,8 @@ let colCount = 0;
  * appends it to a given table element with given id
  */
 function insertData(tableId, data = DEFAULT_TABLE_DATA) {
-    // Sets rowCount to one
-    if (rowCount <= 0) rowCount = 1;
-
     // Initialization of row data container
-    let tableData = [];
-
-    // User row data structure as object
-    let userDataObject = {
-        head: head,
-        data: data
-    };
-
-    // Add fake data temporarily
-    tableData.push(userDataObject);
-    tableData.push(userDataObject);
+    let tableData = [ data ];
     
     // Loop through and add row based on current index of iteration
     for (var i = 0; i < tableData.length; i++) {
@@ -144,7 +131,9 @@ function checkTableDataStructure(tempData) {
                 switch (finalData.data[i].values.type) {
                     case DataValueTypes.Checkbox:
                         // Sets an empty string value to save space
-                        finalData.data[i].values.value = "";
+                        if (typeof finalData.data[i].values.value != "string")
+                            finalData.data[i].values.value =
+                                finalData.data[i].values.value.toString();
                         break;
                     case DataValueTypes.Text:
                         /* Reset current data values "value" type to string,
@@ -217,6 +206,9 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
         table.appendChild(tableRow);
     }
 
+    // Counts each checkbox in one row
+    let checkBoxColCount = 0;
+
     // Custom row id
     const rowId = id = rowCount ? `AA-${id}` : id;
 
@@ -244,18 +236,32 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
                 // Initialize a new input or checkbox element
                 let checkBox = document.createElement("input");
 
+                // Custom checkbox id
+                let checkBoxId = `${rowId}-CB-${checkBoxColCount}`;
+
                 // Sets tabla data attribute/s
                 checkBox.setAttribute("type", "checkbox");
+                checkBox.setAttribute("id", );
+
+                // Sets default value for checkbox
+                finalData.data[j].values.value == "1"
+                    ? checkBox.setAttribute("checked", CheckBoxValues.ON)
+                    : checkBox.setAttribute("checked", CheckBoxValues.OFF);
 
                 /* Assigns checkbox onclick function and attribute to current
                 * finalData.data[j].values.onclick functions
                 */
-                checkBox.onclick = () => finalData.data[j].values.onclick(checkBoxId);
+                checkBox.onclick = () => {
+                    finalData.data[j].values.onclick(checkBoxId);
+                };
 
                 // Append checkbox to current row data
                 tableData.appendChild(checkBox);
                 break;
         }
+
+        // Increment by one for existance of checkbox in a column
+        checkBoxColCount++;
 
         // Appends data to current row
         tableRow.appendChild(tableData);

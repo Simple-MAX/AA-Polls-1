@@ -28,15 +28,22 @@ function getToken() {
 
 // Stores the given token in a cookie
 function setToken(token) { 
+    // Current day plus one
     const date = new Date().getDate + 1;
 
+    // Stores token in a cookie
     document.cookie = `token=${token}; expire=${date};`; 
 }
 
 // Checks whether an actual token exists, returns boolean
 function tokenExists() {
+    // Retrieves the token
+    const token = getToken();
+
     // Return true boolean value
-    if (getToken() != "") return true;
+    if (!stringContains(token, "token=;") || 
+        token != "" || token != null)
+        return true;
 
     // Return opposite
     return false;

@@ -58,12 +58,12 @@ function request(url, data, method = "GET", async = false) {
      * and returns a string output which is valid for URL requests.
      * This passes some desired key names and values in separate arrays
      */
-    let urlParams = createUrlParams(data.keys, data.values);
-
+    let urlParams = data != null ? createUrlParams(data.keys, data.values) : "";
+    
     /* Executes an AJAX request (Vanilla JS, not jQuery) with the given 
      * url and returns data, function contains optional arguments
      */
-    return execAjaxRequest(url, method, async);
+    return execAjaxRequest(url + urlParams, method, async);
 }
 
 // Creates parameters for a url with key and value arrays

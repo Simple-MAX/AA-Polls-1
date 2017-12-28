@@ -11,6 +11,7 @@
         <script type="text/javascript" src="../js/networking/backend.js"></script>
         <script type="text/javascript" src="../js/networking/config.js"></script>
         <script type="text/javascript" src="../js/core/store.js"></script>
+        <script type="text/javascript" src="../js/user/config.js"></script>
         <script type="text/javascript" src="../js/user/auth.js"></script>
         <script type="text/javascript" src="../js/core/index.js"></script>
     </head>
@@ -38,7 +39,7 @@
                 <button 
                     type="submit" 
                     id="login-submit" 
-                    onclick="loginUser(getElementById('email'), getElementById('password'))"
+                    onclick="loginUser(getElementById('email').value, getElementById('password').value), '', redirectToPage('results')"
                 >Login</button>
             </div>      
         </main>

@@ -19,6 +19,17 @@ const MAIN_VIEW_INDEX = 0;
 const SCRIPT_PATHS      = [];
 const DEFERRED_SCRIPTS  = [];
 
+const Pages = {
+    Login: "login",
+    Users: "users",
+    Groups: "groups",
+    Results: "results",
+    Poll: "poll",
+    PollManager: "poll-manager"
+};
+
+const INITIAL_PANEL_PAGE = Pages.Users;
+
 // Regular Variables
 var views = [];
 
@@ -35,22 +46,47 @@ window.onload = function() {
 function initialize() {
     // Determines whether user is welcome or not
     quickAuth();
+
+    // Proceed if user is not undefined or non-existent
+    if (getToken() != "" && currentUserData != null) {
+        // Determines what function to run on current page
+        switch (getCurrentPage(true, true)) {
+            case Pages.Users:
+                // Loads user table with results
+                loadUserTable();
+                break;
+        }
+    }
+}
+
+// Adds on click functions to specified elements
+function addListener(id, func, type = "click") {
+    // Adds listener to function
+    getElementById(id).addListener(type, () => func());
 }
 
 // Token based authentication for quick access
 function quickAuth() {
-    // Constant document url variable
-    const currentUrl = document.location.href;
+    // Get current page name
+    const currentPage = getCurrentPage(true, true);
 
     // If current token exists, try to authenticate
-    if (stringContains(currentUrl, "login") && tokenExists())
-        tokenAuthentication(getToken(), redirectToPage("results.html"));
-    else if (!stringContains(currentUrl, "login") && !tokenExists())
-        redirectToPage("login.html");
+    tokenAuthentication(getToken(), function(result) { 
+        // If data was successfully fetched from endpoint, else log out
+        if (result.success && result.data != null) {
+            /* Determines what sequence to to choose and execute,
+             * depending on url location and current page
+             */
+            if (currentPage == Pages.Login) {
+                // If token is not null, redirect user
+                redirectToPage(INITIAL_PANEL_PAGE);
+            }
+        } else logOut();
+    });
 }
 
 // Fetches users, formats data and appends them to users table 
-function loadUsers() {
+function loadUserTable() {
     // Fetches users and stores in a variable
     let users = fetchUsers(currentUserData.token);
 
@@ -64,7 +100,7 @@ function loadUsers() {
     }
 
     // Format users accordingly
-    
+    insertData("user-table");
 }
 
 // Shows a view from a specified index, with optional animation and reset options
@@ -165,13 +201,33 @@ function redirectToPage(page) {
     // Constant url variable
     const currentUrl = document.location.href;
 
-    // Removes filename from current url
+    // Removes hostname and folders from current url
     let fileName = currentUrl.split("/").slice(-1);
 
     // Replaces old filename with empty value
     let pagePath = currentUrl.replace(fileName, "");
 
+    console.log(pagePath + page);
+
     // Redirects user to requested page
-    document.location.href = `${pagePath}${page}`;
+    document.location.href = `${pagePath}${page}.html`;
 }
 
+// Returns current page url
+function getCurrentPage(fileName = false, removeFilePrefix = false) { 
+    // Strip current url accordingly
+    if (fileName) {
+        // Removes hostname and folders from current url
+        let page = (getCurrentPage().split("/").slice(-1))[0];
+
+        // Removes prefix from file if true
+        if (removeFilePrefix)
+            page = page.replace(".html", "");
+
+        // Return modified result
+        return page;
+    }
+
+    // Return full url if fileName and removePrefix is false
+    return document.location.href; 
+}
