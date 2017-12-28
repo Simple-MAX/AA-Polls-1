@@ -48,8 +48,33 @@ function initialize() {
     const currentPage = getCurrentPage(true, true);
 
     // Gets stored token
-    const token = getToken();    
+    const token = getToken();
 
+    // Sets up all listeners
+    handleListeners(currentPage);
+
+    // Determines whether user is welcome or not
+    if (token != "")
+        quickAuth((result) => handleCurrentUser(result));
+    else if (token == "" && currentPage != Pages.Login)
+        redirectToPage(Pages.Login);
+
+    // Proceed if user is not undefined or non-existent
+    if (currentUserData != null) {
+        if (currentUserData.token != "") {
+            // Determines what function to run on current page
+            switch (currentPage) {
+                case Pages.Users:
+                    // Loads user table with results
+                    loadUserTable();
+                    break;
+            }
+        }
+    }
+}
+
+// Handles listeners for elements
+function handleListeners(currentPage) {
     // Declaration of final function for listener
     let listenerFunc;
 
@@ -72,29 +97,6 @@ function initialize() {
             addListener("login-submit", () => listenerFunc());
             addListener("password", (e) => { e.keyCode == 13 ? listenerFunc() : null }, "keyup");
             break;
-        case Pages.Users:
-            // Adds fake data to users table
-            insertData("user-table");
-            break;
-    }
-    // Determines whether user is welcome or not
-    if (token != "" && currentPage == Pages.Login)
-        quickAuth((result) => handleCurrentUser(result));
-    else if (token == "" && currentPage != Pages.Login)
-        redirectToPage(Pages.Login);
-
-    // Proceed if user is not undefined or non-existent
-    if (currentUserData != null) {
-        // If token is not empty
-        if (currentUserData.token != "") {
-            // Determines what function to run on current page
-            switch (currentPage) {
-                case Pages.Users:
-                    // Loads user table with results
-                    loadUserTable();
-                    break;
-            }
-        }
     }
 }
 
@@ -159,13 +161,59 @@ function handleCurrentUser(result) {
                 redirectToPage(INITIAL_PANEL_PAGE);
             }
         } else logOut();
-    }
+    } else logOut();
 }
 
 // Fetches users, formats data and appends them to users table 
 function loadUserTable() {
     // Fetches users and stores in a variable
     let users = fetchUsers(currentUserData.token);
+
+    // Declaration of user table data
+    let userTableData = [];
+
+    // Column titles for head
+    const headTitles = ["Namn", "Admin", "Superuser"];
+
+    // Loops through each user and adds specific keys and values
+    for (let i = 0; i < users.data.length; i++) {
+        // Constant variable and value for current user in iteration
+        const currentUser = users.data[i];
+
+        // Values to append
+        let valuesToAppend = [
+            {
+                values: {
+                    value: `${currentUser.first_name} ${currentUser.last_name}`,
+                    type: "text",
+                    onclick: (id, obj) => null
+                }
+            },
+            {
+                values: {
+                    value: currentUser.admin,
+                    type: "checkbox",
+                    onclick: (id, obj) => null
+                }
+            },
+            {
+                values: {
+                    value: currentUser.super_user,
+                    type: "checkbox",
+                    onclick: (id, obj) => null
+                }
+            },
+        ];
+
+        // Declaration of custom user data object
+        let userDataObject = {
+            head: i <= 0 ? headTitles : null,
+            data: valuesToAppend
+        };
+
+        // Add final structure to table data array
+        userTableData.push(userDataObject);
+    }
 
     // Return nothing if users is null
     if (users == null) {
@@ -177,7 +225,7 @@ function loadUserTable() {
     }
 
     // Format users accordingly
-    insertData("user-table");
+    insertData("user-table", userTableData);
 }
 
 // Shows a view from a specified index, with optional animation and reset options

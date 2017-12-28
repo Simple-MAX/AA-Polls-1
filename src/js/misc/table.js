@@ -21,7 +21,7 @@ const DEFAULT_TABLE_DATA = {
             values: {
                 value: "",
                 type: "text",
-                onclick: null
+                onclick: () => alert("text")
             }
         },
         {
@@ -39,10 +39,10 @@ const DataValueTypes = {
     Checkbox: "checkbox",
 }; 
 
-const CheckBoxValues = { ON: 1, OFF: 0 };
+const CheckBoxValues = { ON: "1", OFF: "0" };
 
 // Regular variables
-let rowCount = 0;
+let rowCount = 1;
 let colCount = 0;
 
 /* Gets inserted data, formats it correctly and
@@ -50,7 +50,7 @@ let colCount = 0;
  */
 function insertData(tableId, data = DEFAULT_TABLE_DATA) {
     // Initialization of row data container
-    let tableData = [ data ];
+    let tableData = data;
     
     // Loop through and add row based on current index of iteration
     for (var i = 0; i < tableData.length; i++) {
@@ -144,9 +144,6 @@ function checkTableDataStructure(tempData) {
                                 finalData.data[i].values.value.toString();
                         } else if (finalData.data[i].values.value == "")
                             finalData.data[i].values.value = "nAn";
-
-                        // Set current data values onclick to null
-                        finalData.data[i].values.onclick = null;
                         break;
                     default:
                         finalData.data[i].values.value = "";
@@ -226,26 +223,44 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
         // Checks the data values "type" datatype
         switch (finalData.data[j].values.type) {
             case DataValueTypes.Text:
+                // Custom text id
+                let textId = `${rowId}-T-${checkBoxColCount}`;
+
+                /* Assigns text onclick function and attribute to current
+                 * finalData.data[j].values.onclick function
+                 */
+                tableData.onclick = (obj) => finalData.data[j].values.onclick(textId);
+
                 // Assign inner HTML value to current finalData.data value
                 tableData.innerHTML = finalData.data[j].values.value;
                 break;
             case DataValueTypes.Checkbox:
+                // Custom checkbox id
+                let checkBoxId = `${rowId}-CB-${checkBoxColCount}`;
+
                 // Initialize a new input or checkbox element
-                let checkBox = createElement("input", `${rowId}-CB-${checkBoxColCount}`);
+                let checkBox = createElement("input", checkBoxId);
 
                 // Sets tabla data attribute/s
                 checkBox.setAttribute("type", "checkbox");
 
                 // Sets default value for checkbox
-                finalData.data[j].values.value == "1"
-                    ? checkBox.setAttribute("checked", CheckBoxValues.ON)
-                    : checkBox.setAttribute("checked", CheckBoxValues.OFF);
+                if (finalData.data[j].values.value == CheckBoxValues.ON)
+                    checkBox.setAttribute("checked", true);
 
                 /* Assigns checkbox onclick function and attribute to current
-                * finalData.data[j].values.onclick functions
-                */
-                checkBox.onclick = () => 
-                    finalData.data[j].values.onclick(checkBoxId);
+                 * finalData.data[j].values.onclick function
+                 */
+                checkBox.onclick = function(obj) {
+                    // Add or remove "checked" attribute 
+                    if (checkBox.checked)
+                        checkBox.setAttribute("checked", true);
+                    else
+                        checkBox.removeAttribute("checked");
+
+                    // Execute passed function value
+                    finalData.data[j].values.onclick(checkBoxId, obj);
+                }
 
                 // Append checkbox to current row data
                 tableData.appendChild(checkBox);

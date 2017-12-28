@@ -30,7 +30,7 @@ function fetchUsers(token, callback) {
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */
-    let result = execAjaxRequest(USER_API_URL, params);
+    let result = request(USER_API_URL, params);
 
     /* If result is an object type, it will return
      * some data with from the endpoint, regardless whether it's
@@ -42,13 +42,21 @@ function fetchUsers(token, callback) {
             // Stores fetched users locally
             fetchedUsersData = result["data"];
 
-            // Call a custom and passed function
-            callback();
+            // Call a custom and passed callback function
+            if (callback != null) {
+                /* Creates a cloned callback function and passes
+                 * fetched data as parameter for external and quick access
+                 */
+                const execCallback = (passedData) => callback(passedData);
+
+                // Executes the cloned function
+                execCallback(result);
+            }
         }
 
         // Assigns fetched data to data variable
         data = result;
-    } else if (typeof result == "string") alert("Authentication failed");
+    } else if (typeof result == "string") alert("Fetch failed");
 
     // Returns final data
     return data;
