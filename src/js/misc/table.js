@@ -13,7 +13,9 @@
 * /**************************************************
 */
 
-// Constant variabless
+// Constant variables
+const D_T_DATA = DEFAULT_TABLE_DATA;
+
 const DEFAULT_TABLE_DATA = {
     head: ["Title", "Admin"],
     data: [
@@ -43,46 +45,20 @@ const DataValueTypes = {
 let rowCount = 0;
 let colCount = 0;
 
-// Vanilla JS default onload function
-window.onload = function() {
-    // Initialize script
-    initialize();
-}
-
-// Initializes the main function
-function initialize() {
+/* Gets inserted data, formats it correctly and
+ * appends it to a given table element with given id
+ */
+function insertData(tableId, data = DEFAULT_TABLE_DATA) {
     // Sets rowCount to one
-    rowCount = 1;
+    if (rowCount <= 0) rowCount = 1;
 
     // Initialization of row data container
     let tableData = [];
 
     // User row data structure as object
     let userDataObject = {
-        head: ["Name", "Admin", "Superuser"],
-        data: [
-            {
-                values: {
-                    value: "",
-                    type: "text",
-                    onclick: null
-                }
-            },
-            {
-                values: {
-                    value: "",
-                    type: "checkbox",
-                    onclick: (obj) => alert(getElement(obj).checked)
-                }
-            },
-            {
-                values: {
-                    value: "",
-                    type: "checkbox",
-                    onclick: (obj) => alert(getElement(obj).checked)
-                }
-            }
-        ]
+        head: head,
+        data: data
     };
 
     // Add fake data temporarily
@@ -92,7 +68,7 @@ function initialize() {
     // Loop through and add row based on current index of iteration
     for (var i = 0; i < tableData.length; i++) {
         // Append fetched data to user table
-        appendDataToTable("user-table", tableData[i]);
+        appendDataToTable(tableId, tableData[i]);
     }
 }
 

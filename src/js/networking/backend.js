@@ -52,6 +52,20 @@
 }
 */
 
+// Makes an HTTP request and returns some data from finished request
+function request(url, data, method = "GET", async = false) {
+    /* Creates a string and executes the createUrlParams function
+     * and returns a string output which is valid for URL requests.
+     * This passes some desired key names and values in separate arrays
+     */
+    let urlParams = createUrlParams(data.keys, data.values);
+
+    /* Executes an AJAX request (Vanilla JS, not jQuery) with the given 
+     * url and returns data, function contains optional arguments
+     */
+    return execAjaxRequest(url, method, async);
+}
+
 // Creates parameters for a url with key and value arrays
 function createUrlParams(keys, values) {
     /* First string needs a question mark after endpoint,

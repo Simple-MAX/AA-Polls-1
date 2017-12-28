@@ -13,17 +13,17 @@
 * /**************************************************
 */
 
-// Regular Variables
-var views = [];
-
-var currentIndex    = 0;
-var previousIndex   = 0;
-
 // Constant variables
 const MAIN_VIEW_INDEX = 0;
 
 const SCRIPT_PATHS      = [];
 const DEFERRED_SCRIPTS  = [];
+
+// Regular Variables
+var views = [];
+
+var currentIndex    = 0;
+var previousIndex   = 0;
 
 // Default vanilla JS onload function
 window.onload = function() {
@@ -49,30 +49,22 @@ function quickAuth() {
         redirectToPage("login.html");
 }
 
-// Loads constant valued scripts with specific options
-function loadScripts() {
-    /* Loops through all scripts from an array
-     * and initializes given script at given index
-     * with a true or false stated deferred option
-     */
-    for (let i = 0; i < SCRIPT_PATHS.length; i++) {
-        // Deferred boolean statement, default value is false
-        let deferred = false;
+// Fetches users, formats data and appends them to users table 
+function loadUsers() {
+    // Fetches users and stores in a variable
+    let users = fetchUsers(currentUserData.token);
 
-        // Only if "DEFERRED_SCRIPTS" is greater than zero.
-        if (DEFERRED_SCRIPTS.length > 0) {
-            // Loops through constant deferred scripts
-            for (let j = 0; j < DEFERRED_SCRIPTS; j++) {
-                // Checks whether current script is deferred or not
-                if (SCRIPT_PATHS[i] == DEFERRED_SCRIPTS[j] && 
-                    DEFERRED_SCRIPTS[j] != null)
-                    deferred = true;
-            }
-        }
+    // Return nothing if users is null
+    if (users == null) {
+        // Make user aware of progress failure
+        alert("Could not fetch users, try again.");
 
-        // Adds the script to the page
-        include(SCRIPT_PATHS[i], deferred);
+        // Exit function
+        return;
     }
+
+    // Format users accordingly
+    
 }
 
 // Shows a view from a specified index, with optional animation and reset options
@@ -117,21 +109,6 @@ function showView(index, anim = false, reset = false) {
 // Goes back to the previous index if navigated beyond once
 function goBack() { showView(previousIndex, false, true); }
 
-// Redirects user to the main site or panel
-function redirectToPage(page) { 
-    // Constant url variable
-    const currentUrl = document.location.href;
-
-    // Removes filename from current url
-    let fileName = currentUrl.split("/").slice(-1);
-
-    // Replaces old filename with empty value
-    let pagePath = currentUrl.replace(fileName, "");
-
-    // Redirects user to requested page
-    document.location.href = `${pagePath}${page}`;
-}
-
 // Locates and fetches a specified element
 function getElement(id) { return document.getElementById(id); }
 
@@ -140,6 +117,32 @@ function getElementType(id) { return (typeof document.getElementById(id)); }
 
 // Returns a boolean value based on the existance of substring
 function stringContains(string, value) { return string.includes(value); }
+
+// Loads constant valued scripts with specific options
+function loadScripts() {
+    /* Loops through all scripts from an array
+     * and initializes given script at given index
+     * with a true or false stated deferred option
+     */
+    for (let i = 0; i < SCRIPT_PATHS.length; i++) {
+        // Deferred boolean statement, default value is false
+        let deferred = false;
+
+        // Only if "DEFERRED_SCRIPTS" is greater than zero.
+        if (DEFERRED_SCRIPTS.length > 0) {
+            // Loops through constant deferred scripts
+            for (let j = 0; j < DEFERRED_SCRIPTS; j++) {
+                // Checks whether current script is deferred or not
+                if (SCRIPT_PATHS[i] == DEFERRED_SCRIPTS[j] && 
+                    DEFERRED_SCRIPTS[j] != null)
+                    deferred = true;
+            }
+        }
+
+        // Adds the script to the page
+        include(SCRIPT_PATHS[i], deferred);
+    }
+}
 
 /* Includes a specified script to the current webpage,
  * which can be accessed globally and locally
@@ -155,5 +158,20 @@ function include(uri, deferred = false) {
 
     // Appends the newly created element to the head element
     document.head.appendChild(script);
+}
+
+// Redirects user to the main site or panel
+function redirectToPage(page) { 
+    // Constant url variable
+    const currentUrl = document.location.href;
+
+    // Removes filename from current url
+    let fileName = currentUrl.split("/").slice(-1);
+
+    // Replaces old filename with empty value
+    let pagePath = currentUrl.replace(fileName, "");
+
+    // Redirects user to requested page
+    document.location.href = `${pagePath}${page}`;
 }
 

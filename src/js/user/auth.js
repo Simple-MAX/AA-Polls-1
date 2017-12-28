@@ -13,32 +13,29 @@
 * /**************************************************
 */
 
+// Regular variables
+var currentUserData;
+
 // Attempts to authenticate the user and executes a final action
 function loginUser(email = "", password = "", token = "", callback) {
-    /* Creates a string and executes the createUrlParams function
-     * and returns a string output which is valid for URL requests.
-     * This passes some desired key names and values in separate arrays
-     */
-    var urlParams = "";
+    // Creates a new array for possible parameters
+    let params = {  };
     
+    /* Gets the appropriate values and store them
+     * according to a determined structure below
+     */
     if (email != "" && password != "") {
-        // Gets the appropriate elements and it's values
-        const credentials = [
-            document.getElementById(email).value,
-            document.getElementById(password).value
-        ];
-
-        // Parses parameters for url correctly
-        urlParams = createUrlParams(["email", "password"], credentials);
+        params.keys     = ["email", "password"];
+        params.values   = [email, password];
     } else if (token != "") {
-        // Set token as url parameter
-        urlParams = createUrlParams(["token"], [token]);
+        params.keys     = ["token"];
+        params.values   = [token];
     }
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */
-    var result = execAjaxRequest(`${API_URL}${endpoint.user}${urlParams}`);
+    let result = request(`${API_URL}${endpoint.user}`, params);
 
     /* If result is an object type, it will return
      * some data with from the endpoint, regardless whether it's
@@ -48,24 +45,26 @@ function loginUser(email = "", password = "", token = "", callback) {
         // If the result was successful and successfully authenticated, else
         if (result["success"] && result["data"] != null) {
             /* Assign a global variable to the "data" object,
-            * given from the current, finished request output
-            */
-            let userData = result["data"];
+             * given from the current, finished request output
+             */
+            currentUserData = result["data"];
 
             // If current token is not stored, replace the existing one
-            if (getToken() != userData["token"])
+            if (getToken() != currentUserData["token"])
                 setToken(userData["token"]);
 
-            // Redirect user to the main site or panel
-            callback();
+            // Call a custom and passed callback function
+            callback(userData["token"]);
         } else logOut();
-    } else if (typeof result == "string") 
-        alert("Authentication failed");
+    } else if (typeof result == "string") alert("Authentication failed");
+
+    // Return fetched data
+    return null;
 }
 
 // Token based authentication
 function tokenAuthentication(token, callback) {
-    loginUser("", "", token, callback);
+    return loginUser("", "", token, callback);
 }
 
 // Registers the given user, returns result data
