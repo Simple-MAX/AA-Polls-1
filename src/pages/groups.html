@@ -11,7 +11,6 @@
         <script type="text/javascript" src="../js/networking/backend.js"></script>
         <script type="text/javascript" src="../js/networking/config.js"></script>
         <script type="text/javascript" src="../js/core/store.js"></script>
-        <script type="text/javascript" src="../js/user/config.js"></script>
         <script type="text/javascript" src="../js/user/auth.js"></script>
         <script type="text/javascript" src="../js/core/index.js"></script>
     </head>
@@ -35,6 +34,26 @@
         </header>
         <main>
             <div class="wrapper">
+                
+                <div class="box">
+	               <a class="button" href="#popup1">Add User</a>
+                </div>
+            
+                <div id="popup1" class="overlay">
+                    <div class="popup">
+                        <h2>Add user</h2>
+                        <a class="close" href="#">&times;</a>
+                        <div class="content">
+                            
+                            <div class="fields">
+                                Group Name: <input type="text" name="G-Name" value=""><br>
+                                Group Members: <input type="text" name="Email" value=""><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
                 <h1 class="title">Groups</h1>
                 <div class="box-list">
                     <div class="box-row">
