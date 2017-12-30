@@ -379,11 +379,14 @@ function redirectToPage(page) {
 }
 
 // Returns current page url
-function getCurrentPage(fileName = false, removeFilePrefix = false) { 
+function getCurrentPage(fileName = false, removeFilePrefix = false) {
+    // Gets current url
+    let url = window.location.pathname;
+
     // Strip current url accordingly
     if (fileName) {
         // Removes hostname and folders from current url
-        let page = (getCurrentPage().split("/").slice(-1))[0];
+        let page = url.substring(url.lastIndexOf("/") + 1);
 
         // Removes prefix from file if true
         if (removeFilePrefix)
@@ -394,5 +397,5 @@ function getCurrentPage(fileName = false, removeFilePrefix = false) {
     }
 
     // Return full url if fileName and removePrefix is false
-    return document.location.href; 
+    return url; 
 }

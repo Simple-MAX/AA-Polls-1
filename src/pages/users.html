@@ -40,25 +40,44 @@
                 <h1 class="title">Users</h1>
                 
                 <div class="box">
-	               <a class="button" href="#popup1">Add Group</a>
+	               <a class="button" href="#popup1">Add User</a>
                 </div>
             
                 <div id="popup1" class="overlay">
                     <div class="popup">
-                        <h2>Add user</h2>
-                        <a class="close" href="#">&times;</a>
+                        <div class="title">
+                            <h2 style="width: null">Add user</h2>
+
+                            <a class="close" href="#">&times;</a>
+                        </div>
+
+                        <br />
+
                         <div class="content">
-                            
                             <div class="fields">
-                                Name: <input type="text" name="Name" value=""><br>
-                                Email: <input type="text" name="Email" value=""><br>
-                                Pass: <input type="text" name="pass" value=""><br>
-                                Rep Pass: <input type="text" name="rep-pass" value=""><br>
+                                <input type="text" name="name" placeholder="Namn" />
+
+                                <br />
+
+                                <input type="text" name="email" placeholder="Email" />
+
+                                <br />
+
+                                <input type="text" name="password" placeholder="Lösenord" />
+
+                                <br />
+
+                                <input type="text" name="pass-conf" placeholder="Lösenord igen" />
+
+                                <br />
                             </div>
+
+                            <br />
+
+                            <button class="close-action" id="submit-user">Spara</button>
                         </div>
                     </div>
                 </div>
-                
                 
                 <table class="table" id="user-table"></table>
             </div>
