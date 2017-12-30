@@ -5,17 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../css/groups.css">
 
-        <title>AA-Polls</title>
+        <title>Användare</title>
         
         <script type="text/javascript" src="../../lib/jquery/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="../js/networking/backend.js"></script>
         <script type="text/javascript" src="../js/networking/config.js"></script>
-        <script type="text/javascript" src="../js/core/store.js"></script>
+        <script type="text/javascript" src="../js/navigation/navigation.js"></script>
+        <script type="text/javascript" src="../js/navigation/config.js"></script>
+        <script type="text/javascript" src="../js/misc/table.js"></script>
         <script type="text/javascript" src="../js/user/config.js"></script>
         <script type="text/javascript" src="../js/user/manage.js"></script>
         <script type="text/javascript" src="../js/user/auth.js"></script>
+        <script type="text/javascript" src="../js/core/config.js"></script>
+        <script type="text/javascript" src="../js/core/store.js"></script>
         <script type="text/javascript" src="../js/core/index.js"></script>
-        <script type="text/javascript" src="../js/misc/table.js"></script>
     </head>
     <body>
         <header>
@@ -40,13 +43,18 @@
                 <h1 class="title">Users</h1>
                 
                 <div class="box">
-	               <a class="button" href="#popup1">Add User</a>
+                    <a class="button" href="#popup1">
+                        <p class="button-text">Ny användare</p> 
+                        <p style="color: #00aa00" class="button-icon-text">&plus;</p>
+                    </a>                
                 </div>
+
+                <br />
             
                 <div id="popup1" class="overlay">
                     <div class="popup">
                         <div class="title">
-                            <h2 style="width: null">Add user</h2>
+                            <h2>Ny användare</h2>
 
                             <a class="close" href="#">&times;</a>
                         </div>
@@ -55,19 +63,21 @@
 
                         <div class="content">
                             <div class="fields">
-                                <input type="text" name="name" placeholder="Namn" />
+                                <br />
+
+                                <input type="text" id="add-name" placeholder="Namn" />
 
                                 <br />
 
-                                <input type="text" name="email" placeholder="Email" />
+                                <input type="text" id="add-email" placeholder="Email" />
 
                                 <br />
 
-                                <input type="text" name="password" placeholder="Lösenord" />
+                                <input type="text" id="add-pass" placeholder="Lösenord" />
 
                                 <br />
 
-                                <input type="text" name="pass-conf" placeholder="Lösenord igen" />
+                                <input type="text" id="add-pass-conf" placeholder="Lösenord igen" />
 
                                 <br />
                             </div>
@@ -75,6 +85,8 @@
                             <br />
 
                             <button class="close-action" id="submit-user">Spara</button>
+                            
+                            <br />
                         </div>
                     </div>
                 </div>

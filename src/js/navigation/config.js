@@ -12,9 +12,19 @@
 */
 
 // Constant variables
-const MONTHS = [
-    "January",  "February", "Mars",
-    "April",    "May",      "June",
-    "July",     "August",   "September",
-    "November", "October",  "December"
-];
+const Pages = {
+    Login: "login",
+    Users: "users",
+    Groups: "groups",
+    Statistics: "Statistics",
+    Poll: "poll",
+    PollManager: "poll-manager"
+};
+
+const INITIAL_PANEL_PAGE = Pages.Users;
+
+// Regular Variables
+var views = [];
+
+var currentIndex    = 0;
+var previousIndex   = 0;

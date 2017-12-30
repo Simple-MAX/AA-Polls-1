@@ -12,9 +12,7 @@
 */
 
 // Constant variables
-const MONTHS = [
-    "January",  "February", "Mars",
-    "April",    "May",      "June",
-    "July",     "August",   "September",
-    "November", "October",  "December"
-];
+const MAIN_VIEW_INDEX = 0;
+
+const SCRIPT_PATHS      = [];
+const DEFERRED_SCRIPTS  = [];

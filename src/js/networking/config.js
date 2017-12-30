@@ -1,12 +1,10 @@
 /****************************************************
 *                                                   *
-*               BluDay - config.js                  *
+*               AA-Polls - config.js                *
 *                                                   *
-*         Developed by : Bachir Bouchemla           *
+*        Date of development : November 2017        *
 *                                                   *
-*     Date of development : Mid September 2017      *
-*                                                   *
-*   Copyrights @ MicroAA Labs | BluDay | botprizm   *
+*       Copyrights @ https://github.com/BluDay      *
 *                                                   *
 *                      (o.0)                        *
 *                                                   *

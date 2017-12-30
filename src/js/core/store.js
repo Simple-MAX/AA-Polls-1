@@ -1,12 +1,10 @@
 /****************************************************
 *                                                   *
-*                 BluDay - store.js                 *
+*                AA-Polls - store.js                *
 *                                                   *
-*           Developed by : Bachir Bouchemla         *
+*        Date of development : December 2017        *
 *                                                   *
-*      Date of development : Late December 2017     *
-*                                                   *
-*         Copyrights @ MicroAA Labs | BluDay        *
+*       Copyrights @ https://github.com/BluDay      *
 *                                                   *
 *                      (o.0)                        *
 *                                                   *
