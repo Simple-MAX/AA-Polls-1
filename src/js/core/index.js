@@ -91,7 +91,10 @@ function handleListeners(currentPage) {
                 }
                 
                 // Adds login function to this function
-                registerUser(values[0], values[1], values[2], function(result) {
+                let result = registerUser(values[0], values[1], values[2]);
+
+                // If result is successful, proceed, else alert user
+                if (result != null) {
                     // Re-render user table if succeeded
                     if (result["success"]) {
                         // Re-render actual user table
@@ -100,7 +103,7 @@ function handleListeners(currentPage) {
                         // Hide popup window
                         getElement("close-add").click();
                     } else alert("Kunde inte lägga till användare");
-                });
+                } else alert("Vänligen se till att fälten är giltiga");
             }
 
             // Adds listener function to element
@@ -173,7 +176,7 @@ function loadUserTable(callback = null) {
     let userTableData = [];
 
     // Column titles for head
-    const headTitles = ["Namn", "Email", "Admin", "Superuser"];
+    const headTitles = ["Namn", "Email address", "Administratör", "Super användare"];
 
     // Loops through each user and adds specific keys and values
     for (let i = 0; i < users.data.length; i++) {
