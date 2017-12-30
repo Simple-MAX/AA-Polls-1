@@ -43,15 +43,17 @@
                 <h1 class="title">Users</h1>
                 
                 <div class="box">
-                    <a class="button" href="#popup1">
+                    <a class="button" href="#add-user">
                         <p class="button-text">Ny användare</p> 
                         <p class="button-icon-text">&plus;</p>
                     </a>                
                 </div>
 
                 <br />
-            
-                <div id="popup1" class="overlay">
+                
+                <table class="table" id="user-table"></table>
+
+                <div id="add-user" class="overlay">
                     <div class="popup">
                         <div class="title">
                             <h2>Ny användare</h2>
@@ -84,14 +86,56 @@
 
                             <br />
 
-                            <button class="close-action" id="submit-user">Spara</button>
+                            <button class="popup-button" id="add-user-button">Lägg till användare</button>
                             
                             <br />
                         </div>
                     </div>
                 </div>
-                
-                <table class="table" id="user-table"></table>
+
+                <div id="edit-user" class="overlay">
+                    <div class="popup">
+                        <div class="title">
+                            <h2>Redigera användare</h2>
+
+                            <a class="close" href="#">&times;</a>
+                        </div>
+
+                        <br />
+
+                        <div class="content">
+                            <div class="fields">
+                                <br />
+
+                                <input type="text" id="edit-name" placeholder="Namn" />
+
+                                <br />
+
+                                <input type="text" id="edit-email" placeholder="Email" />
+
+                                <br />
+
+                                <input type="text" id="edit-pass" placeholder="Lösenord" />
+
+                                <br />
+
+                                <input type="text" id="edit-pass-conf" placeholder="Lösenord igen" />
+
+                                <br />
+                            </div>
+
+                            <br />
+
+                            <button class="popup-button" id="edit-user-button">Spara</button>
+
+                            <br />
+
+                            <button class="popup-button" style="background: red" id="delete-user-button">Ta bort användare</button>
+                            
+                            <br />
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
         <footer>
