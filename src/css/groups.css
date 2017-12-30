@@ -247,11 +247,11 @@
     display: block;
     margin: auto;
     width: 100px;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 5px;
     background-color: #8a199e;
     color: #fff;
-    font-size: 15px;
+    font-size: 17px;
     transition: all 200ms;
     cursor: pointer;
   }
@@ -263,7 +263,6 @@
   .box {
     margin: 0;
     padding: 0;
-    height: 20px;
     display: block;
   }
 
@@ -277,7 +276,7 @@
     font-size: 25px;
     line-height: 12.5px;
     text-decoration: none;
-    color: #000;
+    color: #fff;
     display: inline-block;
   }
 
@@ -287,22 +286,24 @@
     padding: 0;
     text-decoration: none;
     font-size: 17px;
-    font-weight: bold;
-    color: #000;
+    font-weight: 400;
+    color: #fff;
   }
 
   .button {
     border: 0;
     margin: 0;
-    padding: 5px;
+    padding: 10px 15px;
     display: inline-block;
     text-decoration: none;
+    border-radius: 5px;
+    background-color: #8a199e;
   }
 
   .button:visited {
-      margin: 0;
-      padding: 0;
-      border: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
 
   .button:hover {
