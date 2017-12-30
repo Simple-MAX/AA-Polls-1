@@ -4,6 +4,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../css/login.css">
+        <link rel="stylesheet" type="text/css" href="../css/main.css" />
 
         <title>Logga in</title>
         
@@ -24,9 +25,9 @@
     <body>
         <header>
             <nav>
-                <div class="nav-main admin-panel">
+                <div class="nav-main-inverted admin-panel">
                     <div class="nav-container">
-                        <div class="nav-logo-container">
+                        <div class="nav-logo-container inverted">
                             <h1>Mental hälsa</h1>
                             <h4>Administrationpanel</h4>
                         </div>
@@ -35,18 +36,25 @@
             </nav>
         </header>
         <main>
-            <div class="login-content">     
-                <label><b>Användarnamn</b></label>
-                <input type="text" placeholder="Email address" name="uname" id="email" required />
+            <div class="wrapper">
+                <p class="title">Logga in</p>
 
-                <label><b>Lösenord</b></label>
-                <input type="password" placeholder="Ditt lösenord" name="psw" id="password" required />
-                
-                <button 
-                    type="submit" 
-                    id="login-submit"
-                >Login</button>
-            </div>      
+                <div class="login-form">
+                    <input class="textbox" type="text" placeholder="Email address" id="email" required />
+
+                    <hr class="short-spacing" />
+
+                    <input class="textbox" type="password" placeholder="Ditt lösenord" id="password" required />
+
+                    <hr class="regular-spacing" />
+                    
+                    <button 
+                        class="regular-button"
+                        type="submit" 
+                        id="login-submit"
+                    >Logga in</button>
+                </div>    
+            </div>  
         </main>
         <footer>
         </footer> 

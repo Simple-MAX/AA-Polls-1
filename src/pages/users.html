@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="../css/groups.css" />
-        <link rel="stylesheet" type="text/css" href="../css/index.css" />
+        <link rel="stylesheet" type="text/css" href="../css/tables.css" />
+        <link rel="stylesheet" type="text/css" href="../css/main.css" />
 
         <title>Användare</title>
         
@@ -47,9 +47,9 @@
                 <p class="title">Användare</p>
                 
                 <div class="box">
-                    <a class="button" href="#add-user">
-                        <p class="button-text">Ny användare</p> 
-                        <p class="button-icon-text">&plus;</p>
+                    <a class="anchor-button" href="#add-user">
+                        <p class="anchor-button-text">Ny användare</p> 
+                        <p class="anchor-button-icon-text">&plus;</p>
                     </a>                
                 </div>
 
@@ -63,84 +63,78 @@
 
                 <div id="add-user" class="overlay">
                     <div class="popup">
-                        <div class="title">
-                            <h2>Ny användare</h2>
+                        <div class="head">
+                            <p>Ny användare</p>
 
-                            <a class="close" href="#">&times;</a>
+                            <a id="close-add" href="#">&times;</a>
                         </div>
 
-                        <br />
+                        <hr class="short-spacing" />
 
                         <div class="content">
                             <div class="fields">
-                                <br />
-
                                 <input type="text" id="add-name" placeholder="Namn" />
 
-                                <br />
+                                <hr class="short-spacing" />
 
                                 <input type="text" id="add-email" placeholder="Email" />
 
-                                <br />
+                                <hr class="short-spacing" />
 
                                 <input type="text" id="add-pass" placeholder="Lösenord" />
 
-                                <br />
+                                <hr class="short-spacing" />
 
                                 <input type="text" id="add-pass-conf" placeholder="Lösenord igen" />
-
-                                <br />
                             </div>
 
-                            <br />
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
 
-                            <button class="popup-button" id="add-user-button">Lägg till användare</button>
+                            <button class="regular-button" id="add-user-button">Lägg till användare</button>
                             
-                            <br />
+                            <hr class="short-spacing" />
                         </div>
                     </div>
                 </div>
 
                 <div id="edit-user" class="overlay">
                     <div class="popup">
-                        <div class="title">
-                            <h2>Redigera användare</h2>
+                        <div class="head">
+                            <p>Redigera användare</p>
 
-                            <a class="close" href="#">&times;</a>
+                            <a id="close-edit" href="#">&times;</a>
                         </div>
 
-                        <br />
+                        <hr class="short-spacing" />
 
                         <div class="content">
                             <div class="fields">
-                                <br />
-
                                 <input type="text" id="edit-name" placeholder="Namn" />
 
-                                <br />
+                                <hr class="short-spacing" />
 
                                 <input type="text" id="edit-email" placeholder="Email" />
 
-                                <br />
+                                <hr class="short-spacing" />
 
                                 <input type="text" id="edit-pass" placeholder="Lösenord" />
 
-                                <br />
+                                <hr class="short-spacing" />
 
                                 <input type="text" id="edit-pass-conf" placeholder="Lösenord igen" />
-
-                                <br />
                             </div>
 
-                            <br />
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
 
-                            <button class="popup-button" id="edit-user-button">Spara</button>
+                            <button class="regular-button" id="edit-user-button">Spara information</button>
 
-                            <br />
+                            <hr class="short-spacing" />
 
-                            <button class="popup-button" style="background: red" id="delete-user-button">Ta bort användare</button>
+                            <button class="regular-button" style="background: #dd0000" id="remove-user-button">Ta bort användare</button>
                             
-                            <br />
+                            <hr class="short-spacing" />
                         </div>
                     </div>
                 </div>

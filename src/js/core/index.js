@@ -98,7 +98,7 @@ function handleListeners(currentPage) {
                         refreshUserTable();
 
                         // Hide popup window
-                        getElementByClass("close").click();
+                        getElement("close-add").click();
                     } else alert("Kunde inte lägga till användare");
                 });
             }
