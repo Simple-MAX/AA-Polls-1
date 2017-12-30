@@ -14,7 +14,7 @@
 // Attempts to authenticate the user and executes a final action
 function loginUser(email = "", password = "", token = "", callback = null) {
     // Data variable to return
-    let data;
+    let data = null;
 
     // Creates a new array for possible parameters
     let params = {};
@@ -22,13 +22,15 @@ function loginUser(email = "", password = "", token = "", callback = null) {
     /* Gets the appropriate values and store them
      * according to a determined structure below
      */
-    if (email != "" && password != "") {
-        params.keys     = ["email", "password"];
-        params.values   = [email, password];
-    } else if (token != "") {
-        params.keys     = ["token"];
-        params.values   = [token];
-    }
+    if ((email != "" && password != "") || token != "") {
+        if (email != "" && password != "") {
+            params.keys     = ["email", "password"];
+            params.values   = [email, password];
+        } else if (email == "" && password == "" && token != "") {
+            params.keys     = ["token"];
+            params.values   = [token];
+        }
+    } else return data;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
@@ -61,7 +63,7 @@ function loginUser(email = "", password = "", token = "", callback = null) {
 
         // Assigns fetched data to data variable
         data = result;
-    } else if (typeof result == "string") alert("Authentication failed");
+    }
 
     // Return fetched data
     return data;
@@ -79,16 +81,59 @@ function tokenAuthentication(token, callback) {
 }
 
 // Registers the given user, returns result data
-function registerUser(email, pass) {
-    // Gets the appropriate elements and it's values
-    var email   = document.getElementById("login-email").value;
-    var pass    = document.getElementById("login-pass").value;
-}
+function registerUser(name, email, password, callback = null) {
+    // Data variable to return
+    let data = null;
+     
+    // Creates a new array for possible parameters
+    let params = {};
 
-// Sends a reset mail link to an existing user
-function resetUser(email) {
-    // Gets the appropriate elements and it's values
-    var email = document.getElementById("login-email").value;
+    // Names separated and stored in a constant array
+    const names = name.split(" ").slice(0);
+
+    // Terminate if names array is invalid
+    if (names.length <= 1)
+        if (typeof names[0] != "string" || typeof names[1] != "string")
+            return data;
+
+    /* Gets the appropriate values and store them
+     * according to a determined structure below
+     */
+    if (names[0] != "" && names[1] != "" && email != "" && password != "") {
+        params.keys     = ["first_name", "last_name", "email", "password"];
+        params.values   = [names[0], names[1], email, password];
+    } else return data;
+
+    /* Executes an AJAX request (Vanilla JS, not jQuery)
+     * with the given url, function contains optional arguments
+     */
+    let result = request(USER_API_URL, params, "POST");
+    
+    /* If result is an object type, it will return
+     * some data with from the endpoint, regardless whether it's
+     * successful or not. If not, it will return an error string.
+     */
+    if (typeof result == "object") {
+        // If the result was successful
+        if (result["success"] && result["data"] != null) {
+            // Call a custom and passed callback function
+            if (callback != null) {
+                /* Creates a cloned callback function and passes
+                 * fetched data as parameter for external and quick access
+                 */
+                const execCallback = (passedData) => callback(passedData);
+
+                // Executes the cloned function
+                execCallback(result);
+            }
+        }
+
+        // Assigns fetched data to data variable
+        data = result;
+    }
+
+    // Returns final data
+    return data;
 }
 
 // Removes existing token and redirects user to login site

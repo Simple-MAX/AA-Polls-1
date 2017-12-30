@@ -14,7 +14,7 @@
 // Attempts to fetch all users based on current user status
 function fetchUsers(token, callback) {
     // Data variable to return
-    let data;
+    let data = null;
 
     // Creates a new array for possible parameters
     let params = {};
@@ -54,7 +54,7 @@ function fetchUsers(token, callback) {
 
         // Assigns fetched data to data variable
         data = result;
-    } else if (typeof result == "string") alert("Fetch failed");
+    }
 
     // Returns final data
     return data;
@@ -63,7 +63,7 @@ function fetchUsers(token, callback) {
 // Change user status to a given user type
 function changeUserType(currentToken, userId, usertype, value) {
     // Data variable to return
-    let data;
+    let data = null;
      
     // Creates a new array for possible parameters
     let params = {};
@@ -100,7 +100,7 @@ function changeUserType(currentToken, userId, usertype, value) {
 
         // Assigns fetched data to data variable
         data = result;
-    } else if (typeof result == "string") alert("Status changed");
+    }
 
     // Returns final data
     return data;

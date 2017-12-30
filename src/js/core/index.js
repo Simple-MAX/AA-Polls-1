@@ -72,16 +72,41 @@ function handleListeners(currentPage) {
             addListener("login-submit", () => listenerFunc());
             addListener("password", (e) => { e.keyCode == 13 ? listenerFunc() : null }, "keyup");
             break;
-    }
-}
+        case Pages.Users:
+            // Declares listener accordingly
+            listenerFunc = function() {
+                // Used to minimize and shortify this script
+                let values = [ 
+                    getElementValue("add-name"),
+                    getElementValue("add-email"),
+                    getElementValue("add-pass"),
+                    getElementValue("add-pass-conf")
+                ];
 
-// Adds on click functions to specified elements
-function addListener(id, func, type = "click") {
-    // Gets the element with id
-    let element = getElement(id);
-    
-    // Adds listener to element with function
-    element.addEventListener(type, (e) => func(e));
+                // Terminate if password is not the same
+                if (values[3] != values[2] || values[0] == "" || values[1] == "") {
+                    alert("Vänligen fyll i all fält korrekt");
+
+                    return;
+                }
+                
+                // Adds login function to this function
+                registerUser(values[0], values[1], values[2], function(result) {
+                    // Re-render user table if succeeded
+                    if (result["success"]) {
+                        // Re-render actual user table
+                        refreshUserTable();
+
+                        // Hide popup window
+                        getElementByClass("close").click();
+                    } else alert("Kunde inte lägga till användare");
+                });
+            }
+
+            // Adds listener function to element
+            addListener("add-user-button", () => listenerFunc());
+            break;
+    }
 }
 
 // Token based authentication for quick access
@@ -140,7 +165,7 @@ function handleCurrentUser(result) {
 }
 
 // Fetches users, formats data and appends them to users table 
-function loadUserTable() {
+function loadUserTable(callback = null) {
     // Fetches users and stores in a variable
     let users = fetchUsers(currentUserData.token);
 
@@ -214,39 +239,51 @@ function loadUserTable() {
     // Return nothing if users is null
     if (users == null) {
         // Make user aware of progress failure
-        alert("Could not fetch users, try again.");
+        alert("Kunde inte hämta användare, försök igen.");
 
         // Exit function
         return;
+    }
+
+    // Call a custom and passed callback function
+    if (callback != null) {
+        /* Creates a cloned callback function and passes
+         * fetched data as parameter for external and quick access
+         */
+        const execCallback = (passedData) => callback(passedData);
+
+        // Executes the cloned function
+        execCallback();
     }
 
     // Format users accordingly
     insertData("user-table", userTableData);
 }
 
-// Locates and fetches a specified element
-function getElement(id) { return document.getElementById(id); }
-
-// Gets the type of a specific element
-function getElementType(id) { return (typeof getElement(id)); }
-
-// Gets the value of a specific element
-function getElementValue(id) { return getElement(id).value; }
-
-// Creates an element instance
-function createElement(type, id = "") {
-    // Create a new element with given type
-    let element = document.createElement(type);
-
-    // If id is not empty, assign it
-    if (id != "") element.setAttribute("id", id);
-
-    // Return newly created element
-    return element;
+// Refreshes and re-renders the user table
+function refreshUserTable() {
+    // Re-renders table after successful data fetch
+    loadUserTable(function() {
+        // Resets table
+        removeChildren("user-table");
+        
+        // Resets counters for table (critical)
+        resetTableCounters();
+    });
 }
 
 // Returns a boolean value based on the existance of substring
 function stringContains(string, value) { return string.includes(value); }
+
+// Shows a HTML based popup with optional field values
+function showPopup(id, fields) {
+    if (getElement(id) == null) return;
+    
+    // If fields data type is array, proceed
+    if (typeof fields == "array") {
+
+    }
+}
 
 /* (Temporarily unavailable)
 

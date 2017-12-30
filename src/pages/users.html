@@ -1,9 +1,10 @@
 <!DOCTYPE HTML>
 <html lang="sv">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/groups.css">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="../css/groups.css" />
+        <link rel="stylesheet" type="text/css" href="../css/index.css" />
 
         <title>Användare</title>
         
@@ -13,6 +14,7 @@
         <script type="text/javascript" src="../js/navigation/navigation.js"></script>
         <script type="text/javascript" src="../js/navigation/config.js"></script>
         <script type="text/javascript" src="../js/misc/table.js"></script>
+        <script type="text/javascript" src="../js/misc/element.js"></script>
         <script type="text/javascript" src="../js/user/config.js"></script>
         <script type="text/javascript" src="../js/user/manage.js"></script>
         <script type="text/javascript" src="../js/user/auth.js"></script>
@@ -30,9 +32,11 @@
                             <h4>Administrationpanel</h4>
                         </div>
 
-                        <div class="nav-meny-container">
-                            <li class="active">Statistik</li>
-                            <li>Frågor</li>
+                        <div class="nav-menu-container">
+                            <li class="active">Användare</li>
+                            <li>Grupper</li>
+                            <li>Skapa formulär</li>
+                            <li>Statistik</li>
                         </div>
                     </div>
                 </div>
@@ -40,7 +44,7 @@
         </header>
         <main>
             <div class="wrapper">
-                <h1 class="title">Users</h1>
+                <p class="title">Användare</p>
                 
                 <div class="box">
                     <a class="button" href="#add-user">
@@ -50,6 +54,10 @@
                 </div>
 
                 <br />
+
+                <div class="table-placeholder">
+                    <p class="table-placeholder-text">Inga användare</p>
+                </div>
                 
                 <table class="table" id="user-table"></table>
 

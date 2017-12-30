@@ -43,6 +43,13 @@ const CheckBoxValues = { ON: "1", OFF: "0" };
 let rowCount = 1;
 let colCount = 0;
 
+// Resets all counters
+function resetTableCounters() {
+    // Proceeds to reset counters
+    if (rowCount > 1 || rowCount != 1) rowCount = 1;
+    if (colCount > 0 || colCount != 0) colCount = 0;
+}
+
 /* Gets inserted data, formats it correctly and
  * appends it to a given table element with given id
  */
