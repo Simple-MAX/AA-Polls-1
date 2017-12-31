@@ -19,14 +19,14 @@ const DEFAULT_TABLE_DATA = {
             values: {
                 value: "",
                 type: "text",
-                onclick: () => alert("text")
+                onclick: (id, obj) => alert("text")
             }
         },
         {
             values: {
                 value: "",
                 type: "checkbox",
-                onclick: (obj) => alert(getElement(obj).checked)
+                onclick: (id, obj) => alert(getElement(obj).checked)
             }
         }
     ]

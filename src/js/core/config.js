@@ -25,10 +25,10 @@ const Listeners = {
                 "password"
             ],
             Functions: [
-                (e) => loginUserListener(e),
+                () => loginUserListener(),
                 function(e) {
                     if (e.keyCode == 13)
-                        return loginUserListener(e);
+                        return loginUserListener();
                     else
                         return null;
                 }
@@ -41,13 +41,16 @@ const Listeners = {
         Users: {
             Elements: [
                 "add-user-button",
-                "edit-user-button"
+                "edit-user-button",
+                "delete-user-button"
             ],
             Functions: [
-                (e) => addUserListener(e),
-                (e) => editUserListener(e)
+                () => addUserListener(),
+                () => editUserListener(),
+                () => deleteUserListener()
             ],
             Type: [
+                "click",
                 "click",
                 "click"
             ]

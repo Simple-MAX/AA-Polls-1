@@ -156,22 +156,23 @@ function loadUserTable(callback = null) {
     // Loops through each user and adds specific keys and values
     for (let i = 0; i < users.data.length; i++) {
         // Constant variable and value for current user in iteration
-        const currentUser = users.data[i];
+        const currentUser       = users.data[i];
+        const currentUserName   = `${currentUser.first_name} ${currentUser.last_name}`;
 
         // Values to append
         let valuesToAppend = [
             {
                 values: {
-                    value: `${currentUser.first_name} ${currentUser.last_name}`,
+                    value: currentUserName,
                     type: "text",
-                    onclick: (id, obj) => editUserListener()
+                    onclick: (id, obj) => showEditUser(users.data[i])
                 }
             },
             {
                 values: {
                     value: currentUser.email,
                     type: "text",
-                    onclick: (id, obj) => editUserListener()
+                    onclick: (id, obj) => showEditUser(users.data[i])
                 }
             },
             {
@@ -242,16 +243,6 @@ function refreshUserTable() {
 // Returns a boolean value based on the existance of substring
 function stringContains(string, value) { return string.includes(value); }
 
-// Shows a HTML based popup with optional field values
-function showPopup(id, fields) {
-    if (getElement(id) == null) return;
-    
-    // If fields data type is array, proceed
-    if (typeof fields == "array") {
-
-    }
-}
-
 // Adds user based on specific click
 function addUserListener() {
     // Used to minimize and shortify this script
@@ -286,11 +277,34 @@ function addUserListener() {
 }
 
 // Edits user based on specific click
-function editUserListener() {
+function editUserListener() { }
 
+// Deletes user on click
+function deleteUserListener() {
+    // Gets user token
+    const token = getElementValue("edit-token");
 
-    // Shows the popup box
-    simulateElementClick("show-edit-user");
+    // Terminate if password is not the same
+    if (token == "") {
+        alert("Kan inte ta bort användare.");
+
+        return;
+    }
+    
+    // Adds login function to this function
+    let result = deleteUser(token);
+
+    // If result is successful, proceed, else alert user
+    if (result != null) {
+        // Re-render user table if succeeded
+        if (result["success"]) {
+            // Re-render actual user table
+            refreshUserTable();
+
+            // Hide popup window
+            getElement("close-edit").click();
+        } else alert("Kunde inte ta bort användaren");
+    } else alert("Kunde inte ta bort användaren");
 }
 
 // Adds login user listener to login button
@@ -303,6 +317,21 @@ function loginUserListener() {
     
     // Adds login function to this function
     loginUser(values[0], values[1], "", (result) => handleCurrentUser(result));
+}
+
+// Shows edit user popup with user data
+function showEditUser(data) {
+    // Passed user data declaration
+    const currentUserName = `${data.first_name} ${data.last_name}`;
+
+    // Assigns current user values to fields
+    getElement("edit-id").value     = data.id;
+    getElement("edit-name").value   = currentUserName;
+    getElement("edit-email").value  = data.email;
+    getElement("edit-token").value  = data.token;
+    
+    // Shows the popup box
+    simulateElementClick("show-edit-user");
 }
 
 /* (Temporarily unavailable)

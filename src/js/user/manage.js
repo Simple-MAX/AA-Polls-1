@@ -117,7 +117,7 @@ function fetchUsers(token, callback) {
 }
 
 // Change user status to a given user type
-function changeUserType(currentToken, userId, usertype, value) {
+function changeUserType(currentToken, userId, userType, value, callback = null) {
     // Data variable to return
     let data = null;
      
@@ -128,7 +128,7 @@ function changeUserType(currentToken, userId, usertype, value) {
      * according to a determined structure below
      */
     params.keys     = ["token", "status", "status_val", "user_id"];
-    params.values   = [currentToken, usertype, value, userId];
+    params.values   = [currentToken, userType, value, userId];
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
@@ -163,7 +163,7 @@ function changeUserType(currentToken, userId, usertype, value) {
 }
 
 // Edits user information
-function editUser(name, email, password, token) {
+function editUser(name, email, password, token, callback = null) {
     // Data variable to return
     let data = null;
     
@@ -198,6 +198,52 @@ function editUser(name, email, password, token) {
      */
     let result = request(USER_API_URL, params, "PUT");
     
+    /* If result is an object type, it will return
+     * some data with from the endpoint, regardless whether it's
+     * successful or not. If not, it will return an error string.
+     */
+    if (typeof result == "object") {
+        // If the result was successful
+        if (result["success"] && result["data"] != null) {
+            // Call a custom and passed callback function
+            if (callback != null) {
+                /* Creates a cloned callback function and passes
+                 * fetched data as parameter for external and quick access
+                 */
+                const execCallback = (passedData) => callback(passedData);
+
+                // Executes the cloned function
+                execCallback(result);
+            }
+        }
+
+        // Assigns fetched data to data variable
+        data = result;
+    }
+
+    // Returns final data
+    return data;
+}
+
+// Deletes given user
+function deleteUser(token, callback = null) {
+    // Data variable to return
+    let data = null;
+    
+    // Creates a new array for possible parameters
+    let params = {};
+
+    /* Gets the appropriate values and store them
+     * according to a determined structure below
+     */
+    params.keys     = ["token"];
+    params.values   = [token];
+
+    /* Executes an AJAX request (Vanilla JS, not jQuery)
+     * with the given url, function contains optional arguments
+     */
+    let result = request(USER_API_URL, params, "DELETE");
+
     /* If result is an object type, it will return
      * some data with from the endpoint, regardless whether it's
      * successful or not. If not, it will return an error string.
