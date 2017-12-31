@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html lang="sv">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/results.css">
-        <link rel="stylesheet" type="text/css" href="../css/header.css" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="../css/main.css" />
+        <link rel="stylesheet" type="text/css" href="../css/statistics.css" />
 
         <title>Statistik</title>
         
@@ -13,11 +13,13 @@
         <script type="text/javascript" src="../js/networking/config.js"></script>
         <script type="text/javascript" src="../js/navigation/navigation.js"></script>
         <script type="text/javascript" src="../js/navigation/config.js"></script>
+        <script type="text/javascript" src="../js/misc/table.js"></script>
         <script type="text/javascript" src="../js/misc/element.js"></script>
+        <script type="text/javascript" src="../js/listener/config.js"></script>
+        <script type="text/javascript" src="../js/listener/listener.js"></script>
         <script type="text/javascript" src="../js/user/config.js"></script>
         <script type="text/javascript" src="../js/user/manage.js"></script>
         <script type="text/javascript" src="../js/user/auth.js"></script>
-        <script type="text/javascript" src="../js/statistics/statistics.js"></script>
         <script type="text/javascript" src="../js/core/config.js"></script>
         <script type="text/javascript" src="../js/core/store.js"></script>
         <script type="text/javascript" src="../js/core/index.js"></script>
@@ -32,9 +34,11 @@
                             <h4>Administrationpanel</h4>
                         </div>
 
-                        <div class="nav-meny-container">
-                            <li class="active">Statistik</li>
-                            <li>Frågor</li>
+                        <div class="nav-menu-container">
+                            <li><a href="users.html">Användare</a></li>
+                            <li><a href="groups.html">Grupper</a></li>
+                            <li><a href="poll-manager.html">Formulär</a></li>
+                            <li class="active"><a href="statistics.html">Statistik</a></li>
                         </div>
                     </div>
                 </div>
@@ -42,9 +46,13 @@
         </header>
         <main>
             <div class="wrapper">
+                <p class="title">Statistik</p>
+                    
+                <div class="box"><!-- Empty --></div>
+                                
+
                 <div class="filter-group">
                     <div class="filter-group-picker">
-                        <!--- Värderna som visas är de grupper som finns. -->
                         <select class="select" id="prog-short-option">
                             <option value="Group1">Grupp1</option>
                             <option value="Group2">Grupp2</option>
@@ -64,10 +72,8 @@
                     </tr>  
                 </table>
                 
-                <!--- Synka dessa två fält så de är i samma rad -->
                 <div class="filter-time">
                     <div>
-                        <!--- Datums intervall picker här nedan -->
                         <p>Datum från:</p>
                         <select class="date-picker-from" id="prog-short-option">
                             <option value="Group1">Date Picker From</option>
@@ -89,7 +95,7 @@
                 <div class="export">
                     <input class="button" id="filter-apply" value="Exportera som CSV" type="submit" onclick="formnSubmit()"/>  
                 </div>
-            </div>        
+            </div>    
         </main>
         <footer>
         </footer> 
