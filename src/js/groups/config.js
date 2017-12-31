@@ -10,3 +10,9 @@
 *                                                   *
 * /**************************************************
 */
+
+// Constant variables
+const GROUP_API_URL = `${API_URL}${Endpoint.Group}`;
+
+// Regular variables
+var fetchedGroups;
