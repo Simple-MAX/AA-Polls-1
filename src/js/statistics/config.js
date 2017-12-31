@@ -18,3 +18,16 @@ const MONTHS = [
     "July",     "August",   "September",
     "November", "October",  "December"
 ];
+
+// Constant variables
+const DEFAULT_STATS = { 
+    Chart: { 
+        Min: 0, 
+        Max: 0, 
+        Average: 0 
+    },
+    Date: { 
+        From: "", 
+        To: "" 
+    }
+};
