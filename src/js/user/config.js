@@ -12,7 +12,7 @@
 */
 
 // Constant variables
-const USER_API_URL = `${API_URL}${endpoint.user}`;
+const USER_API_URL = `${API_URL}${Endpoint.User}`;
 
 // Regular variables
 var currentUserData;

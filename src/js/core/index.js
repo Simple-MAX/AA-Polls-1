@@ -50,65 +50,29 @@ function initialize() {
 
 // Handles listeners for elements
 function handleListeners(currentPage) {
-    // Declaration of final function for listener
-    let listenerFunc;
+    // Declares listener according to current page
+    let currentListener;
 
     // Adds listener to elements for different pages
     switch (currentPage) {
         case Pages.Login:
-            // Declares listener accordingly
-            listenerFunc = function() {
-                // Used to minimize and shortify this script
-                let values = [ 
-                    getElementValue("email"),
-                    getElementValue("password") 
-                ];
-                
-                // Adds login function to this function
-                loginUser(values[0], values[1], "", (result) => handleCurrentUser(result));
-            }
-
-            // Adds listener function to element
-            addListener("login-submit", () => listenerFunc());
-            addListener("password", (e) => { e.keyCode == 13 ? listenerFunc() : null }, "keyup");
+            currentListener = Listeners.Pages.Login;
             break;
         case Pages.Users:
-            // Declares listener accordingly
-            listenerFunc = function() {
-                // Used to minimize and shortify this script
-                let values = [ 
-                    getElementValue("add-name"),
-                    getElementValue("add-email"),
-                    getElementValue("add-pass"),
-                    getElementValue("add-pass-conf")
-                ];
-
-                // Terminate if password is not the same
-                if (values[3] != values[2] || values[0] == "" || values[1] == "") {
-                    alert("Vänligen fyll i all fält korrekt");
-
-                    return;
-                }
-                
-                // Adds login function to this function
-                let result = registerUser(values[0], values[1], values[2]);
-
-                // If result is successful, proceed, else alert user
-                if (result != null) {
-                    // Re-render user table if succeeded
-                    if (result["success"]) {
-                        // Re-render actual user table
-                        refreshUserTable();
-
-                        // Hide popup window
-                        getElement("close-add").click();
-                    } else alert("Kunde inte lägga till användare");
-                } else alert("Vänligen se till att fälten är giltiga");
-            }
-
-            // Adds listener function to element
-            addListener("add-user-button", () => listenerFunc());
+            currentListener = Listeners.Pages.Users;
             break;
+    }
+
+    // Adds listener and function to element
+    for (let i = 0; i < currentListener.Elements.length; i++) {
+        // Declare and assign current listener type
+        let type = currentListener.Type[i];
+
+        // Assign alternative value if not assigned
+        if (type == null || type == undefined) type = "click";
+
+        // Adds listener at last
+        addListener(currentListener.Elements[i], currentListener.Functions[i], type);
     }
 }
 
@@ -189,14 +153,14 @@ function loadUserTable(callback = null) {
                 values: {
                     value: `${currentUser.first_name} ${currentUser.last_name}`,
                     type: "text",
-                    onclick: (id, obj) => alert("haha")
+                    onclick: (id, obj) => editUserListener()
                 }
             },
             {
                 values: {
                     value: currentUser.email,
                     type: "text",
-                    onclick: (id, obj) => null
+                    onclick: (id, obj) => editUserListener()
                 }
             },
             {
@@ -286,6 +250,59 @@ function showPopup(id, fields) {
     if (typeof fields == "array") {
 
     }
+}
+
+// Adds user based on specific click
+function addUserListener() {
+    // Used to minimize and shortify this script
+    let values = [ 
+        getElementValue("add-name"),
+        getElementValue("add-email"),
+        getElementValue("add-pass"),
+        getElementValue("add-pass-conf")
+    ];
+
+    // Terminate if password is not the same
+    if (values[3] != values[2] || values[0] == "" || values[1] == "") {
+        alert("Vänligen fyll i all fält korrekt");
+
+        return;
+    }
+    
+    // Adds login function to this function
+    let result = registerUser(values[0], values[1], values[2]);
+
+    // If result is successful, proceed, else alert user
+    if (result != null) {
+        // Re-render user table if succeeded
+        if (result["success"]) {
+            // Re-render actual user table
+            refreshUserTable();
+
+            // Hide popup window
+            getElement("close-add").click();
+        } else alert("Kunde inte lägga till användare");
+    } else alert("Vänligen se till att fälten är giltiga");
+}
+
+// Edits user based on specific click
+function editUserListener() {
+
+
+    // Shows the popup box
+    simulateElementClick("show-edit-user");
+}
+
+// Adds login user listener to login button
+function loginUserListener() {
+    // Used to minimize and shortify this script
+    let values = [ 
+        getElementValue("email"),
+        getElementValue("password") 
+    ];
+    
+    // Adds login function to this function
+    loginUser(values[0], values[1], "", (result) => handleCurrentUser(result));
 }
 
 /* (Temporarily unavailable)

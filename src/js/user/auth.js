@@ -80,62 +80,6 @@ function tokenAuthentication(token, callback) {
     return loginUser("", "", token, callback);
 }
 
-// Registers the given user, returns result data
-function registerUser(name, email, password, callback = null) {
-    // Data variable to return
-    let data = null;
-     
-    // Creates a new array for possible parameters
-    let params = {};
-
-    // Names separated and stored in a constant array
-    const names = name.split(" ").slice(0);
-
-    // Terminate if names array is invalid
-    if (names.length <= 1)
-        if (typeof names[0] != "string" || typeof names[1] != "string")
-            return data;
-
-    /* Gets the appropriate values and store them
-     * according to a determined structure below
-     */
-    if (names[0] != "" && names[1] != "" && email != "" && password != "") {
-        params.keys     = ["first_name", "last_name", "email", "password"];
-        params.values   = [names[0], names[1], email, password];
-    } else return data;
-
-    /* Executes an AJAX request (Vanilla JS, not jQuery)
-     * with the given url, function contains optional arguments
-     */
-    let result = request(USER_API_URL, params, "POST");
-    
-    /* If result is an object type, it will return
-     * some data with from the endpoint, regardless whether it's
-     * successful or not. If not, it will return an error string.
-     */
-    if (typeof result == "object") {
-        // If the result was successful
-        if (result["success"] && result["data"] != null) {
-            // Call a custom and passed callback function
-            if (callback != null) {
-                /* Creates a cloned callback function and passes
-                 * fetched data as parameter for external and quick access
-                 */
-                const execCallback = (passedData) => callback(passedData);
-
-                // Executes the cloned function
-                execCallback(result);
-            }
-        }
-
-        // Assigns fetched data to data variable
-        data = result;
-    }
-
-    // Returns final data
-    return data;
-}
-
 // Removes existing token and redirects user to login site
 function logOut() {
     setToken("");

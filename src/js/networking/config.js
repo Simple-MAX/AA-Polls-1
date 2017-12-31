@@ -26,9 +26,9 @@ const API_PATH      = "/api/";
 
 const API_URL = API_DOMAIN + API_PATH;
 
-const endpoint = {
-    user: "user.php",
-    poll: "poll.php"
+const Endpoint = {
+    User: "user.php",
+    Poll: "poll.php"
 };
 
 
