@@ -1,10 +1,6 @@
 @charset "UTF-8";
 
- {
-    width: 100%;
-    height: 800px;
-    background-color: #f9f9f9;
-}
+
 
  .form-wrapper {
     width: 1024px;
@@ -106,6 +102,8 @@
     text-align: center;
     margin-top: 7px;
     margin-left: 0.6%;
+    border: 2px #c0c0c0 solid;
+    border-radius: 5px;
 }
 
 .form-left-divider output{
@@ -116,11 +114,6 @@
     left: -11px; 
     float: none;
     margin: 0;
-    line-height: 30px;
-    border: 2px #c0c0c0 solid;
-    border-radius: 5px;
-    color: #6b6b6b;
-    text-align: center;
 }
 
 .date-wrapper {
@@ -170,6 +163,7 @@
  .form-col-2-input-divider {
     width: 50%;
     margin: 25px 0;
+    margin-top: 0;
     float: left;
     display: block;
 }
@@ -514,28 +508,45 @@
 }
 
 .addButton {
-    padding: 5px;
-    border-radius: 5px;
-    background-color: rgb(22, 252, 80);
+	width: 25px;
+    height: 25px;
+    padding: 5px 8px;
+    font-size: 18px;
+    line-height: 0.67;
+    border-radius: 12.5px;
+    background-color:#44c767;
     color: #fff;
-    width: 10px;
-    text-transform: uppercase;
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px auto;
 }
 
 .removeButton {
-    padding: 5px;
-    border-radius: 5px;
-    background-color: rgb(238, 30, 30);
+    width: 25px;
+    height: 25px;
+    padding: 5px 8px;
+    font-size: 18px;
+    line-height: 0.67;
+    border-radius: 12.5px;
+    background-color:#f44336;
     color: #fff;
-    text-transform: uppercase;
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px auto;
 }
 
 .editButton {
-    padding: 5px;
-    border-radius: 5px;
-    background-color: rgb(36, 36, 36);
+    width: 25px;
+    height: 25px;
+    padding: 5px 8px;
+    font-size: 18px;
+    line-height: 0.67;
+    border-radius: 12.5px;
+    background-color: #000;
     color: #fff;
-    text-transform: uppercase;
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px auto;
 }
 
 .h2Title {
@@ -545,6 +556,9 @@
     color: #8a199e;
     width: 20%;
     margin-right: 80%;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.3s linear all;
 }
 
 .labelTitle {
@@ -552,7 +566,64 @@
     font-size: 17px;
     font-weight: bold;
     color: #000;
-    width: 50%;
+    width: auto;
     height: auto;
     margin: 5px;
+    margin-left: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.3s linear all;
+}
+
+.editInput {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.editInput .editInputContent {
+    visibility: hidden;
+    width: 90%;
+    background-color: #fff;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 12px 5%;
+    position: absolute;
+    z-index: 1;
+    bottom: 10%;
+    left: 50%;
+    margin-left: -50%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.editInputMain {
+    width: 80%;
+    height: auto;
+    float: left;
+    display: block;
+    color: #000;
+    margin: 10px 0;
+}
+
+.editInputMain > input{
+   width: 100%;
+}
+
+.editInputMain > p{
+    color: #8a199e;
+    font-weight: bold;
+    font-size: 20px;
+ }
+
+.editInputSettings {
+    width: 20%;
+    margin-top: 7%;
+    height: auto;
+    float: right;
+    display: block;
+}
+
+.editInput:hover .editInputContent {
+    visibility: visible;
 }
