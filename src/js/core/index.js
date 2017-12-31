@@ -133,6 +133,17 @@ function handleCurrentUser(result) {
 
 // Fetches users, formats data and appends them to users table 
 function loadUserTable(callback = null) {
+    // Call a custom and passed callback function
+    if (callback != null) {
+        /* Creates a cloned callback function and passes
+         * fetched data as parameter for external and quick access
+         */
+        const execCallback = (passedData) => callback(passedData);
+
+        // Executes the cloned function
+        execCallback();
+    }
+
     // Fetches users and stores in a variable
     let users = fetchUsers(currentUserData.token);
 
@@ -210,17 +221,6 @@ function loadUserTable(callback = null) {
 
         // Exit function
         return;
-    }
-
-    // Call a custom and passed callback function
-    if (callback != null) {
-        /* Creates a cloned callback function and passes
-         * fetched data as parameter for external and quick access
-         */
-        const execCallback = (passedData) => callback(passedData);
-
-        // Executes the cloned function
-        execCallback();
     }
 
     // Format users accordingly
