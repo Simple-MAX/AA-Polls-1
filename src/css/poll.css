@@ -181,12 +181,13 @@
  .form-input-button {
     width: 32%;
     margin: 20px 34%;
-    background-color: #8a199e;
+    background-color: #6f237e;
     color: #fff;
     border: 0px;
-    height: 35px;
+    height:40px;
+    line-height: 17px;
     margin-bottom: 60px;
-    font-size: 12px;
+    font-size: 17px;
 }
 
  .form-col-2-input-divider > input {
@@ -598,7 +599,7 @@
 }
 
 .editInputMain {
-    width: 80%;
+    width: 85%;
     height: auto;
     float: left;
     display: block;
@@ -611,14 +612,13 @@
 }
 
 .editInputMain > p{
-    color: #8a199e;
-    font-weight: bold;
-    font-size: 20px;
+    font-weight: light;
+    font-size: 24px;
  }
 
 .editInputSettings {
-    width: 20%;
-    margin-top: 7%;
+    width: 15%;
+    margin-top: 4px;
     height: auto;
     float: right;
     display: block;
