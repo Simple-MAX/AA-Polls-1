@@ -226,6 +226,58 @@ function editUser(name, email, token, callback = null) {
     return data;
 }
 
+// Resets user password
+function resetUser(password, token, callback = null) {
+    // Data variable to return
+    let data = null;
+    
+    // Creates a new array for possible parameters
+    let params = {};
+
+    /* Gets the appropriate values and store them
+     * according to a determined structure below
+     */
+    if (password != "") {
+        // Sub parameters
+        let subParams = { password: password };
+
+        // Adds the sub params to the main params
+        params.keys     = [ "token", "col_data" ];
+        params.values   = [ token, JSON.stringify(subParams) ];
+    } else return data;
+
+    /* Executes an AJAX request (Vanilla JS, not jQuery)
+     * with the given url, function contains optional arguments
+     */
+    let result = request(USER_API_URL, params, "PUT");
+    
+    /* If result is an object type, it will return
+     * some data with from the endpoint, regardless whether it's
+     * successful or not. If not, it will return an error string.
+     */
+    if (typeof result == "object") {
+        // If the result was successful
+        if (result["success"] && result["data"] != null) {
+            // Call a custom and passed callback function
+            if (callback != null) {
+                /* Creates a cloned callback function and passes
+                 * fetched data as parameter for external and quick access
+                 */
+                const execCallback = (passedData) => callback(passedData);
+
+                // Executes the cloned function
+                execCallback(result);
+            }
+        }
+
+        // Assigns fetched data to data variable
+        data = result;
+    }
+
+    // Returns final data
+    return data;
+}
+
 // Deletes given user
 function deleteUser(token, callback = null) {
     // Data variable to return

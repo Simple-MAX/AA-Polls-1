@@ -270,8 +270,8 @@ function addUserListener() {
             // Re-render actual user table
             refreshUserTable();
 
-            // Hide popup window
-            getElement("close-add").click();
+            // All popup boxes
+            closeAllPopups();
         } else alert("Kunde inte lägga till användare");
     } else alert("Vänligen se till att fälten är giltiga");
 }
@@ -306,10 +306,45 @@ function editUserListener() {
             // Re-render actual user table
             refreshUserTable();
 
-            // Hide popup window
-            getElement("close-edit").click();
+            // All popup boxes
+            closeAllPopups();
         } else alert("Kan inte redigera användare");
     } else alert("Kan inte redigera användare");
+}
+
+// Resets user password on given input and submission
+function resetUserListener() { 
+    // Used to minimize and shortify this script
+    let values = [ 
+        getElementValue("reset-pass"),
+        getElementValue("reset-token")
+    ];
+
+    // Terminate if password is not the same
+    if (values[0] == "") {
+        alert("Vänligen fyll i all fält korrekt");
+
+        return;
+    } else if (values[1] == "") {
+        alert("Kan inte redigera användare");
+        
+        return;
+    }
+    
+    // Adds login function to this function
+    let result = resetUser(values[0], values[1]);
+
+    // If result is successful, proceed, else alert user
+    if (result != null) {
+        // Re-render user table if succeeded
+        if (result["success"]) {
+            // Re-render actual user table
+            refreshUserTable();
+
+            // All popup boxes
+            closeAllPopups();
+        } else alert("Kan inte återställa lösenord");
+    } else alert("Kan inte återställa lösenord");
 }
 
 // Deletes user on click
@@ -334,8 +369,8 @@ function deleteUserListener() {
             // Re-render actual user table
             refreshUserTable();
 
-            // Hide popup window
-            getElement("close-edit").click();
+            // All popup boxes
+            closeAllPopups();
         } else alert("Kunde inte ta bort användaren");
     } else alert("Kunde inte ta bort användaren");
 }
@@ -354,16 +389,74 @@ function loginUserListener() {
 
 // Shows edit user popup with user data
 function showEditUser(data) {
+    // Terminates if data is invalid
+    if (data == null) return;
+
     // Passed user data declaration
     const currentUserName = `${data.first_name} ${data.last_name}`;
 
     // Assigns current user values to fields
-    getElement("edit-name").value   = currentUserName;
-    getElement("edit-email").value  = data.email;
-    getElement("edit-token").value  = data.token;
+    getElement("edit-name").value       = currentUserName;
+    getElement("edit-email").value      = data.email;
+    getElement("edit-token").value      = data.token;
+
+    // Adds reset password popup listener
+    addListener("reset-user-option-button", () => showResetUser(data));
     
     // Shows the popup box
     simulateElementClick("show-edit-user");
+}
+
+// Shows reset user password popup
+function showResetUser(data) {
+    // Terminates if data is invalid
+    if (data == null) return;
+
+    // Assigns current user values to fields
+    getElement("reset-token").value = data.token;
+
+    // Hide edit user box
+    simulateElementClick("close-edit");
+    
+    // Shows the popup box
+    simulateElementClick("show-reset-user");
+}
+
+// Closes all popup boxes and resets fields
+function closeAllPopups() {
+    // Close buttons
+    let closeButtons = [
+        "close-add",
+        "close-edit",
+        "close-reset"
+    ];
+
+    // Fields to be resetted
+    let resetFields = [
+        "add-name",
+        "add-email",
+        "add-pass",
+        "add-pass-conf",
+        "edit-name",
+        "edit-email",
+        "edit-token",
+        "reset-token",
+        "reset-pass"
+    ];
+
+    // Loops through field ids and resets them
+    for (let i = 0; i < resetFields.length; i++) {
+        // Gets the element
+        let element = getElement(resetFields[i]);
+
+        // Proceed if element exists
+        if (element != null && element.value != "") 
+            element.value = "";
+    }
+
+    // Simulates a click on each button
+    for (let j = 0; j < closeButtons.length; j++)
+        simulateElementClick(closeButtons[j]);
 }
 
 /* (Temporarily unavailable)

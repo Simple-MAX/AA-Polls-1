@@ -53,15 +53,10 @@
                     </a>
 
                     <a id="show-edit-user" href="#edit-user"></a>    
+                    <a id="show-reset-user" href="#reset-user"></a>    
                 </div>
 
                 <hr class="short-spacing" />
-
-                <!-- Unavailable
-                <div class="table-placeholder">
-                    <p id="table-status">Inga användare</p>
-                </div>
-                -->
                 
                 <table id="user-table"></table>
 
@@ -81,7 +76,7 @@
 
                                 <hr class="short-spacing" />
 
-                                <input type="text" id="add-email" placeholder="Email" />
+                                <input type="text" id="add-email" placeholder="Email address" />
 
                                 <hr class="short-spacing" />
 
@@ -120,17 +115,7 @@
 
                                 <hr class="short-spacing" />
 
-                                <input type="text" id="edit-email" placeholder="Email" />
-
-                                <!--
-                                <hr class="short-spacing" />
-
-                                <input type="text" id="edit-pass" placeholder="Lösenord" />
-
-                                <hr class="short-spacing" />
-
-                                <input type="text" id="edit-pass-conf" placeholder="Lösenord igen" />
-                                -->
+                                <input type="text" id="edit-email" placeholder="Email address" />
                             </div>
 
                             <hr class="short-spacing" />
@@ -140,12 +125,47 @@
 
                             <hr class="short-spacing" />
 
+                            <button class="regular-button" id="reset-user-option-button">Återställ lösenord</button>
+                            
+                            <hr class="short-spacing" />
+
                             <button 
                                 class="regular-button" 
                                 style="background: #dd0000" 
                                 id="delete-user-button"
                             >Ta bort användare</button>
                             
+                            <hr class="short-spacing" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reset-user" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>Återställ lösenord</p>
+
+                            <a id="close-reset" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <div class="fields">
+                                <input type="text" id="reset-token" style="display: none" />
+
+                                <hr class="short-spacing" />
+
+                                <input type="text" id="reset-pass" placeholder="Nytt lösenord" />
+
+                                <hr class="short-spacing" />
+                            </div>
+
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
+
+                            <button class="regular-button" id="reset-user-button">Återställ</button>
+
                             <hr class="short-spacing" />
                         </div>
                     </div>

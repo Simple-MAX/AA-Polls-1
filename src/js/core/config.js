@@ -42,14 +42,17 @@ const Listeners = {
             Elements: [
                 "add-user-button",
                 "edit-user-button",
-                "delete-user-button"
+                "delete-user-button",
+                "reset-user-button"
             ],
             Functions: [
                 () => addUserListener(),
                 () => editUserListener(),
-                () => deleteUserListener()
+                () => deleteUserListener(),
+                () => resetUserListener()
             ],
             Type: [
+                "click",
                 "click",
                 "click",
                 "click"

@@ -22,9 +22,3 @@ const Pages = {
 };
 
 const INITIAL_PANEL_PAGE = Pages.Users;
-
-// Regular Variables
-var views = [];
-
-var currentIndex    = 0;
-var previousIndex   = 0;
