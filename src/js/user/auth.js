@@ -60,10 +60,10 @@ function loginUser(email = "", password = "", token = "", callback = null) {
                 execCallback(result);
             }
         }
-
-        // Assigns fetched data to data variable
-        data = result;
     }
+
+    // Assigns fetched data to data variable
+    data = result;
 
     // Return fetched data
     return data;

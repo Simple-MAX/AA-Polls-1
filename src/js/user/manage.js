@@ -31,8 +31,8 @@ function registerUser(name, email, password, callback = null) {
      * according to a determined structure below
      */
     if (names[0] != "" && names[1] != "" && email != "" && password != "") {
-        params.keys     = ["first_name", "last_name", "email", "password"];
-        params.values   = [names[0], names[1], email, password];
+        params.keys     = [ "first_name", "last_name", "email", "password" ];
+        params.values   = [ names[0], names[1], email, password ];
     } else return data;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
@@ -78,8 +78,8 @@ function fetchUsers(token, callback) {
     /* Gets the appropriate values and store them
      * according to a determined structure below
      */
-    params.keys     = ["token", "fetch"];
-    params.values   = [token, true];
+    params.keys     = [ "token", "fetch" ];
+    params.values   = [ token, true ];
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
@@ -127,8 +127,8 @@ function changeUserType(currentToken, userId, userType, value, callback = null) 
     /* Gets the appropriate values and store them
      * according to a determined structure below
      */
-    params.keys     = ["token", "status", "status_val", "user_id"];
-    params.values   = [currentToken, userType, value, userId];
+    params.keys     = [ "token", "status", "status_val", "user_id" ];
+    params.values   = [ currentToken, userType, value, userId ];
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
@@ -163,7 +163,7 @@ function changeUserType(currentToken, userId, userType, value, callback = null) 
 }
 
 // Edits user information
-function editUser(name, email, password, token, callback = null) {
+function editUser(name, email, token, callback = null) {
     // Data variable to return
     let data = null;
     
@@ -179,18 +179,19 @@ function editUser(name, email, password, token, callback = null) {
             return data;
 
     /* Gets the appropriate values and store them
-        * according to a determined structure below
-        */
-    if (names[0] != "" && names[1] != "" && email != "" && password != "") {
+     * according to a determined structure below
+     */
+    if (names[0] != "" && names[1] != "" && email != "") {
         // Sub parameters
-        let subParams = {};
-
-        subParams.keys     = ["first_name", "last_name", "email", "password"];
-        subParams.values   = [names[0], names[1], email, password];
+        let subParams = {
+            "first_name": names[0],
+            "last_name" : names[1],
+            "email"     : email
+        };
 
         // Adds the sub params to the main params
-        params.keys     = ["token", "col_data"];
-        params.values   = [token, JSON.stringify(subParams)];
+        params.keys     = [ "token", "col_data" ];
+        params.values   = [ token, JSON.stringify(subParams) ];
     } else return data;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
@@ -236,8 +237,8 @@ function deleteUser(token, callback = null) {
     /* Gets the appropriate values and store them
      * according to a determined structure below
      */
-    params.keys     = ["token"];
-    params.values   = [token];
+    params.keys     = [ "token" ];
+    params.values   = [ token ];
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments

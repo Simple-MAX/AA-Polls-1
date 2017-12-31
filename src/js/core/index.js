@@ -277,7 +277,40 @@ function addUserListener() {
 }
 
 // Edits user based on specific click
-function editUserListener() { }
+function editUserListener() { 
+    // Used to minimize and shortify this script
+    let values = [ 
+        getElementValue("edit-name"),
+        getElementValue("edit-email"),
+        getElementValue("edit-token")
+    ];
+
+    // Terminate if password is not the same
+    if (values[0] == "" || values[1] == "") {
+        alert("Vänligen fyll i all fält korrekt");
+
+        return;
+    } else if (values[2] == "") {
+        alert("Kan inte redigera användare");
+        
+        return;
+    }
+    
+    // Adds login function to this function
+    let result = editUser(values[0], values[1], values[2]);
+
+    // If result is successful, proceed, else alert user
+    if (result != null) {
+        // Re-render user table if succeeded
+        if (result["success"]) {
+            // Re-render actual user table
+            refreshUserTable();
+
+            // Hide popup window
+            getElement("close-edit").click();
+        } else alert("Kan inte redigera användare");
+    } else alert("Kan inte redigera användare");
+}
 
 // Deletes user on click
 function deleteUserListener() {
@@ -325,7 +358,6 @@ function showEditUser(data) {
     const currentUserName = `${data.first_name} ${data.last_name}`;
 
     // Assigns current user values to fields
-    getElement("edit-id").value     = data.id;
     getElement("edit-name").value   = currentUserName;
     getElement("edit-email").value  = data.email;
     getElement("edit-token").value  = data.token;

@@ -21,6 +21,8 @@
  */
 
 // Constant variables
+const DEV_MODE = true;
+
 const API_DOMAIN    = "http://localhost";
 const API_PATH      = "/api/";
 
