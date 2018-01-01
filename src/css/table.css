@@ -1,8 +1,15 @@
 @charset "UTF-8";
 
-table {
+.table-container {
     width: 100%;
     margin: auto;
+
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
 
     border-collapse: collapse;
 
@@ -11,11 +18,11 @@ table {
 
 td, th {
     padding: 10px;
-    
-    border: 1px solid #555;
 
     text-align: left;
 }
+
+td { border-top: 1px solid #ddd; }
 
 .table-placeholder {
     display: block;

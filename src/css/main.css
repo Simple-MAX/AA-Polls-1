@@ -27,8 +27,9 @@
 }
 
 .nav-container {
-    width: 70%;
+    width: 900px;
     height: 100px;
+    padding-left: 15px;
     display: block;
     margin: auto;
 }
