@@ -189,5 +189,14 @@ function loginUserListener() {
     ];
     
     // Adds login function to this function
-    loginUser(values[0], values[1], "", (result) => handleCurrentUser(result));
+    let result = loginUser(values[0], values[1], "");
+
+    // If result is successful, proceed, else alert user
+    if (result != null) {
+        // Re-render user table if succeeded
+        if (result["success"]) {
+            // Handles user correctly
+            handleCurrentUser(result);
+        } else alert("Fel användarnamn eller lösenord");
+    } else alert("Kunde inte logga in");
 }
