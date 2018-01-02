@@ -52,31 +52,31 @@
                         <div class="form-right-divider">
                             <div class="form-container">
                                 <div class="form-col-0">
-                                    <input id="" class="h2Title" value="Bedömning">
+                                    <input id="editFirstTitle" class="h2Title" value="Bedömning">
                                 <div class="form-col-1-input"/>
-                                    <input id="" class="labelTitle" value="Grupp">
+                                    <input id="editJudgeGroupTitle" class="labelTitle" value="Grupp">
                                     <input id="judge-group"/>
                                 </div>
                                 <div class="form-col-1-input">
-                                    <input id="" class="labelTitle" value="Lägsta värde">
+                                    <input id="editMinTitle" class="labelTitle" value="Lägsta värde">
                                     <input id="min"/>   
                                 </div>
                                 <div class="form-col-1-input">
-                                    <input id="" class="labelTitle" value="Högsta värde">
+                                    <input id="editMaxTitle" class="labelTitle" value="Högsta värde">
                                     <input id="max"/>   
                                 </div>
                                 </div>
                                 <div class="form-col-2-input">
-                                    <input id="" class="h2Title" value="Detaljerat">
+                                    <input id="editSecondTitle" class="h2Title" value="Detaljerat">
                                 <div class="form-col-2-input-divider">
-                                    <input id="" class="labelTitle" value="Prognos på kort sikt">
+                                    <input id="editProgShortTitle" class="labelTitle" value="Prognos på kort sikt">
                                     <div class="editInput">
                                         <span class="editInputContent">
                                             <div class="editInputMain">
                                                 <p>Alternativ</p>
-                                                <input id="" class="" placeholder="Alternativ1">
-                                                <input id="" class="" placeholder="Alternativ2">
-                                                <input id="" class="" placeholder="Alternativ3">
+                                                <input id="" placeholder="Alternativ1">
+                                                <input id="" placeholder="Alternativ2">
+                                                <input id="" placeholder="Alternativ3">
                                             </div>
                                             <div class="editInputSettings">
                                                 <a class="addButton">+</a>
@@ -90,14 +90,14 @@
                                     <textarea id="prog-short-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
                                 <div class="form-col-2-input-divider">
-                                    <input id="" class="labelTitle" value="Prognos på lång sikt">
+                                    <input id="editProgLongTitle" class="labelTitle" value="Prognos på lång sikt">
                                     <div class="editInput">
                                         <span class="editInputContent">
                                             <div class="editInputMain">
                                                 <p>Alternativ</p>
-                                                <input id="" class="" placeholder="Alternativ1">
-                                                <input id="" class="" placeholder="Alternativ2">
-                                                <input id="" class="" placeholder="Alternativ3">
+                                                <input id="" placeholder="Alternativ1">
+                                                <input id="" placeholder="Alternativ2">
+                                                <input id="" placeholder="Alternativ3">
                                             </div>
                                             <div class="editInputSettings">
                                                 <a class="addButton">+</a>
@@ -113,16 +113,16 @@
                             </div>
                             <div class="form-col-2-input">
                                 <div class="form-col-2-input-divider">
-                                    <input id="" class="labelTitle" value="Påverkandefaktorer">
+                                    <input id="editInfluencesTitle" class="labelTitle" value="Påverkandefaktorer">
                                     <input type="range" name="influencesNameIn" id="influencesIdIn" value="5" min="0" max="10" oninput="influencesIdOut.value = influencesIdIn.value">
                                     <output name="influencesNameOut" id="influencesIdOut">5</output>
                                     <div class="editInput">
                                         <span class="editInputContent">
                                             <div class="editInputMain">
                                                 <p>Alternativ</p>
-                                                <input id="" class="" placeholder="Alternativ1">
-                                                <input id="" class="" placeholder="Alternativ2">
-                                                <input id="" class="" placeholder="Alternativ3">
+                                                <input id="" placeholder="Alternativ1">
+                                                <input id="" placeholder="Alternativ2">
+                                                <input id="" placeholder="Alternativ3">
                                             </div>
                                             <div class="editInputSettings">
                                                 <a class="addButton">+</a>
@@ -136,16 +136,16 @@
                                     <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
                                 <div class="form-col-2-input-divider actionsColor">
-                                    <input id="" class="labelTitle" value="Åtgärder">
+                                    <input id="editActionsTitle" class="labelTitle" value="Åtgärder">
                                     <input type="range" name="actionsNameIn" id="actionsIdIn" value="5" min="0" max="10" oninput="actionsIdOut.value = actionsIdIn.value">
                                     <output name="actionsNameOut" id="actionsIdOut">5</output>
                                     <div class="editInput">
                                         <span class="editInputContent">
                                             <div class="editInputMain">
                                                     <p>Alternativ</p>
-                                                <input id="" class="" placeholder="Alternativ1">
-                                                <input id="" class="" placeholder="Alternativ2">
-                                                <input id="" class="" placeholder="Alternativ3">
+                                                <input id="" placeholder="Alternativ1">
+                                                <input id="" placeholder="Alternativ2">
+                                                <input id="" placeholder="Alternativ3">
                                             </div>
                                             <div class="editInputSettings">
                                                 <a class="addButton">+</a>
@@ -158,7 +158,7 @@
                                     </div>
                                     <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
-                                <input class="form-input-button regular-button" id="form-submit" value="Skicka in bedömning" type="submit" onclick="formnSubmit()"/>   
+                                <input class="form-input-button regular-button test-button" id="form-submit" value="Skicka in bedömning" type="submit"/>   
                             </div>    
                         </div>
                     </div>
