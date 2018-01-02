@@ -19,10 +19,41 @@ table {
 td, th {
     padding: 10px;
 
+    max-height: 10px;
+
+    overflow: hidden;
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 0px;
+    text-overflow: ellipsis;
     text-align: left;
+    white-space: nowrap;
+
+    transition: all 1s ease-in-out;
 }
 
-td { border-top: 1px solid #ddd; }
+th:not(:first-child), td:not(:first-child) {
+    border-left: 1px solid #ddd;
+}
+
+td { 
+    border-top: 1px solid #ddd; 
+    font-weight: 300;
+}
+
+*:not(th).center { 
+    display: block;
+    margin: auto;
+}
+
+th.center { 
+    margin: 0;
+    text-align: center; 
+}
+
+tr { height: 40px; }
+
 
 .table-placeholder {
     display: block;

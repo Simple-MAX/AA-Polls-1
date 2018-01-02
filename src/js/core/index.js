@@ -80,29 +80,6 @@ function quickAuth(callback = null) {
     }
 }
 
-// Handles the user by storing token and redirecting to the panel
-function handleCurrentUser(result) {
-    // Gets current page name
-    const currentPage = getCurrentPage(true, true);
-
-    // If data was successfully fetched from endpoint, else log out
-    if (result != null) {
-        if (result.success && result.data != null) {
-            /* Determines what sequence to to choose and execute,
-            * depending on url location and current page
-            */
-            if (currentPage == Pages.Login) {
-                // Store current token with the newer one
-                if (getToken() != currentUserData.token)
-                    setToken(currentUserData.token)
-
-                // If token is not null, redirect user
-                redirectToPage(INITIAL_PANEL_PAGE);
-            }
-        } else logOut();
-    } else logOut();
-}
-
 // Fetches users, formats data and appends them to users table 
 function loadUserTable(callback = null) {
     // Call a custom and passed callback function

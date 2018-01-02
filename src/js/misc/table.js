@@ -26,7 +26,7 @@ const DEFAULT_TABLE_DATA = {
             values: {
                 value: "",
                 type: "checkbox",
-                onclick: (id, obj) => alert(getElement(obj).checked)
+                onclick: (id, obj) => alert(getElement(obj).checked),
             }
         }
     ]
@@ -190,12 +190,16 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
         let tableRow = createElement("tr");
     
         // Assigns a class name to the element
-        tableRow.className = "table table-row";
+        tableRow.className = "row";
 
         // Loops through finalData.head and creates new head rows
         for (let j = 0; j < finalData.head.length; j++) {
             // Initialization of table row head element
             let tableHead = createElement("th");
+
+            // Aligns head to the center if value type is checkbox
+            if (finalData.data[j].values.type != DataValueTypes.Text)
+                tableHead.className = "center";
 
             // Sets table row head value to finalData.head with given index
             tableHead.innerHTML = finalData.head[j];
@@ -217,9 +221,6 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
 
     // Initiates a new table row element
     let tableRow = createElement("tr", rowId);
-    
-    // Assigns a class name to the element
-    tableRow.className = "table table-row";
 
     // Loops through data for each row and creates a new row data element
     for (let j = 0; j < finalData.data.length; j++) {
@@ -254,6 +255,9 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
 
                 // Initialize a new input or checkbox element
                 let checkBox = createElement("input", checkBoxId);
+
+                // Aligns element to the center if value type is checkbox
+                checkBox.className = "center";
 
                 // Sets tabla data attribute/s
                 checkBox.setAttribute("type", "checkbox");

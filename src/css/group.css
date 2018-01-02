@@ -5,10 +5,11 @@
 }
 
 .groups-container .group.active {
+    display: inline-block;
     width: 100%;
-    height: 200px;
 
     margin-bottom: 10px;
+    padding-bottom: 10px;
 
     border-radius: 5px;
     border: 1px solid #eee;
@@ -63,10 +64,11 @@
 .tab > p {
     float: left;
     height: 26px;
+    padding: 3px 0;
 
     color: #777;
     font-weight: 300;
-    font-size: 24px;
+    font-size: 20px;
     text-align: left;
 }
 
@@ -81,6 +83,17 @@
     text-align: right;
 }
 
-.group.active .content {
-    padding: 10px;
+.group.active .content { padding: 10px; }
+
+.group-table-container {
+    width: 50%;
+    float: left;
+}
+
+.group-table-container:not(:last-child) {
+    padding-right: 5px;
+}
+
+.group-table-container > p {
+    color: #555;
 }
