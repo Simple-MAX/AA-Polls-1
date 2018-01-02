@@ -19,14 +19,14 @@ const DEFAULT_TABLE_DATA = {
             values: {
                 value: "",
                 type: "text",
-                onclick: (id, obj) => alert("text")
+                onclick: (id, e) => alert("text")
             }
         },
         {
             values: {
                 value: "",
                 type: "checkbox",
-                onclick: (id, obj) => alert(getElement(obj).checked),
+                onclick: (id, e) => alert(getElement(e).checked),
             }
         }
     ]
@@ -53,7 +53,7 @@ function resetTableCounters() {
 /* Gets inserted data, formats it correctly and
  * appends it to a given table element with given id
  */
-function insertData(tableId, data = DEFAULT_TABLE_DATA) {
+function insertTableData(tableId, data = DEFAULT_TABLE_DATA) {
     // Initialization of row data container
     let tableData = data;
     
@@ -239,7 +239,7 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
                 /* Assigns text onclick function and attribute to current
                  * finalData.data[j].values.onclick function
                  */
-                tableData.onclick = (obj) => finalData.data[j].values.onclick(textId, obj);
+                tableData.onclick = (e) => finalData.data[j].values.onclick(textId, e);
 
                 // Assign inner HTML value to current finalData.data value
                 tableData.innerHTML = finalData.data[j].values.value;
@@ -269,7 +269,7 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
                 /* Assigns checkbox onclick function and attribute to
                  * current finalData.data[j].values.onclick function
                  */
-                checkBox.onclick = function(obj) {
+                checkBox.onclick = function(e) {
                     // Add or remove "checked" attribute 
                     if (checkBox.checked)
                         checkBox.setAttribute("checked", true);
@@ -277,7 +277,7 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
                         checkBox.removeAttribute("checked");
 
                     // Execute passed function value
-                    finalData.data[j].values.onclick(checkBoxId, obj);
+                    finalData.data[j].values.onclick(checkBoxId, e);
                 }
 
                 /* Increment by one for existance 

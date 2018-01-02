@@ -30,7 +30,8 @@ const API_URL = API_DOMAIN + API_PATH;
 
 const Endpoint = {
     User: "user.php",
-    Poll: "poll.php"
+    Poll: "poll.php",
+    Group: "group.php"
 };
 
 

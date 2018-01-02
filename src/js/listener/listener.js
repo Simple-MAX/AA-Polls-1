@@ -90,8 +90,6 @@ function editUserListener() {
         getElementValue("edit-token")
     ];
 
-    console.log(values);
-
     // Terminate if password is not the same
     if (values[0] == "" && values[1] == "") {
         if (values[2] == "")

@@ -114,21 +114,21 @@ function loadUserTable(callback = null) {
                 values: {
                     value: currentUserName,
                     type: "text",
-                    onclick: (id, obj) => showEditUser(users.data[i])
+                    onclick: (id, e) => showEditUser(users.data[i])
                 }
             },
             {
                 values: {
                     value: currentUser.email,
                     type: "text",
-                    onclick: (id, obj) => showEditUser(users.data[i])
+                    onclick: (id, e) => showEditUser(users.data[i])
                 }
             },
             {
                 values: {
                     value: currentUser.admin,
                     type: "checkbox",
-                    onclick: (id, obj) => {
+                    onclick: (id, e) => {
                         value = 0;
 
                         if (getElement(id).checked) value = 1;
@@ -142,7 +142,7 @@ function loadUserTable(callback = null) {
                 values: {
                     value: currentUser.super_user,
                     type: "checkbox",
-                    onclick: (id, obj) => {
+                    onclick: (id, e) => {
                         value = 0;
 
                         if (getElement(id).checked) value = 1;
@@ -174,7 +174,7 @@ function loadUserTable(callback = null) {
     }
 
     // Format users accordingly
-    insertData("user-table", userTableData);
+    insertTableData("user-table", userTableData);
 }
 
 // Refreshes and re-renders the user table

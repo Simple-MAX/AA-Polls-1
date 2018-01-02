@@ -64,7 +64,7 @@
                 
                 <div class="groups-container">
                     <!-- Fake group -->
-                    <div class="group active">
+                    <div class="group active" id="test">
                         <div class="tab">
                             <p>Grupp titel</p>
 
@@ -74,30 +74,6 @@
                         <div class="content">
                             <div class="sub">
                                 <div class="group-table-container">
-                                    <p>Administratörer</p>
-
-                                    <hr class="short-spacing" />
-
-                                    <div class="table-container">
-                                        <table>
-                                            <tr>
-                                                <th>Namn</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Bachir B</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    
-                                    <hr class="short-spacing" />
-
-                                    <a id="show-add-group" class="small-anchor-button" href="#add-group">
-                                        <p class="text">Lägg till administratör</p> 
-                                        <p class="icon-text">&plus;</p>
-                                    </a> 
-                                </div>
-
-                                <div class="group-table-container">
                                     <p>Användare</p>
 
                                     <hr class="short-spacing" />
@@ -106,16 +82,18 @@
                                         <table>
                                             <tr>
                                                 <th>Namn</th>
+                                                <th>Email</th>
                                             </tr>
                                             <tr>
                                                 <td>Bosse Berg</td>
+                                                <td>bb@b.se</td>
                                             </tr>
                                         </table>
                                     </div>
 
                                     <hr class="short-spacing" />
                                     
-                                    <a id="show-add-group" class="small-anchor-button" href="#add-group">
+                                    <a id="show-add-group-user" class="small-anchor-button" href="#add-group-user">
                                         <p class="text">Lägg till användare</p> 
                                         <p class="icon-text">&plus;</p>
                                     </a> 
@@ -191,15 +169,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="group minimized">
-                        <div class="tab">
-                            <p>Grupp titel 2</p>
-
-                            <a>&#9668;</a>
-                        </div>
-                    </div>
-                    <!-- End -->
                 </div>
             
                 <div id="add-group" class="overlay">
@@ -225,6 +194,47 @@
                             <hr class="short-spacing" />
 
                             <button class="regular-button" id="add-group-button">Lägg till grupp</button>
+
+                            <hr class="short-spacing" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="add-group-user" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>Lägg till användare</p>
+
+                            <a id="close-add-group-user" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <div class="fields">
+                                <hr class="short-spacing" />
+                                <hr class="short-spacing" />
+
+                                <div class="table-container">
+                                    <table>
+                                        <tr>
+                                            <th>Namn</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Bosse Berg</td>
+                                            <td>bb@b.se</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <hr class="short-spacing" />
+                            </div>
+
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
+
+                            <button class="regular-button" id="add-group-user-button">Lägg till grupp</button>
 
                             <hr class="short-spacing" />
                         </div>

@@ -55,6 +55,21 @@ function removeChild(parentId, index = 0) {
     // Gets the parent element
     let parent = getElement(parentId);
 
+    // Terminate if element is non-existent
+    if (parent == null) return;
+
     // Removes a child based on a specified index
     parent.removeChild(parent.childNodes[index]);
+}
+
+// Switches between CSS classes
+function changeElementClass(id, className) {
+    // Gets the specified element with id
+    let element = getElement(id);
+
+    // Terminate if element is non-existent
+    if (element == null) return;
+
+    // Attempts to change element class
+    element.className = className;
 }

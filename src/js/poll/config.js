@@ -10,3 +10,9 @@
 *                                                   *
 * /**************************************************
 */
+
+// Constant variables
+const POLL_API_URL = `${API_URL}${Endpoint.Poll}`;
+
+// Regular variables
+var fetchedPolls;
