@@ -26,12 +26,15 @@ function getElementByClass(className) {
 } 
 
 // Creates an element instance
-function createElement(type, id = "") {
+function createElement(type, id = "", className = "") {
     // Create a new element with given type
     let element = document.createElement(type);
 
     // If id is not empty, assign it
     if (id != "") element.setAttribute("id", id);
+
+    // If class is given, assign it to element
+    if (className != "") element.className = className;
 
     // Return newly created element
     return element;
@@ -72,4 +75,9 @@ function changeElementClass(id, className) {
 
     // Attempts to change element class
     element.className = className;
+}
+
+// Creates and returns an anchor button
+function createAnchorButton(id, type, href) {
+    
 }

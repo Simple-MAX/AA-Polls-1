@@ -187,10 +187,7 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
     // Adds head values to each row if initialized
     if (finalData.head != null) {
         // Initiates a new table row element
-        let tableRow = createElement("tr");
-    
-        // Assigns a class name to the element
-        tableRow.className = "row";
+        let tableRow = createElement("tr", "", "row");
 
         // Loops through finalData.head and creates new head rows
         for (let j = 0; j < finalData.head.length; j++) {
@@ -254,10 +251,7 @@ function appendDataToTable(tableId, data = DEFAULT_TABLE_DATA, id = rowCount) {
                 let checkBoxId = `${rowId}-CB-${checkBoxColCount}`;
 
                 // Initialize a new input or checkbox element
-                let checkBox = createElement("input", checkBoxId);
-
-                // Aligns element to the center if value type is checkbox
-                checkBox.className = "center";
+                let checkBox = createElement("input", checkBoxId, "center");
 
                 // Sets tabla data attribute/s
                 checkBox.setAttribute("type", "checkbox");

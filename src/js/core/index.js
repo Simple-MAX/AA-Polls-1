@@ -44,7 +44,8 @@ function initialize() {
                     loadUserTable();
                     break;
                 case Pages.Groups:
-
+                    // Fetches and appends groups
+                    loadGroups();
                     break;
             }
         }
@@ -208,7 +209,7 @@ function loadGroups(callback = null) {
     // Fetches all accessible groups based on admin status
     fetchGroups(currentUser.token);
 
-    
+    appendGroup("groups", fetchedGroups[0]);
 }
 
 // Returns a boolean value based on the existance of substring

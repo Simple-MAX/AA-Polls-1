@@ -19,7 +19,7 @@ table {
 td, th {
     padding: 10px;
 
-    max-height: 10px;
+    height: 40px;
 
     overflow: hidden;
 

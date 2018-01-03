@@ -14,5 +14,7 @@
 // Constant variables
 const GROUP_API_URL = `${API_URL}${Endpoint.Group}`;
 
+const LEFT_ARROW_CHAR = "&#9668;";
+
 // Regular variables
 var fetchedGroups;
