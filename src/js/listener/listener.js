@@ -15,6 +15,9 @@
 function addListener(id, func, type = "click") {
     // Gets the element with id
     let element = getElement(id);
+
+    // Terminate if element is non-existent
+    if (element == null) return;
     
     // Adds listener to element with function
     element.addEventListener(type, (e) => func(e));

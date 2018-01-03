@@ -11,6 +11,16 @@
 * /**************************************************
 */
 
+// Constant variables
+let AnchorButton = {
+    Types: {
+        Small: "small",
+        Regular: "regular"
+    },
+    Text: "Button",
+    IconText: "&times;"
+}
+
 // Locates and fetches a specified element
 function getElement(id) { return document.getElementById(id); }
 
@@ -78,6 +88,48 @@ function changeElementClass(id, className) {
 }
 
 // Creates and returns an anchor button
-function createAnchorButton(id, type, href) {
-    
+function createAnchorButton(data) {
+    // Determines class name for button
+    let className = "small-anchor-button";
+
+    // Set default class name value
+    if (data.type == "regular")
+        className = "anchor-button";
+    else
+        className = "small-anchor-button";
+
+    // Creates button element
+    let button = createElement("a", data.id, className);
+
+    // Set href attribute if key exists
+    if (data.href != null && data.href != "")
+        button.setAttribute("href", "#" + data.href);
+
+    // Creates the button text
+    let text = createElement("p", "", "text");
+
+    // Set actual text to button
+    text.innerHTML = data.text;
+
+    // Set default button text if null
+    if (data.text == null || data.text == "")
+        text.innerHTML = "Button";
+
+    // Append the text element
+    button.appendChild(text);
+
+    // Add icon text only if requested
+    if (data.iconText != null && data.iconText != "") {
+        // Creates a text icon element
+        let iconText = createElement("p", "", "icon-text");
+
+        // Assign actual icon text to element
+        iconText.innerHTML = data.iconText;
+
+        // Append the icon text element
+        button.appendChild(iconText);
+    }
+
+    // Return the newly created element
+    return button;
 }
