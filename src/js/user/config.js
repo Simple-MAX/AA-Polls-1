@@ -15,5 +15,5 @@
 const USER_API_URL = `${API_URL}${Endpoint.User}`;
 
 // Regular variables
-var currentUserData;
-var fetchedUsersData;
+var currentUser;
+var fetchedUsers;

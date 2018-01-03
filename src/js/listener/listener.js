@@ -23,7 +23,7 @@ function addListener(id, func, type = "click") {
 // Handles listeners for elements
 function handleListeners(currentPage) {
     // Declares listener according to current page
-    let currentListener;
+    let currentListener = null;
 
     // Adds listener to elements for different pages
     switch (currentPage) {
@@ -35,16 +35,19 @@ function handleListeners(currentPage) {
             break;
     }
 
-    // Adds listener and function to element
-    for (let i = 0; i < currentListener.Elements.length; i++) {
-        // Declare and assign current listener type
-        let type = currentListener.Type[i];
+    // Proceed only if currentListener is assigned
+    if (currentListener != null) {
+        // Adds listener and function to element
+        for (let i = 0; i < currentListener.Elements.length; i++) {
+            // Declare and assign current listener type
+            let type = currentListener.Type[i];
 
-        // Assign alternative value if not assigned
-        if (type == null || type == undefined) type = "click";
+            // Assign alternative value if not assigned
+            if (type == null || type == undefined) type = "click";
 
-        // Adds listener at last
-        addListener(currentListener.Elements[i], currentListener.Functions[i], type);
+            // Adds listener at last
+            addListener(currentListener.Elements[i], currentListener.Functions[i], type);
+        }
     }
 }
 

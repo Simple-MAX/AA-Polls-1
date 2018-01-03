@@ -47,7 +47,7 @@ function loginUser(email = "", password = "", token = "", callback = null) {
             /* Assign a global variable to the "data" object,
              * given from the current, finished request output
              */
-            currentUserData = result["data"];
+            currentUser = result["data"];
 
             // Call a custom and passed callback function
             if (callback != null) {

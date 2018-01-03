@@ -68,7 +68,7 @@ function registerUser(name, email, password, callback = null) {
 }
 
 // Attempts to fetch all users based on current user status
-function fetchUsers(token, callback) {
+function fetchUsers(token, callback = null) {
     // Data variable to return
     let data = null;
 
@@ -94,7 +94,7 @@ function fetchUsers(token, callback) {
         // If the result was successful
         if (result["success"] && result["data"] != null) {
             // Stores fetched users locally
-            fetchedUsersData = result["data"];
+            fetchedUsers = result["data"];
 
             // Call a custom and passed callback function
             if (callback != null) {

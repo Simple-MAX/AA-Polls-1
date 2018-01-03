@@ -35,13 +35,16 @@ function initialize() {
         redirectToPage(Pages.Login);
 
     // Proceed if user is not undefined or non-existent
-    if (currentUserData != null) {
-        if (currentUserData.token != "") {
+    if (currentUser != null) {
+        if (currentUser.token != "") {
             // Determines what function to run on current page
             switch (currentPage) {
                 case Pages.Users:
                     // Loads user table with results
                     loadUserTable();
+                    break;
+                case Pages.Groups:
+
                     break;
             }
         }
@@ -94,7 +97,7 @@ function loadUserTable(callback = null) {
     }
 
     // Fetches users and stores in a variable
-    let users = fetchUsers(currentUserData.token);
+    fetchUsers(currentUser.token);
 
     // Declaration of user table data
     let userTableData = [];
@@ -103,52 +106,52 @@ function loadUserTable(callback = null) {
     const headTitles = ["Namn", "Email address", "Administratör", "Super användare"];
 
     // Loops through each user and adds specific keys and values
-    for (let i = 0; i < users.data.length; i++) {
+    for (let i = 0; i < fetchedUsers.length; i++) {
         // Constant variable and value for current user in iteration
-        const currentUser       = users.data[i];
-        const currentUserName   = `${currentUser.first_name} ${currentUser.last_name}`;
+        const user       = fetchedUsers[i];
+        const userName   = `${user.first_name} ${user.last_name}`;
 
         // Values to append
         let valuesToAppend = [
             {
                 values: {
-                    value: currentUserName,
+                    value: userName,
                     type: "text",
-                    onclick: (id, e) => showEditUser(users.data[i])
+                    onclick: (id, e) => showEditUser(fetchedUsers[i])
                 }
             },
             {
                 values: {
-                    value: currentUser.email,
+                    value: user.email,
                     type: "text",
-                    onclick: (id, e) => showEditUser(users.data[i])
+                    onclick: (id, e) => showEditUser(fetchedUsers[i])
                 }
             },
             {
                 values: {
-                    value: currentUser.admin,
+                    value: user.admin,
                     type: "checkbox",
                     onclick: (id, e) => {
                         value = 0;
 
                         if (getElement(id).checked) value = 1;
 
-                        if (currentUserData.super_user == "1")
-                            changeUserType(currentUserData.token, currentUser.id, "Admin", value);
+                        if (currentUser.super_user == "1")
+                            changeUserType(currentUser.token, user.id, "Admin", value);
                     }
                 }
             },
             {
                 values: {
-                    value: currentUser.super_user,
+                    value: user.super_user,
                     type: "checkbox",
                     onclick: (id, e) => {
                         value = 0;
 
                         if (getElement(id).checked) value = 1;
 
-                        if (currentUserData.super_user == "1")
-                            changeUserType(currentUserData.token, currentUser.id, "SuperUser", value);
+                        if (currentUser.super_user == "1")
+                            changeUserType(currentUser.token, user.id, "SuperUser", value);
                     }
                 }
             },
@@ -165,7 +168,7 @@ function loadUserTable(callback = null) {
     }
 
     // Return nothing if users is null
-    if (users == null) {
+    if (fetchedUsers == null) {
         // Make user aware of progress failure
         alert("Kunde inte hämta användare, försök igen.");
 
@@ -187,6 +190,25 @@ function refreshUserTable() {
         // Resets counters for table (critical)
         resetTableCounters();
     });
+}
+
+// Fetches all groups and renders them accordingly
+function loadGroups(callback = null) {
+    // Call a custom and passed callback function
+    if (callback != null) {
+        /* Creates a cloned callback function and passes
+         * fetched data as parameter for external and quick access
+         */
+        const execCallback = (passedData) => callback(passedData);
+
+        // Executes the cloned function
+        execCallback();
+    }
+
+    // Fetches all accessible groups based on admin status
+    fetchGroups(currentUser.token);
+
+    
 }
 
 // Returns a boolean value based on the existance of substring
@@ -260,8 +282,14 @@ function closeAllPopups() {
     }
 
     // Simulates a click on each button
-    for (let j = 0; j < closeButtons.length; j++)
-        simulateElementClick(closeButtons[j]);
+    for (let j = 0; j < closeButtons.length; j++) {
+        // Gets the element
+        let element = getElement(closeButtons[j]);
+
+        // Proceed if element exists
+        if (element != null && element.value != "")
+            simulateElementClick(closeButtons[j]);
+    }
 }
 
 /* (Temporarily unavailable)
