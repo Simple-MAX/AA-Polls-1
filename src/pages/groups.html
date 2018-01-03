@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" type="text/css" href="../css/main.css" />
         <link rel="stylesheet" type="text/css" href="../css/group.css" />
+        <link rel="stylesheet" type="text/css" href="../css/poll.css" />
         <link rel="stylesheet" type="text/css" href="../css/table.css" />
 
         <title>Grupper</title>
@@ -40,7 +41,6 @@
                         <div class="nav-menu-container">
                             <li><a href="users.html">Användare</a></li>
                             <li class="active"><a href="groups.html">Grupper</a></li>
-                            <li><a href="poll-manager.html">Formulär</a></li>
                             <li><a href="statistics.html">Statistik</a></li>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                         <p class="icon-text">&plus;</p>
                     </a>
                     
-                    <a id="show-add-group" class="anchor-button" href="#add-group">
+                    <a id="refresh-groups-button" class="anchor-button">
                         <p class="text">Ladda om grupper</p>
                     </a> 
                 </div>
@@ -65,8 +65,8 @@
                 <hr class="short-spacing" />
                 
                 <div class="groups-container" id="groups">
-                    <!-- Fake group -->
-                    <div class="group minimized">
+                    <!-- Fake group
+                    <div class="group minimized" style="display: none">
                         <div class="tab">
                             <p>Grupp titel</p>
 
@@ -171,6 +171,7 @@
                             </div>
                         </div>
                     </div>
+                    -->
                 </div>
             
                 <div id="add-group" class="overlay">
@@ -218,7 +219,7 @@
                                 <hr class="short-spacing" />
 
                                 <div class="table-container">
-                                    <table>
+                                    <table id="add-group-user-table">
                                         <tr>
                                             <th>Namn</th>
                                             <th>Email</th>
@@ -236,7 +237,7 @@
                             <hr class="short-spacing" />
                             <hr class="short-spacing" />
 
-                            <button class="regular-button" id="add-group-user-button">Lägg till grupp</button>
+                            <button class="regular-button" id="add-group-user-button">Lägg till användare</button>
 
                             <hr class="short-spacing" />
                         </div>

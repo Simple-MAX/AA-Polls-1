@@ -90,7 +90,7 @@
 }
 
  output {
-    display: block ;
+    display: block;
     width: 6%;
     height: 30px;
     float: left;
@@ -628,4 +628,64 @@
 
 .test-button {
     cursor: not-allowed;
+}
+
+.group-poll-container {
+    display: inline-block;
+    width: 100%;
+}
+
+.group-poll-container > p {
+    color: #555;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.group-poll-container .poll-container {
+    height: 140px;
+    width: 100%;
+    
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.poll-container .poll {
+    position: relative;
+    height: 120px;
+    width: 200px;
+
+    margin: 7.5px 0 7.5px 15px;
+
+    padding: 10px;
+
+    float: left;
+
+    border-radius: 5px;
+
+    background: #8a199e;
+}
+
+.poll > h4 {
+    color: #fff;
+    font-size: 18px;
+}
+
+.poll > p {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.poll > a {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    color: #fff;
+    font-size: 14px;
+    font-weight: 300;
+    text-decoration: none;
+
+    opacity: 0.5;
 }

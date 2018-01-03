@@ -54,13 +54,10 @@ function resetTableCounters() {
  * appends it to a given table element with given id
  */
 function insertTableData(tableId, data = DEFAULT_TABLE_DATA) {
-    // Initialization of row data container
-    let tableData = data;
-    
-    // Loop through and add row based on current index of iteration
-    for (var i = 0; i < tableData.length; i++) {
+    // Loops through and adds row based on current index of iteration
+    for (var i = 0; i < data.length; i++) {
         // Append fetched data to user table
-        appendDataToTable(tableId, tableData[i]);
+        appendDataToTable(tableId, data[i]);
     }
 }
 

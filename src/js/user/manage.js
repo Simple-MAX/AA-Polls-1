@@ -68,7 +68,7 @@ function registerUser(name, email, password, callback = null) {
 }
 
 // Attempts to fetch all users based on current user status
-function fetchUsers(token, callback = null) {
+function fetchUsers(token, userId = "", callback = null) {
     // Data variable to return
     let data = null;
 
@@ -78,8 +78,8 @@ function fetchUsers(token, callback = null) {
     /* Gets the appropriate values and store them
      * according to a determined structure below
      */
-    params.keys     = [ "token", "fetch" ];
-    params.values   = [ token, true ];
+    params.keys     = [ "token", "fetch", "user_id" ];
+    params.values   = [ token, true, userId ];
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
@@ -227,7 +227,7 @@ function editUser(name, email, token, callback = null) {
 }
 
 // Resets user password
-function resetUser(password, token, callback = null) {
+function resetUser(password, userToken, callback = null) {
     // Data variable to return
     let data = null;
     
@@ -243,7 +243,7 @@ function resetUser(password, token, callback = null) {
 
         // Adds the sub params to the main params
         params.keys     = [ "token", "col_data" ];
-        params.values   = [ token, JSON.stringify(subParams) ];
+        params.values   = [ userToken, JSON.stringify(subParams) ];
     } else return data;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)

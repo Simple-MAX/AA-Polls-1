@@ -36,6 +36,9 @@ function handleListeners(currentPage) {
         case Pages.Users:
             currentListener = Listeners.Pages.Users;
             break;
+        case Pages.Groups:
+            currentListener = Listeners.Pages.Groups;
+            break;
     }
 
     // Proceed only if currentListener is assigned
@@ -203,4 +206,35 @@ function loginUserListener() {
             handleCurrentUser(result);
         } else alert("Fel användarnamn eller lösenord");
     } else alert("Kunde inte logga in");
+}
+
+// Adds a new group
+function addGroupListener() {
+    // Used to minimize and shortify this script
+    let values = [ 
+        getElementValue("add-group-title"),
+        currentUser.token
+    ];
+
+    // Terminate if password is not the same
+    if (values[0] == "" && values[1] != "") {
+        alert("Vänligen fyll i all fält korrekt");
+
+        return;
+    }
+    
+    // Adds login function to this function
+    let result = addGroup(values[0], values[1]);
+
+    // If result is successful, proceed, else alert user
+    if (result != null) {
+        // Re-render user table if succeeded
+        if (result["success"]) {
+            // Re-render actual user table
+            refreshGroups();
+
+            // All popup boxes
+            closeAllPopups();
+        } else alert("Kunde inte lägga till grupp");
+    } else alert("Kunde inte lägga till grupp");
 }

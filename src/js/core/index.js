@@ -41,7 +41,7 @@ function initialize() {
             switch (currentPage) {
                 case Pages.Users:
                     // Loads user table with results
-                    loadUserTable();
+                    loadUserTable("user-table");
                     break;
                 case Pages.Groups:
                     // Fetches and appends groups
@@ -85,7 +85,7 @@ function quickAuth(callback = null) {
 }
 
 // Fetches users, formats data and appends them to users table 
-function loadUserTable(callback = null) {
+function loadUserTable(tableId, callback = null) {
     // Call a custom and passed callback function
     if (callback != null) {
         /* Creates a cloned callback function and passes
@@ -99,6 +99,15 @@ function loadUserTable(callback = null) {
 
     // Fetches users and stores in a variable
     fetchUsers(currentUser.token);
+
+    // Return nothing if users is null
+    if (fetchedUsers == null) {
+        // Make user aware of progress failure
+        alert("Kunde inte hämta användare, försök igen.");
+
+        // Exit function
+        return;
+    }
 
     // Declaration of user table data
     let userTableData = [];
@@ -168,17 +177,8 @@ function loadUserTable(callback = null) {
         userTableData.push(userDataObject);
     }
 
-    // Return nothing if users is null
-    if (fetchedUsers == null) {
-        // Make user aware of progress failure
-        alert("Kunde inte hämta användare, försök igen.");
-
-        // Exit function
-        return;
-    }
-
     // Format users accordingly
-    insertTableData("user-table", userTableData);
+    insertTableData(tableId, userTableData);
 }
 
 // Refreshes and re-renders the user table
@@ -209,7 +209,29 @@ function loadGroups(callback = null) {
     // Fetches all accessible groups based on admin status
     fetchGroups(currentUser.token);
 
-    appendGroup("groups", fetchedGroups[0]);
+    // Return nothing if users is null
+    if (fetchedGroups == null) {
+        // Make user aware of progress failure
+        alert("Kunde inte hämta grupper, försök igen.");
+
+        // Exit function
+        return;
+    }
+
+    // Inserts all and existing group data
+    insertGroupData("groups", fetchedGroups);
+}
+
+// Refreshes and re-renders group division
+function refreshGroups() {
+    // Re-renders table after successful data fetch
+    loadGroups(function() {
+        // Resets groups division
+        removeChildren("groups");
+        
+        // Resets counters for table (critical)
+        resetGroupCounters();
+    });
 }
 
 // Returns a boolean value based on the existance of substring
@@ -256,7 +278,8 @@ function closeAllPopups() {
     let closeButtons = [
         "close-add",
         "close-edit",
-        "close-reset"
+        "close-reset",
+        "close-add-group"
     ];
 
     // Fields to be resetted
@@ -269,7 +292,8 @@ function closeAllPopups() {
         "edit-email",
         "edit-token",
         "reset-token",
-        "reset-pass"
+        "reset-pass",
+        "add-group-title"
     ];
 
     // Loops through field ids and resets them

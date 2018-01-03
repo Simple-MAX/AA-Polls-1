@@ -39,7 +39,7 @@ const Listeners = {
                 "edit-user-button",
                 "delete-user-button",
                 "reset-user-button",
-                "refresh-user-table"
+                "refresh-user-table-button"
             ],
             Functions: [
                 () => addUserListener(),
@@ -52,6 +52,20 @@ const Listeners = {
                 "click",
                 "click",
                 "click",
+                "click",
+                "click"
+            ]
+        },
+        Groups: {
+            Elements: [
+                "add-group-button",
+                "refresh-groups-button"
+            ],
+            Functions: [
+                () => addGroupListener(),
+                () => refreshGroups()
+            ],
+            Type: [
                 "click",
                 "click"
             ]
