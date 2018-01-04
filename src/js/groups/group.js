@@ -323,7 +323,7 @@ function loadPopupUserTable(groupId) {
     fetchedUsers = fetchUsers(currentUser.token)["data"];
 
     // Gets group users from given group id
-    let groupUsers      = null;
+    let groupUsers      = [];
     let availableUsers  = [];
 
     // Gets the specified group and its users
@@ -333,26 +333,26 @@ function loadPopupUserTable(groupId) {
             // Assigns groupUsers to current iteration group users data
             groupUsers = fetchedGroups[i].users;
 
-            // Exit iteration
+            // Loop through each available user
+            for (let j = 0; j < fetchedUsers.length; j++) {
+                // Variable to shorten code
+                let user = fetchedUsers[j];
+
+                // Exlude user if user is admin or super user
+                if (user.admin != "1" && user.super_user != "1") {
+                    // Loop through each group user
+                    for (let k = 0; k < groupUsers.length; k++) {
+                        // Add user if id does not exist in group users
+                        if (user.id != groupUsers[k].id && 
+                            k == groupUsers.length - 1)
+                            availableUsers.push(user);
+                    } 
+                } 
+            }
+
+            // Exit current loop and iteration
             break;
         }
-    }
-
-    // Loop through each available user
-    for (let j = 0; j < fetchedUsers.length; j++) {
-        // Variable to shorten code
-        let user = fetchedUsers[j];
-
-        // Exlude user if user is admin or super user
-        if (user.admin != "1" && user.super_user != "1") {
-            // Loop through each group user
-            for (let k = 0; k < groupUsers.length; k++) {
-                // Add user if id does not exist in group users
-                if (user.id != groupUsers[k].id && 
-                    k == groupUsers.length - 1)
-                    availableUsers.push(user);
-            } 
-        } 
     }
     
     // Loops through each user and adds specific keys and values
