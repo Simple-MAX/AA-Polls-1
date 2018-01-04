@@ -458,8 +458,6 @@ function appendGroup(containerId, data) {
             // Get result of request and action
             let result = deleteGroup(currentUser.token, groupId);
 
-            console.log(result);
-
             // If result is successful, proceed, else alert user
             if (result != null) {
                 // Re-render user table if succeeded

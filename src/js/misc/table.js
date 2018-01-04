@@ -77,28 +77,25 @@ function checkTableDataStructure(tempData) {
      * else assign finalData to default table object
      */
     if (typeof finalData == "object") {
-        // If rowCount is greater than zero, remove head
-        if (rowCount <= 1) {
-            /* Proceed if finalData.head data type is array,
-            * else, assign default head to finalData.head.
-            * If rowCount is greater than zero, remove head
-            */
-            if (typeof finalData.head == "object" && headCount > 0) {
-                // Loops through entire head
-                for (let i = 0; i < headCount; i++) {
-                    /* If current head data type is not string,
-                    * else set head string in current iteration to "No title"
-                    */
-                    if (typeof finalData.head[i] != "string")
-                        finalData.head[i] = finalData.head[i].toString();
-                    else if (finalData.head[i] == "")
-                        finalData.head[i] = "No title";
-                }
-            } else if (typeof finalData.head != "object" && finalData.head != null) {
-                // Set finalData head to a default head
-                finalData.head = DEFAULT_TABLE_DATA.head;
+        /* Proceed if finalData.head data type is array,
+        * else, assign default head to finalData.head.
+        * If rowCount is greater than zero, remove head
+        */
+        if (typeof finalData.head == "object" && headCount > 0) {
+            // Loops through entire head
+            for (let i = 0; i < headCount; i++) {
+                /* If current head data type is not string,
+                * else set head string in current iteration to "No title"
+                */
+                if (typeof finalData.head[i] != "string")
+                    finalData.head[i] = finalData.head[i].toString();
+                else if (finalData.head[i] == "")
+                    finalData.head[i] = "No title";
             }
-        } else finalData.head = null;
+        } else if (typeof finalData.head != "object" && finalData.head != null) {
+            // Set finalData head to a default head
+            finalData.head = DEFAULT_TABLE_DATA.head;
+        }
 
         // If there are more data rows than head rows and is not equal
         if (dataLength > headCount && headCount > 0) {

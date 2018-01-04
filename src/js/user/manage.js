@@ -78,8 +78,15 @@ function fetchUsers(token, userId = "", callback = null) {
     /* Gets the appropriate values and store them
      * according to a determined structure below
      */
-    params.keys     = [ "token", "fetch", "user_id" ];
-    params.values   = [ token, true, userId ];
+    params.keys     = [ "token", "fetch" ];
+    params.values   = [ token, true ];
+
+    // Add only if userId is not empty
+    if (userId != "") {
+        // Add key and value to params
+        params.keys.push("user_id");
+        params.values.push(userId);
+    }
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
