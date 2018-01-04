@@ -100,8 +100,8 @@ function handleCurrentUser(result) {
             */
             if (currentPage == Pages.Login) {
                 // Store current token with the newer one
-                if (getToken() != currentUserData.token)
-                    setToken(currentUserData.token)
+                if (getToken() != currentUser.token)
+                    setToken(currentUser.token)
 
                 // If token is not null, redirect user
                 redirectToPage(INITIAL_PANEL_PAGE);

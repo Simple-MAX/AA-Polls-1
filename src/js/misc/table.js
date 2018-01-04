@@ -26,7 +26,7 @@ const DEFAULT_TABLE_DATA = {
             values: {
                 value: "",
                 type: "checkbox",
-                onclick: (id, e) => alert(getElement(e).checked),
+                onclick: (id, e) => alert(getElement(e).checked)
             }
         }
     ]

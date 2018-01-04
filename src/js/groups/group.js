@@ -103,9 +103,6 @@ function fetchGroupUsers(group, token) {
      */
     modifiedGroup.users = users;
 
-    // Delete unnecessary user_ids key
-    delete modifiedGroup["user_ids"];
-
     // Return users for curr
     return modifiedGroup;
 }
@@ -317,7 +314,7 @@ function loadPopupUserTable(groupId) {
     let userTableData = [];
     
     // Column titles for head
-    const headTitles = ["Namn", ""];
+    const headTitles = ["Namn", " "];
 
     // Attempts to fetch all users and store them locally
     fetchedUsers = fetchUsers(currentUser.token)["data"];
@@ -367,14 +364,24 @@ function loadPopupUserTable(groupId) {
                 values: {
                     value: userName,
                     type: "text",
-                    onclick: (id, e) => alert("not done")
+                    onclick: (id, e) => {
+                        console.log("hehe");
+                        // Gets current checkbox
+                        let checkBox = getElement(id);
+
+                        // Add or remove "checked" attribute 
+                        if (checkBox.checked)
+                            checkBox.setAttribute("checked", true);
+                        else
+                            checkBox.removeAttribute("checked");
+                    }
                 }
             },
             {
                 values: {
                     value: "",
                     type: "checkbox",
-                    onclick: (id, e) => alert("not done")
+                    onclick: (id, e) => alert("not done"),
                 }
             },
         ];

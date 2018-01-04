@@ -54,15 +54,15 @@
                                 <h2>Bedömning</h2>
                                 <div class="form-col-1-input"/>
                                     <label>Grupp</label>
-                                    <input id="judge-group"/>
+                                    <input class="input" id="judge-group"/>
                                 </div>
                                 <div class="form-col-1-input">
                                     <label>Lägsta värde</label>
-                                    <input id="min"/>   
+                                    <input class="input" id="min"/>   
                                 </div>
                                 <div class="form-col-1-input">
                                     <label>Högsta värde</label>
-                                    <input id="max"/>   
+                                    <input class="input" id="max"/>   
                                 </div>
                             </div>
                             <div class="form-col-2-input">
@@ -86,23 +86,27 @@
                             <div class="form-col-2-input">
                                 <div class="form-col-2-input-divider">
                                     <h4>Påverkandefaktorer</h4>
-                                    <input type="range" name="influencesNameIn" id="influencesIdIn" value="5" min="0" max="10" oninput="influencesIdOut.value = influencesIdIn.value">
+
+                                    <input class="input" type="range" name="influencesNameIn" id="influencesIdIn" value="5" min="0" max="10" oninput="influencesIdOut.value = influencesIdIn.value">
                                     <output name="influencesNameOut" id="influencesIdOut">5</output>
                                     <select id="influences-option">
                                         <option value="Påverkansalternativ">Påverkansalternativ</option>
                                     </select>
                                     <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
+
                                 <div class="form-col-2-input-divider actionsColor">
                                     <h4>Åtgärder</h4>
-                                    <input type="range" name="actionsNameIn" id="actionsIdIn" value="5" min="0" max="10" oninput="actionsIdOut.value = actionsIdIn.value">
+
+                                    <input class="input" type="range" name="actionsNameIn" id="actionsIdIn" value="5" min="0" max="10" oninput="actionsIdOut.value = actionsIdIn.value">
                                     <output name="actionsNameOut" id="actionsIdOut">5</output>
                                     <select id="actions-option">
                                         <option value="Åtgärdsalternativ">Åtgärdsalternativ</option>
                                     </select>
                                     <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
-                                <input class="form-input-button" id="form-submit" value="Skicka in bedömning" type="submit" onclick="formnSubmit()"/>   
+
+                                <button class="regular-button" id="submit-poll">Skicka in bedömning</button>
                             </div>    
                         </div>
                     </div>
