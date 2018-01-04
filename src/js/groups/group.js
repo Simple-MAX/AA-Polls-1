@@ -85,9 +85,6 @@ function fetchGroupUsers(group, token) {
         // Attempts to fetch user data
         let result = fetchUsers(token, userId);
 
-        // Creates a nullified user data variable
-        let userData = null;
-
         /* If result is an object type, it will return
          * some data with from the endpoint, regardless whether it's
          * successful or not. If not, it will return an error string.
@@ -95,11 +92,8 @@ function fetchGroupUsers(group, token) {
         if (typeof result == "object") {
             // If the result was successful
             if (result["success"] && result["data"] != null) {
-                // Assigns successful data to userData variable
-                userData = result["data"][0];
-
                 // Fetch each user and store them in 
-                users.push(userData);
+                users.push(result["data"][0]);
             }
         }
     }
@@ -281,6 +275,124 @@ function loadGroupUserTable(tableId, users) {
     insertTableData(tableId, userTableData);
 }
 
+// Prompts user to choose whether to delete or not to delete group
+function deleteCurrentGroup(e) {
+    // Shows a prompt with two choices; OK and Cancel
+    if (confirm("Vill du verkligen ta bort denna grupp?")) {
+        // Get result of request and action
+        let result = deleteGroup(currentUser.token, groupId);
+
+        // If result is successful, proceed, else alert user
+        if (result != null) {
+            // Re-render user table if succeeded
+            if (result["success"]) {
+                // Re-render actual user table
+                refreshGroups();
+            } else alert("Kunde inte ta bort denna grupp");
+        } else alert("Kunde inte ta bort denna grupp");
+    }
+}
+
+// Toggles between active and minimize group class
+function toggleGroup(e, groupId) {
+    // Sets class to the opposite on click
+    if (e.srcElement.parentNode.className == "group active")
+        changeElementClass(groupId, "group minimized");
+    else
+        changeElementClass(groupId, "group active");
+}
+
+// Reloads the popup user table
+function loadPopupUserTable(groupId) {
+    // Assigns popup table id
+    const tableId = "add-group-user-table";
+
+    // Gets the popup user table element
+    let table = getElement(tableId);
+
+    // If popup table is not empty, remove all children
+    removeChildren(tableId);
+    
+    // Declaration of user table data
+    let userTableData = [];
+    
+    // Column titles for head
+    const headTitles = ["Namn", ""];
+
+    // Attempts to fetch all users and store them locally
+    fetchedUsers = fetchUsers(currentUser.token)["data"];
+
+    // Gets group users from given group id
+    let groupUsers      = null;
+    let availableUsers  = [];
+
+    // Gets the specified group and its users
+    for (let i = 0; i < fetchedGroups.length; i++) {
+        // If current group was found, filter it correctly
+        if (fetchedGroups[i].id == groupId) {
+            // Assigns groupUsers to current iteration group users data
+            groupUsers = fetchedGroups[i].users;
+
+            // Exit iteration
+            break;
+        }
+    }
+
+    // Loop through each available user
+    for (let j = 0; j < fetchedUsers.length; j++) {
+        // Variable to shorten code
+        let user = fetchedUsers[j];
+
+        // Exlude user if user is admin or super user
+        if (user.admin != "1" && user.super_user != "1") {
+            // Loop through each group user
+            for (let k = 0; k < groupUsers.length; k++) {
+                // Add user if id does not exist in group users
+                if (user.id != groupUsers[k].id && 
+                    k == groupUsers.length - 1)
+                    availableUsers.push(user);
+            } 
+        } 
+    }
+    
+    // Loops through each user and adds specific keys and values
+    for (let i = 0; i < availableUsers.length; i++) {
+        // Constant variable and value for current user in iteration
+        const user       = availableUsers[i];
+        const userName   = `${user.first_name} ${user.last_name}`;
+
+        // Values to append
+        let valuesToAppend = [
+            {
+                values: {
+                    value: userName,
+                    type: "text",
+                    onclick: (id, e) => alert("not done")
+                }
+            },
+            {
+                values: {
+                    value: "",
+                    type: "checkbox",
+                    onclick: (id, e) => alert("not done")
+                }
+            },
+        ];
+
+        // Declaration of custom user data object
+        const userDataObject = {
+            head: i <= 0 ? headTitles : null,
+            data: valuesToAppend
+        };
+
+        // Add final structure to table data array
+        userTableData.push(userDataObject);
+    }
+
+    // Format users accordingly
+    insertTableData(tableId, userTableData);
+}
+
 // Appends a specific group to the group page
 function appendGroup(containerId, data) {
     // Creates a new id for current group
@@ -303,13 +415,7 @@ function appendGroup(containerId, data) {
     let tab = createElement("div", tabId, "tab");
 
     // Adds onclick function to tab
-    tab.onclick = function(e) {
-        // Sets class to the opposite on click
-        if (e.srcElement.parentNode.className == "group active")
-            changeElementClass(groupId, "group minimized");
-        else
-            changeElementClass(groupId, "group active");
-    }
+    tab.onclick = (e) => toggleGroup(e, groupId); 
 
     // Creates a title for the tab
     let title = createElement("p", "");
@@ -329,8 +435,6 @@ function appendGroup(containerId, data) {
 
     // Creates a content container
     let content = createElement("div", "", "content");
-
-    // ------------------------------------------------------------------------
 
     // Creats a sub content container
     let subContent = createElement("div", "", "sub-content");
@@ -372,6 +476,9 @@ function appendGroup(containerId, data) {
         iconText: "&plus;"
     });
 
+    // Gets popup user table on click
+    addUserBtn.onclick = () => loadPopupUserTable(groupId);
+
     // Appends the button and a spacing element
     groupTableContainer.appendChild(spacing.cloneNode(true));
     groupTableContainer.appendChild(addUserBtn);
@@ -381,8 +488,6 @@ function appendGroup(containerId, data) {
 
     // Adds sub content container to parent container
     content.appendChild(subContent);
-
-    // ------------------------------------------------------------------------
 
     // Creats a new sub content container
     subContent = createElement("div", "", "sub-content");
@@ -430,8 +535,6 @@ function appendGroup(containerId, data) {
     // Adds sub content container to parent container
     content.appendChild(subContent);
 
-    // ------------------------------------------------------------------------
-
     // Creats a new sub content container
     subContent = createElement("div", "", "sub-content");
     
@@ -452,22 +555,7 @@ function appendGroup(containerId, data) {
     deleteButton.innerHTML = "Ta bort grupp";
 
     // Adds delete function to button
-    deleteButton.onclick = function(e) {
-        // Shows a prompt with two choices; OK and Cancel
-        if (confirm("Vill du verkligen ta bort denna grupp?")) {
-            // Get result of request and action
-            let result = deleteGroup(currentUser.token, groupId);
-
-            // If result is successful, proceed, else alert user
-            if (result != null) {
-                // Re-render user table if succeeded
-                if (result["success"]) {
-                    // Re-render actual user table
-                    refreshGroups();
-                } else alert("Kunde inte ta bort denna grupp");
-            } else alert("Kunde inte ta bort denna grupp");
-        }
-    }
+    deleteButton.onclick = (e) => deleteCurrentGroup(e);
 
     // Adds button to centered container
     centeredContainer.appendChild(deleteButton);
@@ -477,8 +565,6 @@ function appendGroup(containerId, data) {
     
     // Adds sub content container to parent container
     content.appendChild(subContent);
-
-    // ------------------------------------------------------------------------
 
     // Adds tab and content elements to group element
     group.appendChild(tab);

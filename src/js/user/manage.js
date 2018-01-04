@@ -100,9 +100,6 @@ function fetchUsers(token, userId = "", callback = null) {
     if (typeof result == "object") {
         // If the result was successful
         if (result["success"] && result["data"] != null) {
-            // Stores fetched users locally
-            fetchedUsers = result["data"];
-
             // Call a custom and passed callback function
             if (callback != null) {
                 /* Creates a cloned callback function and passes

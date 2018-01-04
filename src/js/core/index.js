@@ -98,10 +98,10 @@ function loadUserTable(tableId, callback = null) {
     }
 
     // Fetches users and stores in a variable
-    fetchUsers(currentUser.token);
+    let result = fetchUsers(currentUser.token)["data"];
 
     // Return nothing if users is null
-    if (fetchedUsers == null) {
+    if (result == null) {
         // Make user aware of progress failure
         alert("Kunde inte hämta användare, försök igen.");
 
@@ -116,9 +116,9 @@ function loadUserTable(tableId, callback = null) {
     const headTitles = ["Namn", "Email address", "Administratör", "Super användare"];
 
     // Loops through each user and adds specific keys and values
-    for (let i = 0; i < fetchedUsers.length; i++) {
+    for (let i = 0; i < result.length; i++) {
         // Constant variable and value for current user in iteration
-        const user       = fetchedUsers[i];
+        const user       = result[i];
         const userName   = `${user.first_name} ${user.last_name}`;
 
         // Values to append
@@ -127,14 +127,14 @@ function loadUserTable(tableId, callback = null) {
                 values: {
                     value: userName,
                     type: "text",
-                    onclick: (id, e) => showEditUser(fetchedUsers[i])
+                    onclick: (id, e) => showEditUser(result[i])
                 }
             },
             {
                 values: {
                     value: user.email,
                     type: "text",
-                    onclick: (id, e) => showEditUser(fetchedUsers[i])
+                    onclick: (id, e) => showEditUser(result[i])
                 }
             },
             {

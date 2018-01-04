@@ -58,6 +58,9 @@ function removeChildren(parentId) {
     // Gets the parent element
     let parent = getElement(parentId);
 
+    // Continue only if children exists
+    if (parent.firstChild == null) return;
+
     // Loops through and delets all existing children
     while (parent.firstChild)
         parent.removeChild(parent.firstChild);
