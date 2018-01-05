@@ -19,6 +19,9 @@ window.onload = function() {
 
 // Initiatlizes the main function
 function initialize() {
+    // Closes all popup if present beforehand
+    closeAllPopups();
+
     // Gets current page name
     const currentPage = getCurrentPage(true, true);
 
@@ -41,7 +44,7 @@ function initialize() {
             switch (currentPage) {
                 case Pages.Users:
                     // Loads user table with results
-                    loadUserTable("user-table");
+                    loadUserTable();
                     break;
                 case Pages.Groups:
                     // Fetches and appends groups
@@ -85,7 +88,7 @@ function quickAuth(callback = null) {
 }
 
 // Fetches users, formats data and appends them to users table 
-function loadUserTable(tableId, callback = null) {
+function loadUserTable(callback = null) {
     // Call a custom and passed callback function
     if (callback != null) {
         /* Creates a cloned callback function and passes
@@ -146,8 +149,7 @@ function loadUserTable(tableId, callback = null) {
 
                         if (getElement(id).checked) value = 1;
 
-                        if (currentUser.super_user == "1")
-                            changeUserType(currentUser.token, user.id, "Admin", value);
+                        changeUserType(currentUser.token, user.id, "Admin", value);
                     }
                 }
             },
@@ -160,8 +162,7 @@ function loadUserTable(tableId, callback = null) {
 
                         if (getElement(id).checked) value = 1;
 
-                        if (currentUser.super_user == "1")
-                            changeUserType(currentUser.token, user.id, "SuperUser", value);
+                        changeUserType(currentUser.token, user.id, "SuperUser", value);
                     }
                 }
             },
@@ -178,7 +179,7 @@ function loadUserTable(tableId, callback = null) {
     }
 
     // Format users accordingly
-    insertTableData(tableId, userTableData);
+    insertTableData("user-table", userTableData);
 }
 
 // Refreshes and re-renders the user table
@@ -279,7 +280,8 @@ function closeAllPopups() {
         "close-add",
         "close-edit",
         "close-reset",
-        "close-add-group"
+        "close-add-group",
+        "close-add-group-user"
     ];
 
     // Fields to be resetted

@@ -16,6 +16,10 @@ let groupCount = 0;
 
 // Creates a request to insert and create a new group
 function addGroup(title, token, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" ||
+        currentUser.admin != "1") return;
+
     // Data variable to return
     let data = null;
 
@@ -66,8 +70,19 @@ function addGroup(title, token, callback = null) {
     return data;
 }
 
+// Attempts to add new users to some group
+function addGroupUsers(groupId, users, token, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" ||
+        currentUser.admin != "1") return;
+}
+
 // Receives all users within a specific group and adds their data
 function fetchGroupUsers(group, token) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" ||
+        currentUser.admin != "1") return;
+
     // Terminate if group has invalid value
     if (group == null && token == null) return;
 
@@ -109,6 +124,10 @@ function fetchGroupUsers(group, token) {
 
 // Attempts to fetch accessible groups based on current user privileges
 function fetchGroups(token, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" ||
+        currentUser.admin != "1") return;
+    
     // Data variable to return
     let data = null;
      
@@ -168,7 +187,11 @@ function fetchGroups(token, callback = null) {
 }
 
 // Attempts to delete existing group
-function deleteGroup(token, groupId, callback = null) {
+function deleteGroup(groupId, token, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1"  ||
+        currentUser.admin != "1") return;
+
     // Data variable to return
     let data = null;
     
@@ -215,8 +238,54 @@ function deleteGroup(token, groupId, callback = null) {
     return data;
 }
 
+// Attempts to delete chosen user from current group
+function deleteGroupUser(groupId, userId, token, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" || currentUser.admin != "1") return;
+}
+
+// Prompts user to choose whether to delete or not to delete group
+function deleteCurrentGroup(groupId) {
+    // Shows a prompt with two choices; OK and Cancel
+    if (confirm("Vill du verkligen ta bort denna grupp?")) {
+        // Get result of request and action
+        let result = deleteGroup(groupId, currentUser.token);
+
+        // If result is successful, proceed, else alert user
+        if (result != null) {
+            // Re-render user table if succeeded
+            if (result["success"]) {
+                // Re-render actual user table
+                refreshGroups();
+            } else alert("Kunde inte ta bort denna grupp");
+        } else alert("Kunde inte ta bort denna grupp");
+    }
+}
+
+// Prompts user to choose whether to delete or not to delete group
+function deleteCurrentGroupUser(groupId, userId) {
+    // Shows a prompt with two choices; OK and Cancel
+    if (confirm("Vill du ta bort" + "" +  " från denna grupp?")) {
+        // Get result of request and action
+        let result = deleteCurrentGroupUser(groupId, userId, currentUser.token);
+
+        // If result is successful, proceed, else alert user
+        if (result != null) {
+            // Re-render user table if succeeded
+            if (result["success"]) {
+                // Re-render actual user table
+                refreshGroups();
+            } else alert("Kunde inte ta bort denna grupp");
+        } else alert("Kunde inte ta bort denna grupp");
+    }
+}
+
 // Inserts multiple groups to page
 function insertGroupData(containerId, data) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" ||
+        currentUser.admin != "1") return;
+
     /* Loops through and adds new group tab 
      * based on current index of iteration
      */
@@ -228,6 +297,10 @@ function insertGroupData(containerId, data) {
 
 // Appends user data to a specific group user table
 function loadGroupUserTable(tableId, users) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" ||
+        currentUser.admin != "1") return;
+
     // Declaration of user table data
     let userTableData = [];
 
@@ -246,14 +319,14 @@ function loadGroupUserTable(tableId, users) {
                 values: {
                     value: userName,
                     type: "text",
-                    onclick: (id, e) => alert("not done")
+                    onclick: (id, e) => deleteCurrentGroupUser(id, user.id)
                 }
             },
             {
                 values: {
                     value: user.email,
                     type: "text",
-                    onclick: (id, e) => alert("not done")
+                    onclick: (id, e) => deleteCurrentGroupUser(id, user.id)
                 }
             },
         ];
@@ -272,24 +345,6 @@ function loadGroupUserTable(tableId, users) {
     insertTableData(tableId, userTableData);
 }
 
-// Prompts user to choose whether to delete or not to delete group
-function deleteCurrentGroup(e) {
-    // Shows a prompt with two choices; OK and Cancel
-    if (confirm("Vill du verkligen ta bort denna grupp?")) {
-        // Get result of request and action
-        let result = deleteGroup(currentUser.token, groupId);
-
-        // If result is successful, proceed, else alert user
-        if (result != null) {
-            // Re-render user table if succeeded
-            if (result["success"]) {
-                // Re-render actual user table
-                refreshGroups();
-            } else alert("Kunde inte ta bort denna grupp");
-        } else alert("Kunde inte ta bort denna grupp");
-    }
-}
-
 // Toggles between active and minimize group class
 function toggleGroup(e, groupId) {
     // Sets class to the opposite on click
@@ -301,6 +356,10 @@ function toggleGroup(e, groupId) {
 
 // Reloads the popup user table
 function loadPopupUserTable(groupId) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" ||
+        currentUser.admin != "1") return;
+
     // Assigns popup table id
     const tableId = "add-group-user-table";
 
@@ -365,12 +424,11 @@ function loadPopupUserTable(groupId) {
                     value: userName,
                     type: "text",
                     onclick: (id, e) => {
-                        console.log("hehe");
                         // Gets current checkbox
-                        let checkBox = getElement(id);
+                        let checkBox = getElement(id.replace("T", "CB"));
 
                         // Add or remove "checked" attribute 
-                        if (checkBox.checked)
+                        if (!checkBox.checked)
                             checkBox.setAttribute("checked", true);
                         else
                             checkBox.removeAttribute("checked");
@@ -562,7 +620,7 @@ function appendGroup(containerId, data) {
     deleteButton.innerHTML = "Ta bort grupp";
 
     // Adds delete function to button
-    deleteButton.onclick = (e) => deleteCurrentGroup(e);
+    deleteButton.onclick = (e) => deleteCurrentGroup(e, groupId);
 
     // Adds button to centered container
     centeredContainer.appendChild(deleteButton);

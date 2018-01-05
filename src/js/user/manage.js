@@ -122,6 +122,9 @@ function fetchUsers(token, userId = "", callback = null) {
 
 // Change user status to a given user type
 function changeUserType(currentToken, userId, userType, value, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1") return;
+
     // Data variable to return
     let data = null;
      
@@ -168,6 +171,9 @@ function changeUserType(currentToken, userId, userType, value, callback = null) 
 
 // Edits user information
 function editUser(name, email, token, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1") return;
+
     // Data variable to return
     let data = null;
     
@@ -232,6 +238,9 @@ function editUser(name, email, token, callback = null) {
 
 // Resets user password
 function resetUser(password, userToken, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1") return;
+
     // Data variable to return
     let data = null;
     

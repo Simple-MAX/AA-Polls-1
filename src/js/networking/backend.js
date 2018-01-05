@@ -113,7 +113,7 @@ function execAjaxRequest(url, method = "GET", async = false) {
         if (request.readyState == 4 && request.status == 200)
             data = JSON.parse(request.responseText);
         else
-            data = "Error: couldn't fetch data";
+            data = "Error: could not fetch data";
     }
 
     // Specifies the request method, domain url and async option (critical)
