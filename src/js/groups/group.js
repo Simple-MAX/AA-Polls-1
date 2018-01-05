@@ -17,7 +17,7 @@ let groupCount = 0;
 // Creates a request to insert and create a new group
 function addGroup(title, token, callback = null) {
     // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" ||
+    if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
 
     // Data variable to return
@@ -31,11 +31,11 @@ function addGroup(title, token, callback = null) {
     */
     if (title != "" && token != "") {
         // Sub parameters
-        let subParams = { title: title };
+        let subParams = JSON.stringify({ title: title });
 
         // Adds the sub params to the main params
-        params.keys     = [ "token", "group" ];
-        params.values   = [ token, JSON.stringify(subParams) ];
+        params.keys     = ["token", "group"];
+        params.values   = [token, subParams];
     } else return data;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
@@ -73,14 +73,14 @@ function addGroup(title, token, callback = null) {
 // Attempts to add new users to some group
 function addGroupUsers(groupId, users, token, callback = null) {
     // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" ||
+    if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
 }
 
 // Receives all users within a specific group and adds their data
 function fetchGroupUsers(group, token) {
     // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" ||
+    if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
 
     // Terminate if group has invalid value
@@ -125,7 +125,7 @@ function fetchGroupUsers(group, token) {
 // Attempts to fetch accessible groups based on current user privileges
 function fetchGroups(token, callback = null) {
     // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" ||
+    if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
     
     // Data variable to return
@@ -138,8 +138,8 @@ function fetchGroups(token, callback = null) {
      * according to a determined structure below
      */
     if (token != "") {
-        params.keys     = [ "token" ];
-        params.values   = [ token ];
+        params.keys     = ["token"];
+        params.values   = [token];
     } else return data;
     
     /* Executes an AJAX request (Vanilla JS, not jQuery)
@@ -189,7 +189,7 @@ function fetchGroups(token, callback = null) {
 // Attempts to delete existing group
 function deleteGroup(groupId, token, callback = null) {
     // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1"  ||
+    if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
 
     // Data variable to return
@@ -202,8 +202,8 @@ function deleteGroup(groupId, token, callback = null) {
      * according to a determined structure below
      */
     if (token != "" && groupId != "") {
-        params.keys     = [ "token", "group_id" ];
-        params.values   = [ token, groupId ];
+        params.keys     = ["token", "group_id"];
+        params.values   = [token, groupId];
     } else return data;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
@@ -241,7 +241,82 @@ function deleteGroup(groupId, token, callback = null) {
 // Attempts to delete chosen user from current group
 function deleteGroupUser(groupId, userId, token, callback = null) {
     // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" || currentUser.admin != "1") return;
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
+    // Data variable to return
+    let data = null;
+
+    // Creates a new array for possible parameters
+    let params = {};
+
+    // Declaration of group object variable
+    let modifiedGroup = null;
+
+    // Clones and modifies group based on group id
+    if (groupId != "") {
+        // Current
+        let group = null;
+
+        // Gets the specified group and its users
+        for (let i = 0; i < fetchedGroups.length; i++) {
+            // If current group was found, filter it correctly
+            if (fetchedGroups[i].id == groupId) {
+                // Assigns groupUsers to current iteration group users data
+                group = fetchedGroups[i].users;
+
+                // Exit current loop and iteration
+                break;
+            }
+        }
+
+        // TODO
+
+        // Terminate if group was not found
+        if (group == null) return;
+
+        // Set modifiedGroup to an actual modified group object
+        modifiedGroup = JSON.stringify(group);
+    }
+
+    /* Gets the appropriate values and store them
+    * according to a determined structure below
+    */
+    if (token != "" && groupId != "") {
+        params.keys     = ["token", "group"];
+        params.values   = [token, modifiedGroup];
+    } else return data;
+
+    /* Executes an AJAX request (Vanilla JS, not jQuery)
+    * with the given url, function contains optional arguments
+    */
+    let result = request(GROUP_API_URL, params, "PATCH");
+
+    /* If result is an object type, it will return
+    * some data with from the endpoint, regardless whether it's
+    * successful or not. If not, it will return an error string.
+    */
+    if (typeof result == "object") {
+        // If the result was successful
+        if (result["success"] && result["data"] != null) {
+            // Call a custom and passed callback function
+            if (callback != null) {
+                /* Creates a cloned callback function and passes
+                * fetched data as parameter for external and quick access
+                */
+                const execCallback = (passedData) => callback(passedData);
+
+                // Executes the cloned function
+                execCallback(result);
+            }
+        }
+
+        // Assigns fetched data to data variable
+        data = result;
+    }
+
+    // Returns final data
+    return data;
 }
 
 // Prompts user to choose whether to delete or not to delete group
@@ -263,11 +338,14 @@ function deleteCurrentGroup(groupId) {
 }
 
 // Prompts user to choose whether to delete or not to delete group
-function deleteCurrentGroupUser(groupId, userId) {
+function deleteCurrentGroupUser(groupId, user) {
+    // User full name value declaration
+    const userName = `${user.first_name} ${user.last_name}`;
+
     // Shows a prompt with two choices; OK and Cancel
-    if (confirm("Vill du ta bort" + "" +  " från denna grupp?")) {
+    if (confirm(`Vill du ta bort ${userName} från denna grupp?`)) {
         // Get result of request and action
-        let result = deleteCurrentGroupUser(groupId, userId, currentUser.token);
+        let result = deleteCurrentGroupUser(groupId, user.id, currentUser.token);
 
         // If result is successful, proceed, else alert user
         if (result != null) {
@@ -283,7 +361,7 @@ function deleteCurrentGroupUser(groupId, userId) {
 // Inserts multiple groups to page
 function insertGroupData(containerId, data) {
     // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" ||
+    if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
 
     /* Loops through and adds new group tab 
@@ -298,7 +376,7 @@ function insertGroupData(containerId, data) {
 // Appends user data to a specific group user table
 function loadGroupUserTable(tableId, users) {
     // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" ||
+    if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
 
     // Declaration of user table data
@@ -319,14 +397,14 @@ function loadGroupUserTable(tableId, users) {
                 values: {
                     value: userName,
                     type: "text",
-                    onclick: (id, e) => deleteCurrentGroupUser(id, user.id)
+                    onclick: (id, e) => deleteCurrentGroupUser(id, user)
                 }
             },
             {
                 values: {
                     value: user.email,
                     type: "text",
-                    onclick: (id, e) => deleteCurrentGroupUser(id, user.id)
+                    onclick: (id, e) => deleteCurrentGroupUser(id, user)
                 }
             },
         ];
@@ -357,7 +435,7 @@ function toggleGroup(e, groupId) {
 // Reloads the popup user table
 function loadPopupUserTable(groupId) {
     // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" ||
+    if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
 
     // Assigns popup table id
@@ -439,7 +517,7 @@ function loadPopupUserTable(groupId) {
                 values: {
                     value: "",
                     type: "checkbox",
-                    onclick: (id, e) => alert("not done"),
+                    onclick: (id, e) => null,
                 }
             },
         ];

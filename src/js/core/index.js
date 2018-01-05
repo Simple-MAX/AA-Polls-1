@@ -145,10 +145,13 @@ function loadUserTable(callback = null) {
                     value: user.admin,
                     type: "checkbox",
                     onclick: (id, e) => {
-                        value = 0;
+                        // Value variable declaration
+                        let value = 0;
 
+                        // Set value to one if checked
                         if (getElement(id).checked) value = 1;
 
+                        // Change user type and value
                         changeUserType(currentUser.token, user.id, "Admin", value);
                     }
                 }
@@ -158,10 +161,13 @@ function loadUserTable(callback = null) {
                     value: user.super_user,
                     type: "checkbox",
                     onclick: (id, e) => {
-                        value = 0;
-
+                        // Value variable declaration
+                        let value = 0;
+                        
+                        // Set value to one if checked
                         if (getElement(id).checked) value = 1;
 
+                        // Change user type and value
                         changeUserType(currentUser.token, user.id, "SuperUser", value);
                     }
                 }

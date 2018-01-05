@@ -13,6 +13,9 @@
 
 // Registers the given user, returns result data
 function registerUser(name, email, password, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1") return;
+
     // Data variable to return
     let data = null;
      
@@ -31,8 +34,8 @@ function registerUser(name, email, password, callback = null) {
      * according to a determined structure below
      */
     if (names[0] != "" && names[1] != "" && email != "" && password != "") {
-        params.keys     = [ "first_name", "last_name", "email", "password" ];
-        params.values   = [ names[0], names[1], email, password ];
+        params.keys     = ["first_name", "last_name", "email", "password"];
+        params.values   = [names[0], names[1], email, password];
     } else return data;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
@@ -69,6 +72,9 @@ function registerUser(name, email, password, callback = null) {
 
 // Attempts to fetch all users based on current user status
 function fetchUsers(token, userId = "", callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1") return;
+
     // Data variable to return
     let data = null;
 
@@ -78,8 +84,8 @@ function fetchUsers(token, userId = "", callback = null) {
     /* Gets the appropriate values and store them
      * according to a determined structure below
      */
-    params.keys     = [ "token", "fetch" ];
-    params.values   = [ token, true ];
+    params.keys     = ["token", "fetch"];
+    params.values   = [token, true];
 
     // Add only if userId is not empty
     if (userId != "") {
@@ -134,8 +140,8 @@ function changeUserType(currentToken, userId, userType, value, callback = null) 
     /* Gets the appropriate values and store them
      * according to a determined structure below
      */
-    params.keys     = [ "token", "status", "status_val", "user_id" ];
-    params.values   = [ currentToken, userType, value, userId ];
+    params.keys     = ["token", "status", "status_val", "user_id"];
+    params.values   = [currentToken, userType, value, userId];
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
@@ -193,15 +199,15 @@ function editUser(name, email, token, callback = null) {
      */
     if (names[0] != "" && names[1] != "" && email != "") {
         // Sub parameters
-        let subParams = {
+        let subParams = JSON.stringify({
             "first_name": names[0],
             "last_name" : names[1],
             "email"     : email
-        };
+        });
 
         // Adds the sub params to the main params
-        params.keys     = [ "token", "col_data" ];
-        params.values   = [ token, JSON.stringify(subParams) ];
+        params.keys     = ["token", "col_data"];
+        params.values   = [token, subParams];
     } else return data;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
@@ -252,11 +258,11 @@ function resetUser(password, userToken, callback = null) {
      */
     if (password != "") {
         // Sub parameters
-        let subParams = { password: password };
+        let subParams = JSON.stringify({ password: password });
 
         // Adds the sub params to the main params
-        params.keys     = [ "token", "col_data" ];
-        params.values   = [ userToken, JSON.stringify(subParams) ];
+        params.keys     = ["token", "col_data"];
+        params.values   = [userToken, subParams];
     } else return data;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
@@ -293,6 +299,9 @@ function resetUser(password, userToken, callback = null) {
 
 // Deletes given user
 function deleteUser(token, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1") return;
+
     // Data variable to return
     let data = null;
     
@@ -302,8 +311,8 @@ function deleteUser(token, callback = null) {
     /* Gets the appropriate values and store them
      * according to a determined structure below
      */
-    params.keys     = [ "token" ];
-    params.values   = [ token ];
+    params.keys     = ["token"];
+    params.values   = [token];
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
