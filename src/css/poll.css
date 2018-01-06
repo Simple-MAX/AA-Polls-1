@@ -475,34 +475,6 @@ input[type=range][orient=vertical]::-ms-fill-upper {
     }
 }
 
-.addButton {
-	width: 25px;
-    height: 25px;
-    padding: 5px 8px;
-    font-size: 18px;
-    line-height: 0.67;
-    border-radius: 12.5px;
-    background-color:#44c767;
-    color: #fff;
-    display: inline-block;
-    cursor: pointer;
-    margin: 5px auto;
-}
-
-.removeButton {
-    width: 25px;
-    height: 25px;
-    padding: 5px 8px;
-    font-size: 18px;
-    line-height: 0.67;
-    border-radius: 12.5px;
-    background-color:#f44336;
-    color: #fff;
-    display: inline-block;
-    cursor: pointer;
-    margin: 5px auto;
-}
-
 .editButton {
     width: 25px;
     height: 25px;
@@ -543,13 +515,13 @@ input[type=range][orient=vertical]::-ms-fill-upper {
     transition: 0.3s linear all;
 }
 
-.editInput {
+.edit-input {
     position: relative;
     display: inline-block;
     width: 100%;
 }
 
-.editInput .editInputContent {
+.edit-input .content {
     visibility: hidden;
     width: 90%;
     background-color: #fff;
@@ -565,39 +537,52 @@ input[type=range][orient=vertical]::-ms-fill-upper {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-.editInputMain {
+.edit-input .content .main {
     width: 85%;
-    height: auto;
+    max-height: 150px;
+    overflow: auto;
     float: left;
-    display: block;
-    color: #000;
     margin: 10px 0;
+    display: block;
+
+    color: #000;
 }
 
-.editInputMain > input{
-   width: 100%;
-}
+.edit-input .content .main > input { width: 100%; }
 
-.editInputMain > p{
-    font-weight: light;
+.edit-input .content > p {
+    font-weight: 300;
     font-size: 24px;
- }
+    color: #000;
+}
 
-.editInputSettings {
-    width: 15%;
-    margin-top: 4px;
+.settings {
+    width: 25px;
+    margin: 5px;
     height: auto;
     float: right;
     display: block;
 }
 
-.editInput:hover .editInputContent {
-    visibility: visible;
+.settings .button {
+	width: 25px;
+    height: 25px;
+    padding: 5px 8px;
+    border-radius: 12.5px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px auto;
+
+    background-color:#44c767;
+
+    color: #fff;
+    font-size: 18px;
+    line-height: 0.67;
 }
 
-.test-button {
-    cursor: not-allowed;
-}
+.edit-input:hover .content { visibility: visible; }
+
+.test-button { cursor: not-allowed; }
 
 .group-polls-container {
     display: inline-block;
