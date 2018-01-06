@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
- .form-wrapper {
-    width: 1024px;
+ .poll-wrapper {
+    width: 100%;
     margin: 0 auto;
     height: 800px;
     display: block;
 }
 
- .form-left-divider {
+ .poll-left-divider {
     width: 3%;
     float: left;
     display: block;
@@ -16,37 +16,37 @@
     position: relative;
 }
 
- .form-left-divider > input{
+ .poll-left-divider > input{
     height: 100%;
     width: 100%;
     -webkit-appearance: slider-vertical;
     writing-mode: bt-lr; 
 }
 
- .form-right-divider {
+ .poll-right-divider {
     width: 95%;
     float: right;
     display: block;
 }
 
- .form-date-container {
+ .poll-date-container {
     width: 100%;
     height: 50px;
 
 }
 
- .form-container {
+ .poll-container {
     width: 100%;
     height: 750px;
 }
 
- .form-col-0 {
+ .poll-col-0 {
     width: 100%;
     height: 15%;
     margin: 2.5% 0;
 }
 
- .form-col-0 > h2{
+ .poll-col-0 > h2{
     margin: 10px 0;
 }
 
@@ -54,20 +54,20 @@
     color: #810097;
 }
 
- .form-col-1 {
+ .poll-col-1 {
     width: 100%;
     height: 85%;
     margin: 2.5% 0;
 }
 
- .form-col-1-input {
+ .poll-col-1-input {
     width: 25%;
     display: block;
     float: left;
     position: relative;
 }
 
- .form-col-1-input > label{
+ .poll-col-1-input > label{
     display: block;
     font-weight: bold;
     /* position: absolute;
@@ -77,7 +77,7 @@
     */
 }
 
- .input {
+ .text-input {
     border: 2px #c0c0c0 solid;
     border-radius: 5px;
     color: #6b6b6b;
@@ -104,7 +104,7 @@
     border-radius: 5px;
 }
 
-.form-left-divider output{
+.poll-left-divider output{
     width: 30px;
     height: 30px;
     position: absolute;
@@ -148,17 +148,17 @@
     font-size: 13px;
 }
 
- .form-col-2-input {
+ .poll-col-2-input {
     display: inline-block;
     width: 100%;
     height: auto;
 }
 
- .form-col-2-input > select {
+ .poll-col-2-input > select {
     width: 70%;
 }
 
- .form-col-2-input-divider {
+ .poll-col-2-input-divider {
     width: 50%;
     margin: 25px 0;
     margin-top: 0;
@@ -166,7 +166,7 @@
     display: block;
 }
 
- .form-input-textarea {
+ .poll-input-textarea {
     width: 70%;
     margin-right: 30%;
     border: 2px #c0c0c0 solid;
@@ -176,7 +176,7 @@
     resize: none;
 }
 
- .form-input-button {
+ .poll-input-button {
     width: 32%;
     margin: 20px 34%;
     background-color: #6f237e;
@@ -188,11 +188,11 @@
     font-size: 17px;
 }
 
- .form-col-2-input-divider > input {
+ .poll-col-2-input-divider > input {
     width: 90%;
 }
 
- .form-col-2-input-divider > textarea {
+ .poll-col-2-input-divider > textarea {
     width: 90%;
     border: 2px #c0c0c0 solid;
     border-radius: 4px;
@@ -300,19 +300,19 @@
   }
    input[type=range]::-ms-fill-lower {
     background: linear-gradient(to left, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
    input[type=range]:focus::-ms-fill-lower {
     background: linear-gradient(to left, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
    input[type=range]::-ms-fill-upper {
     background: linear-gradient(to left, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
    input[type=range]:focus::-ms-fill-upper {
     background: linear-gradient(to left, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
 
 /*     ÅTGÄRDER  SLIDER    */
@@ -328,19 +328,19 @@
   }
    .actionsColor input[type=range]::-ms-fill-lower {
     background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
    .actionsColor input[type=range]:focus::-ms-fill-lower {
     background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
    .actionsColor input[type=range]::-ms-fill-upper {
     background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
    .actionsColor input[type=range]:focus::-ms-fill-upper {
     background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
 
 
@@ -348,10 +348,10 @@
   /*     VERTICAL    */
 
    #verticalIdIn {
-    transform: rotate(90deg);
-    -webkit-transform:rotate(90deg);
-    -moz-transform:rotate(90deg);
-    -o-transform:rotate(90deg); 
+    transpoll: rotate(90deg);
+    -webkit-transpoll:rotate(90deg);
+    -moz-transpoll:rotate(90deg);
+    -o-transpoll:rotate(90deg); 
     width: 600px;
     position: absolute;
     top: 367px;
@@ -451,37 +451,37 @@
     color: transparent;
     border: 0.5px #999 solid ;
   }
-   .form-left-divider input[type=range]::-webkit-slider-runnable-track {
+   .poll-left-divider input[type=range]::-webkit-slider-runnable-track {
     background: -webkit-linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* Chrome10-25,Safari5.1-6 */
   }
-   .form-left-divider input[type=range]:focus::-webkit-slider-runnable-track {
+   .poll-left-divider input[type=range]:focus::-webkit-slider-runnable-track {
     background: -webkit-linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* Chrome10-25,Safari5.1-6 */
   }
-   .form-left-divider input[type=range]::-moz-range-track {
+   .poll-left-divider input[type=range]::-moz-range-track {
     background: -moz-linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* FF3.6-15 */
   }
-   .form-left-divider input[type=range]::-ms-fill-lower {
+   .poll-left-divider input[type=range]::-ms-fill-lower {
     background: linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
-   .form-left-divider input[type=range]:focus::-ms-fill-lower {
+   .poll-left-divider input[type=range]:focus::-ms-fill-lower {
     background: linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
-   .form-left-divider input[type=range]::-ms-fill-upper {
+   .poll-left-divider input[type=range]::-ms-fill-upper {
     background: linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }
-   .form-left-divider input[type=range]:focus::-ms-fill-upper {
+   .poll-left-divider input[type=range]:focus::-ms-fill-upper {
     background: linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
   }  
   
 
 
 
 @media (max-width: 1024px) {
-     .form-wrapper {
+     .poll-wrapper {
         width: 768px;
         margin: 0 auto;
         height: 800px;
@@ -489,7 +489,7 @@
     }
 }
 @media (max-width: 768px) {
-     .form-wrapper {
+     .poll-wrapper {
         width: 568px;
         margin: 0 auto;
         height: 800px;
@@ -498,7 +498,7 @@
 }
 
 @media (max-width: 568px) {
-     .form-wrapper {
+     .poll-wrapper {
         width: 320px;
         margin: 0 auto;
         height: 800px;
@@ -630,19 +630,19 @@
     cursor: not-allowed;
 }
 
-.group-poll-container {
+.group-polls-container {
     display: inline-block;
     width: 100%;
 }
 
-.group-poll-container > p {
+.group-polls-container > p {
     color: #555;
     text-align: center;
     font-size: 22px;
     font-weight: 300;
 }
 
-.group-poll-container .poll-container {
+.group-polls-container .polls-container {
     height: 140px;
     width: 100%;
     
@@ -650,7 +650,7 @@
     white-space: nowrap;
 }
 
-.poll-container .poll {
+.polls-container .poll {
     position: relative;
     height: 120px;
     width: 200px;

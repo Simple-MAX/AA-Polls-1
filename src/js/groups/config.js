@@ -19,5 +19,4 @@ const LEFT_ARROW_CHAR = "&#9668;";
 // Regular variables
 var fetchedGroups;
 
-// Regular variables
 var groupCount = 0;

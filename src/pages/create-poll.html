@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../css/main.css" />
         <link rel="stylesheet" type="text/css" href="../css/poll.css" />
 
-        <title>Skapa formulär</title>
+        <title>Skapa pollulär</title>
         
         <script type="text/javascript" src="../../lib/jquery/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="../js/networking/backend.js"></script>
@@ -36,8 +36,7 @@
 
                         <div class="nav-menu-container">
                             <li><a href="users.html">Användare</a></li>
-                            <li><a href="groups.html">Grupper</a></li>
-                            <li class="active"><a href="poll-manager.html">Formulär</a></li>
+                            <li class="active"><a href="groups.html">Grupper</a></li>
                             <li><a href="statistics.html">Statistik</a></li>
                         </div>
                     </div>
@@ -47,118 +46,151 @@
         <main>
             <div class="wrapper">
                 <p class="title">Skapa formulär</p>
-                <div class="form-main">
-                    <div class="form-wrapper">
-                        <div class="form-right-divider">
-                            <div class="form-container">
-                                <div class="form-col-0">
-                                    <input id="editFirstTitle" class="h2Title" value="Bedömning">
-                                <div class="form-col-1-input"/>
-                                    <input id="editJudgeGroupTitle" class="labelTitle" value="Grupp">
-                                    <input id="judge-group"/>
+
+                <div class="poll-main">
+                    <div class="poll-wrapper">
+                        <div class="poll-right-divider">
+                            <div class="poll-container">
+                                <div class="poll-col-0">
+                                    <input id="editFirstTitle" class="h2Title" value="Bedömning" />
+
+                                    <div class="poll-col-1-input" />
+
+                                    <input id="editJudgeGroupTitle" class="labelTitle" value="Grupp" />
+                                    <input class="text-input" id="judge-group"/>
                                 </div>
-                                <div class="form-col-1-input">
-                                    <input id="editMinTitle" class="labelTitle" value="Lägsta värde">
-                                    <input id="min"/>   
+
+                                <div class="poll-col-1-input">
+                                    <input id="editMinTitle" class="labelTitle" value="Lägsta värde" />
+                                    <input class="text-input" id="min" />   
                                 </div>
-                                <div class="form-col-1-input">
-                                    <input id="editMaxTitle" class="labelTitle" value="Högsta värde">
-                                    <input id="max"/>   
+
+                                <div class="poll-col-1-input">
+                                    <input id="editMaxTitle" class="labelTitle" value="Högsta värde" />
+                                    <input class="text-input" id="max" />   
                                 </div>
-                                </div>
-                                <div class="form-col-2-input">
-                                    <input id="editSecondTitle" class="h2Title" value="Detaljerat">
-                                <div class="form-col-2-input-divider">
+
+                            </div>
+
+                            <div class="poll-col-2-input">
+                                <input id="editSecondTitle" class="h2Title" value="Detaljerat">
+                                <div class="poll-col-2-input-divider">
                                     <input id="editProgShortTitle" class="labelTitle" value="Prognos på kort sikt">
+                                    
                                     <div class="editInput">
                                         <span class="editInputContent">
                                             <div class="editInputMain">
                                                 <p>Alternativ</p>
-                                                <input id="" placeholder="Alternativ1">
-                                                <input id="" placeholder="Alternativ2">
-                                                <input id="" placeholder="Alternativ3">
+
+                                                <input class="text-input" id="" placeholder="Alternativ1" />
+                                                <input class="text-input" id="" placeholder="Alternativ2" />
+                                                <input class="text-input" id="" placeholder="Alternativ3" />
                                             </div>
+
                                             <div class="editInputSettings">
                                                 <a class="addButton">+</a>
                                                 <a class="removeButton">-</a>
                                             </div>
                                         </span>
+
                                         <select id="prog-short-option">
                                             <option value="Prognosalternativ">Prognosalternativ</option>
                                         </select>
                                     </div>
+
                                     <textarea id="prog-short-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
-                                <div class="form-col-2-input-divider">
+
+                                <div class="poll-col-2-input-divider">
                                     <input id="editProgLongTitle" class="labelTitle" value="Prognos på lång sikt">
+                                    
                                     <div class="editInput">
                                         <span class="editInputContent">
                                             <div class="editInputMain">
                                                 <p>Alternativ</p>
-                                                <input id="" placeholder="Alternativ1">
-                                                <input id="" placeholder="Alternativ2">
-                                                <input id="" placeholder="Alternativ3">
+
+                                                <input class="text-input" id="" placeholder="Alternativ1" />
+                                                <input class="text-input" id="" placeholder="Alternativ2" />
+                                                <input class="text-input" id="" placeholder="Alternativ3" />
                                             </div>
+
                                             <div class="editInputSettings">
                                                 <a class="addButton">+</a>
                                                 <a class="removeButton">-</a>
                                             </div>
                                         </span>
+
                                         <select id="prog-long-option">
                                             <option value="Prognosalternativ">Prognosalternativ</option>
                                         </select>
                                     </div>
+                                    
                                     <textarea id="prog-long-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
                             </div>
-                            <div class="form-col-2-input">
-                                <div class="form-col-2-input-divider">
-                                    <input id="editInfluencesTitle" class="labelTitle" value="Påverkandefaktorer">
-                                    <input type="range" name="influencesNameIn" id="influencesIdIn" value="5" min="0" max="10" oninput="influencesIdOut.value = influencesIdIn.value">
+
+                            <div class="poll-col-2-input">
+                                <div class="poll-col-2-input-divider">
+                                    <input id="editInfluencesTitle" class="labelTitle" value="Påverkandefaktorer"> 
+                                    <input type="range" class="text-input" name="influencesNameIn" id="influencesIdIn" value="5" min="0" max="10" oninput="influencesIdOut.value = influencesIdIn.value">
+                                    
                                     <output name="influencesNameOut" id="influencesIdOut">5</output>
+                                    
                                     <div class="editInput">
                                         <span class="editInputContent">
                                             <div class="editInputMain">
                                                 <p>Alternativ</p>
-                                                <input id="" placeholder="Alternativ1">
-                                                <input id="" placeholder="Alternativ2">
-                                                <input id="" placeholder="Alternativ3">
+
+                                                <input class="text-input" id="" placeholder="Alternativ1" />
+                                                <input class="text-input" id="" placeholder="Alternativ2" />
+                                                <input class="text-input" id="" placeholder="Alternativ3" />
                                             </div>
+
                                             <div class="editInputSettings">
                                                 <a class="addButton">+</a>
                                                 <a class="removeButton">-</a>
                                             </div>
                                         </span>
+
                                         <select id="influences-option">
                                             <option value="Påverkansalternativ">Påverkansalternativ</option>
                                         </select>
                                     </div>
+
                                     <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
-                                <div class="form-col-2-input-divider actionsColor">
+
+                                <div class="poll-col-2-input-divider actionsColor">
                                     <input id="editActionsTitle" class="labelTitle" value="Åtgärder">
-                                    <input type="range" name="actionsNameIn" id="actionsIdIn" value="5" min="0" max="10" oninput="actionsIdOut.value = actionsIdIn.value">
+                                    <input class="text-input" type="range" name="actionsNameIn" id="actionsIdIn" value="5" min="0" max="10" oninput="actionsIdOut.value = actionsIdIn.value">
+                                    
                                     <output name="actionsNameOut" id="actionsIdOut">5</output>
+                                    
                                     <div class="editInput">
                                         <span class="editInputContent">
                                             <div class="editInputMain">
-                                                    <p>Alternativ</p>
-                                                <input id="" placeholder="Alternativ1">
-                                                <input id="" placeholder="Alternativ2">
-                                                <input id="" placeholder="Alternativ3">
+                                                <p>Alternativ</p>
+
+                                                <input class="text-input" id="" placeholder="Alternativ1" />
+                                                <input class="text-input" id="" placeholder="Alternativ2" />
+                                                <input class="text-input" id="" placeholder="Alternativ3" />
                                             </div>
+
                                             <div class="editInputSettings">
                                                 <a class="addButton">+</a>
                                                 <a class="removeButton">-</a>
                                             </div>
                                         </span>
+
                                         <select id="actions-option">
                                             <option value="Åtgärdsalternativ">Åtgärdsalternativ</option>
                                         </select>
                                     </div>
+
                                     <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
                                 </div>
-                                <input class="form-input-button regular-button test-button" id="form-submit" value="Skicka in bedömning" type="submit"/>   
+
+                                <button id="poll-submit" class="regular-button">Skicka in bedömning</button> 
                             </div>    
                         </div>
                     </div>

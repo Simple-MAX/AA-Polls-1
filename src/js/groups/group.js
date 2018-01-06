@@ -519,9 +519,9 @@ function appendGroup(containerId, data) {
     let group = createElement("div", groupId, "group minimized");
     
     // New tab and table id
-    const tabId     = groupId + "-tab";
-    const tableId   = groupId + "-user-table";
-    const pollsId   = groupId + "-polls";
+    const tabId             = groupId + "-tab";
+    const tableId           = groupId + "-user-table";
+    const pollsContainerId  = groupId + "-polls";
 
     // Creates a tab for the group
     let tab = createElement("div", tabId, "tab");
@@ -583,7 +583,7 @@ function appendGroup(containerId, data) {
     let addUserBtn = createAnchorButton({
         id: "show-add-group-user", 
         type: "small", 
-        href: "edit-group-users",
+        href: "#edit-group-users",
         text: "Hantera användare"
     });
 
@@ -604,7 +604,7 @@ function appendGroup(containerId, data) {
     subContent = createElement("div", "", "sub-content");
 
     // Creates a new group poll container
-    let groupPollContainer = createElement("div", "", "group-poll-container");
+    let groupPollsContainer = createElement("div", "", "group-polls-container");
 
     // Creates a new title for current section
     title = createElement("p", "");
@@ -613,16 +613,16 @@ function appendGroup(containerId, data) {
     title.innerHTML = "Alla formulär";
 
     // Adds all sub content children to container
-    groupPollContainer.appendChild(title);
-    groupPollContainer.appendChild(spacing.cloneNode(true));
+    groupPollsContainer.appendChild(title);
+    groupPollsContainer.appendChild(spacing.cloneNode(true));
 
     // Creates a nullified poll container
-    let pollContainer = null;
+    let pollsContainer = null;
 
     // Proceed only if poll array length is greater than zero
     if (data.polls.length > 0) {
         // Creates a new poll container
-        pollContainer = createElement("div", pollsId, "poll-container");
+        pollsContainer = createElement("div", pollsContainerId, "polls-container");
     }
 
     // Creates and returns an anchor button
@@ -634,14 +634,14 @@ function appendGroup(containerId, data) {
     });
 
     // Add poll container only if it is not null
-    if (pollContainer != null)
-        groupPollContainer.appendChild(pollContainer);
+    if (pollsContainer != null)
+        groupPollsContainer.appendChild(pollsContainer);
 
-    groupPollContainer.appendChild(spacing.cloneNode(true));
-    groupPollContainer.appendChild(addPollBtn);
+    groupPollsContainer.appendChild(spacing.cloneNode(true));
+    groupPollsContainer.appendChild(addPollBtn);
 
     // Adds group poll container to sub content container
-    subContent.appendChild(groupPollContainer);
+    subContent.appendChild(groupPollsContainer);
 
     // Adds sub content container to parent container
     content.appendChild(subContent);
@@ -692,7 +692,7 @@ function appendGroup(containerId, data) {
         insertGroupUserTable(tableId, data.users);
 
     if (data.polls.length > 0)
-        insertGroupPolls(pollsId, data.polls);
+        insertgroupPollsContainers(pollsContainerId, data.polls);
 
     // Increments group count
     groupCount++;

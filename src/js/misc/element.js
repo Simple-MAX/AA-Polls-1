@@ -106,7 +106,7 @@ function createAnchorButton(data) {
 
     // Set href attribute if key exists
     if (data.href != null && data.href != "")
-        button.setAttribute("href", "#" + data.href);
+        button.setAttribute("href", data.href);
 
     // Creates the button text
     let text = createElement("p", "", "text");
