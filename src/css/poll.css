@@ -33,10 +33,7 @@
     height: 50px;
 }
 
-.poll-container {
-    width: 100%;
-    height: 750px;
-}
+.poll-container { width: 100%; }
 
 .poll-col-0 {
     width: 100%;

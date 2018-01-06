@@ -17,3 +17,5 @@ const USER_API_URL = `${API_URL}${Endpoint.User}`;
 // Regular variables
 var currentUser;
 var fetchedUsers;
+
+var formattedTableUsers;

@@ -20,6 +20,10 @@
         <script type="text/javascript" src="../js/user/config.js"></script>
         <script type="text/javascript" src="../js/user/manage.js"></script>
         <script type="text/javascript" src="../js/user/auth.js"></script>
+        <script type="text/javascript" src="../js/polls/config.js"></script>
+        <script type="text/javascript" src="../js/polls/poll.js"></script>
+        <script type="text/javascript" src="../js/groups/config.js"></script>
+        <script type="text/javascript" src="../js/groups/group.js"></script>
         <script type="text/javascript" src="../js/core/store.js"></script>
         <script type="text/javascript" src="../js/core/index.js"></script>
     </head>
@@ -51,30 +55,32 @@
                         <div class="poll-right-divider">
                             <div class="poll-container">
                                 <div class="poll-col-0">
-                                    <input id="editFirstTitle" class="h2Title" value="Bedömning" />
+                                    <input id="section-title-1" class="h2Title" value="Section 1" />
+                                </div>
 
-                                    <div class="poll-col-1-input" />
-
-                                    <input id="editJudgeGroupTitle" class="labelTitle" value="Grupp" />
-                                    <input class="text-input" id="judge-group"/>
+                                <div class="poll-col-1-input">
+                                    <input id="sub-title-1" class="labelTitle" value="Sub title 1" />
+                                    <input class="text-input" id="value-1" />
                                 </div>
  
                                 <div class="poll-col-1-input">
-                                    <input id="editMinTitle" class="labelTitle" value="Lägsta värde" />
-                                    <input class="text-input" id="min" />   
+                                    <input id="sub-title-2" class="labelTitle" value="Sub title 2" />
+                                    <input class="text-input" id="value-2" disabled />   
                                 </div>
 
                                 <div class="poll-col-1-input">
-                                    <input id="editMaxTitle" class="labelTitle" value="Högsta värde" />
-                                    <input class="text-input" id="max" />   
+                                    <input id="sub-title-3" class="labelTitle" value="Sub title 3" />
+                                    <input class="text-input" id="value-3" disabled />   
                                 </div>
-
                             </div>
 
+                            <hr class="short-spacing" style="width: 100%" />
+
                             <div class="poll-col-2-input">
-                                <input id="editSecondTitle" class="h2Title" value="Detaljerat">
+                                <input id="section-title-2" class="h2Title" value="Section 2" />
+
                                 <div class="poll-col-2-input-divider">
-                                    <input id="editProgShortTitle" class="labelTitle" value="Prognos på kort sikt">
+                                    <input id="section-1-sub-title" class="labelTitle" value="Section sub title 1">
                                     
                                     <div class="editInput">
                                         <span class="editInputContent">
@@ -93,7 +99,7 @@
                                         </span>
 
                                         <select id="prog-short-option">
-                                            <option value="Prognosalternativ">Prognosalternativ</option>
+                                            <option>Prognosalternativ</option>
                                         </select>
                                     </div>
 
@@ -120,7 +126,7 @@
                                         </span>
 
                                         <select id="prog-long-option">
-                                            <option value="Prognosalternativ">Prognosalternativ</option>
+                                            <option>Prognosalternativ</option>
                                         </select>
                                     </div>
                                     

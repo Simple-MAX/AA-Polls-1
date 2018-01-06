@@ -16,9 +16,9 @@ const Pages = {
     Login: "login",
     Users: "users",
     Groups: "groups",
-    Statistics: "Statistics",
+    Statistics: "statistics",
     Poll: "poll",
-    PollManager: "poll-manager"
+    CreatePoll: "create-poll"
 };
 
 const INITIAL_PANEL_PAGE = Pages.Users;

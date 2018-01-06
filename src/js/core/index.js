@@ -43,52 +43,42 @@ function initialize() {
             // Determines what function to run on current page
             switch (currentPage) {
                 case Pages.Users:
+                    // Loads all users
+                    loadUsers();
+
                     // Loads user table with results
                     loadUserTable();
+
+                    // Format users accordingly
+                    insertTableData("user-table", formattedTableUsers);
                     break;
                 case Pages.Groups:
+                    // Loads all users
+                    loadUsers();
+
                     // Fetches and appends groups
                     loadGroups();
+
+                    // Inserts all and existing group data
+                    insertGroupData("groups", fetchedGroups);
+                    break;
+                case Pages.CreatePoll:
+                    // Fetches and appends groups
+                    loadGroups();
+
+                    // Fetches group information for newly created poll
+                    loadPollInfo();
                     break;
             }
         }
     }
 }
 
-// Token based authentication for quick access
-function quickAuth(callback = null) {
-    // Gets stored token
-    const token = getToken();
-
-    // Terminates if token is empty and returns false for failure
-    if (token == "") {
-        // Handles and redirects user to login screen
-        handleCurrentUser(null);
-
-        // Terminates
-        return;
-    }
-
-    // Getscurrent page name
-    const currentPage = getCurrentPage(true, true);
-
-    // If current token exists, try to authenticate
-    let result = tokenAuthentication(token);
-
-    // Call a custom and passed callback function
-    if (callback != null) {
-        /* Creates a cloned callback function and passes
-         * fetched data as parameter for external and quick access
-         */
-        const execCallback = (passedData) => callback(passedData);
-
-        // Executes the cloned function
-        execCallback(result);
-    }
-}
-
 // Returns a boolean value based on the existance of substring
 function stringContains(string, value) { return string.includes(value); }
+
+// Gets first param value of url with given key
+function getUrlParam(key) { return location.search.split(key + "=")[1]; }
 
 // Shows edit user popup with user data
 function showEditUser(data) {

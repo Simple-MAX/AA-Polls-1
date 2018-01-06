@@ -106,6 +106,9 @@ function fetchUsers(token, userId = "", callback = null) {
     if (typeof result == "object") {
         // If the result was successful
         if (result["success"] && result["data"] != null) {
+            // Stores fetched users locally
+            fetchedUsers = result["data"];
+
             // Call a custom and passed callback function
             if (callback != null) {
                 /* Creates a cloned callback function and passes
@@ -347,7 +350,7 @@ function deleteUser(token, callback = null) {
 }
 
 // Fetches users, formats data and appends them to users table 
-function loadUserTable(callback = null) {
+function loadUsers(callback = null) {
     // Call a custom and passed callback function
     if (callback != null) {
         /* Creates a cloned callback function and passes
@@ -360,27 +363,40 @@ function loadUserTable(callback = null) {
     }
 
     // Fetches users and stores in a variable
-    let result = fetchUsers(currentUser.token)["data"];
+    fetchUsers(currentUser.token);
 
     // Return nothing if users is null
-    if (result == null) {
+    if (fetchedUsers == null) {
         // Make user aware of progress failure
         alert("Kunde inte hämta användare, försök igen.");
 
         // Exit function
         return;
     }
+}
+
+function loadUserTable(callback = null) {
+    // Call a custom and passed callback function
+    if (callback != null) {
+        /* Creates a cloned callback function and passes
+         * fetched data as parameter for external and quick access
+         */
+        const execCallback = (passedData) => callback(passedData);
+
+        // Executes the cloned function
+        execCallback();
+    }
 
     // Declaration of user table data
     let userTableData = [];
-
+    
     // Column titles for head
     const headTitles = ["Namn", "Email address", "Administratör", "Super användare"];
 
     // Loops through each user and adds specific keys and values
-    for (let i = 0; i < result.length; i++) {
+    for (let i = 0; i < fetchedUsers.length; i++) {
         // Constant variable and value for current user in iteration
-        const user       = result[i];
+        const user       = fetchedUsers[i];
         const userName   = `${user.first_name} ${user.last_name}`;
 
         // Values to append
@@ -389,14 +405,14 @@ function loadUserTable(callback = null) {
                 values: {
                     value: userName,
                     type: "text",
-                    onclick: (id, e) => showEditUser(result[i])
+                    onclick: (id, e) => showEditUser(fetchedUsers[i])
                 }
             },
             {
                 values: {
                     value: user.email,
                     type: "text",
-                    onclick: (id, e) => showEditUser(result[i])
+                    onclick: (id, e) => showEditUser(fetchedUsers[i])
                 }
             },
             {
@@ -443,18 +459,24 @@ function loadUserTable(callback = null) {
         userTableData.push(userDataObject);
     }
 
-    // Format users accordingly
-    insertTableData("user-table", userTableData);
+    // Adds current table data to global variable
+    formattedTableUsers = userTableData;
 }
 
 // Refreshes and re-renders the user table
 function refreshUserTable() {
     // Re-renders table after successful data fetch
-    loadUserTable(function() {
+    loadUsers(function() {
         // Resets table
         removeChildren("user-table");
         
         // Resets counters for table (critical)
         resetTableCounters();
     });
+
+    // Formats formattedUsersTable correctly
+    loadUserTable();
+
+    // Format users accordingly
+    insertTableData("user-table", formattedTableUsers);
 }

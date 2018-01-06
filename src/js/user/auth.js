@@ -11,6 +11,38 @@
 * /**************************************************
 */
 
+// Token based authentication for quick access
+function quickAuth(callback = null) {
+    // Gets stored token
+    const token = getToken();
+
+    // Terminates if token is empty and returns false for failure
+    if (token == "") {
+        // Handles and redirects user to login screen
+        handleCurrentUser(null);
+
+        // Terminates
+        return;
+    }
+
+    // Getscurrent page name
+    const currentPage = getCurrentPage(true, true);
+
+    // If current token exists, try to authenticate
+    let result = tokenAuthentication(token);
+
+    // Call a custom and passed callback function
+    if (callback != null) {
+        /* Creates a cloned callback function and passes
+         * fetched data as parameter for external and quick access
+         */
+        const execCallback = (passedData) => callback(passedData);
+
+        // Executes the cloned function
+        execCallback(result);
+    }
+}
+
 // Attempts to authenticate the user and executes a final action
 function loginUser(email = "", password = "", token = "", callback = null) {
     // Data variable to return

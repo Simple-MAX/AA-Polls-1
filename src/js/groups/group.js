@@ -306,7 +306,7 @@ function deleteCurrentGroup(groupId) {
         if (result != null) {
             // Re-render user table if succeeded
             if (result["success"]) {
-                // Re-render actual user table
+                // Re-renders groups
                 refreshGroups();
             } else alert("Kunde inte ta bort denna grupp");
         } else alert("Kunde inte ta bort denna grupp");
@@ -412,7 +412,7 @@ function loadPopupUserTable(groupId) {
     const headTitles = ["Namn", " "];
 
     // Attempts to fetch all users and store them locally
-    fetchedUsers = fetchUsers(currentUser.token)["data"];
+    fetchUsers(currentUser.token);
 
     // Gets group users from given group id
     let groupUsers      = [];
@@ -628,7 +628,7 @@ function appendGroup(containerId, data) {
     // Creates and returns an anchor button
     let addPollBtn = createAnchorButton({
         type: "small", 
-        href: "create-poll.html?id=" + groupId,
+        href: "create-poll.html?group_id=" + groupId,
         text: "Nytt formulär",
         iconText: "&plus;"
     });
@@ -666,7 +666,7 @@ function appendGroup(containerId, data) {
     deleteButton.innerHTML = "Ta bort grupp";
 
     // Adds delete function to button
-    deleteButton.onclick = (e) => deleteCurrentGroup(e, groupId);
+    deleteButton.onclick = (e) => deleteCurrentGroup(groupId);
 
     // Adds button to centered container
     centeredContainer.appendChild(deleteButton);
@@ -722,9 +722,6 @@ function loadGroups(callback = null) {
         // Exit function
         return;
     }
-
-    // Inserts all and existing group data
-    insertGroupData("groups", fetchedGroups);
 }
 
 // Refreshes and re-renders group division
@@ -737,6 +734,9 @@ function refreshGroups() {
         // Resets counters for table (critical)
         resetGroupCounters();
     });
+
+    // Append group content once again
+    insertGroupData("groups", fetchedGroups);
 }
 
 // Resets group counter
