@@ -11,9 +11,6 @@
 * /**************************************************
 */
 
-// Regular variables
-let groupCount = 0;
-
 // Creates a request to insert and create a new group
 function addGroup(title, token, callback = null) {
     // Terminate if current user is not admin or super user
@@ -332,7 +329,7 @@ function insertGroupData(containerId, data) {
 }
 
 // Appends user data to a specific group user table
-function loadGroupUserTable(tableId, users) {
+function insertGroupUserTable(tableId, users) {
     // Terminate if current user is not admin or super user
     if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
@@ -524,6 +521,7 @@ function appendGroup(containerId, data) {
     // New tab and table id
     const tabId     = groupId + "-tab";
     const tableId   = groupId + "-user-table";
+    const pollsId   = groupId + "-polls";
 
     // Creates a tab for the group
     let tab = createElement("div", tabId, "tab");
@@ -624,7 +622,7 @@ function appendGroup(containerId, data) {
     // Proceed only if poll array length is greater than zero
     if (data.polls.length > 0) {
         // Creates a new poll container
-        pollContainer = createElement("div", "", "poll-container");
+        pollContainer = createElement("div", pollsId, "poll-container");
     }
 
     // Creates and returns an anchor button
@@ -686,23 +684,18 @@ function appendGroup(containerId, data) {
     // Appends current group to the container
     groupContainer.appendChild(group);
 
-    /* Inserts user to group table after all contents
+    /* Inserts users and polls to group table after all contents
      * of the group container has been initialized and
-     * if the group data user length is greater than zero
+     * if the group data users and polls length is greater than zero
      */
-    if (data.users.length > 0) { 
-        // Insert group users to table
-        loadGroupUserTable(tableId, data.users);
-    }
+    if (data.users.length > 0)
+        insertGroupUserTable(tableId, data.users);
+
+    if (data.polls.length > 0)
+        insertGroupPolls(pollsId, data.polls);
 
     // Increments group count
     groupCount++;
-}
-
-// Resets group counter
-function resetGroupCounters() {
-    // Reset groupCount only if value is greater than zero
-    if (groupCount > 0) groupCount = 0;
 }
 
 // Fetches all groups and renders them accordingly
@@ -744,4 +737,10 @@ function refreshGroups() {
         // Resets counters for table (critical)
         resetGroupCounters();
     });
+}
+
+// Resets group counter
+function resetGroupCounters() {
+    // Reset groupCount only if value is greater than zero
+    if (groupCount > 0) groupCount = 0;
 }
