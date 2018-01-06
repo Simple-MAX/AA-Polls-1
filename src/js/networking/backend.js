@@ -11,45 +11,6 @@
 * /**************************************************
 */
 
-/*
-{
-  "poll_id": "AA-P-123456789",
-  "poll": {
-    "user_id": "123456789",
-    "date": "2017-11-18T22:00:30",
-    "general_rate": 0,
-    "initial": {
-      "group": "nAn",
-      "estimation_total": 0,
-      "min": 0,
-      "max": 0
-    },
-    "details": {
-      "prognosis": {
-        "short": {
-          option: "nAn",
-          info: ""
-        }, 
-        "long": {
-          option: "nAn",
-          info: ""
-        }
-      },
-      "influences": {
-        rate: 0,
-        option: "nAn",
-        info: ""
-      },
-      "actions": {
-        rate: 0,
-        option: "nAn",
-        info: ""
-      }
-    }
-  }
-}
-*/
-
 // Makes an HTTP request and returns some data from finished request
 function request(url, data, method = "GET", async = false) {
     /* Creates a string and executes the createUrlParams function

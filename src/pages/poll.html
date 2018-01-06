@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../css/poll.css" />
         <link rel="stylesheet" type="text/css" href="../css/main.css" />
 
-        <title>Skapa formulär</title>
+        <title>Skicka formulär</title>
 
         <script type="text/javascript" src="../../lib/jquery/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="../js/networking/backend.js"></script>
@@ -18,7 +18,6 @@
         <script type="text/javascript" src="../js/user/config.js"></script>
         <script type="text/javascript" src="../js/user/manage.js"></script>
         <script type="text/javascript" src="../js/user/auth.js"></script>
-        <script type="text/javascript" src="../js/core/config.js"></script>
         <script type="text/javascript" src="../js/core/store.js"></script>
         <script type="text/javascript" src="../js/core/index.js"></script>
     </head>
@@ -33,7 +32,6 @@
                         </div>
 
                         <div class="nav-menu-container">
-                            <li><a href="users.html">Användare</a></li>
                             <li><a href="groups.html">Grupper</a></li>
                             <li class="active"><a href="statistics.html">Statistik</a></li>
                         </div>
@@ -42,90 +40,101 @@
             </nav>
         </header>
         <main>
-           <div class="form-main">
-                <div class="form-wrapper">
-                    <div class="form-left-divider">
+            <div class="wrapper">
+                <div class="poll-main">
+                    <div class="poll-wrapper">
+                        <div class="poll-left-divider">
                             <output name="verticalNameOut" id="verticalIdOut">5</output>
-                        <input orient="vertical" type="range" name="verticalNameIn" id="verticalIdIn" value="5" min="0" max="10" oninput="verticalIdOut.value = verticalIdIn.value">                       
-                    </div>
-                    <div class="form-right-divider">
-                        <div class="form-container">
-                            <div class="form-col-0">
-                                <h2>Bedömning</h2>
-                                <div class="form-col-1-input"/>
-                                    <label>Grupp</label>
-                                    <input class="input" id="judge-group"/>
-                                </div>
-                                <div class="form-col-1-input">
-                                    <label>Lägsta värde</label>
-                                    <input class="input" id="min"/>   
-                                </div>
-                                <div class="form-col-1-input">
-                                    <label>Högsta värde</label>
-                                    <input class="input" id="max"/>   
-                                </div>
+
+                            <div class="vertical-slider-container">
+                                <input orient="vertical" type="range" name="verticalNameIn" id="verticalIdIn" value="5" min="0" max="10" oninput="verticalIdOut.value = verticalIdIn.value">
                             </div>
-                            <div class="form-col-2-input">
-                                <h2>Detaljerat</h2>
-                                <div class="form-col-2-input-divider">
-                                    <h4>Prognos på kort sikt</h4>
-                                    <select id="prog-short-option">
-                                        <option value="Prognosalternativ">Prognosalternativ</option>
-                                    </select>
-                                    <textarea id="prog-short-info" placeholder="Ytterligare prognos"></textarea>
+                        </div>
+
+                        <div class="poll-right-divider">
+                            <div class="poll-container">
+                                <div class="poll-col-0">
+                                    <h2>Bedömning</h2>
+
+                                    <div class="poll-col-1-input">
+                                        <label>Grupp</label>
+
+                                        <input class="text-input" id="judge-group" />
+                                    </div>
+                                    <div class="poll-col-1-input">
+                                        <label>Lägsta värde</label>
+
+                                        <input class="text-input" id="min" />   
+                                    </div>
+                                    <div class="poll-col-1-input">
+                                        <label>Högsta värde</label>
+
+                                        <input class="text-input" id="max" />   
+                                    </div>
                                 </div>
-                                <div class="form-col-2-input-divider">
-                                    <h4>Prognos på lång sikt</h4>
-                                    <select id="prog-long-option">
-                                        <option value="Prognosalternativ">Prognosalternativ</option>
-                                    </select>
-                                    <textarea id="prog-long-info" placeholder="Ytterligare prognos"></textarea>
+                                <div class="poll-col-2-input">
+                                    <h2>Detaljerat</h2>
+
+                                    <div class="poll-col-2-input-divider">
+                                        <h4>Prognos på kort sikt</h4>
+
+                                        <select id="prog-short-option">
+                                            <option value="Prognosalternativ">Prognosalternativ</option>
+                                        </select>
+
+                                        <textarea id="prog-short-info" placeholder="Ytterligare prognos"></textarea>
+                                    </div>
+                                    <div class="poll-col-2-input-divider">
+                                        <h4>Prognos på lång sikt</h4>
+
+                                        <select id="prog-long-option">
+                                            <option value="Prognosalternativ">Prognosalternativ</option>
+                                        </select>
+
+                                        <textarea id="prog-long-info" placeholder="Ytterligare prognos"></textarea>
+                                    </div>
                                 </div>
+
+                                <div class="poll-col-2-input">
+                                    <div class="poll-col-2-input-divider">
+                                        <h4>Påverkandefaktorer</h4>
+
+                                        <input class="text-input" type="range" name="influencesNameIn" id="influencesIdIn" value="5" min="0" max="10" oninput="influencesIdOut.value = influencesIdIn.value">
+
+                                        <output name="influencesNameOut" id="influencesIdOut">5</output>
+
+                                        <select id="influences-option">
+                                            <option value="Påverkansalternativ">Påverkansalternativ</option>
+                                        </select>
+
+                                        <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
+                                    </div>
+
+                                    <div class="poll-col-2-input-divider actionsColor">
+                                        <h4>Åtgärder</h4>
+
+                                        <input class="text-input" type="range" name="actionsNameIn" id="actionsIdIn" value="5" min="0" max="10" oninput="actionsIdOut.value = actionsIdIn.value">
+                                        
+                                        <output name="actionsNameOut" id="actionsIdOut">5</output>
+                                        
+                                        <select id="actions-option">
+                                            <option value="Åtgärdsalternativ">Åtgärdsalternativ</option>
+                                        </select>
+
+                                        <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
+                                    </div>
+
+                                    <button class="regular-button" id="submit-poll">Skicka in bedömning</button>
+                                </div>    
                             </div>
-
-                            <div class="form-col-2-input">
-                                <div class="form-col-2-input-divider">
-                                    <h4>Påverkandefaktorer</h4>
-
-                                    <input class="input" type="range" name="influencesNameIn" id="influencesIdIn" value="5" min="0" max="10" oninput="influencesIdOut.value = influencesIdIn.value">
-                                    <output name="influencesNameOut" id="influencesIdOut">5</output>
-                                    <select id="influences-option">
-                                        <option value="Påverkansalternativ">Påverkansalternativ</option>
-                                    </select>
-                                    <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
-                                </div>
-
-                                <div class="form-col-2-input-divider actionsColor">
-                                    <h4>Åtgärder</h4>
-
-                                    <input class="input" type="range" name="actionsNameIn" id="actionsIdIn" value="5" min="0" max="10" oninput="actionsIdOut.value = actionsIdIn.value">
-                                    <output name="actionsNameOut" id="actionsIdOut">5</output>
-                                    <select id="actions-option">
-                                        <option value="Åtgärdsalternativ">Åtgärdsalternativ</option>
-                                    </select>
-                                    <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
-                                </div>
-
-                                <button class="regular-button" id="submit-poll">Skicka in bedömning</button>
-                            </div>    
                         </div>
                     </div>
                 </div>
             </div>
-           
-
         </main>
-        <footer>
-        </footer> 
-        <script>
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth()+1; 
-            var yyyy = today.getFullYear();
-            today = dd+' - '+mm+' - '+yyyy;
 
-            document.getElementById("date").value =
-            today;
-        </script>
+        <footer>
+
+        </footer> 
     </body> 
 </html> 
