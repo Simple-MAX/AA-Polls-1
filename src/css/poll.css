@@ -9,21 +9,12 @@
 
 .poll-left-divider {
     width: 30px;
-    height: 100%;
     float: left;
-    display: block;
-}
-
-.poll-left-divider .vertical-slider-container {
-    height: calc(100% - 30px);
-    width: 30px;
-    float: left;
-
     display: block;
 }
 
 .poll-right-divider {
-    width: 95%;
+    width: 93%;
     float: right;
     display: block;
 }
@@ -38,10 +29,8 @@
 .poll-col-0 {
     width: 100%;
     height: 15%;
-    margin: 2.5% 0;
+    margin-top: 0;
 }
-
-.poll-col-0 > h2 { margin: 10px 0; }
 
 h2 { color: #810097; }
 
@@ -318,127 +307,146 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 #verticalIdIn {
-    width: 30px;
-    height: 100%;
-
-    -webkit-appearance: slider-vertical;
+    width: 625px;
+    height: 30px;
+    margin-top: 5px;
+    transform: 
+        translateX(-297.5px) 
+        translateY(297.5px) 
+        rotate(-90deg);
 }
   
 input[type=range] {
     -webkit-appearance: none;
     width: 82.5%;
-    background: transparent;
     border: 0px;
     float: left;
     padding: 0;
 }
 
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; } 
 input[type=range]:focus { outline: none; }
 
 input[type=range]::-ms-track {
     height: 100%;
-    cursor: pointer;
 
     background: transparent; 
     border-color: transparent;
     color: transparent;
 }
 
-/* Special styling for WebKit/Blink */
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 36px;
+    height: 35px;
     width: 10px;
-    background: #ffffff;
     cursor: pointer;
-    border: 0.5px #999 solid;
-    margin-top: -3.5px;
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
 }
   
 /* All the same stuff for Firefox */
 input[type=range]::-moz-range-thumb {
-    height: 36px;
+    height: 35px;
     width: 10px;
-    background: #ffffff;
     cursor: pointer;
-    border: 0.5px #999 solid;
-    margin-top: -3.5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
 }
 
 /* All the same stuff for IE */
 input[type=range]::-ms-thumb {
-    height: 36px;
+    -webkit-appearance: none;
+    height: 35px;
     width: 10px;
-    background: #ffffff;
     cursor: pointer;
-    border: 0.5px #999 solid;
-    margin-top: -3.5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
+}
+
+input[type=range][orient=vertical]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 35px;
+    width: 10px;
+    cursor: pointer;
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
+}
+  
+input[type=range][orient=vertical]::-moz-range-thumb {
+    height: 35px;
+    width: 10px;
+    cursor: pointer;
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
+}
+
+/* All the same stuff for IE */
+input[type=range][orient=vertical]::-ms-thumb {
+    -webkit-appearance: none;
+    height: 35px;
+    width: 10px;
+    cursor: pointer;
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-    width: 60vh;
     height: 30px;
     cursor: pointer;
     border: 0.5px #999 solid;
-    background: -webkit-linear-gradient(left, #fff832 0%,#ff3535 100%); /* Chrome10-25,Safari5.1-6 */
+    background: -webkit-linear-gradient(left, #fff832 0%,#ff3535 100%);
 }
   
 input[type=range]:focus::-webkit-slider-runnable-track {
-    background: -webkit-linear-gradient(left, #fff831 0%,#ff3530 100%); /* Chrome10-25,Safari5.1-6 */
+    background: -webkit-linear-gradient(left, #fff831 0%,#ff3530 100%);
     border: 0.5px #999 solid;
 }
   
 input[type=range]::-moz-range-track {
-    width: 60vh;
     height: 30px;
     cursor: pointer;
     border: 0.5px #999 solid ;
-    background: -moz-linear-gradient(left, #fff832 0%, #ff3535 100%); /* FF3.6-15 */
+    background: -moz-linear-gradient(left, #fff832 0%, #ff3535 100%);
 }
   
 input[type=range]::-ms-track {
-    width: 60vh;
     height: 10px;
     cursor: pointer;
     background: transparent;
     border-color: transparent;
     border-width: 16px 0;
     color: transparent;
-    border: 0.5px #999 solid ;
+    border: 0.5px #999 solid;
 }
 
-.poll-left-divider input[type=range]::-webkit-slider-runnable-track {
-    background: -webkit-linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* Chrome10-25,Safari5.1-6 */
+input[type=range][orient=vertical]::-webkit-slider-runnable-track {
+    background: -webkit-linear-gradient(right, #32ff5e  0%,#fff832 50%, #ff3535 100%);
 }
 
-.poll-left-divider input[type=range]:focus::-webkit-slider-runnable-track {
-    background: -webkit-linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* Chrome10-25,Safari5.1-6 */
+input[type=range][orient=vertical]::-moz-range-track {
+    background: -moz-linear-gradient(right, #32ff5e  0%,#fff832 50%, #ff3535 100%);
 }
 
-.poll-left-divider input[type=range]::-moz-range-track {
-    background: -moz-linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* FF3.6-15 */
+input[type=range][orient=vertical]::-ms-fill-lower {
+    background: linear-gradient(right, #32ff5e  0%,#fff832 50%, #ff3535 100%);
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 );
 }
 
-.poll-left-divider input[type=range]::-ms-fill-lower {
-    background: linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+input[type=range][orient=vertical]::-ms-fill-upper {
+    background: linear-gradient(rignt, #32ff5e  0%,#fff832 50%, #ff3535 100%);
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 );
 }
-
-.poll-left-divider input[type=range]:focus::-ms-fill-lower {
-    background: linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
-}
-
-.poll-left-divider input[type=range]::-ms-fill-upper {
-    background: linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
-}
-
-.poll-left-divider input[type=range]:focus::-ms-fill-upper {
-    background: linear-gradient(left, #32ff5e  0%,#fff832 50%, #ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
-}  
   
 @media (max-width: 1024px) {
     .poll-wrapper {
