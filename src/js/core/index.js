@@ -87,160 +87,6 @@ function quickAuth(callback = null) {
     }
 }
 
-// Fetches users, formats data and appends them to users table 
-function loadUserTable(callback = null) {
-    // Call a custom and passed callback function
-    if (callback != null) {
-        /* Creates a cloned callback function and passes
-         * fetched data as parameter for external and quick access
-         */
-        const execCallback = (passedData) => callback(passedData);
-
-        // Executes the cloned function
-        execCallback();
-    }
-
-    // Fetches users and stores in a variable
-    let result = fetchUsers(currentUser.token)["data"];
-
-    // Return nothing if users is null
-    if (result == null) {
-        // Make user aware of progress failure
-        alert("Kunde inte hämta användare, försök igen.");
-
-        // Exit function
-        return;
-    }
-
-    // Declaration of user table data
-    let userTableData = [];
-
-    // Column titles for head
-    const headTitles = ["Namn", "Email address", "Administratör", "Super användare"];
-
-    // Loops through each user and adds specific keys and values
-    for (let i = 0; i < result.length; i++) {
-        // Constant variable and value for current user in iteration
-        const user       = result[i];
-        const userName   = `${user.first_name} ${user.last_name}`;
-
-        // Values to append
-        let valuesToAppend = [
-            {
-                values: {
-                    value: userName,
-                    type: "text",
-                    onclick: (id, e) => showEditUser(result[i])
-                }
-            },
-            {
-                values: {
-                    value: user.email,
-                    type: "text",
-                    onclick: (id, e) => showEditUser(result[i])
-                }
-            },
-            {
-                values: {
-                    value: user.admin,
-                    type: "checkbox",
-                    onclick: (id, e) => {
-                        // Value variable declaration
-                        let value = 0;
-
-                        // Set value to one if checked
-                        if (getElement(id).checked) value = 1;
-
-                        // Change user type and value
-                        changeUserType(currentUser.token, user.id, "Admin", value);
-                    }
-                }
-            },
-            {
-                values: {
-                    value: user.super_user,
-                    type: "checkbox",
-                    onclick: (id, e) => {
-                        // Value variable declaration
-                        let value = 0;
-                        
-                        // Set value to one if checked
-                        if (getElement(id).checked) value = 1;
-
-                        // Change user type and value
-                        changeUserType(currentUser.token, user.id, "SuperUser", value);
-                    }
-                }
-            },
-        ];
-
-        // Declaration of custom user data object
-        const userDataObject = {
-            head: i <= 0 ? headTitles : null,
-            data: valuesToAppend
-        };
-
-        // Add final structure to table data array
-        userTableData.push(userDataObject);
-    }
-
-    // Format users accordingly
-    insertTableData("user-table", userTableData);
-}
-
-// Refreshes and re-renders the user table
-function refreshUserTable() {
-    // Re-renders table after successful data fetch
-    loadUserTable(function() {
-        // Resets table
-        removeChildren("user-table");
-        
-        // Resets counters for table (critical)
-        resetTableCounters();
-    });
-}
-
-// Fetches all groups and renders them accordingly
-function loadGroups(callback = null) {
-    // Call a custom and passed callback function
-    if (callback != null) {
-        /* Creates a cloned callback function and passes
-         * fetched data as parameter for external and quick access
-         */
-        const execCallback = (passedData) => callback(passedData);
-
-        // Executes the cloned function
-        execCallback();
-    }
-
-    // Fetches all accessible groups based on admin status
-    fetchGroups(currentUser.token);
-
-    // Return nothing if users is null
-    if (fetchedGroups == null) {
-        // Make user aware of progress failure
-        alert("Kunde inte hämta grupper, försök igen.");
-
-        // Exit function
-        return;
-    }
-
-    // Inserts all and existing group data
-    insertGroupData("groups", fetchedGroups);
-}
-
-// Refreshes and re-renders group division
-function refreshGroups() {
-    // Re-renders table after successful data fetch
-    loadGroups(function() {
-        // Resets groups division
-        removeChildren("groups");
-        
-        // Resets counters for table (critical)
-        resetGroupCounters();
-    });
-}
-
 // Returns a boolean value based on the existance of substring
 function stringContains(string, value) { return string.includes(value); }
 
@@ -287,7 +133,7 @@ function closeAllPopups() {
         "close-edit",
         "close-reset",
         "close-add-group",
-        "close-add-group-user"
+        "close-edit-group-users",
     ];
 
     // Fields to be resetted
@@ -301,7 +147,8 @@ function closeAllPopups() {
         "edit-token",
         "reset-token",
         "reset-pass",
-        "add-group-title"
+        "add-group-title",
+        "edit-users-group-id"
     ];
 
     // Loops through field ids and resets them

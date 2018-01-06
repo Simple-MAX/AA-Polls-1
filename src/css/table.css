@@ -8,6 +8,17 @@
     border-radius: 5px;
 }
 
+.table-popup-container {
+    width: 100%;
+    max-height: 200px;
+    margin: auto;
+
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    overflow: auto;
+}
+
 table {
     width: 100%;
 

@@ -22,6 +22,8 @@
         <script type="text/javascript" src="../js/user/config.js"></script>
         <script type="text/javascript" src="../js/user/manage.js"></script>
         <script type="text/javascript" src="../js/user/auth.js"></script>
+        <script type="text/javascript" src="../js/polls/config.js"></script>
+        <script type="text/javascript" src="../js/polls/poll.js"></script>
         <script type="text/javascript" src="../js/groups/config.js"></script>
         <script type="text/javascript" src="../js/groups/group.js"></script>
         <script type="text/javascript" src="../js/core/config.js"></script>
@@ -65,8 +67,8 @@
                 <hr class="short-spacing" />
                 
                 <div class="groups-container" id="groups">
-                    <!-- Fake group
-                    <div class="group minimized" style="display: none">
+                    <!--
+                    <div class="group active">
                         <div class="tab">
                             <p>Grupp titel</p>
 
@@ -203,31 +205,33 @@
                     </div>
                 </div>
 
-                <div id="add-group-user" class="overlay">
+                <div id="edit-group-users" class="overlay">
                     <div class="popup">
                         <div class="head">
-                            <p>Lägg till användare</p>
+                            <p>Redigare användare</p>
 
-                            <a id="close-add-group-user" href="#">&times;</a>
+                            <a id="close-edit-group-users" href="#">&times;</a>
                         </div>
 
                         <hr class="short-spacing" />
 
                         <div class="content">
-                                <hr class="short-spacing" />
-                                <hr class="short-spacing" />
-
-                                <div class="table-container">
-                                    <table id="add-group-user-table">
-                                    </table>
-                                </div>
-
-                                <hr class="short-spacing" />
+                            <input type="text" id="edit-users-group-id" style="display: none"></input>
 
                             <hr class="short-spacing" />
                             <hr class="short-spacing" />
 
-                            <button class="regular-button" id="add-group-user-button">Lägg till användare</button>
+                            <div class="table-popup-container">
+                                <table id="edit-group-users-table">
+                                </table>
+                            </div>
+
+                            <hr class="short-spacing" />
+
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
+
+                            <button class="regular-button" id="edit-group-users-button">Spara information</button>
 
                             <hr class="short-spacing" />
                         </div>

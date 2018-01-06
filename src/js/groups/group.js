@@ -70,58 +70,6 @@ function addGroup(title, token, callback = null) {
     return data;
 }
 
-// Attempts to add new users to some group
-function addGroupUsers(groupId, users, token, callback = null) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-}
-
-// Receives all users within a specific group and adds their data
-function fetchGroupUsers(group, token) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-
-    // Terminate if group has invalid value
-    if (group == null && token == null) return;
-
-    // Modified group object
-    let modifiedGroup = group;
-
-    // User data array
-    let users = []; 
-
-    // Loops through each group and adds data accordingly
-    for (let i = 0; i < modifiedGroup.user_ids.length; i++) {
-        // Current user id in iteration
-        const userId = modifiedGroup.user_ids[i];
-
-        // Attempts to fetch user data
-        let result = fetchUsers(token, userId);
-
-        /* If result is an object type, it will return
-         * some data with from the endpoint, regardless whether it's
-         * successful or not. If not, it will return an error string.
-         */
-        if (typeof result == "object") {
-            // If the result was successful
-            if (result["success"] && result["data"] != null) {
-                // Fetch each user and store them in 
-                users.push(result["data"][0]);
-            }
-        }
-    }
-
-    /* Add a new key to group and assign
-     * users array variable as a value
-     */
-    modifiedGroup.users = users;
-
-    // Return users for curr
-    return modifiedGroup;
-}
-
 // Attempts to fetch accessible groups based on current user privileges
 function fetchGroups(token, callback = null) {
     // Terminate if current user is not admin or super user
@@ -159,8 +107,14 @@ function fetchGroups(token, callback = null) {
 
             // Loops through each group and adds data accordingly
             for (let i = 0; i < result["data"].length; i++) {
+                // Attempts to add actual user data to group object
+                let modifiedGroupData = fetchGroupUsers(result["data"][i], token);
+
+                // Attempts to add all poll data to group object
+                modifiedGroupData = fetchGroupPolls(modifiedGroupData, token);
+
                 // Push a modified result to finalResult array
-                finalResult.push(fetchGroupUsers(result["data"][i], token));
+                finalResult.push(modifiedGroupData);
             }
 
             // Stores fetched groups locally
@@ -184,6 +138,54 @@ function fetchGroups(token, callback = null) {
 
     // Returns final data
     return data;
+}
+
+// Receives all users within a specific group and adds their data
+function fetchGroupUsers(group, token) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
+    // Terminate if group has invalid value
+    if (group == null && token == null) return;
+
+    // Modified group object
+    let modifiedGroup = group;
+
+    // User data array
+    let users = [];
+
+    // Loops through each group and adds data accordingly
+    for (let i = 0; i < modifiedGroup.user_ids.length; i++) {
+        // Exit current loop if there are no ids
+        if (modifiedGroup.user_ids.length < 1) break;
+        
+        // Current user id in iteration
+        const userId = modifiedGroup.user_ids[i];
+
+        // Attempts to fetch user data
+        let result = fetchUsers(token, userId);
+
+        /* If result is an object type, it will return
+         * some data with from the endpoint, regardless whether it's
+         * successful or not. If not, it will return an error string.
+         */
+        if (typeof result == "object") {
+            // If the result was successful
+            if (result["success"] && result["data"] != null) {
+                // Fetch each user and store them in 
+                users.push(result["data"][0]);
+            }
+        }
+    }
+
+    /* Add a new key to group and assign
+     * users array variable as a value
+     */
+    modifiedGroup.users = users;
+
+    // Return users for curr
+    return modifiedGroup;
 }
 
 // Attempts to delete existing group
@@ -239,7 +241,7 @@ function deleteGroup(groupId, token, callback = null) {
 }
 
 // Attempts to delete chosen user from current group
-function deleteGroupUser(groupId, userId, token, callback = null) {
+function editGroupUsers(groupId, group, token, callback = null) {
     // Terminate if current user is not admin or super user
     if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
@@ -253,38 +255,15 @@ function deleteGroupUser(groupId, userId, token, callback = null) {
     // Declaration of group object variable
     let modifiedGroup = null;
 
-    // Clones and modifies group based on group id
-    if (groupId != "") {
-        // Current
-        let group = null;
-
-        // Gets the specified group and its users
-        for (let i = 0; i < fetchedGroups.length; i++) {
-            // If current group was found, filter it correctly
-            if (fetchedGroups[i].id == groupId) {
-                // Assigns groupUsers to current iteration group users data
-                group = fetchedGroups[i].users;
-
-                // Exit current loop and iteration
-                break;
-            }
-        }
-
-        // TODO
-
-        // Terminate if group was not found
-        if (group == null) return;
-
-        // Set modifiedGroup to an actual modified group object
-        modifiedGroup = JSON.stringify(group);
-    }
-
     /* Gets the appropriate values and store them
     * according to a determined structure below
     */
     if (token != "" && groupId != "") {
+        // Sub parameters
+        let subParams = JSON.stringify(group);
+
         params.keys     = ["token", "group"];
-        params.values   = [token, modifiedGroup];
+        params.values   = [token, subParams];
     } else return data;
 
     /* Executes an AJAX request (Vanilla JS, not jQuery)
@@ -337,27 +316,6 @@ function deleteCurrentGroup(groupId) {
     }
 }
 
-// Prompts user to choose whether to delete or not to delete group
-function deleteCurrentGroupUser(groupId, user) {
-    // User full name value declaration
-    const userName = `${user.first_name} ${user.last_name}`;
-
-    // Shows a prompt with two choices; OK and Cancel
-    if (confirm(`Vill du ta bort ${userName} från denna grupp?`)) {
-        // Get result of request and action
-        let result = deleteCurrentGroupUser(groupId, user.id, currentUser.token);
-
-        // If result is successful, proceed, else alert user
-        if (result != null) {
-            // Re-render user table if succeeded
-            if (result["success"]) {
-                // Re-render actual user table
-                refreshGroups();
-            } else alert("Kunde inte ta bort denna grupp");
-        } else alert("Kunde inte ta bort denna grupp");
-    }
-}
-
 // Inserts multiple groups to page
 function insertGroupData(containerId, data) {
     // Terminate if current user is not admin or super user
@@ -397,14 +355,14 @@ function loadGroupUserTable(tableId, users) {
                 values: {
                     value: userName,
                     type: "text",
-                    onclick: (id, e) => deleteCurrentGroupUser(id, user)
+                    onclick: (id, e) => null
                 }
             },
             {
                 values: {
                     value: user.email,
                     type: "text",
-                    onclick: (id, e) => deleteCurrentGroupUser(id, user)
+                    onclick: (id, e) => null
                 }
             },
         ];
@@ -438,8 +396,11 @@ function loadPopupUserTable(groupId) {
     if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
 
+    // Sets group id to invisible group id input
+    getElement("edit-users-group-id").value = groupId;
+
     // Assigns popup table id
-    const tableId = "add-group-user-table";
+    const tableId = "edit-group-users-table";
 
     // Gets the popup user table element
     let table = getElement(tableId);
@@ -474,17 +435,27 @@ function loadPopupUserTable(groupId) {
 
                 // Exlude user if user is admin or super user
                 if (user.admin != "1" && user.super_user != "1") {
-                    // Loop through each group user
-                    for (let k = 0; k < groupUsers.length; k++) {
-                        // Add user if id does not exist in group users
-                        if (user.id != groupUsers[k].id && 
-                            k == groupUsers.length - 1)
-                            availableUsers.push(user);
-                    } 
+                    // Checks whether user already is added
+                    for (let l = 0; l < groupUsers.length; l++) {
+                        // Adds user regardless but with different checked values
+                        if (user.id != groupUsers[l].id) {
+                            // If not found and current iteration is last
+                            if (l == groupUsers.length - 1) {
+                                // Adds user with unchecked value
+                                availableUsers.push(["0", user]);
+                            }
+                        } else {
+                            // Adds user with checked value
+                            availableUsers.push(["1", user]);
+
+                            // Exits current loop and iteration
+                            break;
+                        }
+                    }
                 } 
             }
 
-            // Exit current loop and iteration
+            // Exits current loop and iteration
             break;
         }
     }
@@ -492,7 +463,7 @@ function loadPopupUserTable(groupId) {
     // Loops through each user and adds specific keys and values
     for (let i = 0; i < availableUsers.length; i++) {
         // Constant variable and value for current user in iteration
-        const user       = availableUsers[i];
+        const user       = availableUsers[i][1];
         const userName   = `${user.first_name} ${user.last_name}`;
 
         // Values to append
@@ -515,7 +486,7 @@ function loadPopupUserTable(groupId) {
             },
             {
                 values: {
-                    value: "",
+                    value: availableUsers[i][0],
                     type: "checkbox",
                     onclick: (id, e) => null,
                 }
@@ -614,9 +585,8 @@ function appendGroup(containerId, data) {
     let addUserBtn = createAnchorButton({
         id: "show-add-group-user", 
         type: "small", 
-        href: "add-group-user",
-        text: "Lägg till användare",
-        iconText: "&plus;"
+        href: "edit-group-users",
+        text: "Hantera användare"
     });
 
     // Gets popup user table on click
@@ -652,7 +622,7 @@ function appendGroup(containerId, data) {
     let pollContainer = null;
 
     // Proceed only if poll array length is greater than zero
-    if (data.poll_ids.length > 0) {
+    if (data.polls.length > 0) {
         // Creates a new poll container
         pollContainer = createElement("div", "", "poll-container");
     }
@@ -733,4 +703,45 @@ function appendGroup(containerId, data) {
 function resetGroupCounters() {
     // Reset groupCount only if value is greater than zero
     if (groupCount > 0) groupCount = 0;
+}
+
+// Fetches all groups and renders them accordingly
+function loadGroups(callback = null) {
+    // Call a custom and passed callback function
+    if (callback != null) {
+        /* Creates a cloned callback function and passes
+         * fetched data as parameter for external and quick access
+         */
+        const execCallback = (passedData) => callback(passedData);
+
+        // Executes the cloned function
+        execCallback();
+    }
+
+    // Fetches all accessible groups based on admin status
+    fetchGroups(currentUser.token);
+
+    // Return nothing if users is null
+    if (fetchedGroups == null) {
+        // Make user aware of progress failure
+        alert("Kunde inte hämta grupper, försök igen.");
+
+        // Exit function
+        return;
+    }
+
+    // Inserts all and existing group data
+    insertGroupData("groups", fetchedGroups);
+}
+
+// Refreshes and re-renders group division
+function refreshGroups() {
+    // Re-renders table after successful data fetch
+    loadGroups(function() {
+        // Resets groups division
+        removeChildren("groups");
+        
+        // Resets counters for table (critical)
+        resetGroupCounters();
+    });
 }

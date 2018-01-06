@@ -101,6 +101,7 @@ function editUserListener() {
 
     // Terminate if password is not the same
     if (values[0] == "" && values[1] == "") {
+        // Checks if token is not empty
         if (values[2] == "")
             alert("Kan inte redigera användare");
         else
@@ -237,4 +238,91 @@ function addGroupListener() {
             closeAllPopups();
         } else alert("Kunde inte lägga till grupp");
     } else alert("Kunde inte lägga till grupp");
+}
+
+// Adds a new group
+function editGroupUsersListener() {
+    // Fetches popup table element
+    let popupTable = getElement("edit-group-users-table");
+
+    // Gets the current group id
+    const groupId = getElementValue("edit-users-group-id");
+
+    // Declaration of selected users array
+    let newUsers = [];
+
+    // Loops through popup table
+    for (let i = 0; i < popupTable.childNodes.length; i++) {
+        // Skip the header
+        if (i == 0) continue;
+
+        // Current table row
+        const row = popupTable.childNodes[i];
+
+        // Gets and sets the current name text id
+        const fullName = row.childNodes[0].innerHTML;
+
+        // Current row user id variable
+        let userId = null;
+        
+        // Gets row user id based on full name
+        for (let j = 0; j < fetchedUsers.length; j++) {
+            // Gets the full name of current user in iteration
+            const currentFullName = `${fetchedUsers[j].first_name} ${fetchedUsers[j].last_name}`;
+
+            // If row user was found, set row user id
+            if (fullName == currentFullName) {
+                // Sets row user id
+                userId = fetchedUsers[j].id;
+
+                // Exit loop and current iteration
+                break;
+            }
+        }
+
+        // Skip if row user id was not found
+        if (userId == null) continue;
+
+        // Adds the user if row is checked
+        if (row.childNodes[1].childNodes[0].checked)
+            newUsers.push(userId);
+    }
+
+    // Terminate if users array length is zero
+    if (newUsers.length < 1) return;
+
+    // Creates a group object for request
+    let group = {
+        id: groupId,
+        user_ids: newUsers
+    };
+
+    // Used to minimize and shortify this script
+    let values = [ 
+        groupId,
+        group,
+        currentUser.token
+    ];
+
+    // Terminate if password is not the same
+    if (values[0] == "" && values[1] != "") {
+        alert("Vänligen fyll i all fält korrekt");
+
+        return;
+    }
+    
+    // Adds login function to this function
+    let result = editGroupUsers(values[0], values[1], values[2]);
+
+    // If result is successful, proceed, else alert user
+    if (result != null) {
+        // Re-render user table if succeeded
+        if (result["success"]) {
+            // Re-render actual user table
+            refreshGroups();
+
+            // All popup boxes
+            closeAllPopups();
+        } else alert("Kunde inte hantera användare");
+    } else alert("Kunde inte hantera användare");
 }
