@@ -67,7 +67,7 @@ function initialize() {
                     loadGroups();
 
                     // Fetches group information for newly created poll
-                    loadPollInfo();
+                    loadCreatePollInfo();
                     break;
             }
         }
