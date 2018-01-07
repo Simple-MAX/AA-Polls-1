@@ -72,17 +72,6 @@ const Listeners = {
                 "click",
                 "click"
             ]
-        },
-        CreatePoll: {
-            Elements: [
-                "section-2"
-            ],
-            Functions: [
-                () => addPollOptionsListener(),
-            ],
-            Type: [
-                "load",
-            ]
         }
     }
 };

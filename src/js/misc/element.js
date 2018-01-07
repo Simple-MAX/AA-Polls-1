@@ -78,6 +78,15 @@ function removeChild(parentId, index = 0) {
     parent.removeChild(parent.childNodes[index]);
 }
 
+// Removes element with id
+function removeElement(id) { 
+    // Gets the child
+    let child = getElement(id);
+
+    // Removes child
+    child.parentNode.removeChild(child);
+}
+
 // Switches between CSS classes
 function changeElementClass(id, className) {
     // Gets the specified element with id

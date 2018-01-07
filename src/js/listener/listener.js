@@ -39,9 +39,6 @@ function handleListeners(currentPage) {
         case Pages.Groups:
             currentListener = Listeners.Pages.Groups;
             break;
-        case Pages.CreatePoll:
-            currentListener = Listeners.Pages.CreatePoll;
-            break;
     }
 
     // Proceed only if currentListener is assigned
@@ -198,7 +195,7 @@ function loginUserListener() {
         getElementValue("email"),
         getElementValue("password") 
     ];
-    
+
     // Adds login function to this function
     let result = loginUser(values[0], values[1], "");
 
@@ -328,15 +325,4 @@ function editGroupUsersListener() {
             closeAllPopups();
         } else alert("Kunde inte hantera användare");
     } else alert("Kunde inte hantera användare");
-}
-
-// Adds a new option value
-function addPollOptionsListener() {
-    // Adds add option to all elements accordingly
-    for (let i = 0; i < SUB_SECTION_LENGTH; i++) {
-        // Current add option button id
-        const addOptionId = "section-2-add-option-" + i;
-
-        addListener(addOptionId, () => addOptionInput());
-    }
 }
