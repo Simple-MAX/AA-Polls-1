@@ -475,21 +475,7 @@ input[type=range][orient=vertical]::-ms-fill-upper {
     }
 }
 
-.editButton {
-    width: 25px;
-    height: 25px;
-    padding: 5px 8px;
-    font-size: 18px;
-    line-height: 0.67;
-    border-radius: 12.5px;
-    background-color: #000;
-    color: #fff;
-    display: inline-block;
-    cursor: pointer;
-    margin: 5px auto;
-}
-
-.h2Title {
+.section-title {
     border: 0;
     font-size: 25px;
     font-weight: bold;
@@ -501,7 +487,7 @@ input[type=range][orient=vertical]::-ms-fill-upper {
     transition: 0.3s linear all;
 }
 
-.labelTitle {
+.sub-title {
     border: 0;
     font-size: 17px;
     font-weight: bold;
