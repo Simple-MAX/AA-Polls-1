@@ -274,34 +274,34 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 /*     ÅTGÄRDER  SLIDER    */
-.actionsColor input[type=range]::-webkit-slider-runnable-track {
+.actions-color input[type=range]::-webkit-slider-runnable-track {
     background: -webkit-linear-gradient(left, #fff832 0%,#32ff5e 100%); /* Chrome10-25,Safari5.1-6 */
 }
   
-.actionsColor input[type=range]:focus::-webkit-slider-runnable-track {
+.actions-color input[type=range]:focus::-webkit-slider-runnable-track {
     background: -webkit-linear-gradient(left, #fff831 0%,#32ff5e 100%); /* Chrome10-25,Safari5.1-6 */
 }
 
-.actionsColor input[type=range]::-moz-range-track {
+.actions-color input[type=range]::-moz-range-track {
     background: -moz-linear-gradient(left, #fff832 0%, #32ff5e 100%); /* FF3.6-15 */
 }
 
-.actionsColor input[type=range]::-ms-fill-lower {
+.actions-color input[type=range]::-ms-fill-lower {
     background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
 }
 
-.actionsColor input[type=range]:focus::-ms-fill-lower {
+.actions-color input[type=range]:focus::-ms-fill-lower {
     background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
 }
 
-.actionsColor input[type=range]::-ms-fill-upper {
+.actions-color input[type=range]::-ms-fill-upper {
     background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
 }
 
-.actionsColor input[type=range]:focus::-ms-fill-upper {
+.actionsC-clor input[type=range]:focus::-ms-fill-upper {
     background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
 }

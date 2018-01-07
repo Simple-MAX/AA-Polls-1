@@ -46,150 +46,147 @@
                 </div>
             </nav>
         </header>
+
         <main>
             <div class="wrapper">
                 <p class="title">Skapa formulär</p>
 
-                <div class="poll-main">
-                    <div class="poll-wrapper">
-                        <div class="poll-right-divider">
-                            <div class="poll-container">
-                                <div class="poll-col-0">
-                                    <input id="section-title-1" class="h2Title" value="Section 1" />
-                                </div>
+                <div class="poll-right-divider">
+                    <div class="poll-container">
+                        <div class="poll-col-0">
+                            <input id="section-1-title" class="h2Title" value="Section 1" />
+                        </div>
 
-                                <div class="poll-col-1-input">
-                                    <input id="sub-title-1" class="labelTitle" value="Sub title 1" />
-                                    <input class="text-input" id="value-1" disabled />
-                                </div>
- 
-                                <div class="poll-col-1-input">
-                                    <input id="sub-title-2" class="labelTitle" value="Sub title 2" />
-                                    <input class="text-input" id="value-2" disabled />   
-                                </div>
+                        <div class="poll-col-1-input">
+                            <input id="section-1-sub-title-1" class="labelTitle" value="Sub title 1" />
+                            <input class="text-input" id="section-1-value-1" disabled />
+                        </div>
 
-                                <div class="poll-col-1-input">
-                                    <input id="sub-title-3" class="labelTitle" value="Sub title 3" />
-                                    <input class="text-input" id="value-3" disabled />   
-                                </div>
+                        <div class="poll-col-1-input">
+                            <input id="section-1-sub-title-2" class="labelTitle" value="Sub title 2" />
+                            <input class="text-input" id="section-1-value-2" disabled />   
+                        </div>
+
+                        <div class="poll-col-1-input">
+                            <input id="section-1-sub-title-3" class="labelTitle" value="Sub title 3" />
+                            <input class="text-input" id="section-1-value-3" disabled />   
+                        </div>
+                    </div>
+
+                    <hr class="short-spacing" style="width: 100%;" />
+                    <hr class="short-spacing" style="width: 100%;" />
+
+                    <div class="poll-col-2-input" id="section-2">
+                        <input id="section-2-title" class="h2Title" value="Section 2" />
+
+                        <div class="poll-col-2-input-divider">
+                            <input id="section-2-sub-title-1" class="labelTitle" value="Section 2 sub title 1" />
+                            
+                            <div class="edit-input">
+                                <span class="content">
+                                    <p>Alternativ</p>
+
+                                    <div class="main">
+                                        <input class="text-input" id="section-2-select-1-option-placeholder" placeholder="Alternativ 1" />
+                                    </div>
+
+                                    <div class="settings">
+                                        <a class="button" id="section-2-add-option-1">+</a>
+                                        <a class="button" id="section-2-remove-option-1" style="background-color: #f44336;">-</a>
+                                    </div>
+                                </span>
+
+                                <select id="section-2-select-1">
+                                    <option id="section-2-select-1-option-0">Section 2 option 1</option>
+                                </select>
                             </div>
 
-                            <hr class="short-spacing" style="width: 100%;" />
-                            <hr class="short-spacing" style="width: 100%;" />
+                            <textarea id="section-2-text-1" placeholder="Section 2 placeholder 1"></textarea>
+                        </div>
 
-                            <div class="poll-col-2-input">
-                                <input id="section-title-2" class="h2Title" value="Section 2" />
+                        <div class="poll-col-2-input-divider">
+                            <input id="section-2-sub-title-2" class="labelTitle" value="Section 2 sub title 2" />
+                            
+                            <div class="edit-input">
+                                <span class="content">
+                                    <p>Alternativ</p>
 
-                                <div class="poll-col-2-input-divider">
-                                    <input id="section-1-sub-title" class="labelTitle" value="Section sub title 1">
-                                    
-                                    <div class="edit-input">
-                                        <span class="content">
-                                            <p>Alternativ</p>
-
-                                            <div class="main">
-                                                <input class="text-input" id="" placeholder="Alternativ1" />
-                                            </div>
-
-                                            <div class="settings">
-                                                <a class="button">+</a>
-                                                <a class="button" style="background-color: #f44336;">-</a>
-                                            </div>
-                                        </span>
-
-                                        <select id="prog-short-option">
-                                            <option>Prognosalternativ</option>
-                                        </select>
+                                    <div class="main">
+                                        <input class="text-input" id="section-2-select-2-option-placeholder" placeholder="Alternativ1" />
                                     </div>
 
-                                    <textarea id="prog-short-info" placeholder="Ytterligare prognos"></textarea>
-                                </div>
-
-                                <div class="poll-col-2-input-divider">
-                                    <input id="editProgLongTitle" class="labelTitle" value="Prognos på lång sikt">
-                                    
-                                    <div class="edit-input">
-                                        <span class="content">
-                                            <p>Alternativ</p>
-
-                                            <div class="main">
-                                                <input class="text-input" id="" placeholder="Alternativ1" />
-                                            </div>
-
-                                            <div class="settings">
-                                                <a class="button">+</a>
-                                                <a class="button" style="background-color: #f44336;">-</a>
-                                            </div>
-                                        </span>
-
-                                        <select id="prog-short-option">
-                                            <option>Prognosalternativ</option>
-                                        </select>
+                                    <div class="settings">
+                                        <a class="button" id="section-2-add-option-2">+</a>
+                                        <a class="button" id="section-2-remove-option-2" style="background-color: #f44336;">-</a>
                                     </div>
-                                    
-                                    <textarea id="prog-long-info" placeholder="Ytterligare prognos"></textarea>
-                                </div>
+                                </span>
+
+                                <select id="section-2-select-2">
+                                    <option id="section-2-select-2-option-0">Section 2 option 2</option>
+                                </select>
                             </div>
 
-                            <div class="poll-col-2-input">
-                                <div class="poll-col-2-input-divider">
-                                    <input id="editInfluencesTitle" class="labelTitle" value="Påverkandefaktorer" /> 
-                                    
-                                    <div class="edit-input">
-                                        <span class="content">
-                                            <p>Alternativ</p>
+                            <textarea id="section-2-text-2" placeholder="Section 2 placeholder 2"></textarea>
+                        </div>
+                    </div>
 
-                                            <div class="main">
-                                                <input class="text-input" id="" placeholder="Alternativ1" />
-                                            </div>
+                    <div class="poll-col-2-input">
+                        <div class="poll-col-2-input-divider">
+                            <input id="section-2-sub-title-3" class="labelTitle" value="Section 2 sub title 3" /> 
+                            
+                            <div class="edit-input">
+                                <span class="content">
+                                    <p>Alternativ</p>
 
-                                            <div class="settings">
-                                                <a class="button">+</a>
-                                                <a class="button" style="background-color: #f44336;">-</a>
-                                            </div>
-                                        </span>
-
-                                        <select id="prog-short-option">
-                                            <option>Prognosalternativ</option>
-                                        </select>
+                                    <div class="main">
+                                        <input class="text-input" id="section-2-select-2-option-placeholder" placeholder="Alternativ1" />
                                     </div>
 
-                                    <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
-                                </div>
+                                    <div class="settings">
+                                        <a class="button" id="section-2-add-option-3">+</a>
+                                        <a class="button" id="section-2-remove-option-3" style="background-color: #f44336;">-</a>
+                                    </div>
+                                </span>
 
-                                <div class="poll-col-2-input-divider">
-                                    <input id="editActionsTitle" class="labelTitle" value="Åtgärder" />
+                                <select id="section-2-select-3">
+                                    <option id="section-2-select-3-option-0">Section 2 option 3</option>
+                                </select>
+                            </div>
 
-                                    <div class="edit-input">
-                                        <span class="content">
-                                            <p>Alternativ</p>
+                            <textarea id="section-2-text-3" placeholder="Section 2 placeholder 3"></textarea>
+                        </div>
 
-                                            <div class="main">
-                                                <input class="text-input" id="" placeholder="Alternativ1" />
-                                            </div>
+                        <div class="poll-col-2-input-divider">
+                            <input id="section-2-sub-title-4" class="labelTitle" value="Section 2 sub title 4" />
 
-                                            <div class="settings">
-                                                <a class="button">+</a>
-                                                <a class="button" style="background-color: #f44336;">-</a>
-                                            </div>
-                                        </span>
+                            <div class="edit-input">
+                                <span class="content">
+                                    <p>Alternativ</p>
 
-                                        <select id="prog-short-option">
-                                            <option>Prognosalternativ</option>
-                                        </select>
+                                    <div class="main">
+                                        <input class="text-input" id="section-2-select-4-option-placeholder" placeholder="Alternativ1" />
                                     </div>
 
-                                    <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
-                                </div>
+                                    <div class="settings">
+                                        <a class="button" id="section-2-add-option-4">+</a>
+                                        <a class="button" id="section-2-remove-option-4" style="background-color: #f44336;">-</a>
+                                    </div>
+                                </span>
 
-                                <button id="poll-submit" class="regular-button">Skicka in bedömning</button> 
-                            </div>    
+                                <select id="section-2-select-4">
+                                    <option id="section-2-select-4-option-0">Section 2 option 4</option>
+                                </select>
+                            </div>
+
+                            <textarea id="section-2-text-4" placeholder="Section 2 placeholder 4"></textarea>
                         </div>
                     </div>
                 </div>
+
+                <button id="poll-submit" class="regular-button">Skicka in bedömning</button> 
+                
+                <hr class="regular-spacing" />
             </div>
         </main>
-        <footer>
-        </footer> 
     </body> 
 </html> 
