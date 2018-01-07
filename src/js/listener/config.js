@@ -72,6 +72,17 @@ const Listeners = {
                 "click",
                 "click"
             ]
+        },
+        CreatePoll: {
+            Elements: [
+                "create-poll",
+            ],
+            Functions: [
+                () => createPollListener(),
+            ],
+            Type: [
+                "click",
+            ]
         }
     }
 };

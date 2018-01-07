@@ -143,6 +143,17 @@ select {
     resize: none;
 }
 
+.poll-input-text {
+    width: 70%;
+    height: 30px;
+    padding: 0 7px;
+    margin-right: 30%;
+    border: 2px #c0c0c0 solid;
+    border-radius: 5px;
+    color: #6b6b6b;
+    resize: none;
+}
+
 .poll-input-button {
     width: 32%;
     margin: 20px 34%;
@@ -480,7 +491,7 @@ input[type=range][orient=vertical]::-ms-fill-upper {
     font-size: 25px;
     font-weight: bold;
     color: #8a199e;
-    width: 20%;
+    width: 75%;
     margin-right: 80%;
     padding: 0;
     box-sizing: border-box;
@@ -553,22 +564,23 @@ input[type=range][orient=vertical]::-ms-fill-upper {
 .settings .button {
 	width: 25px;
     height: 25px;
+    margin: 5px auto;
     padding: 5px 8px;
     border-radius: 12.5px;
     display: inline-block;
     cursor: pointer;
-    margin: 5px auto;
 
     background-color:#44c767;
+    transition: opacity 0.2s ease-in-out;
 
     color: #fff;
     font-size: 18px;
     line-height: 0.67;
 }
 
-.edit-input:hover .content { visibility: visible; }
+.settings .button:hover { opacity: 0.8; }
 
-.test-button { cursor: not-allowed; }
+.edit-input:hover .content { visibility: visible; }
 
 .group-polls-container {
     display: inline-block;

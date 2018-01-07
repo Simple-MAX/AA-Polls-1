@@ -39,6 +39,9 @@ function handleListeners(currentPage) {
         case Pages.Groups:
             currentListener = Listeners.Pages.Groups;
             break;
+        case Pages.CreatePoll:
+            currentListener = Listeners.Pages.CreatePoll;
+            break;
     }
 
     // Proceed only if currentListener is assigned
@@ -207,6 +210,14 @@ function loginUserListener() {
             handleCurrentUser(result);
         } else alert("Fel användarnamn eller lösenord");
     } else alert("Kunde inte logga in");
+}
+
+// Creates poll on click
+function createPollListener() {
+    /* Gets inserted data from all fields and
+     * stores all values accordingly and carefully
+     */
+    createPollInsertedObject();
 }
 
 // Adds a new group

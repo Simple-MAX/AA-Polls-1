@@ -83,6 +83,9 @@ function removeElement(id) {
     // Gets the child
     let child = getElement(id);
 
+    // Exit if child is null
+    if (child == null) return;
+
     // Removes child
     child.parentNode.removeChild(child);
 }
