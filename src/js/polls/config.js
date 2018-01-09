@@ -97,24 +97,24 @@ const DEFAULT_POLL_IDS = [
     ["section-2-title", "details.section_title"],
 
     ["section-2-sub-title-1", "details.0.sub_title"],
-    ["section-2-select-1-option-0", "details.0.placeholder"],
-    ["section-2-select-1-option-1", "details.0.selected"],
-    ["section-2-text-1", "details.0.placeholder"],
+    ["section-2-select-1-option-0", "details.0.option.placeholder"],
+    ["section-2-select-1-option-1", "details.0.option.selected"],
+    ["section-2-text-1", "details.0.info.placeholder"],
 
     ["section-2-sub-title-2", "details.1.sub_title"],
-    ["section-2-select-2-option-0", "details.1.placeholder"],
-    ["section-2-select-2-option-1", "details.1.selected"],
-    ["section-2-text-2", "details.1.placeholder"],
+    ["section-2-select-2-option-0", "details.1.option.placeholder"],
+    ["section-2-select-2-option-1", "details.1.option.selected"],
+    ["section-2-text-2", "details.1.info.placeholder"],
 
     ["section-2-sub-title-3", "details.2.sub_title"],
-    ["section-2-select-3-option-0", "details.2.placeholder"],
-    ["section-2-select-3-option-1", "details.2.selected"],
-    ["section-2-text-3", "details.2.placeholder"],
+    ["section-2-select-3-option-0", "details.2.option.placeholder"],
+    ["section-2-select-3-option-1", "details.2.option.selected"],
+    ["section-2-text-3", "details.2.info.placeholder"],
 
-    ["section-2-sub-title-4", "sub_title"],
-    ["section-2-select-4-option-0", "details.3.placeholder"],
-    ["section-2-select-4-option-1", "details.3.selected"],
-    ["section-2-text-4", "details.3.placeholder"],
+    ["section-2-sub-title-4", "details.3.sub_title"],
+    ["section-2-select-4-option-0", "details.3.option.placeholder"],
+    ["section-2-select-4-option-1", "details.3.option.selected"],
+    ["section-2-text-4", "details.3.info.placeholder"],
 ];
 
 // Regular variables

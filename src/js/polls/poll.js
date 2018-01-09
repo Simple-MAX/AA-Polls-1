@@ -49,6 +49,10 @@ function loadCreatePollInfo() {
 
 // Inserts formatted data to poll container and its elements
 function insertPollData(pollStructure, ids) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
     // Defines data as pollStructure
     let data = pollStructure;
 
@@ -81,6 +85,10 @@ function insertPollData(pollStructure, ids) {
 
 // Creates poll data
 function setNewPollData() {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
     // Creates new array with new data
     let pollData = [
         [createdPoll.initial.section_title],
@@ -122,6 +130,10 @@ function setNewPollData() {
 
 // Gets values from front-end 
 function getNewPollData(data, ids) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
     // Terminate if element ids is null
     if (data == null || ids == null) return;
 
@@ -190,11 +202,18 @@ function getNewPollData(data, ids) {
 
 // Attempts to create poll with inserted data
 function createPollInsertedObject() {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
     // Gets inserted data from site
     getNewPollData(createdPollData, DEFAULT_POLL_IDS);
     
     // Resets current and global inserted data object
     insertedCreatePollStructure = createdPoll;
+
+    // Terminate if poll object is null
+    if (insertedCreatePollStructure == null) return;
 
     // Loops through data array and construct
     for (let i = 0; i < insertedCreatePollData.length; i++) {
@@ -208,7 +227,21 @@ function createPollInsertedObject() {
              * poll ids array and proceeds if found
              */
             if (primaryId == DEFAULT_POLL_IDS[j][0]) {
-                
+                // Splits current JSON key id for reference
+                let keys = DEFAULT_POLL_IDS[j][1].split(".");
+
+                // Assigns variable to key as parent based on index
+                let currentKey = insertedCreatePollStructure;
+
+                // Sets new key each sequence in iteration
+                for (let k = 0; k < keys.length; k++) {
+                    // Add poll data value to current poll object key
+                    if (k == keys.length - 1)
+                        currentKey[keys[k]] = primaryData;
+
+                    // Sets the key to a new and child key
+                    currentKey = currentKey[keys[k]];
+                }
             }
         }
     }
@@ -231,6 +264,13 @@ function getPollGroup(groupId) {
 
     // Return null if not found
     return null;
+}
+
+// Attempts to submit newly created poll
+function createPoll(token, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
 }
 
 // Attempts to fetch accessible groups based on current user privileges

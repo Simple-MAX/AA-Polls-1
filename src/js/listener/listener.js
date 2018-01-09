@@ -218,6 +218,9 @@ function createPollListener() {
      * stores all values accordingly and carefully
      */
     createPollInsertedObject();
+
+    // Terminate if poll object is null
+    if (insertedCreatePollStructure == null) return;
 }
 
 // Adds a new group
