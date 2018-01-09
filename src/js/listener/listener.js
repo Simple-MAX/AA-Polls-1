@@ -220,7 +220,26 @@ function createPollListener() {
     createPollInsertedObject();
 
     // Terminate if poll object is null
-    if (insertedCreatePollStructure == null) return;
+    if (insertedCreatePollStructure == null) {
+        alert("Kunde inte skapa formulär");
+
+        return;
+    }
+
+    // Makes code shorter
+    let poll = insertedCreatePollStructure;
+
+    // Attempts to create and submit poll
+    let result = createPoll(currentUser.token, poll);
+
+    // If result is successful, proceed, else alert user
+    if (result != null) {
+        // Re-render user table if succeeded
+        if (result["success"]) {
+            // Redirects user back to group page
+            redirectToPage(Pages.Groups);
+        } else alert("Kunde inte skapa formulär");
+    } else alert("Kunde inte skapa formulär");
 }
 
 // Adds a new group

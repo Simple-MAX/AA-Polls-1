@@ -114,9 +114,11 @@ function tokenAuthentication(token, callback) {
 
 // Removes existing token and redirects user to login site
 function logOut() {
+    // Removes token
     setToken("");
 
-    redirectToPage("login");
+    // Logs user out
+    redirectToPage(Pages.Login);
 }
 
 // Handles the user by storing token and redirecting to the panel
@@ -126,7 +128,7 @@ function handleCurrentUser(result) {
 
     // If data was successfully fetched from endpoint, else log out
     if (result != null) {
-        if (result.success && result.data != null) {
+        if (result.success) {
             /* Determines what sequence to to choose and execute,
             * depending on url location and current page
             */

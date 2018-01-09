@@ -22,8 +22,6 @@ function redirectToPage(page) {
     // Replaces old filename with empty value
     let pagePath = currentUrl.replace(fileName, "");
 
-    console.log(pagePath + page);
-
     // Redirects user to requested page
     document.location.href = `${pagePath}${page}.html`;
 }

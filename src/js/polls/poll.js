@@ -267,10 +267,55 @@ function getPollGroup(groupId) {
 }
 
 // Attempts to submit newly created poll
-function createPoll(token, callback = null) {
+function createPoll(token, poll, callback = null) {
     // Terminate if current user is not admin or super user
     if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
+
+    // Data variable to return
+    let data = null;
+    
+    // Creates a new array for possible parameters
+    let params = {};
+
+    /* Gets the appropriate values and store them
+     * according to a determined structure below
+     */
+    if (token != "" && poll != null) {
+        params.keys     = ["token", "poll"];
+        params.values   = [token, JSON.stringify(poll)];
+    } else return data;
+    
+    /* Executes an AJAX request (Vanilla JS, not jQuery)
+     * with the given url, function contains optional arguments
+     */
+    let result = request(POLL_API_URL, params, "PUT");
+    
+    /* If result is an object type, it will return
+     * some data with from the endpoint, regardless whether it's
+     * successful or not. If not, it will return an error string.
+     */
+    if (typeof result == "object") {
+        // If the result was successful
+        if (result["success"] && result["data"] != null) {
+            // Call a custom and passed callback function
+            if (callback != null) {
+                /* Creates a cloned callback function and passes
+                 * fetched data as parameter for external and quick access
+                 */
+                const execCallback = (passedData) => callback(passedData);
+
+                // Executes the cloned function
+                execCallback(result);
+            }
+        }
+
+        // Assigns fetched data to data variable
+        data = result;
+    }
+
+    // Returns final data
+    return data;
 }
 
 // Attempts to fetch accessible groups based on current user privileges
