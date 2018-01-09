@@ -38,24 +38,30 @@ function loadCreatePollInfo() {
     createdPoll.initial.value_1 = groupId;
 
     // Reformata new data and inserts it to global variable
-    setNewPollData();
+    setNewPollData(createdPoll, DEFAULT_POLL_IDS);
 
     // Inserts poll data and values to elements
-    insertPollData(createdPollData);
+    insertPollData(createdPollData, DEFAULT_POLL_IDS);
 
     // Adds option buttons listeners
     addPollOptionsListener();
 }
 
 // Inserts formatted data to poll container and its elements
-function insertPollData(data = DEFAULT_POLL_DATA, ids = DEFAULT_POLL_IDS) {
+function insertPollData(pollStructure, ids) {
+    // Defines data as pollStructure
+    let data = pollStructure;
+
+    // Terminate if data or ids is nullified
+    if (data == null || ids == null) return;
+
     // Terminate if both array lengths are not equal
     if (data.length != ids.length) return; 
 
     // Loops through each value in passed data variable
     for (let i = 0; i < data.length; i++) {
         // Gets element for current iteration
-        let element = getElement(ids[i]);
+        let element = getElement(ids[i][0]);
 
         /* Proceed if element actually exists
          * and adds text value found in current iteration
@@ -87,13 +93,13 @@ function setNewPollData() {
         [createdPoll.details.section_title]
     ];
 
-    // Gets the length of details object
-    const sectionCount = Object.keys(createdPoll.details).length;
+    // Determines the length of all sub sections
+    const sectionCount = Object.keys(createdPoll.details).length - 1;
 
     // Loop only if number of detail sections is greater than zero
     if (sectionCount > 0) {
         // Loops through each section and adds new data
-        for (let i = 0; i < sectionCount - 1; i++) {
+        for (let i = 0; i < sectionCount; i++) {
             // Current section in iteration
             let currentSection = createdPoll.details[i];
 
@@ -101,7 +107,7 @@ function setNewPollData() {
             let sectionData = [
                 [currentSection.sub_title],
                 [currentSection.option.placeholder, "text"],
-                [currentSection.option.placeholder],
+                [currentSection.option.placeholder, "placeholder"],
                 [currentSection.info.placeholder],
             ];
 
@@ -115,9 +121,9 @@ function setNewPollData() {
 }
 
 // Gets values from front-end 
-function getNewPollData(data = DEFAULT_POLL_DATA, ids = DEFAULT_POLL_IDS) {
+function getNewPollData(data, ids) {
     // Terminate if element ids is null
-    if (ids == null) return;
+    if (data == null || ids == null) return;
 
     // Terminate if createdPollData length is not same as ids length
     if (data.length != ids.length) return;
@@ -134,15 +140,15 @@ function getNewPollData(data = DEFAULT_POLL_DATA, ids = DEFAULT_POLL_IDS) {
         let type = data[i][1] != null ? data[i][1] : "input";
 
         // Gets current id based on id
-        let currentElement = getElement(ids[i]);
+        let currentElement = getElement(ids[i][0]);
 
         // Determines what attribute to fetch from
         if (type == "input") {
             // Pushes id and current element input value
-            createData.push([ids[i], currentElement.value]);
+            createData.push([ids[i][0], currentElement.value]);
         } else if (type == "text") {
             // Pushes id and current element innerHTML value
-            createData.push([ids[i], currentElement.innerHTML]);
+            createData.push([ids[i][0], currentElement.innerHTML]);
         } else if (type == "placeholder") {
             // Current select input parent
             let optionsInputContainer = currentElement.parentNode;
@@ -151,7 +157,7 @@ function getNewPollData(data = DEFAULT_POLL_DATA, ids = DEFAULT_POLL_IDS) {
             let values = [];
 
             // Loops through and pushes multiple input to values array
-            for (let j = 1; j < optionsInputContainer.childNodes.length; j++) {
+            for (let j = 0; j < optionsInputContainer.childNodes.length; j++) {
                 // Current input or option
                 let option = optionsInputContainer.childNodes[j];
 
@@ -159,16 +165,22 @@ function getNewPollData(data = DEFAULT_POLL_DATA, ids = DEFAULT_POLL_IDS) {
                 if (option.tagName != "input".toUpperCase())
                     continue;
 
-                // Continue or skip if element id is "placeholder"
-                if (stringContains(option.id, "placeholder"))
-                    continue;
+                // Creates new input data to push
+                let inputData = [option.id];
+                
+                // If option value is empty, replace with placeholder
+                if (option.value == "") 
+                    option.value = createdPollData[i][0];
+
+                // Pushes option value
+                inputData.push(option.value);
 
                 // Adds select input values to values array
-                values.push(option.id, option.value);
+                values.push(inputData);
             }
             
             // Pushes sub array with another sub array for select values
-            createData.push([ids[i], currentElement.value, values]);
+            createData.push(values);
         }
     }
 
@@ -179,16 +191,26 @@ function getNewPollData(data = DEFAULT_POLL_DATA, ids = DEFAULT_POLL_IDS) {
 // Attempts to create poll with inserted data
 function createPollInsertedObject() {
     // Gets inserted data from site
-    getNewPollData();
-
+    getNewPollData(createdPollData, DEFAULT_POLL_IDS);
+    
     // Resets current and global inserted data object
-    insertedCreatePollStructure = {};
+    insertedCreatePollStructure = createdPoll;
 
     // Loops through data array and construct
     for (let i = 0; i < insertedCreatePollData.length; i++) {
         // Primary element id and data
         let primaryId   = insertedCreatePollData[i][0];
         let primaryData = insertedCreatePollData[i][1];
+
+        // Loops through default poll element ids array
+        for (let j = 0; j < DEFAULT_POLL_IDS.length; j++) {
+            /* Checks for current element id in global 
+             * poll ids array and proceeds if found
+             */
+            if (primaryId == DEFAULT_POLL_IDS[j][0]) {
+                
+            }
+        }
     }
 }
 
@@ -404,7 +426,7 @@ function addOptionInput(sectionId, selectId, placeholder) {
     const optionInputs = optionsContainer.childNodes;
 
     // Number count for new id
-    let inputCount = 0;
+    let inputCount = 1;
 
     // Increments option count if tagName is "option"
     optionInputs.forEach(function(element) {
@@ -487,23 +509,26 @@ function addPollOptionsListener(placeholder = "Alternativ") {
     const sectionId   = "section-2";
     const selectId    = "select-";
 
-    // Adds add option to all elements accordingly
-    for (let i = 0; i < SUB_SECTION_LENGTH + 1; i++) {
-        // Current and correct index
-        const index = i + 1;
+    // Determines the length of all sub sections
+    const sectionCount = Object.keys(createdPoll.details).length - 1;
 
+    /* Adds add option to all elements accordingly
+     * and the value of index is always increased by one
+     * due to the existance of a default option input
+     */
+    for (let i = 1; i < sectionCount + 1; i++) {
         // Current add option button id
-        const addOptionId       = `section-2-select-${index}-add-option`;
-        const removeOptionId    = `section-2-select-${index}-remove-option`; 
+        const addOptionId       = `section-2-select-${i}-add-option`;
+        const removeOptionId    = `section-2-select-${i}-remove-option`; 
 
         // Variable created to reduce length of syntaxes
         let addFunction = function() {
-            addOptionInput(sectionId, selectId + index, placeholder);
+            addOptionInput(sectionId, selectId + i, placeholder);
         }
 
         // Second ariable created to reduce length of syntaxes
         let removeFunction = function() {
-            removeOptionInput(sectionId, selectId + index);
+            removeOptionInput(sectionId, selectId + i);
         }
 
         // Adds listener to add and remove button
