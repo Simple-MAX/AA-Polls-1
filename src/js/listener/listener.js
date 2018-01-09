@@ -42,6 +42,9 @@ function handleListeners(currentPage) {
         case Pages.CreatePoll:
             currentListener = Listeners.Pages.CreatePoll;
             break;
+        case Pages.Statistics:
+            currentListener = Listeners.Pages.Statistics;
+            break;
     }
 
     // Proceed only if currentListener is assigned

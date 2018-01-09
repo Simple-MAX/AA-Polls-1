@@ -40,9 +40,9 @@ function renderStatistics(canvasId, stats = DEFAULT_STATS) {
     
     if (finalAvarage > 0) finalAvarage = getStatsAverage();
 
-    canvas = getElement(canvasId);
+    let canvas = getElement(canvasId);
 
-    context = canvas.getContext("2d");
+    let context = canvas.getContext("2d");
 
     const options = {
         type: 'bar',

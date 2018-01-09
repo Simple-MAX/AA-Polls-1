@@ -69,6 +69,10 @@ function initialize() {
                     // Fetches group information for newly created poll
                     loadCreatePollInfo();
                     break;
+                case Pages.Statistics:
+                    // Renders chart (unfinished)
+                    renderStatistics("chart");
+                    break;
             }
         }
     }

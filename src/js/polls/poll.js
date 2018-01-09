@@ -334,21 +334,14 @@ function fetchPolls(token, pollId = "", callback = null) {
      * according to a determined structure below
      */
     if (token != "") {
-        params.keys     = ["token"];
-        params.values   = [token];
+        params.keys     = ["token", "poll_id"];
+        params.values   = [token, pollId];
     } else return data;
-
-    // Add only if pollId is not empty
-    if (pollId != "") {
-        // Add key and value to params
-        params.keys.push("poll_id");
-        params.values.push(pollId);
-    }
     
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */
-    let result = request(POLL_API_URL, params, "GET");
+    let result = request(POLL_API_URL, params);
     
     /* If result is an object type, it will return
      * some data with from the endpoint, regardless whether it's
@@ -357,6 +350,9 @@ function fetchPolls(token, pollId = "", callback = null) {
     if (typeof result == "object") {
         // If the result was successful
         if (result["success"] && result["data"] != null) {
+            // Stores polls locally in a global variable
+            fetchedPolls = result["data"];
+
             // Call a custom and passed callback function
             if (callback != null) {
                 /* Creates a cloned callback function and passes
@@ -378,7 +374,7 @@ function fetchPolls(token, pollId = "", callback = null) {
 }
 
 // Receives all polls within a specific group and adds each poll data
-function fetchGroupPolls(group, token) {
+function fetchGroupPolls(token, group) {
     // Terminate if current user is not admin or super user
     if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
@@ -411,7 +407,7 @@ function fetchGroupPolls(group, token) {
             // If the result was successful
             if (result["success"] && result["data"] != null) {
                 // Fetch each user and store them in 
-                users.push(result["data"][0]);
+                polls.push(result["data"][0]);
             }
         }
     }
@@ -439,7 +435,7 @@ function insertGroupPolls(containerId, polls) {
      */
     for (let i = 0; i < polls.length; i++) {
         // Adds a new poll block
-        container.appendChild(createPollBlockElement(polls[i]));
+        container.appendChild(createPollBlockElement(polls[i], i));
     }
 }
 
@@ -551,7 +547,7 @@ function removeOptionInput(sectionId, selectId) {
 }
 
 // Creates a poll block element which contains poll data
-function createPollBlockElement(poll) {
+function createPollBlockElement(data, index = 0) {
     // Creates poll block element
     let pollContainer = createElement("div", "", "poll");
     
@@ -559,19 +555,19 @@ function createPollBlockElement(poll) {
     let pollTitle = createElement("h4");
 
     // Adds title
-    pollTitle.innerHTML = "Formulär #";
+    pollTitle.innerHTML = "Formulär #" + (index + 1);
 
     // Poll date
     let pollDate = createElement("p");
 
     // Adds date as text
-    pollDate.innerHTML = "2018-1-1";
+    pollDate.innerHTML = data.date;
 
     // Poll id
     let pollId = createElement("a");
     
     // Adds poll id
-    pollId.innerHTML = "AA-P-1";
+    pollId.innerHTML = data.id;
 
     // Appends all children to poll block
     pollContainer.appendChild(pollTitle);

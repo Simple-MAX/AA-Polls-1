@@ -105,15 +105,15 @@ function fetchGroups(token, callback = null) {
             // Loops through each group and adds data accordingly
             for (let i = 0; i < result["data"].length; i++) {
                 // Attempts to add actual user data to group object
-                let modifiedGroupData = fetchGroupUsers(result["data"][i], token);
+                let modifiedGroupData = fetchGroupUsers(token, result["data"][i]);
 
                 // Attempts to add all poll data to group object
-                modifiedGroupData = fetchGroupPolls(modifiedGroupData, token);
+                modifiedGroupData = fetchGroupPolls(token, modifiedGroupData);
 
                 // Push a modified result to finalResult array
                 finalResult.push(modifiedGroupData);
             }
-
+            
             // Stores fetched groups locally
             fetchedGroups = finalResult;
 
@@ -138,7 +138,7 @@ function fetchGroups(token, callback = null) {
 }
 
 // Receives all users within a specific group and adds their data
-function fetchGroupUsers(group, token) {
+function fetchGroupUsers(token, group) {
     // Terminate if current user is not admin or super user
     if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
@@ -692,7 +692,7 @@ function appendGroup(containerId, data) {
         insertGroupUserTable(tableId, data.users);
 
     if (data.polls.length > 0)
-        insertgroupPollsContainers(pollsContainerId, data.polls);
+        insertGroupPolls(pollsContainerId, data.polls);
 
     // Increments group count
     groupCount++;
