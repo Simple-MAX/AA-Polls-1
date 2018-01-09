@@ -14,7 +14,7 @@
     height: 100px;
     display: block;
 
-    background-color: #111;
+    background-color: #222;
     border-bottom: 7.5px solid #810097;
 }
 
@@ -46,19 +46,17 @@
     height: 30px;
     display: block;
     text-align: left;
-    color: #fafafa;
+    color: #fff;
     font-weight: 300; 
 }
 
-.nav-logo-container.inverted > h1 {
-    color: #000;
-}
+.nav-logo-container.inverted > h1 { color: #000; }
 
 .nav-logo-container > h4 {
     height: 30px;
     display: block;
     text-align: left;
-    color: #999;
+    color: #000;
 }
 
 .admin-panel .nav-logo-container > h4 {
@@ -103,6 +101,8 @@
     font-weight: 300;
     text-decoration: none;
 }
+
+.nav-menu-container > .active > a { color: #fff }
 
 .nav-menu-container > li:active { background-color: #8a199e; }
 .nav-menu-container > li:hover { background-color: #810097; }
