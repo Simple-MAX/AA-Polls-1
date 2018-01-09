@@ -16,6 +16,7 @@ const Pages = {
     Login: "login",
     Users: "users",
     Groups: "groups",
+    Home: "home",
     Statistics: "statistics",
     Poll: "poll",
     CreatePoll: "create-poll"
