@@ -14,10 +14,16 @@
 // Constant variables
 const USER_API_URL = `${API_URL}${Endpoint.User}`;
 
+const UserType = {
+    SuperUser: "super_user",
+    Admin: "admin",
+    User: "user"
+};
+
 // Regular variables
 var currentUser;
 var fetchedUsers;
 
-var UserStatus;
+var userStatus;
 
 var formattedTableUsers;

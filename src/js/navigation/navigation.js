@@ -47,3 +47,21 @@ function getCurrentPage(fileName = false, removeFilePrefix = false) {
     // Return full url if fileName and removePrefix is false
     return url; 
 }
+
+// Returns the default home page for current user
+function getInitialPage(userType = UserType.User) {
+    // Assigns default pages
+    const pages = [
+        ["SuperUser", Pages.Users],
+        ["Admin", Pages.Groups],
+        ["User", Pages.Home]
+    ];
+
+    // Loops through and checks looks for appropriate page
+    for (let i = 0; i < pages.length; i++)
+        if (userType == pages[i][0]) 
+            return pages[i][1];
+
+    // Return home page if not found
+    return Pages.Home;
+}

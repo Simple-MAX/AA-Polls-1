@@ -129,26 +129,27 @@ function handleCurrentUser(result) {
             /* Determines what sequence to to choose and execute,
             * depending on url location and current page
             */
-            if (CurrentPage == Pages.Login) {
+            if (currentPage == Pages.Login) {
                 // Store current token with the newer one
                 if (getToken() != currentUser.token)
                     setToken(currentUser.token)
 
-                // Final tab data
-                let userStatus = "super_user";
+                // Sets the deafult user status value
+                userStatus = UserType.SuperUser;
     
                 // Determines what type user is
                 if (currentUser.super_user != "1" && currentUser.admin != "1")
-                    userStatus = "user";
+                    userStatus = UserType.User;
                 else if (currentUser.super_user != "1" && currentUser.admin == "1")
-                    finalTabs = "admin";
-
-                // Sets the user status to a global variable
-                UserStatus = userStatus;
+                    userStatus = UserType.Admin;
 
                 // If token is not null, redirect user
-                redirectToPage(INITIAL_PANEL_PAGE);
+                redirectToPage(getInitialPage(userStatus));
             }
         } else logOut();
     } else logOut();
+
+    // Redirects user back if failed to authenticate
+    if (currentUser.token == "" && currentPage != Pages.Login)
+        redirectToPage(Pages.Login);
 }

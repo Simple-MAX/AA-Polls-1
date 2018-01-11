@@ -22,19 +22,14 @@ function initialize() {
     /* Gets the curernt page name and stores 
      * the value locally in a global variable
      */
-    CurrentPage = getCurrentPage(true, true);
-
-    // Gets stored token
-    const token = getToken();
+    currentPage = getCurrentPage(true, true);
 
     // Sets up all listeners
-    handleListeners(CurrentPage);
+    handleListeners(currentPage);
 
     // Determines whether user is welcome or not
-    if (token != "")
+    if (getToken() != "")
         quickAuth((result) => handleCurrentUser(result));
-    else if (token == "" && CurrentPage != Pages.Login)
-        redirectToPage(Pages.Login);
 
     // Proceed if user is not undefined or non-existent
     if (currentUser != null) {
@@ -43,37 +38,52 @@ function initialize() {
             loadTabs("tabs-container");
 
             // Determines what function to run on current page
-            switch (CurrentPage) {
+            switch (currentPage) {
                 case Pages.Users:
-                    // Loads all users
-                    loadUsers();
+                    // Proceed if valid user type, else redirect
+                    if (userStatus == UserType.SuperUser) {
+                        // Loads all users
+                        loadUsers();
 
-                    // Loads user table with results
-                    loadUserTable();
+                        // Loads user table with results
+                        loadUserTable();
 
-                    // Format users accordingly
-                    insertTableData("user-table", formattedTableUsers);
+                        // Format users accordingly
+                        insertTableData("user-table", formattedTableUsers);
+                    } else redirectToPage(getInitialPage(userStatus));
                     break;
                 case Pages.Groups:
-                    // Loads all users
-                    loadUsers();
+                    // Proceed if valid user type, else redirect
+                    if (userStatus == UserType.SuperUser || 
+                        userStatus == UserType.Admin) {
+                        // Loads all users
+                        loadUsers();
 
-                    // Fetches and appends groups
-                    loadGroups();
+                        // Fetches and appends groups
+                        loadGroups();
 
-                    // Inserts all and existing group data
-                    insertGroupData("groups", fetchedGroups);
+                        // Inserts all and existing group data
+                        insertGroupData("groups", fetchedGroups);
+                    } else redirectToPage(getInitialPage(userStatus));
                     break;
                 case Pages.CreatePoll:
-                    // Fetches and appends groups
-                    loadGroups();
+                    // Proceed if valid user type, else redirect
+                    if (userStatus == UserType.SuperUser || 
+                        userStatus == UserType.Admin) {
+                        // Fetches and appends groups
+                        loadGroups();
 
-                    // Fetches group information for newly created poll
-                    loadCreatePollInfo();
+                        // Fetches group information for newly created poll
+                        loadCreatePollInfo();
+                    } else redirectToPage(getInitialPage(userStatus));
                     break;
                 case Pages.Statistics:
-                    // Renders chart (unfinished)
-                    renderStatistics("chart");
+                    // Proceed if valid user type, else redirect
+                    if (userStatus == UserType.SuperUser || 
+                        userStatus == UserType.Admin) {
+                        // Renders chart (unfinished)
+                        renderStatistics("chart");
+                    } else redirectToPage(getInitialPage(userStatus));
                     break;
             }
         }

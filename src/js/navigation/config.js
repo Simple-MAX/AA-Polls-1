@@ -40,4 +40,4 @@ const ADMIN_TABS_DATA = [
 const USER_TABS_DATA = [["Hem", "home.html"]];
 
 // Regular variables
-var CurrentPage;
+var currentPage;
