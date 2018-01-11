@@ -18,4 +18,6 @@ const USER_API_URL = `${API_URL}${Endpoint.User}`;
 var currentUser;
 var fetchedUsers;
 
+var UserStatus;
+
 var formattedTableUsers;

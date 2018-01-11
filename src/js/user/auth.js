@@ -123,19 +123,28 @@ function logOut() {
 
 // Handles the user by storing token and redirecting to the panel
 function handleCurrentUser(result) {
-    // Gets current page name
-    const currentPage = getCurrentPage(true, true);
-
     // If data was successfully fetched from endpoint, else log out
     if (result != null) {
         if (result.success) {
             /* Determines what sequence to to choose and execute,
             * depending on url location and current page
             */
-            if (currentPage == Pages.Login) {
+            if (CurrentPage == Pages.Login) {
                 // Store current token with the newer one
                 if (getToken() != currentUser.token)
                     setToken(currentUser.token)
+
+                // Final tab data
+                let userStatus = "super_user";
+    
+                // Determines what type user is
+                if (currentUser.super_user != "1" && currentUser.admin != "1")
+                    userStatus = "user";
+                else if (currentUser.super_user != "1" && currentUser.admin == "1")
+                    finalTabs = "admin";
+
+                // Sets the user status to a global variable
+                UserStatus = userStatus;
 
                 // If token is not null, redirect user
                 redirectToPage(INITIAL_PANEL_PAGE);

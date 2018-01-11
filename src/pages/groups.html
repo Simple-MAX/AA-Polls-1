@@ -10,11 +10,11 @@
 
         <title>Grupper</title>
         
-        <script type="text/javascript" src="../../lib/jquery/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="../js/networking/backend.js"></script>
         <script type="text/javascript" src="../js/networking/config.js"></script>
-        <script type="text/javascript" src="../js/navigation/navigation.js"></script>
+        <script type="text/javascript" src="../js/networking/backend.js"></script>
         <script type="text/javascript" src="../js/navigation/config.js"></script>
+        <script type="text/javascript" src="../js/navigation/tabs.js"></script>
+        <script type="text/javascript" src="../js/navigation/navigation.js"></script>
         <script type="text/javascript" src="../js/misc/table.js"></script>
         <script type="text/javascript" src="../js/misc/element.js"></script>
         <script type="text/javascript" src="../js/listener/config.js"></script>
@@ -39,12 +39,7 @@
                             <h4>Administrationpanel</h4>
                         </div>
 
-                        <div class="nav-menu-container">
-                            <li><a href="users.html">Användare</a></li>
-                            <li class="active"><a href="groups.html">Grupper</a></li>
-                            <li><a href="statistics.html">Statistik</a></li>
-                            <li><a href="home.html">Hem</a></li>
-                        </div>
+                        <div id="tabs-container" class="nav-menu-container"></div>
                     </div>
                 </div>
             </nav>

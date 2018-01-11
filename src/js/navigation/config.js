@@ -23,3 +23,21 @@ const Pages = {
 };
 
 const INITIAL_PANEL_PAGE = Pages.Users;
+
+const DEFAULT_TAB_DATA = [["Tab", "index.html"]];
+
+const DEFAULT_TABS_DATA = [
+    ["Användare", "users.html"],
+    ["Grupper", "groups.html"],
+    ["Statistik", "statistics.html"],
+];
+
+const ADMIN_TABS_DATA = [
+    ["Grupper", "groups.html"],
+    ["Statistik", "statistics.html"],
+];
+
+const USER_TABS_DATA = [["Hem", "home.html"]];
+
+// Regular variables
+var CurrentPage;

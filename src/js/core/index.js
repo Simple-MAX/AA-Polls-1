@@ -12,36 +12,38 @@
 */
 
 // Default vanilla JS onload function
-window.onload = function() {
-    // Initial function in primary sequence
-    initialize();
-}
+window.onload = () => initialize();
 
 // Initiatlizes the main function
 function initialize() {
     // Closes all popup if present beforehand
     closeAllPopups();
 
-    // Gets current page name
-    const currentPage = getCurrentPage(true, true);
+    /* Gets the curernt page name and stores 
+     * the value locally in a global variable
+     */
+    CurrentPage = getCurrentPage(true, true);
 
     // Gets stored token
     const token = getToken();
 
     // Sets up all listeners
-    handleListeners(currentPage);
+    handleListeners(CurrentPage);
 
     // Determines whether user is welcome or not
     if (token != "")
         quickAuth((result) => handleCurrentUser(result));
-    else if (token == "" && currentPage != Pages.Login)
+    else if (token == "" && CurrentPage != Pages.Login)
         redirectToPage(Pages.Login);
 
     // Proceed if user is not undefined or non-existent
     if (currentUser != null) {
         if (currentUser.token != "") {
+            // Generates or creates dynamic tabs
+            loadTabs("tabs-container");
+
             // Determines what function to run on current page
-            switch (currentPage) {
+            switch (CurrentPage) {
                 case Pages.Users:
                     // Loads all users
                     loadUsers();
