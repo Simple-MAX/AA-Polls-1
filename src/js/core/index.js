@@ -29,7 +29,7 @@ function initialize() {
 
     // Determines whether user is welcome or not
     if (getToken() != "")
-        quickAuth((result) => handleCurrentUser(result));
+        quickAuth((data) => handleCurrentUser(data));
 
     // Proceed if user is not undefined or non-existent
     if (currentUser != null) {
@@ -79,10 +79,17 @@ function initialize() {
                     break;
                 case Pages.Statistics:
                     // Proceed if valid user type, else redirect
-                    if (userStatus == UserType.SuperUser || 
+                    if (userStatus == UserType.SuperUser ||
                         userStatus == UserType.Admin) {
                         // Renders chart (unfinished)
                         renderStatistics("chart");
+                    } else redirectToPage(getInitialPage(userStatus));
+                    break;
+                case Pages.Home:
+                    // Proceed if valid user type, else redirect
+                    if (userStatus == UserType.User) {
+                        // Load finished and unfinished polls
+                        console.log("Loaded");
                     } else redirectToPage(getInitialPage(userStatus));
                     break;
             }

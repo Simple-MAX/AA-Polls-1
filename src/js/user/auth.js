@@ -123,29 +123,29 @@ function logOut() {
 
 // Handles the user by storing token and redirecting to the panel
 function handleCurrentUser(result) {
-    // If data was successfully fetched from endpoint, else log out
+    // Only if data or result is not null
     if (result != null) {
+        // If data was successfully fetched from endpoint
         if (result.success) {
             /* Determines what sequence to to choose and execute,
             * depending on url location and current page
             */
-            if (currentPage == Pages.Login) {
-                // Store current token with the newer one
-                if (getToken() != currentUser.token)
-                    setToken(currentUser.token)
+            // Store current token with the newer one
+            if (getToken() != currentUser.token)
+                setToken(currentUser.token)
 
-                // Sets the deafult user status value
-                userStatus = UserType.SuperUser;
-    
-                // Determines what type user is
-                if (currentUser.super_user != "1" && currentUser.admin != "1")
-                    userStatus = UserType.User;
-                else if (currentUser.super_user != "1" && currentUser.admin == "1")
-                    userStatus = UserType.Admin;
+            // Sets the deafult user status value
+            userStatus = UserType.SuperUser;
 
-                // If token is not null, redirect user
+            // Determines what type user is
+            if (currentUser.super_user != "1" && currentUser.admin != "1")
+                userStatus = UserType.User;
+            else if (currentUser.super_user != "1" && currentUser.admin == "1")
+                userStatus = UserType.Admin;
+
+            // If token is not null, redirect user
+            if (currentUser.token != "" && currentPage == Pages.Login)
                 redirectToPage(getInitialPage(userStatus));
-            }
         } else logOut();
     } else logOut();
 

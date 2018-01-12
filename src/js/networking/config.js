@@ -23,7 +23,7 @@
 // Constant variables
 const DEV_MODE = true;
 
-const API_DOMAIN    = "http://localhost";
+const API_DOMAIN    = "http://aapolls.microaa.se";
 const API_PATH      = "/api/";
 
 const API_URL = API_DOMAIN + API_PATH;

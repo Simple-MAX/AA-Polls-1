@@ -379,9 +379,12 @@ function insertGroupUserTable(tableId, users) {
 }
 
 // Toggles between active and minimize group class
-function toggleGroup(e, groupId) {
+function toggleGroup(groupId) {
+    // Gets the tab or container of group with id
+    let groupContainer = getElement(groupId);
+
     // Sets class to the opposite on click
-    if (e.srcElement.parentNode.className == "group active")
+    if (groupContainer.className == "group active")
         changeElementClass(groupId, "group minimized");
     else
         changeElementClass(groupId, "group active");
@@ -527,7 +530,7 @@ function appendGroup(containerId, data) {
     let tab = createElement("div", tabId, "tab");
 
     // Adds onclick function to tab
-    tab.onclick = (e) => toggleGroup(e, groupId); 
+    tab.onclick = () => toggleGroup(groupId); 
 
     // Creates a title for the tab
     let title = createElement("p", "");

@@ -52,9 +52,9 @@ function getCurrentPage(fileName = false, removeFilePrefix = false) {
 function getInitialPage(userType = UserType.User) {
     // Assigns default pages
     const pages = [
-        ["SuperUser", Pages.Users],
-        ["Admin", Pages.Groups],
-        ["User", Pages.Home]
+        [UserType.SuperUser, Pages.Users],
+        [UserType.Admin, Pages.Groups],
+        [UserType.User, Pages.Home]
     ];
 
     // Loops through and checks looks for appropriate page
