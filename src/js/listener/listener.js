@@ -48,6 +48,9 @@ function handleListeners(currentPage) {
         case Pages.Statistics:
             currentListener = Listeners.Pages.Statistics;
             break;
+        case Pages.Home:
+            currentListener = Listeners.Pages.Home;
+            break;
     }
 
     // Proceed only if currentListener is assigned
@@ -372,3 +375,8 @@ function logOutListener() {
     if (confirm("Vill du verkligen logga ut?"))
         logOut();
 }
+
+// Toggle submitted and non submitted poll tabs
+function togglePollTabListener() {
+    // Gets the current element
+} 

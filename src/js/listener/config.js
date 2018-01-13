@@ -83,6 +83,20 @@ const Listeners = {
             Type: [
                 "click",
             ]
-        }
+        },
+        Home: {
+            Elements: [
+                "submitted-polls",
+                "non-submitted-polls"
+            ],
+            Functions: [
+                () => togglePollTabListener(),
+                () => togglePollTabListener()
+            ],
+            Type: [
+                "click",
+                "click"
+            ]
+        },
     }
 };
