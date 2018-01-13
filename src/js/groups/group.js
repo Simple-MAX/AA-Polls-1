@@ -378,18 +378,6 @@ function insertGroupUserTable(tableId, users) {
     insertTableData(tableId, userTableData);
 }
 
-// Toggles between active and minimize group class
-function toggleGroup(groupId) {
-    // Gets the tab or container of group with id
-    let groupContainer = getElement(groupId);
-
-    // Sets class to the opposite on click
-    if (groupContainer.className == "group active")
-        changeElementClass(groupId, "group minimized");
-    else
-        changeElementClass(groupId, "group active");
-}
-
 // Reloads the popup user table
 function loadPopupUserTable(groupId) {
     // Terminate if current user is not admin or super user
@@ -530,16 +518,29 @@ function appendGroup(containerId, data) {
     let tab = createElement("div", tabId, "tab");
 
     // Adds onclick function to tab
-    tab.onclick = () => toggleGroup(groupId); 
+    tab.onclick = function() {
+        // Gets current element class name
+        let tabClassName = getElement(groupId).className;
+
+        // Default class name
+        let className = "group minimized";
+
+        // Switch class if class is same as deafult
+        if (tabClassName == className)
+            className = "group active";
+
+        // Changes class name
+        changeElementClass(groupId, className);
+    }
 
     // Creates a title for the tab
-    let title = createElement("p", "");
+    let title = createElement("p");
 
     // Sets title for title element
     title.innerHTML = data.title;
 
     // Creates an arrow indicator
-    let tabArrow = createElement("a", "");
+    let tabArrow = createElement("a");
 
     // Adds arrow indicator
     tabArrow.innerHTML = LEFT_ARROW_CHAR;
@@ -558,7 +559,7 @@ function appendGroup(containerId, data) {
     let groupTableContainer = createElement("div", "", "group-table-container");
 
     // Creates a title for current section
-    title = createElement("p", "");
+    title = createElement("p");
 
     // Sets section title
     title.innerHTML = "Användare";
@@ -610,7 +611,7 @@ function appendGroup(containerId, data) {
     let groupPollsContainer = createElement("div", "", "group-polls-container");
 
     // Creates a new title for current section
-    title = createElement("p", "");
+    title = createElement("p");
     
     // Sets section title
     title.innerHTML = "Alla formulär";
