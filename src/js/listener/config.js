@@ -46,7 +46,7 @@ const Listeners = {
                 () => editUserListener(),
                 () => deleteUserListener(),
                 () => resetUserListener(),
-                () => refreshUserTable()
+                () => refreshUserTable("user-table")
             ],
             Type: [
                 "click",

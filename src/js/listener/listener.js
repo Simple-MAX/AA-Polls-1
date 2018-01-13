@@ -91,7 +91,7 @@ function addUserListener() {
         // Re-render user table if succeeded
         if (result["success"]) {
             // Re-render actual user table
-            refreshUserTable();
+            refreshUserTable("user-table");
 
             // All popup boxes
             closeAllPopups();
@@ -127,7 +127,7 @@ function editUserListener() {
         // Re-render user table if succeeded
         if (result["success"]) {
             // Re-render actual user table
-            refreshUserTable();
+            refreshUserTable("user-table");
 
             // All popup boxes
             closeAllPopups();
@@ -161,7 +161,7 @@ function resetUserListener() {
         // Re-render user table if succeeded
         if (result["success"]) {
             // Re-render actual user table
-            refreshUserTable();
+            refreshUserTable("user-table");
 
             // All popup boxes
             closeAllPopups();
@@ -189,7 +189,7 @@ function deleteUserListener() {
         // Re-render user table if succeeded
         if (result["success"]) {
             // Re-render actual user table
-            refreshUserTable();
+            refreshUserTable("user-table");
 
             // All popup boxes
             closeAllPopups();

@@ -467,11 +467,11 @@ function loadUserTable(callback = null) {
 }
 
 // Refreshes and re-renders the user table
-function refreshUserTable() {
+function refreshUserTable(tableId) {
     // Re-renders table after successful data fetch
     loadUsers(function() {
         // Resets table
-        removeChildren("user-table");
+        removeChildren(tableId);
         
         // Resets counters for table (critical)
         resetTableCounters();
@@ -481,5 +481,5 @@ function refreshUserTable() {
     loadUserTable();
 
     // Format users accordingly
-    insertTableData("user-table", formattedTableUsers);
+    insertTableData(tableId, formattedTableUsers);
 }
