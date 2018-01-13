@@ -375,6 +375,7 @@ function loadUsers(callback = null) {
     }
 }
 
+// Gets fetched users and creates a table out of the data
 function loadUserTable(callback = null) {
     // Call a custom and passed callback function
     if (callback != null) {

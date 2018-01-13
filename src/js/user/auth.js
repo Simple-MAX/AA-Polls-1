@@ -127,19 +127,16 @@ function handleCurrentUser(result) {
     if (result != null) {
         // If data was successfully fetched from endpoint
         if (result.success) {
-            /* Determines what sequence to to choose and execute,
-            * depending on url location and current page
-            */
             // Store current token with the newer one
             if (getToken() != currentUser.token)
                 setToken(currentUser.token)
 
             // Sets the deafult user status value
-            userStatus = UserType.SuperUser;
+            userStatus = UserType.User;
 
             // Determines what type user is
-            if (currentUser.super_user != "1" && currentUser.admin != "1")
-                userStatus = UserType.User;
+            if (currentUser.super_user == "1")
+                userStatus = UserType.SuperUser;
             else if (currentUser.super_user != "1" && currentUser.admin == "1")
                 userStatus = UserType.Admin;
 
