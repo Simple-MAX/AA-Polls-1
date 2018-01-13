@@ -3,3 +3,6 @@
 
 # Removes default files from Visual Studio
 .vs/
+
+# Skips the config.js file for backend
+/src/js/networking/config.js
