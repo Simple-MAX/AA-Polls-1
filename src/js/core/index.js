@@ -63,7 +63,7 @@ function initialize() {
                         loadGroups();
 
                         // Inserts all and existing group data
-                        insertGroupData("groups", fetchedGroups);
+                        insertGroupData("groups-container", fetchedGroups);
                     } else redirectToPage(getInitialPage(userStatus));
                     break;
                 case Pages.CreatePoll:
@@ -82,7 +82,7 @@ function initialize() {
                     if (userStatus == UserType.SuperUser ||
                         userStatus == UserType.Admin) {
                         // Renders chart (unfinished)
-                        renderStatistics("chart");
+                        renderStatistics("chart-canvas");
                     } else redirectToPage(getInitialPage(userStatus));
                     break;
                 case Pages.Home:

@@ -124,7 +124,9 @@ function setNewPollData() {
         }
     }
 
-    // Sets current and global variable to a modified replacement
+    /* Sets current and global variable 
+     * to a modified replacement
+     */
     createdPollData = pollData;
 }
 
@@ -578,17 +580,11 @@ function createPollBlockElement(data, index = 0) {
     return pollContainer;
 }
 
-// Resets poll counters
-function resetPollCounters() {
-    // Reset pollCount if its value is greater than zero
-    if (pollCount > 0) pollCount = 0;
-}
-
 // Adds a new option value
 function addPollOptionsListener(placeholder = "Alternativ") {
     // Parameter values
-    const sectionId   = "section-2";
-    const selectId    = "select-";
+    const sectionId = "section-2";
+    const selectId = "select-";
 
     // Determines the length of all sub sections
     const sectionCount = Object.keys(createdPoll.details).length - 1;
@@ -599,16 +595,16 @@ function addPollOptionsListener(placeholder = "Alternativ") {
      */
     for (let i = 1; i < sectionCount + 1; i++) {
         // Current add option button id
-        const addOptionId       = `section-2-select-${i}-add-option`;
-        const removeOptionId    = `section-2-select-${i}-remove-option`; 
+        const addOptionId = `section-2-select-${i}-add-option`;
+        const removeOptionId = `section-2-select-${i}-remove-option`;
 
         // Variable created to reduce length of syntaxes
-        let addFunction = function() {
+        let addFunction = function () {
             addOptionInput(sectionId, selectId + i, placeholder);
         }
 
         // Second ariable created to reduce length of syntaxes
-        let removeFunction = function() {
+        let removeFunction = function () {
             removeOptionInput(sectionId, selectId + i);
         }
 
@@ -616,4 +612,10 @@ function addPollOptionsListener(placeholder = "Alternativ") {
         addListener(addOptionId, () => addFunction());
         addListener(removeOptionId, () => removeFunction());
     }
+}
+
+// Resets poll counters
+function resetPollCounters() {
+    // Reset pollCount if its value is greater than zero
+    if (pollCount > 0) pollCount = 0;
 }

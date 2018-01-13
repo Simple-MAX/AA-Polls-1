@@ -29,6 +29,7 @@
         <script type="text/javascript" src="../js/core/store.js"></script>
         <script type="text/javascript" src="../js/core/index.js"></script>
     </head>
+
     <body>
         <header>
             <nav>
@@ -46,9 +47,10 @@
                 </div>
             </nav>
         </header>
+
         <main>
             <div class="wrapper">
-                <p class="title">Formulär</p>
+                <p class="title">Hem</p>
 
                 <div class="admin-option-container">
                     <a id="refresh-polls-button" class="anchor-button">
@@ -58,8 +60,8 @@
 
                 <hr class="short-spacing" />
                 
-                <div class="groups-container" id="groups">
-                    <div class="group active">
+                <div class="groups-container" id="polls">
+                    <div class="group active" id="submitted-polls">
                         <div class="tab">
                             <p>Besvarade formulär</p>
 
@@ -75,39 +77,7 @@
 
                                             <p>2018-1-1</p>
 
-                                            <a>AA-P-000000001</a>
-                                        </div>
-
-                                        <div class="poll">
-                                            <h4>Formulär #2</h4>
-
-                                            <p>2018-1-1</p>
-
-                                            <a>AA-P-000000001</a>
-                                        </div>
-
-                                        <div class="poll">
-                                            <h4>Formulär #3</h4>
-
-                                            <p>2018-1-1</p>
-
-                                            <a>AA-P-000000001</a>
-                                        </div>
-
-                                        <div class="poll">
-                                            <h4>Formulär #4</h4>
-
-                                            <p>2018-1-1</p>
-
-                                            <a>AA-P-000000001</a>
-                                        </div>
-
-                                        <div class="poll">
-                                            <h4>Formulär #4</h4>
-
-                                            <p>2018-1-1</p>
-
-                                            <a>AA-P-000000001</a>
+                                            <a>AA-P-1</a>
                                         </div>
                                     </div>
                                 </div>
@@ -115,61 +85,29 @@
                         </div>
                     </div>
 
-                    <div class="group minimized">
-                            <div class="tab">
-                                <p>Obesvarade formulär</p>
+                    <div class="group minimized" id="non-submitted-polls">
+                        <div class="tab">
+                            <p>Obesvarade formulär</p>
     
-                                <a>&#9668;</a>
-                            </div>
+                            <a>&#9668;</a>
+                        </div>
     
-                            <div class="content">
-                                <div class="sub-content">
-                                    <div class="group-polls-container">
-                                        <div class="polls-container" style="height: auto; max-height: 500px">
-                                            <div class="poll">
-                                                <h4>Formulär #1</h4>
+                        <div class="content">
+                            <div class="sub-content">
+                                <div class="group-polls-container">
+                                    <div class="polls-container" style="height: auto; max-height: 500px">
+                                        <div class="poll">
+                                            <h4>Formulär #1</h4>
     
-                                                <p>2018-1-1</p>
+                                            <p>2018-1-1</p>
     
-                                                <a>AA-P-000000001</a>
-                                            </div>
-    
-                                            <div class="poll">
-                                                <h4>Formulär #2</h4>
-    
-                                                <p>2018-1-1</p>
-    
-                                                <a>AA-P-000000001</a>
-                                            </div>
-    
-                                            <div class="poll">
-                                                <h4>Formulär #3</h4>
-    
-                                                <p>2018-1-1</p>
-    
-                                                <a>AA-P-000000001</a>
-                                            </div>
-    
-                                            <div class="poll">
-                                                <h4>Formulär #4</h4>
-    
-                                                <p>2018-1-1</p>
-    
-                                                <a>AA-P-000000001</a>
-                                            </div>
-    
-                                            <div class="poll">
-                                                <h4>Formulär #4</h4>
-    
-                                                <p>2018-1-1</p>
-    
-                                                <a>AA-P-000000001</a>
-                                            </div>
+                                            <a>AA-P-000000001</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </main>
