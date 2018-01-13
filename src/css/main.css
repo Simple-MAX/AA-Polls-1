@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 * {
     padding: 0;
@@ -32,6 +32,7 @@
     padding-left: 15px;
     display: block;
     margin: auto;
+    position: relative;
 }
 
 .nav-logo-container {
@@ -79,6 +80,29 @@
     margin-top: 40px;
     float: right;
 }
+
+.nav-container .small-button {
+    position: absolute;
+    top: 7.5px;
+    right: 0;
+
+    display: block;
+    max-width: 150px;
+    margin: auto;
+    padding: 5px 10px;
+    border-radius: 2.5px;
+
+    background-color: #8a199e;
+
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.small-button:hover { opacity: 0.8 }
 
 .nav-menu-container > li {
     width: 150px;

@@ -28,6 +28,9 @@ function handleListeners(currentPage) {
     // Declares listener according to current page
     let currentListener = null;
 
+    // Adds the log out button listener
+    addListener("logout-button", logOutListener);
+
     // Adds listener to elements for different pages
     switch (currentPage) {
         case Pages.Login:
@@ -361,4 +364,11 @@ function editGroupUsersListener() {
             closeAllPopups();
         } else alert("Kunde inte hantera användare");
     } else alert("Kunde inte hantera användare");
+}
+
+// Makes the user able to log out from current session
+function logOutListener() {
+    // Prompts the user to make a final decision
+    if (confirm("Vill du verkligen logga ut?"))
+        logOut();
 }
