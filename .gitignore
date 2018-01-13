@@ -1,2 +1,5 @@
 # Removes Mac DS_Store file
 .DS_Store
+
+# Removes default files from Visual Studio
+.vs/*
