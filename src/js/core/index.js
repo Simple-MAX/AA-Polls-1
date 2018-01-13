@@ -37,8 +37,6 @@ function initialize() {
             // Generates or creates dynamic tabs
             loadTabs("tabs-container");
 
-            console.log(currentUser);
-
             // Determines what function to run on current page
             switch (currentPage) {
                 case Pages.Users:
