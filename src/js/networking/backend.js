@@ -78,7 +78,7 @@ function execAjaxRequest(url, method = "GET", async = false) {
     }
 
     // Specifies the request method, domain url and async option (critical)
-    request.open(method, url, async);
+    request.open(method, url, false);
 
     // Executes the request at last
     request.send();
