@@ -377,6 +377,17 @@ function logOutListener() {
 }
 
 // Toggle submitted and non submitted poll tabs
-function togglePollTabListener() {
-    // Gets the current element
+function togglePollTabListener(containerId) {
+    // Gets current element class name
+    let tabClassName = getElement(containerId).className;
+    
+    // Default class name
+    let className = "group minimized";
+
+    // Switch class if class is same as deafult
+    if (tabClassName == className)
+        className = "group active";
+
+    // Changes class name
+    changeElementClass(containerId, className);
 } 

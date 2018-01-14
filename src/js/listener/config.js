@@ -90,8 +90,8 @@ const Listeners = {
                 "non-submitted-polls"
             ],
             Functions: [
-                () => togglePollTabListener(),
-                () => togglePollTabListener()
+                () => togglePollTabListener("submitted-polls"),
+                () => togglePollTabListener("non-submitted-polls")
             ],
             Type: [
                 "click",
