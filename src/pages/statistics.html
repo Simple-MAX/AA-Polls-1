@@ -54,14 +54,11 @@
 
                 <div class="filter-group">
                     <div class="filter-group-picker">
-                        <select class="select" id="prog-short-option">
-                            <option value="Group1">Grupp1</option>
-                            <option value="Group2">Grupp2</option>
-                            <option value="Group3">Grupp3</option>
-                            <option value="Group4">Grupp4</option>
-                            <option value="Group5">Grupp5</option>
+                        <select id="prog-short-option">
+                            <option>Grupp1</option>
                         </select>
                     </div>
+
                     <input class="filter-group-button" id="filter-apply" value="Visa" type="submit" onclick="formnSubmit()"/>   
                 </div>
                 
@@ -75,16 +72,18 @@
                 
                 <div class="filter-time">
                     <div>
-                        <p>Datum från:</p>
-                        <select class="date-picker-from" id="prog-short-option">
-                            <option value="Group1">Date Picker From</option>
+                        <p>Datum från: </p>
+
+                        <select id="prog-short-option">
+                            <option>Date Picker From</option>
                         </select>
                     </div>
                     
                     <div>
-                        <p>Datum till:</p>
-                        <select class="date-picker-to" id="prog-short-option">
-                            <option value="Group1">Date Picker To</option>
+                        <p>Datum till: </p>
+
+                        <select id="prog-short-option">
+                            <option>Date Picker To</option>
                         </select>
                     </div>        
                 </div>
@@ -96,6 +95,8 @@
                 <div class="export">
                     <input class="button" id="filter-apply" value="Exportera som CSV" type="submit" onclick="formnSubmit()"/>  
                 </div>
+
+                <hr class="regular-spacing" />
             </div>    
         </main>
     </body> 

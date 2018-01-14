@@ -400,7 +400,7 @@ function loadPopupUserTable(groupId) {
     let userTableData = [];
     
     // Column titles for head
-    const headTitles = ["Namn", " "];
+    const headTitles = ["Namn", "Medlem"];
 
     // Attempts to fetch all users and store them locally
     fetchUsers(currentUser.token);

@@ -121,6 +121,9 @@ const DEFAULT_POLL_IDS = [
 var fetchedPolls;
 var fetchedPoll;
 
+var submittedPolls;
+var nonSubmittedPolls;
+
 var pollCount = 0;
 
 var insertedCreatePollData;

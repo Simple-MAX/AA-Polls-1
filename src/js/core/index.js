@@ -89,7 +89,7 @@ function initialize() {
                     // Proceed if valid user type, else redirect
                     if (userStatus == UserType.User) {
                         // Load finished and unfinished polls
-                        console.log("Loaded");
+                        loadUserPolls();
                     } else redirectToPage(getInitialPage(userStatus));
                     break;
             }

@@ -266,6 +266,18 @@
     border-bottom: 1px solid #bbb;
 }
 
+select {
+    border: 2px #c0c0c0 solid;
+    border-radius: 4px;
+    color: #6b6b6b;
+    height: 30px;
+    margin: 15px 0;
+    width: 90%;
+    padding: 0 7px;
+    -webkit-appearance: none;
+    font-size: 13px;
+}
+
 .login-form {
     width: 500px;
     height: 350px;

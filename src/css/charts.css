@@ -45,32 +45,19 @@
     color: grey;
 }
 
-.date-picker-from {
-    border: 1px #111 solid;
+select {
+    border: 2px #c0c0c0 solid;
     border-radius: 4px;
-    color: #111;
-    height: 35px;
-    width: 48%;
-    float: left;
-    margin: 0;
+    color: #6b6b6b;
+    height: 30px;
+    margin: 15px 0;
+    width: 90%;
+    padding: 0 7px;
+    -webkit-appearance: none;
+    font-size: 13px;
 }
 
-.date-picker-to {
-    border: 1px #111 solid;
-    border-radius: 4px;
-    color: #111;
-    height: 35px;
-    width: 48%;
-    float: right;
-    margin: 0;
-}
-
-
-
-.diagram-slider {
-    background-color: whitesmoke;
-    margin: 10% 0 3% 0;
-}
+.diagram-slider { background-color: #fff; }
 
 .export {
     width: 100%;

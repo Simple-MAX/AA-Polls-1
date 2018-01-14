@@ -320,7 +320,7 @@ function createPoll(token, poll, callback = null) {
     return data;
 }
 
-// Attempts to fetch accessible groups based on current user privileges
+// Attempts to fetch accessible polls based on current user privileges
 function fetchPolls(token, pollId = "", callback = null) {
     // Terminate if current user is not admin or super user
     if (currentUser.super_user != "1" &&
@@ -354,6 +354,61 @@ function fetchPolls(token, pollId = "", callback = null) {
         if (result["success"] && result["data"] != null) {
             // Stores polls locally in a global variable
             fetchedPolls = result["data"];
+
+            // Call a custom and passed callback function
+            if (callback != null) {
+                /* Creates a cloned callback function and passes
+                 * fetched data as parameter for external and quick access
+                 */
+                const execCallback = (passedData) => callback(passedData);
+
+                // Executes the cloned function
+                execCallback(result);
+            }
+        }
+
+        // Assigns fetched data to data variable
+        data = result;
+    }
+
+    // Returns final data
+    return data;
+}
+
+// Attempts to fetch user polls from current user
+function fetchUserPolls(token, userId, callback = null) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+    
+    // Data variable to return
+    let data = null;
+     
+    // Creates a new array for possible parameters
+    let params = {};
+
+    /* Gets the appropriate values and store them
+     * according to a determined structure below
+     */
+    if (token != "") {
+        params.keys     = ["token", "user_id"];
+        params.values   = [token, userId];
+    } else return data;
+    
+    /* Executes an AJAX request (Vanilla JS, not jQuery)
+     * with the given url, function contains optional arguments
+     */
+    let result = request(POLL_API_URL, params);
+    
+    /* If result is an object type, it will return
+     * some data with from the endpoint, regardless whether it's
+     * successful or not. If not, it will return an error string.
+     */
+    if (typeof result == "object") {
+        // If the result was successful
+        if (result["success"] && result["data"] != null) {
+            // Stores polls locally in a global variable
+            console.log(result["data"]);
 
             // Call a custom and passed callback function
             if (callback != null) {
@@ -438,6 +493,34 @@ function insertGroupPolls(containerId, polls) {
     for (let i = 0; i < polls.length; i++) {
         // Adds a new poll block
         container.appendChild(createPollBlockElement(polls[i], i));
+    }
+}
+
+// Fetches all polls assigned to current user
+function loadUserPolls(callback = null) {
+    // Call a custom and passed callback function
+    if (callback != null) {
+        /* Creates a cloned callback function and passes
+         * fetched data as parameter for external and quick access
+         */
+        const execCallback = (passedData) => callback(passedData);
+
+        // Executes the cloned function
+        execCallback();
+    }
+
+    // Fetches all accessible groups based on admin status
+    fetchUserPolls(currentUser.token, currentUser.id);
+
+    return;
+
+    // Return nothing if users is null
+    if (submittedPolls == null && nonSubmittedPolls == null) {
+        // Make user aware of progress failure
+        alert("Kunde inte hämta formulär, försök igen.");
+
+        // Exit function
+        return;
     }
 }
 
@@ -549,15 +632,19 @@ function removeOptionInput(sectionId, selectId) {
 }
 
 // Creates a poll block element which contains poll data
-function createPollBlockElement(data, index = 0) {
+function createPollBlockElement(data, index = 0, onclick = null) {
     // Creates poll block element
     let pollContainer = createElement("div", "", "poll");
+
+    // Add onclick function if not null
+    if (onclick != null)
+        pollContainer.onclick = () => onclick();
     
     // Poll title or name
     let pollTitle = createElement("h4");
 
     // Adds title
-    pollTitle.innerHTML = "Formulär #" + (index + 1);
+    pollTitle.innerHTML = `Formulär #${(index + 1)}`;
 
     // Poll date
     let pollDate = createElement("p");
