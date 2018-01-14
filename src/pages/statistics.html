@@ -52,14 +52,16 @@
                     
                 <div class="admin-option-container"><!-- Empty --></div>
 
-                <div class="filter-group">
-                    <div class="filter-group-picker">
+                <div class="filter-container">
+                    <div class="picker-container">
                         <select id="prog-short-option">
                             <option>Grupp1</option>
                         </select>
                     </div>
 
-                    <input class="filter-group-button" id="filter-apply" value="Visa" type="submit" onclick="formnSubmit()"/>   
+                    <div class="button-container">
+                        <button class="regular-button" id="show-chart-button">Visa</button>
+                    </div>
                 </div>
                 
                 <table class="data-value">
@@ -70,18 +72,14 @@
                     </tr>  
                 </table>
                 
-                <div class="filter-time">
-                    <div>
-                        <p>Datum från: </p>
-
+                <div class="filter-container">
+                    <div class="picker-container">
                         <select id="prog-short-option">
                             <option>Date Picker From</option>
                         </select>
                     </div>
                     
-                    <div>
-                        <p>Datum till: </p>
-
+                    <div class="picker-container">
                         <select id="prog-short-option">
                             <option>Date Picker To</option>
                         </select>
