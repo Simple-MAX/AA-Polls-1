@@ -28,14 +28,14 @@ function initialize() {
     handleListeners(currentPage);
 
     // Determines whether user is welcome or not
-    if (getToken() != "")
-        quickAuth((data) => handleCurrentUser(data));
+    if (getToken() != "") quickAuth(handleCurrentUser);
 
     // Proceed if user is not undefined or non-existent
     if (currentUser != null) {
         if (currentUser.token != "") {
             // Generates or creates dynamic tabs
-            loadTabs("tabs-container");
+            if (currentPage != Pages.Login)
+                loadTabs("tabs-container");
 
             // Determines what function to run on current page
             switch (currentPage) {

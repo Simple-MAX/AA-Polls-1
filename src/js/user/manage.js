@@ -213,8 +213,6 @@ function editUser(name, email, token, callback = null) {
         params.values   = [token, subParams];
     } else return data;
 
-    console.log(params);
-
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */
@@ -468,6 +466,12 @@ function loadUserTable(callback = null) {
 
 // Refreshes and re-renders the user table
 function refreshUserTable(tableId) {
+    // Gets the group container
+    let table = getElement(table);
+    
+    // Terminate if groups container does not exist
+    if (table == null) return;
+
     // Re-renders table after successful data fetch
     loadUsers(function() {
         // Resets table

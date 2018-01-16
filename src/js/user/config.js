@@ -21,9 +21,9 @@ const UserType = {
 };
 
 // Regular variables
-var currentUser;
-var fetchedUsers;
+var currentUser = {};
 
-var userStatus;
+var fetchedUsers        = [];
+var formattedTableUsers = [];
 
-var formattedTableUsers;
+var userStatus = UserType.User;

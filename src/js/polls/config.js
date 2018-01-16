@@ -118,18 +118,17 @@ const DEFAULT_POLL_IDS = [
 ];
 
 // Regular variables
-var fetchedPolls;
-var fetchedPoll;
-
-var submittedPolls;
-var nonSubmittedPolls;
+var fetchedPolls        = [];
+var submittedPolls      = [];
+var nonSubmittedPolls   = [];
 
 var pollCount = 0;
 
-var insertedCreatePollData;
-var insertedCreatePollStructure;
-
 var createdPoll = DEFAULT_POLL_STRUCTURE.poll;
+
+var fetchedPoll                 = {};
+var insertedCreatePollData      = {};
+var insertedCreatePollStructure = {};
 
 var createdPollData = [
     [createdPoll.initial.section_title],

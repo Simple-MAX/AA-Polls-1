@@ -377,10 +377,6 @@ function fetchPolls(token, pollId = "", callback = null) {
 
 // Attempts to fetch user polls from current user
 function fetchUserPolls(token, userId, callback = null) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-    
     // Data variable to return
     let data = null;
      
@@ -407,8 +403,12 @@ function fetchUserPolls(token, userId, callback = null) {
     if (typeof result == "object") {
         // If the result was successful
         if (result["success"] && result["data"] != null) {
-            // Stores polls locally in a global variable
-            console.log(result["data"]);
+            // Stores polls locally in a global variable (Not done)
+            let fetchedPollIds = result["data"];
+
+            // Sets received ids to local and global variables
+            submittedPolls      = fetchedPollIds["submitted"];
+            nonSubmittedPolls   = fetchedPollIds["non_submitted"];
 
             // Call a custom and passed callback function
             if (callback != null) {
@@ -496,7 +496,7 @@ function insertGroupPolls(containerId, polls) {
     }
 }
 
-// Fetches all polls assigned to current user
+// Fetches all polls assigned to current user (Not done yet)
 function loadUserPolls(callback = null) {
     // Call a custom and passed callback function
     if (callback != null) {
@@ -511,8 +511,6 @@ function loadUserPolls(callback = null) {
 
     // Fetches all accessible groups based on admin status
     fetchUserPolls(currentUser.token, currentUser.id);
-
-    return;
 
     // Return nothing if users is null
     if (submittedPolls == null && nonSubmittedPolls == null) {
@@ -594,7 +592,7 @@ function addOptionInput(sectionId, selectId, placeholder) {
     // Number count for new id
     let inputCount = 1;
 
-    // Increments option count if tagName is "option"
+    // Increments option count if tag name is "option"
     optionInputs.forEach(function(element) {
         if (element.tagName == "input".toUpperCase()) 
             inputCount++;

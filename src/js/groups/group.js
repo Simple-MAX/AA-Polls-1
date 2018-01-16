@@ -90,7 +90,7 @@ function fetchGroups(token, callback = null) {
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */
-    let result = request(GROUP_API_URL, params, "GET");
+    let result = request(GROUP_API_URL, params);
     
     /* If result is an object type, it will return
      * some data with from the endpoint, regardless whether it's
@@ -307,7 +307,7 @@ function deleteCurrentGroup(groupId) {
             // Re-render user table if succeeded
             if (result["success"]) {
                 // Re-renders groups
-                refreshGroups();
+                refreshGroups("groups");
             } else alert("Kunde inte ta bort denna grupp");
         } else alert("Kunde inte ta bort denna grupp");
     }
@@ -322,7 +322,7 @@ function insertGroupData(containerId, data) {
     /* Loops through and adds new group tab 
      * based on current index of iteration
      */
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         // Append fetched data to user table
         appendGroup(containerId, data[i]);
     }
@@ -729,18 +729,24 @@ function loadGroups(callback = null) {
 }
 
 // Refreshes and re-renders group division
-function refreshGroups() {
+function refreshGroups(groupsId) {
+    // Gets the group container
+    let groupsContainer = getElement(groupsId);
+
+    // Terminate if groups container does not exist
+    if (groupsContainer == null) return;
+
     // Re-renders table after successful data fetch
     loadGroups(function() {
         // Resets groups division
-        removeChildren("groups");
+        removeChildren(groupsId);
         
         // Resets counters for table (critical)
         resetGroupCounters();
     });
 
     // Append group content once again
-    insertGroupData("groups", fetchedGroups);
+    insertGroupData(groupsId, fetchedGroups);
 }
 
 // Resets group counter
