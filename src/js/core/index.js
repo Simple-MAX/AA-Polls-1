@@ -74,7 +74,17 @@ function initialize() {
                         loadGroups();
 
                         // Fetches group information for newly created poll
-                        loadCreatePollInfo();
+                        loadCreatePollData();
+                    } else redirectToPage(getInitialPage(userStatus));
+                    break;
+                case Pages.Poll:
+                    // Proceed if valid user type, else redirect
+                    if (userStatus == UserType.User) {
+                        // Load finished and unfinished polls
+                        loadUserPolls();
+
+                        // Loads current and given poll data
+                        loadPoll();
                     } else redirectToPage(getInitialPage(userStatus));
                     break;
                 case Pages.Statistics:

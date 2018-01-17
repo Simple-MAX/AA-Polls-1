@@ -12,7 +12,7 @@
 */
 
 // Used to load information for newly initiated poll
-function loadCreatePollInfo() {
+function loadCreatePollData() {
     // Terminate if current user is not admin or super user
     if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
@@ -28,7 +28,7 @@ function loadCreatePollInfo() {
         alert("Kunde inte skapa formulär");
 
         // Redirect admin back to page
-        redirectToPage(Pages.Groups);
+        redirectToPage(getInitialPage(currentStatus));
 
         return;
     }
@@ -45,6 +45,53 @@ function loadCreatePollInfo() {
 
     // Adds option buttons listeners
     addPollOptionsListener();
+}
+
+// Fetches current poll data and assigns all elements with data
+function loadPoll() {
+    // Gets the id of the current group from url
+    let pollId = getUrlParam("id");
+
+    // Gets current group based on given id
+    let currentPoll = getPoll(pollId);
+
+    // Terminate if group was not found
+    if (currentPoll == null) {
+        alert("Kunde inte hitta formulär");
+
+        // Redirect admin back to page
+        redirectToPage(getInitialPage(currentStatus));
+
+        return;
+    }
+
+    // TODO
+}
+
+// Fetches all polls assigned to current user (Not done yet)
+function loadUserPolls(callback = null) {
+    // Call a custom and passed callback function
+    if (callback != null) {
+        /* Creates a cloned callback function and passes
+         * fetched data as parameter for external and quick access
+         */
+        const execCallback = (passedData) => callback(passedData);
+
+        // Executes the cloned function
+        execCallback();
+    }
+
+    // Fetches all accessible groups based on admin status
+    fetchUserPolls(currentUser.token, currentUser.id);
+
+    // Return nothing if users is null
+    if (submittedPolls == null && nonSubmittedPolls == null) {
+        // Make user aware of progress failure
+        alert("Kunde inte hämta formulär, försök igen.");
+
+        // Exit function
+        return;
+    }
 }
 
 // Inserts formatted data to poll container and its elements
@@ -268,6 +315,22 @@ function getPollGroup(groupId) {
     return null;
 }
 
+// Gets current group based on passed id
+function getPoll(pollId) {
+    // Loops through each group
+    for (let i = 0; i < nonSubmittedPolls.length; i++) {
+        // Sets currentGroup to current object in iteration
+        if (pollId == nonSubmittedPolls[i].id) {
+            // Set currentGroup to object
+            return nonSubmittedPolls[i];
+        }
+    }
+
+    // Return null if not found
+    return null;
+}
+
+
 // Attempts to submit newly created poll
 function createPoll(token, poll, callback = null) {
     // Terminate if current user is not admin or super user
@@ -476,32 +539,6 @@ function fetchGroupPolls(token, group) {
 
     // Return users for curr
     return modifiedGroup;
-}
-
-// Fetches all polls assigned to current user (Not done yet)
-function loadUserPolls(callback = null) {
-    // Call a custom and passed callback function
-    if (callback != null) {
-        /* Creates a cloned callback function and passes
-         * fetched data as parameter for external and quick access
-         */
-        const execCallback = (passedData) => callback(passedData);
-
-        // Executes the cloned function
-        execCallback();
-    }
-
-    // Fetches all accessible groups based on admin status
-    fetchUserPolls(currentUser.token, currentUser.id);
-
-    // Return nothing if users is null
-    if (submittedPolls == null && nonSubmittedPolls == null) {
-        // Make user aware of progress failure
-        alert("Kunde inte hämta formulär, försök igen.");
-
-        // Exit function
-        return;
-    }
 }
 
 // Adds group polls to a specified container

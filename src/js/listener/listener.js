@@ -45,6 +45,9 @@ function handleListeners(currentPage) {
         case Pages.CreatePoll:
             currentListener = Listeners.Pages.CreatePoll;
             break;
+        case Pages.Poll:
+            currentListener = Listeners.Pages.Poll;
+            break;
         case Pages.Statistics:
             currentListener = Listeners.Pages.Statistics;
             break;
