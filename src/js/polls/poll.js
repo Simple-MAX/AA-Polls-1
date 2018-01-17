@@ -478,24 +478,6 @@ function fetchGroupPolls(token, group) {
     return modifiedGroup;
 }
 
-// Adds group polls to a specified container
-function insertGroupPolls(containerId, polls) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-
-    // Gets the container element
-    let container = getElement(containerId);
-
-    /* Loops through and adds new poll block 
-     * based on current index of iteration
-     */
-    for (let i = 0; i < polls.length; i++) {
-        // Adds a new poll block
-        container.appendChild(createPollBlockElement(polls[i], i));
-    }
-}
-
 // Fetches all polls assigned to current user (Not done yet)
 function loadUserPolls(callback = null) {
     // Call a custom and passed callback function
@@ -523,7 +505,11 @@ function loadUserPolls(callback = null) {
 }
 
 // Adds group polls to a specified container
-function insertUserPollsData(containerId, polls) {
+function insertGroupPolls(containerId, polls) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
     // Gets the container element
     let container = getElement(containerId);
 
@@ -533,6 +519,28 @@ function insertUserPollsData(containerId, polls) {
     for (let i = 0; i < polls.length; i++) {
         // Adds a new poll block
         container.appendChild(createPollBlockElement(polls[i], i));
+    }
+}
+
+// Adds group polls to a specified container
+function insertUserPollsData(containerId, polls) {
+    // Gets the container element
+    let container = getElement(containerId);
+
+    /* Loops through and adds new poll block 
+     * based on current index of iteration
+     */
+    for (let i = 0; i < polls.length; i++) {
+        // Sets custom function to current poll
+        let func = function() {
+            location.href = `poll.html?id=${polls[i]["id"]}`;
+        }
+
+        // Creates the poll block
+        let poll = createPollBlockElement(polls[i], i, func);
+
+        // Adds a new poll block
+        container.appendChild(poll);
     }
 }
 
