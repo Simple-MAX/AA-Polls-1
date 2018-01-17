@@ -90,6 +90,10 @@ function initialize() {
                     if (userStatus == UserType.User) {
                         // Load finished and unfinished polls
                         loadUserPolls();
+
+                        // Inserts all and existing user polls data
+                        insertUserPollsData("non-submitted-polls", nonSubmittedPolls);
+                        insertUserPollsData("submitted-polls", submittedPolls);
                     } else redirectToPage(getInitialPage(userStatus));
                     break;
             }

@@ -377,7 +377,7 @@ function logOutListener() {
 }
 
 // Toggle submitted and non submitted poll tabs
-function togglePollTabListener(containerId) {
+function togglePollsTabListener(containerId) {
     // Gets current element class name
     let tabClassName = getElement(containerId).className;
     

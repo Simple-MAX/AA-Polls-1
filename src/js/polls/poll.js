@@ -522,6 +522,20 @@ function loadUserPolls(callback = null) {
     }
 }
 
+// Adds group polls to a specified container
+function insertUserPollsData(containerId, polls) {
+    // Gets the container element
+    let container = getElement(containerId);
+
+    /* Loops through and adds new poll block 
+     * based on current index of iteration
+     */
+    for (let i = 0; i < polls.length; i++) {
+        // Adds a new poll block
+        container.appendChild(createPollBlockElement(polls[i], i));
+    }
+}
+
 // Adds a new option to select element with id
 function addOptionValue(sectionId, selectId, value) {
     // Terminate if value is empty
