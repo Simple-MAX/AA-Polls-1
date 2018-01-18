@@ -50,8 +50,52 @@ function createElement(type, id = "", className = "") {
     return element;
 }
 
-// Simulates a mouse click on element
-function simulateElementClick(id) { getElement(id).click(); }
+// Creates and returns an anchor button
+function createAnchorButton(data) {
+    // Determines class name for button
+    let className = "small-anchor-button";
+
+    // Set default class name value
+    if (data.type == "regular")
+        className = "anchor-button";
+    else
+        className = "small-anchor-button";
+
+    // Creates button element
+    let button = createElement("a", data.id, className);
+
+    // Set href attribute if key exists
+    if (data.href != null && data.href != "")
+        button.setAttribute("href", data.href);
+
+    // Creates the button text
+    let text = createElement("p", "", "text");
+
+    // Set actual text to button
+    text.innerHTML = data.text;
+
+    // Set default button text if null
+    if (data.text == null || data.text == "")
+        text.innerHTML = "Button";
+
+    // Append the text element
+    button.appendChild(text);
+
+    // Add icon text only if requested
+    if (data.iconText != null && data.iconText != "") {
+        // Creates a text icon element
+        let iconText = createElement("p", "", "icon-text");
+
+        // Assign actual icon text to element
+        iconText.innerHTML = data.iconText;
+
+        // Append the icon text element
+        button.appendChild(iconText);
+    }
+
+    // Return the newly created element
+    return button;
+}
 
 // Removes all children from a specific parent
 function removeChildren(parentId) {
@@ -102,49 +146,19 @@ function changeElementClass(id, className) {
     element.className = className;
 }
 
-// Creates and returns an anchor button
-function createAnchorButton(data) {
-    // Determines class name for button
-    let className = "small-anchor-button";
+// Sets given element value
+function passElementValue(firstId, secondId) {
+    // Gets given elements with ids
+    let firstElement    = getElement(firstId),
+        secondElement   = getElement(secondId);
 
-    // Set default class name value
-    if (data.type == "regular")
-        className = "anchor-button";
-    else
-        className = "small-anchor-button";
+    // Terminate if one of the elements is null
+    if (firstElement == null || secondElement == null)
+        return;
 
-    // Creates button element
-    let button = createElement("a", data.id, className);
-
-    // Set href attribute if key exists
-    if (data.href != null && data.href != "")
-        button.setAttribute("href", data.href);
-
-    // Creates the button text
-    let text = createElement("p", "", "text");
-
-    // Set actual text to button
-    text.innerHTML = data.text;
-
-    // Set default button text if null
-    if (data.text == null || data.text == "")
-        text.innerHTML = "Button";
-
-    // Append the text element
-    button.appendChild(text);
-
-    // Add icon text only if requested
-    if (data.iconText != null && data.iconText != "") {
-        // Creates a text icon element
-        let iconText = createElement("p", "", "icon-text");
-
-        // Assign actual icon text to element
-        iconText.innerHTML = data.iconText;
-
-        // Append the icon text element
-        button.appendChild(iconText);
-    }
-
-    // Return the newly created element
-    return button;
+    // Sets the first element value to the second
+    secondElement.value = firstElement.value;
 }
+
+// Simulates a mouse click on element
+function simulateElementClick(id) { getElement(id).click(); }

@@ -305,7 +305,7 @@ input[type=range]:focus::-ms-fill-upper {
     filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
 }
 
-#verticalIdIn {
+input[type = range][orient = vertical] {
     width: 625px;
     height: 30px;
     margin-top: 5px;

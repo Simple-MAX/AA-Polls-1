@@ -408,3 +408,12 @@ function togglePollsTabListener(containerId) {
     // Changes class name
     changeElementClass(containerId, className);
 } 
+
+// Passes input value to some element
+function passElementValueListener(e, targetId) {
+    // Terminate if target id or event is empty
+    if (targetId == "" || e == null) return;
+
+    // Executes pass element value function
+    passElementValue(e.target.id, targetId);
+}
