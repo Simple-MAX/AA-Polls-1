@@ -64,7 +64,7 @@ const Listeners = {
             ],
             Functions: [
                 () => addGroupListener(),
-                () => refreshGroups(),
+                () => refreshGroups("groups-container"),
                 () => editGroupUsersListener()
             ],
             Type: [

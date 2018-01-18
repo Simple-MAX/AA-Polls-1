@@ -307,7 +307,7 @@ function deleteCurrentGroup(groupId) {
             // Re-render user table if succeeded
             if (result["success"]) {
                 // Re-renders groups
-                refreshGroups("groups");
+                refreshGroups("groups-container");
             } else alert("Kunde inte ta bort denna grupp");
         } else alert("Kunde inte ta bort denna grupp");
     }
@@ -422,7 +422,13 @@ function loadPopupUserTable(groupId) {
                 let user = fetchedUsers[j];
 
                 // Exlude user if user is admin or super user
-                if (user.admin != "1" && user.super_user != "1") {
+                // if (user.admin != "1" && user.super_user != "1")
+                //     continue;
+
+                /* Push user with checked value if group user count
+                 * is greater than zero, add every user if otherwise
+                 */
+                if (groupUsers.length > 0) {
                     // Checks whether user already is added
                     for (let l = 0; l < groupUsers.length; l++) {
                         // Adds user regardless but with different checked values
@@ -440,7 +446,7 @@ function loadPopupUserTable(groupId) {
                             break;
                         }
                     }
-                } 
+                } else availableUsers.push(["0", user]);
             }
 
             // Exits current loop and iteration

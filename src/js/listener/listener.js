@@ -277,7 +277,7 @@ function addGroupListener() {
         // Re-render user table if succeeded
         if (result["success"]) {
             // Re-render actual user table
-            refreshGroups();
+            refreshGroups("groups-container");
 
             // All popup boxes
             closeAllPopups();
@@ -309,24 +309,38 @@ function editGroupUsersListener() {
 
         // Current row user id variable
         let userId = null;
+
+        // Only used if super user was found
+        let skip = false;
         
         // Gets row user id based on full name
         for (let j = 0; j < fetchedUsers.length; j++) {
+            // Reset skip value
+            skip = false;
+
+            // Gets the user
+            const user = fetchedUsers[j];
+
+            // Exclude super users
+            if (user.super_user == 1) skip = true;
+
             // Gets the full name of current user in iteration
-            const currentFullName = `${fetchedUsers[j].first_name} ${fetchedUsers[j].last_name}`;
+            const currentFullName = `${user.first_name} ${user.last_name}`;
 
             // If row user was found, set row user id
             if (fullName == currentFullName) {
                 // Sets row user id
-                userId = fetchedUsers[j].id;
+                userId = user.id;
 
                 // Exit loop and current iteration
                 break;
             }
         }
-
-        // Skip if row user id was not found
-        if (userId == null) continue;
+        
+        /* Skip if row user id was not found
+         * or if skip boolean value is true
+         */
+        if (skip || userId == null) continue;
 
         // Adds the user if row is checked
         if (row.childNodes[1].childNodes[0].checked)
@@ -364,7 +378,7 @@ function editGroupUsersListener() {
         // Re-render user table if succeeded
         if (result["success"]) {
             // Re-render actual user table
-            refreshGroups();
+            refreshGroups("groups-container");
 
             // All popup boxes
             closeAllPopups();
