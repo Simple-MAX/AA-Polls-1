@@ -311,12 +311,15 @@ function createPollInsertedObject() {
                                 
                                 // Adds select option values if there is any
                                 for (let l = 0; l < insertedCreatePollData[i + 1].length; l++) {
+                                    // Current option value
+                                    let optionValue = insertedCreatePollData[i + 1][l][1];
+                                    
                                     // Skip if value is empty
-                                    if (insertedCreatePollData[i + 1][l][1] == "")
+                                    if (optionValue == "" || optionValue == insertedCreatePollData[i][1])
                                         continue;
 
                                     // Adds a select option value to values array
-                                    currentKey.values.push(insertedCreatePollData[i + 1][l][1]);
+                                    currentKey.values.push(optionValue);
                                 }            
                             }
                         }

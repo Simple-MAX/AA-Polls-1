@@ -241,10 +241,6 @@ function createPollListener() {
     // Makes code shorter
     let poll = insertedCreatePollStructure;
 
-    console.log(poll);
-
-    return;
-
     // Attempts to create and submit poll
     let result = createPoll(currentUser.token, poll);
 
