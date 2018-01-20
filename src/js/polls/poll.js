@@ -53,7 +53,7 @@ function loadPoll() {
     let pollId = getUrlParam("id");
 
     // Gets current group based on given id
-    let currentPoll = getPoll(pollId);
+    currentPoll = getPoll(pollId);
 
     // Terminate if group was not found
     if (currentPoll == null) {
@@ -65,7 +65,35 @@ function loadPoll() {
         return;
     }
 
-    // TODO
+    // Input bar listeners
+    let inputOutputIds = [
+        ["general-rate-input", "general-rate-output"],
+        ["section-2-rate-3-input", "section-2-rate-3-output"],
+        ["section-2-rate-4-input", "section-2-rate-4-output"]
+    ];
+
+    // Adds listener to each input and output element
+    for (let i = 0; i < inputOutputIds.length; i++) {
+        // Used to shorten code
+        let func = function(e) {
+            // Passes input event and output id
+            passElementValueListener(e, inputOutputIds[i][1]);
+        }
+
+        // Adds listener
+        addListener(inputOutputIds[i][0], func, "input");
+    }
+
+    // Inserts default values to cloned poll object
+    console.log(currentPoll);
+
+    return;
+
+    // Reformata new data and inserts it to global variable
+    setNewPollData(createdPoll, DEFAULT_POLL_IDS);
+
+    // Inserts poll data and values to elements
+    insertPollData(createdPollData, DEFAULT_POLL_IDS);
 }
 
 // Fetches all polls assigned to current user (Not done yet)
@@ -329,7 +357,6 @@ function getPoll(pollId) {
     // Return null if not found
     return null;
 }
-
 
 // Attempts to submit newly created poll
 function createPoll(token, poll, callback = null) {

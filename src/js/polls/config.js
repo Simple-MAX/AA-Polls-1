@@ -122,6 +122,7 @@ var pollCount = 0;
 
 var createdPoll = DEFAULT_POLL_STRUCTURE.poll;
 
+var currentPoll                 = {};
 var fetchedPoll                 = {};
 var insertedCreatePollData      = {};
 var insertedCreatePollStructure = {};

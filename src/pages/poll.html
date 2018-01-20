@@ -65,22 +65,21 @@
                         <div class="poll-right-divider">
                             <div class="poll-container">
                                 <div class="poll-col-0">
-                                    <h2>Bedömning</h2>
+                                    <input id="section-1-title" class="section-title" value="Section 1 title" disabled />
 
                                     <div class="poll-col-1-input">
-                                        <label>Grupp</label>
-
-                                        <input class="text-input" id="judge-group" />
+                                        <input id="section-1-sub-title-1" class="sub-title" value="Sub title 1" placeholder="Sub title 1" />
+                                        <input class="text-input" id="section-1-value-1" disabled />
                                     </div>
+            
                                     <div class="poll-col-1-input">
-                                        <label>Lägsta värde</label>
-
-                                        <input class="text-input" id="min" />   
+                                        <input id="section-1-sub-title-2" class="sub-title" value="Sub title 2" placeholder="Sub title 2" />
+                                        <input class="text-input" id="section-1-value-2" disabled />   
                                     </div>
+            
                                     <div class="poll-col-1-input">
-                                        <label>Högsta värde</label>
-
-                                        <input class="text-input" id="max" />   
+                                        <input id="section-1-sub-title-3" class="sub-title" value="Sub title 3" placeholder="Sub title 3" />
+                                        <input class="text-input" id="section-1-value-3" disabled />   
                                     </div>
                                 </div>
 
@@ -88,55 +87,68 @@
                                 <hr class="short-spacing" style="width: 100%;" />
 
                                 <div class="poll-col-2-input">
-                                    <h2>Detaljerat</h2>
+                                    <input id="section-2-title" class="section-title" value="Section 2 title" placeholder="Section 2 title" disabled />
 
                                     <div class="poll-col-2-input-divider">
-                                        <h4>Prognos på kort sikt</h4>
+                                        <input id="section-2-sub-title-1" class="sub-title" value="Section 2 sub title 1" placeholder="Section 2 sub title 1" disabled />
 
-                                        <select id="prog-short-option">
-                                            <option>Prognosalternativ</option>
+                                        <select id="section-2-select-1">
+                                            <option id="section-2-select-1-option-0">Select 1 option 1</option>
                                         </select>
 
-                                        <textarea id="prog-short-info" placeholder="Ytterligare prognos"></textarea>
+                                        <textarea id="section-2-text-1" placeholder="Section 2 placeholder 1"></textarea>
                                     </div>
+
                                     <div class="poll-col-2-input-divider">
-                                        <h4>Prognos på lång sikt</h4>
+                                        <input id="section-2-sub-title-2" class="sub-title" value="Section 2 sub title 2" placeholder="Section 2 sub title 2" disabled />
 
-                                        <select id="prog-long-option">
-                                            <option>Prognosalternativ</option>
-                                        </select>
+                                        <select id="section-2-select-2">
+                                                <option id="section-2-select-2-option-0">Select 2 option 1</option>
+                                            </select>
 
-                                        <textarea id="prog-long-info" placeholder="Ytterligare prognos"></textarea>
+                                        <textarea id="section-2-text-2" placeholder="Section 2 placeholder 2"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="poll-col-2-input">
                                     <div class="poll-col-2-input-divider">
-                                        <h4>Påverkandefaktorer</h4>
+                                        <input id="section-2-sub-title-3" class="sub-title" value="Section 2 sub title 3" placeholder="Section 2 sub title 3" disabled /> 
+                                        
+                                        <input  
+                                            class="text-input"
+                                            type="range" 
+                                            id="section-2-rate-3-input" 
+                                            min="0" 
+                                            max="10"
+                                        />
 
-                                        <input class="text-input" type="range" name="influencesNameIn" id="influencesIdIn" value="5" min="0" max="10" oninput="influencesIdOut.value = influencesIdIn.value">
+                                        <output id="section-2-rate-3-output">5</output>
 
-                                        <output name="influencesNameOut" id="influencesIdOut">5</output>
-
-                                        <select id="influences-option">
-                                            <option>Påverkansalternativ</option>
+                                        <select id="section-2-select-3">
+                                            <option id="section-2-select-3-option-0">Select 3 option 1</option>
                                         </select>
 
-                                        <textarea id="influences-info" placeholder="Ytterligare prognos"></textarea>
+                                        <textarea id="section-2-text-3" placeholder="Section 2 placeholder 3"></textarea>
                                     </div>
 
                                     <div class="poll-col-2-input-divider actions-color">
-                                        <h4>Åtgärder</h4>
+                                        <input id="section-2-sub-title-4" class="sub-title" value="Section 2 sub title 4" placeholder="Section 2 sub title 4" disabled /> 
 
-                                        <input class="text-input" type="range" name="actionsNameIn" id="actionsIdIn" value="5" min="0" max="10" oninput="actionsIdOut.value = actionsIdIn.value">
+                                        <input  
+                                            class="text-input"
+                                            type="range" 
+                                            id="section-2-rate-4-input" 
+                                            min="0" 
+                                            max="10"
+                                        />
+
+                                        <output id="section-2-rate-4-output">5</output>
                                         
-                                        <output name="actionsNameOut" id="actionsIdOut">5</output>
-                                        
-                                        <select id="actions-option">
-                                            <option>Åtgärdsalternativ</option>
+                                        <select id="section-2-select-4">
+                                            <option id="section-2-select-4-option-0">Select 4 option 1</option>
                                         </select>
 
-                                        <textarea id="actions-info" placeholder="Ytterligare prognos"></textarea>
+                                        <textarea id="section-2-text-4" placeholder="Section 2 placeholder 4"></textarea>
                                     </div>
 
                                     <button class="regular-button" id="submit-poll">Skicka in bedömning</button>
