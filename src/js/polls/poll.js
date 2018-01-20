@@ -77,21 +77,61 @@ function loadPoll() {
 
     // Adds listener to each input and output element
     for (let i = 0; i < inputOutputIds.length; i++) {
-        // Used to shorten code
+        // Passes input event and output id
         let func = function(e) {
-            // Passes input event and output id
             passElementValueListener(e, inputOutputIds[i][1]);
         }
 
-        // Adds listener
+        // Adds listener to element
         addListener(inputOutputIds[i][0], func, "input");
     }
 
     // Reformata new data and inserts it to global variable
-    currentPollData = setNewPollData(currentPoll);
+    currentPollData = setNewPollData(currentPoll, true);
+
+    // Cloned ids array
+    let modifiedIds = DEFAULT_POLL_IDS;
+
+    // Sections sub section count
+    const sectionCount = Object.keys(currentPoll).length - 1;
+    
+    // Removes unused id which causes errors if not used properly
+    for (let i = 0; i < sectionCount; i++) {
+        // Gets the current section select
+        let selectId = `section-2-select-${i + 1}-option-`;
+
+        /* Used to exit second loop and
+         * increase speed of iteration
+         */
+        let modified = false;
+
+        // Loops through each id and value
+        for (let j = 0; j < modifiedIds.length; j++) {
+            // Exit current loop if ids already is modified
+            if (modified) break;
+
+            // If first select data was found, change it
+            if (modifiedIds[j][0] == selectId + "0") {
+                // Change the current id
+                modifiedIds[j][0] = modifiedIds[j][0].replace("-option-0", "");
+
+                // Change the current id value
+                modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "values");
+
+                // Attempts to remove next element
+                if (modifiedIds[j + 1] != null) {
+                    // Deletes the unecessary id and value
+                    modifiedIds.splice(j + 1, 1);
+
+                    // Sets modified to true
+                    modified = true;
+                }
+            }
+        }
+    }
 
     // Inserts poll data and values to elements
-    insertPollData(currentPollData, DEFAULT_POLL_IDS);
+    insertPollData(currentPollData, modifiedIds);
 }
 
 // Fetches all polls assigned to current user (Not done yet)
@@ -145,12 +185,34 @@ function insertPollData(data, ids) {
                 element.value = data[i][0];
             else if (type == "text")
                 element.innerHTML = data[i][0];
+            else if (type == "select") {
+                // Gets the select element
+                let select = getElement(ids[i][0]);
+
+                // Removes all default options
+                removeChildren(ids[i][0]);
+
+                // Loops through each option
+                for (let j = 0; j < data[i][0].length; j++) {
+                    // Creates a new option id
+                    let optionId = `${ids[i][0]}-option-${j + 1}`;
+
+                    // Creates a new option element
+                    let option = createElement("option", optionId);
+
+                    // Adds current value to the new option
+                    option.innerHTML = data[i][0][j];
+
+                    // Appends new option to the select element
+                    select.appendChild(option);
+                }
+            }
         }
     }
 }
 
 // Creates poll data
-function setNewPollData(poll) {
+function setNewPollData(poll, selectValues = false) {
     // Creates new array with new data
     let pollData = [
         [poll.initial.section_title],
@@ -174,12 +236,33 @@ function setNewPollData(poll) {
             let currentSection = poll.details[i];
 
             // Creates new data for current section
-            let sectionData = [
-                [currentSection.sub_title],
-                [currentSection.option.placeholder, "text"],
-                [currentSection.option.placeholder, "placeholder"],
-                [currentSection.info.placeholder],
-            ];
+            let sectionData = [[currentSection.sub_title]];
+
+            // Gets current section option values
+            let value = currentSection.option.values;
+
+            /* Sets section option values to placeholder
+             * if option values array length is zero
+             */
+            if (value.length < 1)
+                value.push(currentSection.option.placeholder);
+
+            // Default select value
+            let selectData = [[value, "select"]];
+
+            // Avoid adding values if data there are no values
+            if (!selectValues) {
+                selectData = [
+                    [currentSection.option.placeholder, "text"],
+                    [currentSection.option.placeholder, "placeholder"]
+                ];
+            }
+
+            // Adds given select data accordingly
+            selectData.forEach(element => sectionData.push(element));
+
+            // Push last section data
+            sectionData.push([currentSection.info.placeholder]);
 
             // Adds all section element to the new poll data
             sectionData.forEach(section => pollData.push(section));
@@ -313,7 +396,7 @@ function createPollInsertedObject() {
                                 for (let l = 0; l < insertedCreatePollData[i + 1].length; l++) {
                                     // Current option value
                                     let optionValue = insertedCreatePollData[i + 1][l][1];
-                                    
+
                                     // Skip if value is empty
                                     if (optionValue == "" || optionValue == insertedCreatePollData[i][1])
                                         continue;
