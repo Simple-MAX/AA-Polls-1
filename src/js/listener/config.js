@@ -84,17 +84,6 @@ const Listeners = {
                 "click",
             ]
         },
-        Poll: {
-            Elements: [
-                "general-rate-input",
-            ],
-            Functions: [
-                (e) => passElementValueListener(e, "general-rate-output"),
-            ],
-            Type: [
-                "input",
-            ]
-        },
         Home: {
             Elements: [
                 "AA-P-T-1",

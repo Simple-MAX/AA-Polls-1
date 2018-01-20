@@ -33,15 +33,18 @@ function loadCreatePollData() {
         return;
     }
 
+    // Set current poll to default created poll
+    currentPoll = createdPoll;
+
     // Inserts default values to cloned poll object
-    createdPoll.group_id        = groupId;
-    createdPoll.initial.value_1 = groupId;
+    currentPoll.group_id        = groupId;
+    currentPoll.initial.value_1 = groupId;
 
     // Reformata new data and inserts it to global variable
-    setNewPollData(createdPoll, DEFAULT_POLL_IDS);
+    currentPollData = setNewPollData(currentPoll);
 
     // Inserts poll data and values to elements
-    insertPollData(createdPollData, DEFAULT_POLL_IDS);
+    insertPollData(currentPollData, DEFAULT_POLL_IDS);
 
     // Adds option buttons listeners
     addPollOptionsListener();
@@ -53,7 +56,7 @@ function loadPoll() {
     let pollId = getUrlParam("id");
 
     // Gets current group based on given id
-    currentPoll = getPoll(pollId);
+    currentPoll = getPoll(pollId).poll;
 
     // Terminate if group was not found
     if (currentPoll == null) {
@@ -84,16 +87,11 @@ function loadPoll() {
         addListener(inputOutputIds[i][0], func, "input");
     }
 
-    // Inserts default values to cloned poll object
-    console.log(currentPoll);
-
-    return;
-
     // Reformata new data and inserts it to global variable
-    setNewPollData(createdPoll, DEFAULT_POLL_IDS);
+    currentPollData = setNewPollData(currentPoll);
 
     // Inserts poll data and values to elements
-    insertPollData(createdPollData, DEFAULT_POLL_IDS);
+    insertPollData(currentPollData, DEFAULT_POLL_IDS);
 }
 
 // Fetches all polls assigned to current user (Not done yet)
@@ -123,14 +121,7 @@ function loadUserPolls(callback = null) {
 }
 
 // Inserts formatted data to poll container and its elements
-function insertPollData(pollStructure, ids) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-
-    // Defines data as pollStructure
-    let data = pollStructure;
-
+function insertPollData(data, ids) {
     // Terminate if data or ids is nullified
     if (data == null || ids == null) return;
 
@@ -159,32 +150,28 @@ function insertPollData(pollStructure, ids) {
 }
 
 // Creates poll data
-function setNewPollData() {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-
+function setNewPollData(poll) {
     // Creates new array with new data
     let pollData = [
-        [createdPoll.initial.section_title],
-        [createdPoll.initial.sub_title_1],
-        [createdPoll.initial.sub_title_2],
-        [createdPoll.initial.sub_title_3],
-        [createdPoll.initial.value_1],
-        [createdPoll.initial.value_2],
-        [createdPoll.initial.value_3],
-        [createdPoll.details.section_title]
+        [poll.initial.section_title],
+        [poll.initial.sub_title_1],
+        [poll.initial.sub_title_2],
+        [poll.initial.sub_title_3],
+        [poll.initial.value_1],
+        [poll.initial.value_2],
+        [poll.initial.value_3],
+        [poll.details.section_title]
     ];
 
     // Determines the length of all sub sections
-    const sectionCount = Object.keys(createdPoll.details).length - 1;
+    const sectionCount = Object.keys(poll.details).length - 1;
 
     // Loop only if number of detail sections is greater than zero
     if (sectionCount > 0) {
         // Loops through each section and adds new data
         for (let i = 0; i < sectionCount; i++) {
             // Current section in iteration
-            let currentSection = createdPoll.details[i];
+            let currentSection = poll.details[i];
 
             // Creates new data for current section
             let sectionData = [
@@ -199,10 +186,8 @@ function setNewPollData() {
         }
     }
 
-    /* Sets current and global variable 
-     * to a modified replacement
-     */
-    createdPollData = pollData;
+    // Returns final and formatted data
+    return pollData;
 }
 
 // Gets values from front-end 
@@ -214,14 +199,14 @@ function getNewPollData(data, ids) {
     // Terminate if element ids is null
     if (data == null || ids == null) return;
 
-    // Terminate if createdPollData length is not same as ids length
+    // Terminate if poll data length is not same as ids length
     if (data.length != ids.length) return;
 
     // Resets current, global variable
     insertedCreateData = [];
 
     // Initialization of new poll data array
-    let createData = [];
+    let pollData = [];
 
     // Loop through ids and get element values
     for (let i = 0; i < ids.length; i++) {
@@ -234,11 +219,11 @@ function getNewPollData(data, ids) {
         // Determines what attribute to fetch from
         if (type == "input") {
             // Pushes id and current element input value
-            createData.push([ids[i][0], currentElement.value]);
+            pollData.push([ids[i][0], currentElement.value]);
         } else if (type == "text") {
             // Pushes id and current element innerHTML value
-            createData.push([ids[i][0], currentElement.innerHTML]);
-        } else if (type == "placeholder") {
+            pollData.push([ids[i][0], currentElement.innerHTML]);
+        } else {
             // Current select input parent
             let optionsInputContainer = currentElement.parentNode;
             
@@ -257,11 +242,10 @@ function getNewPollData(data, ids) {
                 // Creates new input data to push
                 let inputData = [option.id];
                 
-                // If option value is empty, replace with placeholder
+                // If option value is empty, replace with placeholder value
                 if (option.value == "") 
-                    option.value = createdPollData[i][0];
-
-                // Pushes option value
+                    option.value = currentPollData[i][0];
+                
                 inputData.push(option.value);
 
                 // Adds select input values to values array
@@ -269,25 +253,21 @@ function getNewPollData(data, ids) {
             }
             
             // Pushes sub array with another sub array for select values
-            createData.push(values);
+            pollData.push(values);
         }
     }
 
     // Sets newly created data to global variable
-    insertedCreatePollData = createData;
+    return pollData;
 }
 
 // Attempts to create poll with inserted data
 function createPollInsertedObject() {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-
     // Gets inserted data from site
-    getNewPollData(createdPollData, DEFAULT_POLL_IDS);
+    insertedCreatePollData = getNewPollData(currentPollData, DEFAULT_POLL_IDS);
     
     // Resets current and global inserted data object
-    insertedCreatePollStructure = createdPoll;
+    insertedCreatePollStructure = currentPoll;
 
     // Terminate if poll object is null
     if (insertedCreatePollStructure == null) return;
@@ -300,24 +280,47 @@ function createPollInsertedObject() {
 
         // Loops through default poll element ids array
         for (let j = 0; j < DEFAULT_POLL_IDS.length; j++) {
+            // Splits current JSON key id for reference
+            let keys = DEFAULT_POLL_IDS[j][1].split(".");
+
             /* Checks for current element id in global 
              * poll ids array and proceeds if found
              */
             if (primaryId == DEFAULT_POLL_IDS[j][0]) {
-                // Splits current JSON key id for reference
-                let keys = DEFAULT_POLL_IDS[j][1].split(".");
-
                 // Assigns variable to key as parent based on index
                 let currentKey = insertedCreatePollStructure;
 
                 // Sets new key each sequence in iteration
                 for (let k = 0; k < keys.length; k++) {
                     // Add poll data value to current poll object key
-                    if (k == keys.length - 1)
+                    if (k == keys.length - 1 && keys[k] != "values")
                         currentKey[keys[k]] = primaryData;
 
                     // Sets the key to a new and child key
                     currentKey = currentKey[keys[k]];
+
+                    // Proceeds if current object key is "option"
+                    if (keys[k] == "option" && currentKey.values.length < 1) {
+                        // Proceed if next index and value is not null or empty
+                        if (insertedCreatePollData[i + 1] != null) {
+                            // Determines if current data is apart of a picker
+                            if (typeof insertedCreatePollData[i + 1][0] == "object" &&
+                                insertedCreatePollData[i + 1].length > 0) {
+                                // Adds first value as selected value
+                                currentKey.selected = insertedCreatePollData[i + 1][0][1];
+                                
+                                // Adds select option values if there is any
+                                for (let l = 0; l < insertedCreatePollData[i + 1].length; l++) {
+                                    // Skip if value is empty
+                                    if (insertedCreatePollData[i + 1][l][1] == "")
+                                        continue;
+
+                                    // Adds a select option value to values array
+                                    currentKey.values.push(insertedCreatePollData[i + 1][l][1]);
+                                }            
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -356,6 +359,46 @@ function getPoll(pollId) {
 
     // Return null if not found
     return null;
+}
+
+// Adds group polls to a specified container
+function insertGroupPolls(containerId, polls) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
+    // Gets the container element
+    let container = getElement(containerId);
+
+    /* Loops through and adds new poll block 
+     * based on current index of iteration
+     */
+    for (let i = 0; i < polls.length; i++) {
+        // Adds a new poll block
+        container.appendChild(createPollBlockElement(polls[i], i));
+    }
+}
+
+// Adds group polls to a specified container
+function insertUserPollsData(containerId, polls) {
+    // Gets the container element
+    let container = getElement(containerId);
+
+    /* Loops through and adds new poll block 
+     * based on current index of iteration
+     */
+    for (let i = 0; i < polls.length; i++) {
+        // Sets custom function to current poll
+        let func = function() {
+            location.href = `poll.html?id=${polls[i]["id"]}`;
+        }
+
+        // Creates the poll block
+        let poll = createPollBlockElement(polls[i], i, func);
+
+        // Adds a new poll block
+        container.appendChild(poll);
+    }
 }
 
 // Attempts to submit newly created poll
@@ -568,46 +611,6 @@ function fetchGroupPolls(token, group) {
     return modifiedGroup;
 }
 
-// Adds group polls to a specified container
-function insertGroupPolls(containerId, polls) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-
-    // Gets the container element
-    let container = getElement(containerId);
-
-    /* Loops through and adds new poll block 
-     * based on current index of iteration
-     */
-    for (let i = 0; i < polls.length; i++) {
-        // Adds a new poll block
-        container.appendChild(createPollBlockElement(polls[i], i));
-    }
-}
-
-// Adds group polls to a specified container
-function insertUserPollsData(containerId, polls) {
-    // Gets the container element
-    let container = getElement(containerId);
-
-    /* Loops through and adds new poll block 
-     * based on current index of iteration
-     */
-    for (let i = 0; i < polls.length; i++) {
-        // Sets custom function to current poll
-        let func = function() {
-            location.href = `poll.html?id=${polls[i]["id"]}`;
-        }
-
-        // Creates the poll block
-        let poll = createPollBlockElement(polls[i], i, func);
-
-        // Adds a new poll block
-        container.appendChild(poll);
-    }
-}
-
 // Adds a new option to select element with id
 function addOptionValue(sectionId, selectId, value) {
     // Terminate if value is empty
@@ -758,7 +761,7 @@ function addPollOptionsListener(placeholder = "Alternativ") {
     const selectId = "select-";
 
     // Determines the length of all sub sections
-    const sectionCount = Object.keys(createdPoll.details).length - 1;
+    const sectionCount = Object.keys(currentPoll.details).length - 1;
 
     /* Adds add option to all elements accordingly
      * and the value of index is always increased by one

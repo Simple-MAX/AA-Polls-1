@@ -241,6 +241,10 @@ function createPollListener() {
     // Makes code shorter
     let poll = insertedCreatePollStructure;
 
+    console.log(poll);
+
+    return;
+
     // Attempts to create and submit poll
     let result = createPoll(currentUser.token, poll);
 
@@ -250,8 +254,8 @@ function createPollListener() {
         if (result["success"]) {
             // Redirects user back to group page
             redirectToPage(Pages.Groups);
-        } else alert("Kunde inte skapa formulär");
-    } else alert("Kunde inte skapa formulär");
+        } else alert("Kunde inte skapa formulär, försök igen");
+    } else alert("Kunde inte skapa formulär, försök igen");
 }
 
 // Adds a new group

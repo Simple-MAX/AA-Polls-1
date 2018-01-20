@@ -33,7 +33,7 @@ const DEFAULT_POLL_STRUCTURE = {
             0: {
                 sub_title: "Prognos på kort sikt",
                 option: {
-                    placeholder: "Prognosalternativ",
+                    placeholder: "Alternativ",
                     selected: "",
                     values: []
                 },
@@ -45,7 +45,7 @@ const DEFAULT_POLL_STRUCTURE = {
             1: {
                 sub_title: "Prognos på lång sikt",
                 option: {
-                    placeholder: "Prognosalternativ",
+                    placeholder: "Alternativ",
                     selected: "",
                     values: []
                 },
@@ -58,7 +58,7 @@ const DEFAULT_POLL_STRUCTURE = {
                 sub_title: "Påverkandefaktorer",
                 rate: 0,
                 option: {
-                    placeholder: "Påverkansalternativ",
+                    placeholder: "Alternativ",
                     selected: "",
                     values: []
                 },
@@ -71,7 +71,7 @@ const DEFAULT_POLL_STRUCTURE = {
                 sub_title: "Åtgärder",
                 rate: 0,
                 option: {
-                    placeholder: "Åtgärdsalternativ",
+                    placeholder: "Alternativ",
                     selected: "",
                     values: []
                 },
@@ -161,3 +161,5 @@ var createdPollData = [
     [createdPoll.details[3].option.placeholder, "placeholder"],
     [createdPoll.details[3].info.placeholder],
 ];
+
+var currentPollData = createdPollData;
