@@ -74,20 +74,27 @@ function loadPoll() {
 
     // Input bar listeners
     let inputOutputIds = [
-        ["general-rate-input", "general-rate-output"],
-        ["section-2-rate-3-input", "section-2-rate-3-output"],
-        ["section-2-rate-4-input", "section-2-rate-4-output"]
+        ["general-rate-", currentPoll.general_rate],
+        ["section-2-rate-3-", currentPoll.details[2].rate],
+        ["section-2-rate-4-", currentPoll.details[3].rate]
     ];
 
     // Adds listener to each input and output element
     for (let i = 0; i < inputOutputIds.length; i++) {
         // Passes input event and output id
         let func = function(e) {
-            passElementValueListener(e, inputOutputIds[i][1]);
+            passElementValueListener(e, inputOutputIds[i][0] + "output");
         }
 
+        // Gets input and output elements
+        let output  = getElement(inputOutputIds[i][0] + "output"),
+            input   = getElement(inputOutputIds[i][0] + "input");
+
+        // Adds input and output values
+        output.value = input.value = inputOutputIds[i][1];
+
         // Adds listener to element
-        addListener(inputOutputIds[i][0], func, "input");
+        addListener(inputOutputIds[i][0] + "input", func, "input");
     }
 
     // Reformata new data and inserts it to global variable
@@ -98,6 +105,8 @@ function loadPoll() {
 
     // Sections sub section count
     const sectionCount = Object.keys(currentPoll).length - 1;
+
+    console.log(currentPollData);
     
     // Removes unused id which causes errors if not used properly
     for (let i = 0; i < sectionCount; i++) {
