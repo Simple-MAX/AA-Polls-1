@@ -56,11 +56,7 @@ function loadPoll() {
     let pollId = getUrlParam("id");
 
     // Gets current group based on given id
-    currentPoll = getUserPoll(pollId);
-
-    console.log(currentPoll);
-
-    currentPoll = currentPoll.poll;
+    currentPoll = getUserPoll(pollId).poll;
 
     // Terminate if group was not found
     if (currentPoll == null) {
@@ -146,6 +142,8 @@ function loadPoll() {
                 modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "text");
         }
     }
+
+    console.log(modifiedIds);
 
     // Inserts poll data and values to elements
     insertPollData(currentPollData, modifiedIds);
