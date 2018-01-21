@@ -519,6 +519,35 @@ function sendPoll(submit = false) {
 
     // Attempts to create new poll data
     createPollInsertedObject(currentPollData, ids);
+
+    // Array with all input bar ids
+    let inputRateBars = [
+        ["general_rate", "general-rate-input"],
+        ["details.2.rate", "section-2-rate-3-input"],
+        ["details.3.rate", "section-2-rate-4-input"]
+    ];
+
+    // Loops through each bar
+    for (let i = 0; i < inputRateBars.length; i++) {
+        // Gets the input bar value
+        let value = getElementValue(inputRateBars[i][1]);
+
+        // Separates all node keys
+        let keys = inputRateBars[i][0].split(".");
+
+        // Gets tree node
+        let currentKey = insertedCreatePollStructure;
+
+        // Loops through all keys
+        for (let j = 0; j < keys.length; j++) {
+            // Proceeds if node key is equaled to "rate"
+            if (j == keys.length - 1) 
+                currentKey[keys[j]] = value;
+
+            // Goes to the next node with current key
+            currentKey = currentKey[keys[j]];
+        }
+    }
 }
 
 // Attempts to submit newly created poll
