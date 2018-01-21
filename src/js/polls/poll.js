@@ -90,7 +90,7 @@ function loadPoll() {
     currentPollData = setNewPollData(currentPoll, true);
 
     // Cloned ids array
-    let modifiedIds = DEFAULT_POLL_IDS;
+    modifiedIds = DEFAULT_POLL_IDS;
 
     // Sections sub section count
     const sectionCount = Object.keys(currentPoll).length - 1;
@@ -127,6 +127,10 @@ function loadPoll() {
                     modified = true;
                 }
             }
+
+            // Changes id node target from "placeholder" to "text"
+            if (stringContains(modifiedIds[j][1], "placeholder"))
+                modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "text");
         }
     }
 
@@ -181,11 +185,16 @@ function insertPollData(data, ids) {
             let type = data[i][1] != null ? data[i][1] : "input";
 
             // Determines what attribute to modify
-            if (type == "input")
+            if (type == "input") {
+                // Sets element value to current data value
                 element.value = data[i][0];
-            else if (type == "text")
+            } else if (type == "text") {
+                // Sets element inner HTML value to current data value
                 element.innerHTML = data[i][0];
-            else if (type == "select") {
+            } else if (type == "placeholder") {
+                // Sets element placeholder to current data value
+                element.placeholder = data[i][0];
+            } else if (type == "select") {
                 // Gets the select element
                 let select = getElement(ids[i][0]);
 
@@ -261,8 +270,14 @@ function setNewPollData(poll, selectValues = false) {
             // Adds given select data accordingly
             selectData.forEach(element => sectionData.push(element));
 
+            // Default select value
+            let textType = "placeholder";
+
+            // If selectValues is not true, change text type to text
+            if (!selectValues) textType = "text";
+
             // Push last section data
-            sectionData.push([currentSection.info.placeholder]);
+            sectionData.push([currentSection.info.placeholder, textType]);
 
             // Adds all section element to the new poll data
             sectionData.forEach(section => pollData.push(section));
@@ -275,10 +290,6 @@ function setNewPollData(poll, selectValues = false) {
 
 // Gets values from front-end 
 function getNewPollData(data, ids) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-
     // Terminate if element ids is null
     if (data == null || ids == null) return;
 
@@ -300,7 +311,7 @@ function getNewPollData(data, ids) {
         let currentElement = getElement(ids[i][0]);
 
         // Determines what attribute to fetch from
-        if (type == "input") {
+        if (type == "input" || type == "select" || type == "placeholder") {
             // Pushes id and current element input value
             pollData.push([ids[i][0], currentElement.value]);
         } else if (type == "text") {
@@ -345,9 +356,9 @@ function getNewPollData(data, ids) {
 }
 
 // Attempts to create poll with inserted data
-function createPollInsertedObject() {
+function createPollInsertedObject(data, ids) {
     // Gets inserted data from site
-    insertedCreatePollData = getNewPollData(currentPollData, DEFAULT_POLL_IDS);
+    insertedCreatePollData = getNewPollData(data, ids);
     
     // Resets current and global inserted data object
     insertedCreatePollStructure = currentPoll;
@@ -362,14 +373,14 @@ function createPollInsertedObject() {
         let primaryData = insertedCreatePollData[i][1];
 
         // Loops through default poll element ids array
-        for (let j = 0; j < DEFAULT_POLL_IDS.length; j++) {
+        for (let j = 0; j < ids.length; j++) {
             // Splits current JSON key id for reference
-            let keys = DEFAULT_POLL_IDS[j][1].split(".");
+            let keys = ids[j][1].split(".");
 
             /* Checks for current element id in global 
              * poll ids array and proceeds if found
              */
-            if (primaryId == DEFAULT_POLL_IDS[j][0]) {
+            if (primaryId == ids[j][0]) {
                 // Assigns variable to key as parent based on index
                 let currentKey = insertedCreatePollStructure;
 
@@ -382,7 +393,10 @@ function createPollInsertedObject() {
                     // Sets the key to a new and child key
                     currentKey = currentKey[keys[k]];
 
-                    // Proceeds if current object key is "option"
+                    /* Proceeds if current object key is "option" and
+                     * current key values array is either greater or
+                     * lesser than zero to determine submission type sequence
+                     */
                     if (keys[k] == "option" && currentKey.values.length < 1) {
                         // Proceed if next index and value is not null or empty
                         if (insertedCreatePollData[i + 1] != null) {
@@ -406,6 +420,12 @@ function createPollInsertedObject() {
                                 }            
                             }
                         }
+                    } else if (keys[k] == "option" && currentKey.values.length > 0) {
+                        /* Checks if current id does not contain "option" in it
+                         * and attempts to add the selected value to selected key
+                         */
+                        if (keys[k] == "option" && !stringContains(ids[i][0], "option"))
+                            currentKey.selected = insertedCreatePollData[i][1];
                     }
                 }
             }
@@ -487,6 +507,20 @@ function insertUserPollsData(containerId, polls) {
     }
 }
 
+// Attempts to get and format new poll data
+function sendPoll(submit = false) {
+    // Sets default id
+    let ids = DEFAULT_POLL_IDS;
+    
+    /* Passes different values based on
+     * the type of submission
+     */
+    if (submit) ids = modifiedIds;
+
+    // Attempts to create new poll data
+    createPollInsertedObject(currentPollData, ids);
+}
+
 // Attempts to submit newly created poll
 function createPoll(token, poll, callback = null) {
     // Terminate if current user is not admin or super user
@@ -511,6 +545,54 @@ function createPoll(token, poll, callback = null) {
      * with the given url, function contains optional arguments
      */
     let result = request(POLL_API_URL, params, "PUT");
+    
+    /* If result is an object type, it will return
+     * some data with from the endpoint, regardless whether it's
+     * successful or not. If not, it will return an error string.
+     */
+    if (typeof result == "object") {
+        // If the result was successful
+        if (result["success"] && result["data"] != null) {
+            // Call a custom and passed callback function
+            if (callback != null) {
+                /* Creates a cloned callback function and passes
+                 * fetched data as parameter for external and quick access
+                 */
+                const execCallback = (passedData) => callback(passedData);
+
+                // Executes the cloned function
+                execCallback(result);
+            }
+        }
+
+        // Assigns fetched data to data variable
+        data = result;
+    }
+
+    // Returns final data
+    return data;
+}
+
+// Attempts to submit newly created poll
+function submitPoll(token, poll, callback = null) {
+    // Data variable to return
+    let data = null;
+    
+    // Creates a new array for possible parameters
+    let params = {};
+
+    /* Gets the appropriate values and store them
+     * according to a determined structure below
+     */
+    if (token != "" && poll != null) {
+        params.keys     = ["token", "poll"];
+        params.values   = [token, JSON.stringify(poll)];
+    } else return data;
+    
+    /* Executes an AJAX request (Vanilla JS, not jQuery)
+     * with the given url, function contains optional arguments
+     */
+    let result = request(POLL_API_URL, params, "POST");
     
     /* If result is an object type, it will return
      * some data with from the endpoint, regardless whether it's

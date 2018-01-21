@@ -84,6 +84,17 @@ const Listeners = {
                 "click",
             ]
         },
+        Poll: {
+            Elements: [
+                "submit-poll",
+            ],
+            Functions: [
+                () => submitPollListener(),
+            ],
+            Type: [
+                "click",
+            ]
+        },
         Home: {
             Elements: [
                 "AA-P-T-1",

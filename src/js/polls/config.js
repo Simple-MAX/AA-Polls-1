@@ -127,6 +127,7 @@ var fetchedPoll                 = {};
 var insertedCreatePollData      = {};
 var insertedCreatePollStructure = {};
 
+var modifiedIds         = [];
 var fetchedPolls        = [];
 var submittedPolls      = [];
 var nonSubmittedPolls   = [];

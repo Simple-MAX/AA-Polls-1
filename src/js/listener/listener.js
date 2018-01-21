@@ -229,7 +229,7 @@ function createPollListener() {
     /* Gets inserted data from all fields and
      * stores all values accordingly and carefully
      */
-    createPollInsertedObject();
+    sendPoll();
 
     // Terminate if poll object is null
     if (insertedCreatePollStructure == null) {
@@ -252,6 +252,40 @@ function createPollListener() {
             redirectToPage(Pages.Groups);
         } else alert("Kunde inte skapa formulär, försök igen");
     } else alert("Kunde inte skapa formulär, försök igen");
+}
+
+// Creates poll on click
+function submitPollListener() {
+    /* Gets inserted data from all fields and
+     * stores all values accordingly and carefully
+     */
+    sendPoll(true);
+
+    // Terminate if poll object is null
+    if (insertedCreatePollStructure == null) {
+        alert("Kunde inte skapa formulär");
+
+        return;
+    }
+
+    // Makes code shorter
+    let poll = insertedCreatePollStructure;
+
+    console.log(poll);
+
+    return;
+
+    // Attempts to create and submit poll
+    let result = submitPoll(currentUser.token, poll);
+
+    // If result is successful, proceed, else alert user
+    if (result != null) {
+        // Re-render user table if succeeded
+        if (result["success"]) {
+            // Redirects user back to group page
+            redirectToPage(Pages.Home);
+        } else alert("Kunde inte skicka bedömning, försök igen");
+    } else alert("Kunde inte skicka bedömning, försök igen");
 }
 
 // Adds a new group
