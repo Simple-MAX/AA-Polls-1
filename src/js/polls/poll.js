@@ -68,6 +68,9 @@ function loadPoll() {
         return;
     }
 
+    // Sets user id to poll node
+    currentPoll["user_id"] = currentUser.id;
+
     // Input bar listeners
     let inputOutputIds = [
         ["general-rate-input", "general-rate-output"],

@@ -271,12 +271,18 @@ function submitPollListener() {
     // Makes code shorter
     let poll = insertedCreatePollStructure;
 
-    console.log(poll);
+    // Adds user id to poll
+    poll["user_id"] = currentUser.id;
 
-    return;
+    // Creates poll data to submit
+    let pollData = {
+        id: poll.id,
+        group_id: poll.group_id,
+        poll: poll,
+    };
 
     // Attempts to create and submit poll
-    let result = submitPoll(currentUser.token, poll);
+    let result = submitPoll(currentUser.token, pollData);
 
     // If result is successful, proceed, else alert user
     if (result != null) {
