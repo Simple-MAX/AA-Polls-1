@@ -56,7 +56,11 @@ function loadPoll() {
     let pollId = getUrlParam("id");
 
     // Gets current group based on given id
-    currentPoll = getPoll(pollId).poll;
+    currentPoll = getUserPoll(pollId);
+
+    console.log(currentPoll);
+
+    currentPoll = currentPoll.poll;
 
     // Terminate if group was not found
     if (currentPoll == null) {
@@ -67,9 +71,6 @@ function loadPoll() {
 
         return;
     }
-
-    // Sets user id to poll node
-    currentPoll["user_id"] = currentUser.id;
 
     // Input bar listeners
     let inputOutputIds = [
@@ -456,13 +457,16 @@ function getPollGroup(groupId) {
 }
 
 // Gets current group based on passed id
-function getPoll(pollId) {
+function getUserPoll(pollId) {
+    // Merges non submitted and submitted polls
+    let polls = submittedPolls.concat(nonSubmittedPolls);
+
     // Loops through each group
-    for (let i = 0; i < nonSubmittedPolls.length; i++) {
+    for (let i = 0; i < polls.length; i++) {
         // Sets currentGroup to current object in iteration
-        if (pollId == nonSubmittedPolls[i].id) {
+        if (pollId == polls[i].id) {
             // Set currentGroup to object
-            return nonSubmittedPolls[i];
+            return polls[i];
         }
     }
 
@@ -502,8 +506,11 @@ function insertUserPollsData(containerId, polls) {
             location.href = `poll.html?id=${polls[i]["id"]}`;
         }
 
+        // Gets the index from the poll data
+        let index = parseInt(polls[i]["id"].replace("AA-P-", ""));
+
         // Creates the poll block
-        let poll = createPollBlockElement(polls[i], i, func);
+        let poll = createPollBlockElement(polls[i], index, func);
 
         // Adds a new poll block
         container.appendChild(poll);
@@ -523,32 +530,35 @@ function sendPoll(submit = false) {
     // Attempts to create new poll data
     createPollInsertedObject(currentPollData, ids);
 
-    // Array with all input bar ids
-    let inputRateBars = [
-        ["general_rate", "general-rate-input"],
-        ["details.2.rate", "section-2-rate-3-input"],
-        ["details.3.rate", "section-2-rate-4-input"]
-    ];
+    // Add input bar rates if submit is true
+    if (submit) {
+        // Array with all input bar ids
+        let inputRateBars = [
+            ["general_rate", "general-rate-input"],
+            ["details.2.rate", "section-2-rate-3-input"],
+            ["details.3.rate", "section-2-rate-4-input"]
+        ];
 
-    // Loops through each bar
-    for (let i = 0; i < inputRateBars.length; i++) {
-        // Gets the input bar value
-        let value = getElementValue(inputRateBars[i][1]);
+        // Loops through each bar
+        for (let i = 0; i < inputRateBars.length; i++) {
+            // Gets the input bar value
+            let value = getElementValue(inputRateBars[i][1]);
 
-        // Separates all node keys
-        let keys = inputRateBars[i][0].split(".");
+            // Separates all node keys
+            let keys = inputRateBars[i][0].split(".");
 
-        // Gets tree node
-        let currentKey = insertedCreatePollStructure;
+            // Gets tree node
+            let currentKey = insertedCreatePollStructure;
 
-        // Loops through all keys
-        for (let j = 0; j < keys.length; j++) {
-            // Proceeds if node key is equaled to "rate"
-            if (j == keys.length - 1) 
-                currentKey[keys[j]] = value;
+            // Loops through all keys
+            for (let j = 0; j < keys.length; j++) {
+                // Proceeds if node key is equaled to "rate"
+                if (j == keys.length - 1) 
+                    currentKey[keys[j]] = value;
 
-            // Goes to the next node with current key
-            currentKey = currentKey[keys[j]];
+                // Goes to the next node with current key
+                currentKey = currentKey[keys[j]];
+            }
         }
     }
 }
@@ -620,7 +630,7 @@ function submitPoll(token, poll, callback = null) {
         params.keys     = ["token", "poll"];
         params.values   = [token, JSON.stringify(poll)];
     } else return data;
-    
+
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */

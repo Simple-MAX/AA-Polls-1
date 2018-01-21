@@ -101,6 +101,9 @@ function initialize() {
                         // Load finished and unfinished polls
                         loadUserPolls();
 
+                        console.log(submittedPolls);
+                        console.log(nonSubmittedPolls);
+
                         // Inserts all and existing user polls data
                         insertUserPollsData("non-submitted-polls", nonSubmittedPolls);
                         insertUserPollsData("submitted-polls", submittedPolls);
