@@ -85,6 +85,9 @@ function loadPoll() {
 
     // Modify ids and data if poll already is submitted
     if (submitted) {
+        // Removes submit button
+        removeElement("submit-poll");
+
         // Input bar listeners
         let inputOutputIds = [
             ["general-rate-", currentPoll.general_rate],
@@ -105,6 +108,12 @@ function loadPoll() {
 
             // Adds input and output values
             output.value = input.value = inputOutputIds[i][1];
+
+            // Disable the input bars if poll is submitted
+            if (submitted) {
+                output.setAttribute("disabled", "");
+                input.setAttribute("disabled", "");
+            }
 
             // Adds listener to element
             addListener(inputOutputIds[i][0] + "input", func, "input");
@@ -177,7 +186,7 @@ function loadPoll() {
     }
 
     // Inserts poll data and values to elements
-    insertPollData(currentPollData, modifiedIds);
+    insertPollData(currentPollData, modifiedIds, submitted);
 }
 
 // Fetches all polls assigned to current user (Not done yet)
@@ -207,7 +216,7 @@ function loadUserPolls(callback = null) {
 }
 
 // Inserts formatted data to poll container and its elements
-function insertPollData(data, ids) {
+function insertPollData(data, ids, disableAll = false) {
     // Terminate if data or ids is nullified
     if (data == null || ids == null) return;
 
@@ -258,6 +267,9 @@ function insertPollData(data, ids) {
                     select.appendChild(option);
                 }
             }
+
+            // Disable the element if disableAll is true
+            if (disableAll) element.setAttribute("disabled", "");
         }
     }
 }
