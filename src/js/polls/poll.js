@@ -68,82 +68,113 @@ function loadPoll() {
         return;
     }
 
-    // Input bar listeners
-    let inputOutputIds = [
-        ["general-rate-", currentPoll.general_rate],
-        ["section-2-rate-3-", currentPoll.details[2].rate],
-        ["section-2-rate-4-", currentPoll.details[3].rate]
-    ];
+    // Determines if current poll already is submitted
+    let submitted = false;
 
-    // Adds listener to each input and output element
-    for (let i = 0; i < inputOutputIds.length; i++) {
-        // Passes input event and output id
-        let func = function(e) {
-            passElementValueListener(e, inputOutputIds[i][0] + "output");
-        }
-
-        // Gets input and output elements
-        let output  = getElement(inputOutputIds[i][0] + "output"),
-            input   = getElement(inputOutputIds[i][0] + "input");
-
-        // Adds input and output values
-        output.value = input.value = inputOutputIds[i][1];
-
-        // Adds listener to element
-        addListener(inputOutputIds[i][0] + "input", func, "input");
-    }
+    // Checks if current poll already is submitted
+    submittedPolls.forEach(function(data) {
+        // Set submitted to true if found
+        if (data.poll == currentPoll) submitted = true; 
+    });
 
     // Reformata new data and inserts it to global variable
-    currentPollData = setNewPollData(currentPoll, true);
+    currentPollData = setNewPollData(currentPoll, submitted);
 
     // Cloned ids array
     modifiedIds = DEFAULT_POLL_IDS;
 
-    // Sections sub section count
-    const sectionCount = Object.keys(currentPoll).length - 1;
+    // Modify ids and data if poll already is submitted
+    if (submitted) {
+        // Input bar listeners
+        let inputOutputIds = [
+            ["general-rate-", currentPoll.general_rate],
+            ["section-2-rate-3-", currentPoll.details[2].rate],
+            ["section-2-rate-4-", currentPoll.details[3].rate]
+        ];
 
-    console.log(currentPollData);
-    
-    // Removes unused id which causes errors if not used properly
-    for (let i = 0; i < sectionCount; i++) {
-        // Gets the current section select
-        let selectId = `section-2-select-${i + 1}-option-`;
-
-        /* Used to exit second loop and
-         * increase speed of iteration
-         */
-        let modified = false;
-
-        // Loops through each id and value
-        for (let j = 0; j < modifiedIds.length; j++) {
-            // Exit current loop if ids already is modified
-            if (modified) break;
-
-            // If first select data was found, change it
-            if (modifiedIds[j][0] == selectId + "0") {
-                // Change the current id
-                modifiedIds[j][0] = modifiedIds[j][0].replace("-option-0", "");
-
-                // Change the current id value
-                modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "values");
-
-                // Attempts to remove next element
-                if (modifiedIds[j + 1] != null) {
-                    // Deletes the unecessary id and value
-                    modifiedIds.splice(j + 1, 1);
-
-                    // Sets modified to true
-                    modified = true;
-                }
+        // Adds listener to each input and output element
+        for (let i = 0; i < inputOutputIds.length; i++) {
+            // Passes input event and output id
+            let func = function(e) {
+                passElementValueListener(e, inputOutputIds[i][0] + "output");
             }
 
-            // Changes id node target from "placeholder" to "text"
-            if (stringContains(modifiedIds[j][1], "placeholder"))
-                modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "text");
+            // Gets input and output elements
+            let output  = getElement(inputOutputIds[i][0] + "output"),
+                input   = getElement(inputOutputIds[i][0] + "input");
+
+            // Adds input and output values
+            output.value = input.value = inputOutputIds[i][1];
+
+            // Adds listener to element
+            addListener(inputOutputIds[i][0] + "input", func, "input");
+        }
+
+        // Sections sub section count
+        const sectionCount = Object.keys(currentPoll).length - 1;
+        
+        // Removes unused id which causes errors if not used properly
+        for (let i = 0; i < sectionCount; i++) {
+            // Gets the current section select
+            let selectId = `section-2-select-${i + 1}-option-`;
+
+            /* Used to exit second loop and
+            * increase speed of iteration
+            */
+            let modified = false;
+
+            // Loops through each id and value
+            for (let j = 0; j < modifiedIds.length; j++) {
+                // Exit current loop if ids already is modified
+                if (modified) break;
+
+                // If first select data was found, change it
+                if (modifiedIds[j][0] == selectId + "0") {
+                    // Change the current id
+                    modifiedIds[j][0] = modifiedIds[j][0].replace("-option-0", "");
+
+                    // Change the current id value
+                    modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "values");
+
+                    // Attempts to remove next element
+                    if (modifiedIds[j + 1] != null) {
+                        // Deletes the unecessary id and value
+                        modifiedIds.splice(j + 1, 1);
+
+                        // Sets modified to true
+                        modified = true;
+                    } 
+                }
+
+                // Changes id node target from "placeholder" to "text"
+                if (stringContains(modifiedIds[j][1], "placeholder"))
+                    modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "text");
+            }
+
+            // If info text is not empty, change type from placeholder to text
+            if (currentPoll.details[i] != undefined) {
+                // Used to shorten code
+                let details = currentPoll.details[i];
+
+                if (details.info.text != "") {
+                    // Loops through new poll data
+                    for (let j = 0; j < currentPollData.length; j++) {
+                        /* Proceed if element with current 
+                        * placeholder value was found
+                        */
+                        if (currentPollData[j][0] == details.info.placeholder) {
+                            // Sets the placeholder to text and changes value
+                            currentPollData[j][0] = details.info.text;
+                            currentPollData[j][1] = "text";
+
+                            // Exits sub iteration
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
-
-    console.log(modifiedIds);
 
     // Inserts poll data and values to elements
     insertPollData(currentPollData, modifiedIds);
