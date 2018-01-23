@@ -40,6 +40,12 @@ function renderStatistics(canvasId, stats = DEFAULT_STATS) {
                 backgroundColor: "transparent",
                 borderColor: "blue",
                 borderWidth: 1
+            }, {
+                label: '# of Votes',
+                data: [4, 12, 11, 15, 2, 10],
+                backgroundColor: "transparent",
+                borderColor: "green",
+                borderWidth: 1
             }]
         },
         options: {
