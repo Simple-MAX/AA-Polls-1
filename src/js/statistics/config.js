@@ -19,7 +19,6 @@ const MONTHS = [
     "November", "October",  "December"
 ];
 
-// Constant variables
 const DEFAULT_STATS = { 
     Chart: { 
         Min: 0, 

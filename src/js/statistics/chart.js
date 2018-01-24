@@ -26,26 +26,26 @@ function renderStatistics(canvasId, stats = DEFAULT_STATS) {
 
     // Creates options and inserts chart data
     const options = {
-        type: 'line',
+        type: "line",
         data: {
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: "Medelvärde",
+                data: [12, 13, 3, 5, 2, 3],
                 backgroundColor: "transparent",
-                borderColor: "red",
-                borderWidth: 1
+                borderColor: "#00a1ff",
+                borderWidth: 3
             }, {
-                label: '# of Votes',
-                data: [2, 19, 15, 5, 10, 3],
+                label: "Max värde",
+                data: [2, 13, 15, 5, 10, 3],
                 backgroundColor: "transparent",
-                borderColor: "blue",
-                borderWidth: 1
+                borderColor: "#0ace00",
+                borderWidth: 3
             }, {
-                label: '# of Votes',
+                label: "Min värde",
                 data: [4, 12, 11, 15, 2, 10],
                 backgroundColor: "transparent",
-                borderColor: "green",
-                borderWidth: 1
+                borderColor: "#ffe100",
+                borderWidth: 3
             }]
         },
         options: {

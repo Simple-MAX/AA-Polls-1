@@ -91,6 +91,12 @@ function initialize() {
                     // Proceed if valid user type, else redirect
                     if (userStatus == UserType.SuperUser ||
                         userStatus == UserType.Admin) {
+                        // Loads all users
+                        loadUsers();
+                        
+                        // Fetches and appends groups
+                        loadGroups();
+                                                
                         // Renders chart (unfinished)
                         renderStatistics("chart-canvas");
                     } else redirectToPage(getInitialPage(userStatus));
