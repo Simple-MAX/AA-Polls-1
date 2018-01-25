@@ -352,7 +352,7 @@ function insertGroupUserTable(tableId, users) {
                 values: {
                     value: userName,
                     type: "text",
-                    onclick: (id, e) => null
+                    onclick: (id, e) => showChooseUserPoll(users[i])
                 }
             },
             {

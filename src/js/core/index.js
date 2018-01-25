@@ -163,6 +163,17 @@ function showResetUser(data) {
     simulateElementClick("show-reset-user");
 }
 
+// Shows the user poll picker popup
+function showChooseUserPoll(data) {
+    // Terminates if data is invalid
+    if (data == null) return;
+
+    // TODO
+
+    // Shows the popup box
+    simulateElementClick("show-user-polls");
+}
+
 // Closes all popup boxes and resets fields
 function closeAllPopups() {
     // Close buttons
@@ -172,6 +183,7 @@ function closeAllPopups() {
         "close-reset",
         "close-add-group",
         "close-edit-group-users",
+        "close-user-polls",
     ];
 
     // Fields to be resetted
@@ -186,7 +198,7 @@ function closeAllPopups() {
         "reset-token",
         "reset-pass",
         "add-group-title",
-        "edit-users-group-id"
+        "edit-users-group-id",
     ];
 
     // Loops through field ids and resets them
