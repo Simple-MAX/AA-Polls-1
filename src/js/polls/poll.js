@@ -525,24 +525,6 @@ function getUserPoll(pollId) {
 }
 
 // Adds group polls to a specified container
-function insertGroupPolls(containerId, polls) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-
-    // Gets the container element
-    let container = getElement(containerId);
-
-    /* Loops through and adds new poll block 
-     * based on current index of iteration
-     */
-    for (let i = 0; i < polls.length; i++) {
-        // Adds a new poll block
-        container.appendChild(createPollBlockElement(polls[i], i));
-    }
-}
-
-// Adds group polls to a specified container
 function insertUserPollsData(containerId, polls) {
     // Gets the container element
     let container = getElement(containerId);
@@ -729,8 +711,14 @@ function fetchPolls(token, pollId = "", callback = null) {
      * according to a determined structure below
      */
     if (token != "") {
-        params.keys     = ["token", "poll_id"];
-        params.values   = [token, pollId];
+        params.keys     = ["token"];
+        params.values   = [token];
+
+        // Adds poll id if not empty
+        if (pollId != "") {
+            params.keys.push("poll_id");
+            params.values.push(pollId);  
+        }
     } else return data;
     
     /* Executes an AJAX request (Vanilla JS, not jQuery)

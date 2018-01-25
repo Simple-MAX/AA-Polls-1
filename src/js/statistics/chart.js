@@ -33,19 +33,25 @@ function renderStatistics(canvasId, stats = DEFAULT_STATS) {
                 data: [12, 13, 3, 5, 2, 3],
                 backgroundColor: "transparent",
                 borderColor: "#00a1ff",
-                borderWidth: 3
+                borderWidth: 4,
+                pointRadius: 6,
+                pointBackgroundColor: "#fff",
             }, {
                 label: "Max värde",
                 data: [2, 13, 15, 5, 10, 3],
                 backgroundColor: "transparent",
                 borderColor: "#0ace00",
-                borderWidth: 3
+                borderWidth: 4,
+                pointRadius: 6,
+                pointBackgroundColor: "#fff",
             }, {
                 label: "Min värde",
                 data: [4, 12, 11, 15, 2, 10],
                 backgroundColor: "transparent",
                 borderColor: "#ffe100",
-                borderWidth: 3
+                borderWidth: 4,
+                pointRadius: 6,
+                pointBackgroundColor: "#fff",
             }]
         },
         options: {

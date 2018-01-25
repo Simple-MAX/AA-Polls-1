@@ -62,6 +62,9 @@ function initialize() {
                         // Fetches and appends groups
                         loadGroups();
 
+                        // Fetches all polls
+                        fetchPolls(currentUser.token);
+
                         // Inserts all and existing group data
                         insertGroupData("groups-container", fetchedGroups);
                     } else redirectToPage(getInitialPage(userStatus));
@@ -78,14 +81,16 @@ function initialize() {
                     } else redirectToPage(getInitialPage(userStatus));
                     break;
                 case Pages.Poll:
-                    // Proceed if valid user type, else redirect
-                    if (userStatus == UserType.User) {
-                        // Load finished and unfinished polls
-                        loadUserPolls();
+                    // Remove submit button if user is admin or super user
+                    if (userStatus == UserType.SuperUser || 
+                        userStatus == UserType.Admin)
+                        removeElement("submit-poll");
 
-                        // Loads current and given poll data
-                        loadPoll();
-                    } else redirectToPage(getInitialPage(userStatus));
+                    // Load finished and unfinished polls
+                    loadUserPolls();
+
+                    // Loads current and given poll data
+                    loadPoll();
                     break;
                 case Pages.Statistics:
                     // Proceed if valid user type, else redirect
