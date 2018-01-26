@@ -426,6 +426,43 @@ function editGroupUsersListener() {
     } else alert("Kunde inte hantera användare");
 }
 
+// Attempts to show selected user poll
+function showUserPollListener() {
+    // Gets the user polls picker element
+    let userPollsPicker = getElement("user-polls-picker");
+
+    // Gets selected user id
+    let userId = getElement("show-user-polls-user-id").value;
+
+    // Terminate if user polls picker
+    if (userPollsPicker == null) return;
+
+    // Gets the selected option and id
+    let pollId = null;
+
+    // Gets all children of select element
+    const options = userPollsPicker.childNodes;
+
+    // Loops through each element in user polls picker
+    options.forEach(function(element) {
+        // Checks only for elements with "option" as tag name
+        if (element.tagName == "option".toUpperCase()) {
+            // Checks whether element is selected or not
+            if (element.selected != null) {
+                // Set poll id to element's innerHTML
+                pollId = element.innerHTML;
+            }
+        }
+    });
+
+    // Terminate if poll or user id is undefined or null
+    if (pollId == null || pollId == undefined) return;
+    if (userId == null || userId == undefined) return;
+
+    // Redirects admin or super user to user poll
+    location.href = `poll.html?id=${pollId}&user_qid=${userId}`;
+}
+
 // Makes the user able to log out from current session
 function logOutListener() {
     // Prompts the user to make a final decision

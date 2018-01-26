@@ -126,7 +126,34 @@ function initialize() {
 function stringContains(string, value) { return string.includes(value); }
 
 // Gets first param value of url with given key
-function getUrlParam(key) { return location.search.split(key + "=")[1]; }
+function getUrlParam(key) { 
+    // Gets all user params
+    let params = location.search.replace("?", "");
+
+    // Removes all ampersands from parameters
+    params = params.split("&");
+
+    // Defines default value
+    let value = null;
+
+    // Loops through each parameter
+    for (let i = 0; i < params.length; i++) {
+        // Gets current parameter
+        let parameter = params[i].split("=");
+
+        // Checks if given key exists in parameter
+        if (key === parameter[0]) {
+            // Sets value to second element
+            value = parameter[1];
+
+            // Exits current loop
+            break;
+        }
+    }
+
+    // Returns final value
+    return value;
+}
 
 // Shows edit user popup with user data
 function showEditUser(data) {
@@ -168,7 +195,42 @@ function showChooseUserPoll(data) {
     // Terminates if data is invalid
     if (data == null) return;
 
-    // TODO
+    // Fetches given user submitted polls
+    fetchUserPolls(currentUser.token, data.id);
+
+    // Terminate if group was not found
+    if (submittedPolls == null) {
+        alert("Användaren har inga besvarade formulär");
+
+        return;
+    }
+
+    // Sets invisible input element to user id
+    getElement("show-user-polls-user-id").value = data.id;
+
+    // Removes all user 
+    removeChildren("user-polls-picker");
+
+    // Gets the user polls picker element
+    let userPollsPicker = getElement("user-polls-picker");
+
+    // Terminate if picker is null
+    if (userPollsPicker == null) return;
+
+    // Adds new options
+    for (let i = 0; i < submittedPolls.length; i++) {
+        // Creates a new option element
+        let option = createElement("option");
+
+        // Sets option value to poll id
+        option.innerHTML = submittedPolls[i].id;
+
+        // Set first element as selected value
+        if (i == 0) option.setAttribute("selected", "");
+
+        // Appends option to user polls picker
+        userPollsPicker.add(option);
+    }
 
     // Shows the popup box
     simulateElementClick("show-user-polls");

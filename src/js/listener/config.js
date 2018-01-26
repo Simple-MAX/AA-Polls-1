@@ -60,14 +60,17 @@ const Listeners = {
             Elements: [
                 "add-group-button",
                 "refresh-groups-button",
-                "edit-group-users-button"
+                "edit-group-users-button",
+                "show-user-poll-button",
             ],
             Functions: [
                 () => addGroupListener(),
                 () => refreshGroups("groups-container"),
-                () => editGroupUsersListener()
+                () => editGroupUsersListener(),
+                () => showUserPollListener()
             ],
             Type: [
+                "click",
                 "click",
                 "click",
                 "click"

@@ -202,8 +202,15 @@ function loadUserPolls(callback = null) {
         execCallback();
     }
 
+    // Gets the id of the current group from url
+    let userId = getUrlParam("user_id");
+
+    // Resets user id to current user id
+    if (userId == undefined || userId == null)
+        userId = currentUser.id;
+
     // Fetches all accessible groups based on admin status
-    fetchUserPolls(currentUser.token, currentUser.id);
+    fetchUserPolls(currentUser.token, userId);
 
     // Return nothing if users is null
     if (submittedPolls == null && nonSubmittedPolls == null) {
