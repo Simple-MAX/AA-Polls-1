@@ -101,6 +101,9 @@ function initialize() {
                         
                         // Fetches and appends groups
                         loadGroups();
+
+                        // Inserts all groups to a picker
+                        insertFetchedGroups();
                                                 
                         // Renders chart (unfinished)
                         renderStatistics("chart-canvas");

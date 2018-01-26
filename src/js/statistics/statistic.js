@@ -46,3 +46,18 @@ function getStatsAverage(polls) {
     
     // TODO
 }
+
+// Inserts fetched groups to group picker
+function insertFetchedGroups() {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
+    // Gets the group picker element
+    let groupPicker = getElement("");
+
+    // Loops through each group
+    for (let i = 0; i < fetchedGroups.length; i++) {
+
+    }
+}
