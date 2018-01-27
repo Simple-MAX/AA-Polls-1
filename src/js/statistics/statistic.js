@@ -54,10 +54,23 @@ function insertFetchedGroups() {
         currentUser.admin != "1") return;
 
     // Gets the group picker element
-    let groupPicker = getElement("");
+    let groupPicker = getElement("group-picker");
+
+    // Terminate if group picker is null
+    if (groupPicker == null) return;
 
     // Loops through each group
     for (let i = 0; i < fetchedGroups.length; i++) {
+        // Creates a new option element
+        let option = createElement("option");
+        
+        // Sets option value to poll id
+        option.innerHTML = fetchedGroups[i].id;
 
+        // Set first element as selected value
+        if (i == 0) option.setAttribute("selected", "");
+
+        // Appends option to user polls picker
+        groupPicker.add(option);
     }
 }

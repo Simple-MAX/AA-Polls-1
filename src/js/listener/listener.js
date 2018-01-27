@@ -460,7 +460,7 @@ function showUserPollListener() {
     if (userId == null || userId == undefined) return;
 
     // Redirects admin or super user to user poll
-    location.href = `poll.html?id=${pollId}&user_qid=${userId}`;
+    location.href = `poll.html?id=${pollId}&user_id=${userId}`;
 }
 
 // Makes the user able to log out from current session

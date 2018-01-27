@@ -83,6 +83,15 @@ function loadPoll() {
     // Cloned ids array
     modifiedIds = DEFAULT_POLL_IDS;
 
+    // Sets information text if found
+    if (currentPoll.info_text != null) {
+        // Gets the info text paragraph element
+        let infoText = getElement("poll-info-text");
+
+        // Sets info text
+        infoText.innerHTML = currentPoll.info_text;
+    }
+
     // Modify ids and data if poll already is submitted
     if (submitted) {
         // Removes submit button
@@ -285,6 +294,7 @@ function insertPollData(data, ids, disableAll = false) {
 function setNewPollData(poll, selectValues = false) {
     // Creates new array with new data
     let pollData = [
+        [poll.info_text], 
         [poll.initial.section_title],
         [poll.initial.sub_title_1],
         [poll.initial.sub_title_2],

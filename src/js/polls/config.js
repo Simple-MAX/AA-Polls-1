@@ -18,7 +18,7 @@ const DEFAULT_POLL_STRUCTURE = {
     poll: {
         group_id: "AA-G-0",
         general_rate: 0,
-        group_id: "",
+        info_text: "",
         initial: {
             section_title: "Bedömning",
             sub_title_1: "Grupp",
@@ -85,6 +85,8 @@ const DEFAULT_POLL_STRUCTURE = {
 };
 
 const DEFAULT_POLL_IDS = [
+    ["info-text", "info_text"],
+
     ["section-1-title", "initial.section_title"],
     
     ["section-1-sub-title-1", "initial.sub_title_1"],
@@ -133,6 +135,8 @@ var submittedPolls      = [];
 var nonSubmittedPolls   = [];
 
 var createdPollData = [
+    [createdPoll.info_text, "text"],
+
     [createdPoll.initial.section_title],
     [createdPoll.initial.sub_title_1],
     [createdPoll.initial.sub_title_2],

@@ -38,7 +38,7 @@ function renderStatistics(canvasId, stats = DEFAULT_STATS) {
                 pointBackgroundColor: "#fff",
             }, {
                 label: "Max värde",
-                data: [2, 13, 15, 5, 10, 3],
+                data: [2, 13, 15, 5, 10, 6],
                 backgroundColor: "transparent",
                 borderColor: "#0ace00",
                 borderWidth: 4,

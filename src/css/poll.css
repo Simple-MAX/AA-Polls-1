@@ -24,7 +24,35 @@
     height: 50px;
 }
 
-.poll-container { width: 100%; }
+.poll-container { 
+    width: 100%; 
+    position: relative;
+}
+
+.poll-info-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    color: #aaa;
+    font-size: 28px;
+    font-weight: 400;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.poll-info-text {
+    width: 100%;
+    max-height: 200px;
+    margin: auto;
+
+    overflow: auto;
+}
+
+.poll-info-button:hover { color: #555; }
 
 .poll-col-0 {
     width: 100%;
@@ -123,11 +151,16 @@ output {
 
 .poll-input-textarea {
     width: 70%;
+    height: 140px;
     margin-right: 30%;
+    padding: 7px;
+
     border: 2px #c0c0c0 solid;
     border-radius: 5px;
+
     color: #6b6b6b;
-    height: 140px;
+    font-size: 13px;
+
     resize: none;
 }
 
@@ -136,9 +169,13 @@ output {
     height: 30px;
     padding: 0 7px;
     margin-right: 30%;
+
     border: 2px #c0c0c0 solid;
     border-radius: 5px;
+
     color: #6b6b6b;
+    font-size: 13px;
+
     resize: none;
 }
 

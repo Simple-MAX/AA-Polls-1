@@ -48,6 +48,8 @@
 
         <main>
             <div class="wrapper">
+                <p class="title">Bedömning</p>
+
                 <div class="poll-main">
                     <div class="poll-wrapper">
                         <div class="poll-left-divider">
@@ -64,6 +66,8 @@
 
                         <div class="poll-right-divider">
                             <div class="poll-container">
+                                <a href="#poll-info" class="poll-info-button" id="info-button">ⓘ</a>
+
                                 <div class="poll-col-0">
                                     <input id="section-1-title" class="section-title" value="Section 1 title" disabled />
 
@@ -157,6 +161,28 @@
                                     <button class="regular-button" id="submit-poll">Skicka in bedömning</button>
                                 </div>    
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="poll-info" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>Info</p>
+
+                            <a id="close-info" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <hr class="short-spacing" />
+
+                            <p class="poll-info-text" id="poll-info-text">
+                                Ingen information tillgänglig
+                            </p>
+
+                            <hr class="short-spacing" />
                         </div>
                     </div>
                 </div>

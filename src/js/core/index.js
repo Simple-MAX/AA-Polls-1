@@ -249,6 +249,7 @@ function closeAllPopups() {
         "close-add-group",
         "close-edit-group-users",
         "close-user-polls",
+        "close-info"
     ];
 
     // Fields to be resetted
