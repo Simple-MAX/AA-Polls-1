@@ -107,6 +107,9 @@ function insertFetchedGroups() {
         // Skip rendering if exit is true
         if (exit) return;
 
+        // Render date filter container if not visible
+        getElement("date-filter").style.display = "block";
+
         // Re renders the actual chart
         renderStatistics("chart-canvas");
     }

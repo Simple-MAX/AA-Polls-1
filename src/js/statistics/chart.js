@@ -30,7 +30,7 @@ function renderStatistics(canvasId, stats = DEFAULT_STATS) {
         data: {
             datasets: [{
                 label: "Medelvärde",
-                data: [12, 13, 3, 5, 2, 3],
+                data: [12, 3],
                 backgroundColor: "transparent",
                 borderColor: "#00a1ff",
                 borderWidth: 4,
