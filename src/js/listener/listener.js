@@ -448,7 +448,7 @@ function showUserPollListener() {
         // Checks only for elements with "option" as tag name
         if (element.tagName == "option".toUpperCase()) {
             // Checks whether element is selected or not
-            if (element.selected != null) {
+            if (element.selected != null && element.selected) {
                 // Set poll id to element's innerHTML
                 pollId = element.innerHTML;
             }

@@ -24,29 +24,4 @@
     padding: 10px;
 }
 
-select {
-    border: 2px #c0c0c0 solid;
-    border-radius: 4px;
-    color: #6b6b6b;
-    height: 30px;
-    margin: 15px 0;
-    width: 90%;
-    padding: 0 7px;
-    -webkit-appearance: none;
-    font-size: 13px;
-}
-
-.diagram-slider { background-color: #fff; }
-
-.export {
-    width: 100%;
-    margin-top: 3%; 
-}
-
-.button {
-    width: 30%;
-    background-color: #8a199e;
-    color: #fff;
-    float: right;
-    height: 35px;
-}
+select { width: 95%; }

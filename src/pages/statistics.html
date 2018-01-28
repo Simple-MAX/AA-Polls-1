@@ -54,16 +54,12 @@
         <main>
             <div class="wrapper">
                 <p class="title">Statistik</p>
-                    
-                <div class="admin-option-container"><!-- Empty --></div>
 
                 <div class="filter-container">
                     <div class="picker-container">
-                        <select id="group-picker"></select>
-                    </div>
-
-                    <div class="button-container">
-                        <button class="regular-button" id="show-chart-button">Visa</button>
+                        <select id="group-picker">
+                            <option>Välj grupp</option>
+                        </select>
                     </div>
                 </div>
                 
@@ -77,13 +73,13 @@
                 
                 <div class="filter-container">
                     <div class="picker-container">
-                        <select id="prog-short-option">
+                        <select id="stat-begin-date">
                             <option>-</option>
                         </select>
                     </div>
                     
                     <div class="picker-container">
-                        <select id="prog-short-option">
+                        <select id="stat-end-date" style="float: right">
                             <option>-</option>
                         </select>
                     </div>        
@@ -91,10 +87,6 @@
                     
                 <div class="diagram-slider">
                     <canvas id="chart-canvas"></canvas>
-                </div>  
-
-                <div class="export">
-                    <input class="button" id="filter-apply" value="Exportera som CSV" type="submit" onclick="formnSubmit()"/>  
                 </div>
 
                 <hr class="regular-spacing" />

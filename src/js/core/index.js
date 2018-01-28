@@ -104,9 +104,6 @@ function initialize() {
 
                         // Inserts all groups to a picker
                         insertFetchedGroups();
-                                                
-                        // Renders chart (unfinished)
-                        renderStatistics("chart-canvas");
                     } else redirectToPage(getInitialPage(userStatus));
                     break;
                 case Pages.Home:

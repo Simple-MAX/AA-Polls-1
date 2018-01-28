@@ -67,10 +67,50 @@ function insertFetchedGroups() {
         // Sets option value to poll id
         option.innerHTML = fetchedGroups[i].id;
 
-        // Set first element as selected value
-        if (i == 0) option.setAttribute("selected", "");
-
         // Appends option to user polls picker
         groupPicker.add(option);
     }
+
+    // Creates on change function
+    let func = function() {
+        // Clones group picker variable and converts it to an array
+        let options = groupPicker.childNodes;
+
+        // Exit boolean
+        let exit = false;
+
+        // Loops through each element in user polls picker
+        options.forEach(function(element) {
+            // Checks only for elements with "option" as tag name
+            if (element.tagName == "option".toUpperCase()) {
+                // Checks whether element is selected or not
+                if (element.selected != null && element.selected) {
+                    /* Loops through each group and checks
+                     * whether the selected id exists
+                     */
+                    for (let i = 0; i < fetchedGroups.length; i++) {
+                        // Set exit to true if group id was not found
+                        if (element.innerHTML == fetchedGroups[i].id)
+                            return;
+
+                        // Proceed with last step if not found
+                        if (i == fetchedGroups.length - 1) {
+                            // Set exit to true if group id was not found
+                            if (element.innerHTML != fetchedGroups[i].id)
+                                exit = true;
+                        }
+                    }
+                }
+            }
+        });
+
+        // Skip rendering if exit is true
+        if (exit) return;
+
+        // Re renders the actual chart
+        renderStatistics("chart-canvas");
+    }
+
+    // Adds on change listener to select element
+    addListener("group-picker", func, "change");
 }
