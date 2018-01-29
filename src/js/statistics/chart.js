@@ -23,10 +23,10 @@ function renderChart(canvasId, stats = DEFAULT_STATS) {
     const options = {
         type: chartType,
         data: {
-            labels: ["1", "2"],
+            labels: ["1", "2", "3"],
             datasets: [{
                 label: "Medelvärde",
-                data: [12, 3],
+                data: [12, 3, 4],
                 backgroundColor: "transparent",
                 borderColor: "#00a1ff",
                 borderWidth: 4,
@@ -34,7 +34,7 @@ function renderChart(canvasId, stats = DEFAULT_STATS) {
                 pointBackgroundColor: "#fff",
             }, {
                 label: "Max värde",
-                data: [2, 13, 15, 5, 10, 6],
+                data: [2, 13, 6],
                 backgroundColor: "transparent",
                 borderColor: "#0ace00",
                 borderWidth: 4,
@@ -42,7 +42,7 @@ function renderChart(canvasId, stats = DEFAULT_STATS) {
                 pointBackgroundColor: "#fff",
             }, {
                 label: "Min värde",
-                data: [4, 12, 11, 15, 2, 10],
+                data: [4, 9, 7],
                 backgroundColor: "transparent",
                 borderColor: "#ffe100",
                 borderWidth: 4,

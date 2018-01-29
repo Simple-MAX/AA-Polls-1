@@ -121,12 +121,24 @@ function selectGroup() {
     // Skip rendering if exit is true
     if (exit || groupTarget == null) return;
 
+    // Gets and sets new dates to date pickers
+    getGroupStats(groupTarget);
+
+    // Render date filter container if not visible
+    getElement("date-filter").style.display = "block";
+
+    // Re renders the actual chart
+    showStatistics();
+}
+
+// Gets new dates from chosen group
+function getGroupStats(group) {
     // Poll creation date array from start to end
     let pollDates = [];
-
+    
     // Pushes all poll dates to pollDates array
-    for (let i = 0; i < groupTarget.polls.length; i++)
-        pollDates.push(groupTarget.polls[i].date);
+    for (let i = 0; i < group.polls.length; i++)
+        pollDates.push(group.polls[i].date);
 
     // Sorts all poll dates accordingly
     pollDates.sort(function(a, b) {
@@ -135,8 +147,8 @@ function selectGroup() {
     
     // Creates new selected group object
     selectedGroup = {
-        group: groupTarget,
-        polls: groupTarget.polls,
+        group: group,
+        polls: group.polls,
         submitted_polls: undefined,
         dates: pollDates,
     };
@@ -166,8 +178,8 @@ function selectGroup() {
         endOption.value     = endOption.innerHTML;
 
         /* Sets start option to selected if iteration is first
-         * and sets end option to selected if iteration is last
-         */
+            * and sets end option to selected if iteration is last
+            */
         if (i == selectedGroup.dates.length - 1)
             endOption.setAttribute("selected", "");
         else if (i == 0)
@@ -184,12 +196,6 @@ function selectGroup() {
     // Adds listeners to date pickers
     addListener("stat-start-date", func, "change");
     addListener("stat-end-date", func, "change");
-
-    // Render date filter container if not visible
-    getElement("date-filter").style.display = "block";
-
-    // Re renders the actual chart
-    showStatistics();
 }
 
 // Selects a chart type depending on option
@@ -204,5 +210,45 @@ function selectChartType() {
     // Terminate if picker is null
     if (chartTypePicker == null) return;
 
-    console.log(chartType);
+    // Clones group picker variable and converts it to an array
+    let options = chartTypePicker.childNodes;
+    
+    // Exit boolean
+    let exit = false;
+
+    // Loops through each element in user polls picker
+    options.forEach(function(element) {
+        // Checks only for elements with "option" as tag name
+        if (element.tagName == "option".toUpperCase()) {
+            // Checks whether element is selected or not
+            if (element.selected != null && element.selected) {
+                /* Loops through each group and checks
+                 * whether the selected id exists
+                 */
+                for (let i = 0; i < PollChartTypes.length; i++) {
+                    // Set exit to true if group id was not found
+                    if (element.value == PollChartTypes[i].text) {
+                        // Sets group target with matched id
+                        chartType = PollChartTypes[i].value;
+
+                        // Terminates sub function
+                        return;
+                    }
+
+                    // Proceed with last step if not found
+                    if (i == fetchedGroups.length - 1) {
+                        // Set exit to true if group id was not found
+                        if (element.value != PollChartTypes[i].text)
+                            exit = true;
+                    }
+                }
+            }
+        }
+    });
+
+    // Terminate if there is no group or exit is true
+    if (exit || selectedGroup.group == null) return;
+
+    // Re renders the actual chart
+    showStatistics();
 }
