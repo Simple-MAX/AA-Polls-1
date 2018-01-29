@@ -11,40 +11,9 @@
 * /**************************************************
 */
 
-/* Fetches relevant and requested polls in
- * string format and parses it with JSON.parse(),
- * then loops through and fetches the lowest value
- */
-function getStatsMin(polls) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-    
-    // TODO
-}
-
-/* Fetches relevant and requested polls in
- * string format and parses it with JSON.parse(),
- * then loops through and fetches the highest value
- */
-function getStatsMax(polls) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-    
-    // TODO
-}
-
-/* Fetches relevant and requested polls in
- * string format and parses it with JSON.parse(),
- * then loops through and fetches the "estimation_total" value
- */
-function getStatsAverage(polls) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-    
-    // TODO
+// Display statistics on canvas chart
+function showStatistics() {
+    renderChart("chart-canvas");
 }
 
 // Inserts fetched groups to group picker
@@ -53,11 +22,16 @@ function insertFetchedGroups() {
     if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
 
-    // Gets the group picker element
-    let groupPicker = getElement("group-picker");
+    // Gets the group and chart type picker element
+    let groupPicker     = getElement("group-picker");
+    let chartTypePicker = getElement("chart-type-picker");
 
     // Terminate if group picker is null
-    if (groupPicker == null) return;
+    if (groupPicker == null || chartTypePicker == null) 
+        return;
+
+    // Removes all options in chart type picker
+    removeChildren("chart-type-picker");
 
     // Loops through each group
     for (let i = 0; i < fetchedGroups.length; i++) {
@@ -65,23 +39,45 @@ function insertFetchedGroups() {
         let option = createElement("option");
         
         // Sets option value to poll id
-        option.innerHTML = fetchedGroups[i].id;
+        option.innerHTML = option.value = fetchedGroups[i].id;
 
         // Appends option to user polls picker
         groupPicker.add(option);
     }
 
-    // Creates on change function
-    let func = () => selectGroup();
+    // Adds on change listener to select element
+    addListener("group-picker", () => selectGroup(), "change");
+
+    // Loops through all chart types
+    for (let i = 0; i < PollChartTypes.length; i++) {
+        // Creates a new option element
+        let option = createElement("option");
+
+        // Used to shorten code
+        let value = PollChartTypes[i].text;
+        
+        // Sets option value to poll id
+        option.innerHTML = option.value = value;
+
+        // Appends option to user polls picker
+        chartTypePicker.add(option);
+    }
 
     // Adds on change listener to select element
-    addListener("group-picker", func, "change");
+    addListener("chart-type-picker", () => selectChartType(), "change");
 }
 
 // Selects a specified group and tampers with values
 function selectGroup() {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
     // Gets the group picker element
     let groupPicker = getElement("group-picker");
+
+    // Terminate if picker is null
+    if (groupPicker == null) return;
 
     // Clones group picker variable and converts it to an array
     let options = groupPicker.childNodes;
@@ -103,7 +99,7 @@ function selectGroup() {
                  */
                 for (let i = 0; i < fetchedGroups.length; i++) {
                     // Set exit to true if group id was not found
-                    if (element.innerHTML == fetchedGroups[i].id) {
+                    if (element.value == fetchedGroups[i].id) {
                         // Sets group target with matched id
                         groupTarget = fetchedGroups[i];
 
@@ -114,7 +110,7 @@ function selectGroup() {
                     // Proceed with last step if not found
                     if (i == fetchedGroups.length - 1) {
                         // Set exit to true if group id was not found
-                        if (element.innerHTML != fetchedGroups[i].id)
+                        if (element.value != fetchedGroups[i].id)
                             exit = true;
                     }
                 }
@@ -145,6 +141,9 @@ function selectGroup() {
         dates: pollDates,
     };
 
+    // Terminate if dates length is less than one
+    if (pollDates.length < 1) return;
+
     // Removes all options from date pickers
     removeChildren("stat-start-date");
     removeChildren("stat-end-date");
@@ -163,6 +162,9 @@ function selectGroup() {
         startOption.innerHTML   = selectedGroup.dates[i];
         endOption.innerHTML     = selectedGroup.dates[i]; 
 
+        startOption.value   = startOption.innerHTML;
+        endOption.value     = endOption.innerHTML;
+
         /* Sets start option to selected if iteration is first
          * and sets end option to selected if iteration is last
          */
@@ -176,9 +178,31 @@ function selectGroup() {
         endDatePicker.add(endOption);      
     }
 
+    // Date picker listener function
+    let func = () => showStatistics();
+
+    // Adds listeners to date pickers
+    addListener("stat-start-date", func, "change");
+    addListener("stat-end-date", func, "change");
+
     // Render date filter container if not visible
     getElement("date-filter").style.display = "block";
 
     // Re renders the actual chart
-    renderChart("chart-canvas");
+    showStatistics();
+}
+
+// Selects a chart type depending on option
+function selectChartType() {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
+    // Gets the chart type picker element
+    let chartTypePicker = getElement("chart-type-picker");
+
+    // Terminate if picker is null
+    if (chartTypePicker == null) return;
+
+    console.log(chartType);
 }

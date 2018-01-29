@@ -13,11 +13,6 @@
 
 // Renders a chart using the Chart.js library with given stats
 function renderChart(canvasId, stats = DEFAULT_STATS) {
-    // Creates local variables of given stats
-    let finalMin        = stats.Chart.Min, 
-        finalMax        = stats.Chart.Max, 
-        finalAvarage    = stats.Chart.Average;
-
     // Gets the chart canvas element
     let canvas = getElement(canvasId);
 
@@ -26,8 +21,9 @@ function renderChart(canvasId, stats = DEFAULT_STATS) {
 
     // Creates options and inserts chart data
     const options = {
-        type: "line",
+        type: chartType,
         data: {
+            labels: ["1", "2"],
             datasets: [{
                 label: "Medelvärde",
                 data: [12, 3],

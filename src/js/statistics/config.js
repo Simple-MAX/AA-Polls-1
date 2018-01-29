@@ -24,6 +24,17 @@ const ChartType = {
     Line: "line"
 };
 
+const PollChartTypes = [
+    {
+        value: ChartType.Line,
+        text: "Huvudgraf"
+    }, 
+    {
+        value: ChartType.Bar,
+        text: "Påverkningsgraf"
+    }
+];
+
 const DEFAULT_STATS = { 
     Chart: { 
         Min: 0, 
@@ -43,3 +54,5 @@ var selectedGroup = {
     submitted_polls: null,
     dates: null,
 };
+
+var chartType = ChartType.Line;
