@@ -236,7 +236,7 @@ function selectChartType() {
                     }
 
                     // Proceed with last step if not found
-                    if (i == fetchedGroups.length - 1) {
+                    if (i == PollChartTypes.length - 1) {
                         // Set exit to true if group id was not found
                         if (element.value != PollChartTypes[i].text)
                             exit = true;
