@@ -12,7 +12,7 @@
 */
 
 // Renders a chart using the Chart.js library with given stats
-function renderStatistics(canvasId, stats = DEFAULT_STATS) {
+function renderChart(canvasId, stats = DEFAULT_STATS) {
     // Creates local variables of given stats
     let finalMin        = stats.Chart.Min, 
         finalMax        = stats.Chart.Max, 

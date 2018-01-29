@@ -19,6 +19,11 @@ const MONTHS = [
     "November", "October",  "December"
 ];
 
+const ChartType = {
+    Bar: "bar",
+    Line: "line"
+};
+
 const DEFAULT_STATS = { 
     Chart: { 
         Min: 0, 
@@ -29,4 +34,12 @@ const DEFAULT_STATS = {
         From: "", 
         To: "" 
     }
+};
+
+// Regular variables
+var selectedGroup = {
+    group: null,
+    polls: null,
+    submitted_polls: null,
+    dates: null,
 };

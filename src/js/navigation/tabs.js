@@ -64,12 +64,18 @@ function createTab(data = DEFAULT_TAB_DATA) {
     button.innerHTML = data[0];
 
     // Checks given data value type
-    if (typeof data[1] == "string")
+    if (typeof data[1] == "string") {
+        // Sets only href attribute to anchor button
         button.href = data[1];
-    else if (typeof data[1] == "function")
+    } else if (typeof data[1] == "function") {
+        // Assigns custom function to anchor button
         button.onclick = (e) => data[1]();
-    else
-        button.href = "http://google.com";
+
+        /* Sets empty href attribute to 
+         * display pointer correctly
+         */
+        button.href = "#";
+    }
 
     // Appends the anchor button to the list item
     listItem.appendChild(button); 

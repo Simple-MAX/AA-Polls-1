@@ -30,14 +30,19 @@ const DEFAULT_TABS_DATA = [
     ["Användare", "users.html"],
     ["Grupper", "groups.html"],
     ["Statistik", "statistics.html"],
+    ["Logga ut", () => logOutListener()],
 ];
 
 const ADMIN_TABS_DATA = [
     ["Grupper", "groups.html"],
     ["Statistik", "statistics.html"],
+    ["Logga ut", () => logOutListener()],
 ];
 
-const USER_TABS_DATA = [["Hem", "home.html"]];
+const USER_TABS_DATA = [
+    ["Hem", "home.html"],
+    ["Logga ut", () => logOutListener()],
+];
 
 // Regular variables
 var currentPage;

@@ -28,9 +28,6 @@ function handleListeners(currentPage) {
     // Declares listener according to current page
     let currentListener = null;
 
-    // Adds the log out button listener
-    addListener("logout-button", logOutListener);
-
     // Adds listener to elements for different pages
     switch (currentPage) {
         case Pages.Login:
