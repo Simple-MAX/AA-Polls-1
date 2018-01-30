@@ -21,8 +21,6 @@ function renderChart(canvasId, data) {
 
     // Creates datasets and labels array
     let datasets = [], labels = [];
-
-    console.log(data);
     
     // Loops through chart types
     for (let i = 0; i < PollChartTypes.length; i++) {
@@ -61,8 +59,6 @@ function renderChart(canvasId, data) {
             }
         }
     }
-
-    console.log(datasets);
 
     // Terminate if datasets is null
     if (datasets == null || datasets.length <= 0) 

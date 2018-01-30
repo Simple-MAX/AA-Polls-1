@@ -27,6 +27,17 @@ function getPollRateStats(groupData) {
     if (group.polls != null) {
         // Loops through selected group polls
         for (let i = 0; i < group.polls.length; i++) {
+            // Gets selected dates
+            let startDate   = Date.parse(group.start_date),
+                endDate     = Date.parse(group.end_date);
+
+            /* Continues or terminates if selected dates
+             * exceeds minimum and maximum limit
+             */
+            if (Date.parse(group.polls[i].date) < startDate ||
+                Date.parse(group.polls[i].date) > endDate)
+                continue;
+
             // Creates a new stats object for current poll
             let stats = {
                 label: group.polls[i].id,
@@ -88,7 +99,7 @@ function getPollRateStats(groupData) {
 
 // Gets influcences stats from polls
 function getPollInflunceStats(groupData) {
-    // TODO
+    
 }
 
 // Display statistics on canvas chart
@@ -109,6 +120,8 @@ function showStatistics() {
         default: 
             return;
     }
+
+    console.log(selectedGroup);
 
     // Terminate if data is null
     if (data == null) return;
@@ -147,7 +160,8 @@ function insertFetchedGroups() {
     }
 
     // Adds on change listener to select element
-    addListener("group-picker", () => selectGroup(), "change");
+    if (getElement("group-picker").onchange == null)
+        addListener("group-picker", () => selectGroup(), "change");
 
     // Loops through all chart types
     for (let i = 0; i < PollChartTypes.length; i++) {
@@ -165,7 +179,8 @@ function insertFetchedGroups() {
     }
 
     // Adds on change listener to select element
-    addListener("chart-type-picker", () => selectChartType(), "change");
+    if (getElement("chart-type-picker").onchange == null)
+        addListener("chart-type-picker", () => selectChartType(), "change");
 }
 
 // Selects a specified group and tampers with values
@@ -255,6 +270,8 @@ function getGroupStats(group) {
         polls: group.polls,
         submitted_polls: groupSubmittedPolls,
         dates: pollDates,
+        start_date: pollDates[0],
+        end_date: pollDates[pollDates.length - 1]
     };
 
     // Terminate if dates length is less than one
@@ -265,8 +282,8 @@ function getGroupStats(group) {
     removeChildren("stat-end-date");
 
     // Gets both date pickers
-    let startDatePicker = getElement("stat-start-date");
-    let endDatePicker   = getElement("stat-end-date");
+    let startDatePicker = getElement("stat-start-date"),
+        endDatePicker   = getElement("stat-end-date");
 
     // Inserts all dates to both date pickers
     for (let i = 0; i < selectedGroup.dates.length; i++) {
@@ -295,11 +312,27 @@ function getGroupStats(group) {
     }
 
     // Date picker listener function
-    let func = () => showStatistics();
+    let func = () => selectDates();
 
     // Adds listeners to date pickers
-    addListener("stat-start-date", func, "change");
-    addListener("stat-end-date", func, "change");
+    if (getElement("stat-start-date").onchange == null)
+        addListener("stat-start-date", func, "change");
+    if (getElement("stat-end-date").onchange == null)
+        addListener("stat-end-date", func, "change");
+}
+
+// Fetches new values from date pickers and displays new data
+function selectDates() {
+    // Gets both date pickers
+    let startDatePicker = getElement("stat-start-date"),
+        endDatePicker   = getElement("stat-end-date");
+
+    // Sets new dates
+    selectedGroup.start_date    = startDatePicker.value;
+    selectedGroup.end_date      = endDatePicker.value;
+
+    // Shows new statistics with new data
+    showStatistics();
 }
 
 // Selects a chart type depending on option
