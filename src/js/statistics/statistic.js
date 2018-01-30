@@ -13,6 +13,9 @@
 
 // Display statistics on canvas chart
 function showStatistics() {
+    console.log(selectedGroup);
+
+    // Renders the statistics on a new chart
     renderChart("chart-canvas");
 }
 
@@ -121,6 +124,9 @@ function selectGroup() {
     // Skip rendering if exit is true
     if (exit || groupTarget == null) return;
 
+    // Gets new group submitted polls data
+    fetchGroupSubmittedPolls(currentUser.token, groupTarget.id);
+
     // Gets and sets new dates to date pickers
     getGroupStats(groupTarget);
 
@@ -149,7 +155,7 @@ function getGroupStats(group) {
     selectedGroup = {
         group: group,
         polls: group.polls,
-        submitted_polls: undefined,
+        submitted_polls: groupSubmittedPolls,
         dates: pollDates,
     };
 

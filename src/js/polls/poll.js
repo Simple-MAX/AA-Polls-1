@@ -801,7 +801,7 @@ function fetchUserPolls(token, userId, callback = null) {
     if (typeof result == "object") {
         // If the result was successful
         if (result["success"] && result["data"] != null) {
-            // Stores polls locally in a global variable (Not done)
+            // Stores polls locally in a global variable
             let fetchedPollIds = result["data"];
 
             // Sets received ids to local and global variables
@@ -874,6 +874,57 @@ function fetchGroupPolls(token, group) {
 
     // Return users for curr
     return modifiedGroup;
+}
+
+// Attempts to fetch submitted polls from a specific group with id
+function fetchGroupSubmittedPolls(token, groupId, callback = null) {
+    // Data variable to return
+    let data = null;
+     
+    // Creates a new array for possible parameters
+    let params = {};
+
+    /* Gets the appropriate values and store them
+     * according to a determined structure below
+     */
+    if (token != "") {
+        params.keys     = ["token", "group_id"];
+        params.values   = [token, groupId];
+    } else return data;
+    
+    /* Executes an AJAX request (Vanilla JS, not jQuery)
+     * with the given url, function contains optional arguments
+     */
+    let result = request(POLL_API_URL, params);
+    
+    /* If result is an object type, it will return
+     * some data with from the endpoint, regardless whether it's
+     * successful or not. If not, it will return an error string.
+     */
+    if (typeof result == "object") {
+        // If the result was successful
+        if (result["success"] && result["data"] != null) {
+            // Stores polls locally in a global variable
+            groupSubmittedPolls = result["data"];
+
+            // Call a custom and passed callback function
+            if (callback != null) {
+                /* Creates a cloned callback function and passes
+                 * fetched data as parameter for external and quick access
+                 */
+                const execCallback = (passedData) => callback(passedData);
+
+                // Executes the cloned function
+                execCallback(result);
+            }
+        }
+
+        // Assigns fetched data to data variable
+        data = result;
+    }
+
+    // Returns final data
+    return data;
 }
 
 // Adds a new option to select element with id

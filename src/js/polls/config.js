@@ -133,6 +133,7 @@ var modifiedIds         = [];
 var fetchedPolls        = [];
 var submittedPolls      = [];
 var nonSubmittedPolls   = [];
+var groupSubmittedPolls = [];
 
 var createdPollData = [
     [createdPoll.info_text, "text"],
