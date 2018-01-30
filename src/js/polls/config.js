@@ -69,7 +69,6 @@ const DEFAULT_POLL_STRUCTURE = {
             },
             3: {
                 sub_title: "Åtgärder",
-                rate: 1,
                 option: {
                     placeholder: "Alternativ",
                     selected: "",

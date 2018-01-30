@@ -52,8 +52,11 @@ const PollChartTypes = [
 var selectedGroup = {
     group: null,
     polls: null,
+    selected_poll: null,
     submitted_polls: null,
     dates: null,
+    start_date: null,
+    end_date: null,
 };
 
 var chartType = ChartType.Line;

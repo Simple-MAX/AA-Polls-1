@@ -19,6 +19,15 @@ function renderChart(canvasId, data) {
     // Gets the context of the canvas element
     let context = canvas.getContext("2d");
 
+    // If data is null, clear canvas context
+    if (data == null) {
+        // Clears canvas context
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Terminates function
+        return;
+    }
+
     // Creates datasets and labels array
     let datasets = [], labels = [];
     
@@ -42,11 +51,16 @@ function renderChart(canvasId, data) {
                     if (data[k].label != "")
                         datasetData.push(data[k].values[j]);
 
+                // Defines background color
+                let bgColor = chartType != ChartType.Line
+                    ? PollChartTypes[i].borderColors[j]
+                    : "transparent";
+
                 // Creates new dataset object
                 let dataset = {
                     label: PollChartTypes[i].labels[j],
                     data: datasetData,
-                    backgroundColor: "transparent",
+                    backgroundColor: bgColor,
                     borderColor: PollChartTypes[i].borderColors[j],
                     borderWidth: 4,
                     pointRadius: 6,
@@ -58,8 +72,6 @@ function renderChart(canvasId, data) {
             }
         }
     }
-
-    console.log(datasets);
 
     // Terminate if datasets is null
     if (datasets == null || datasets.length <= 0) 

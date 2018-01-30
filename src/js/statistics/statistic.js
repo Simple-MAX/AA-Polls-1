@@ -101,15 +101,89 @@ function getPollRateStats(groupData) {
     // Sets new stats data
     data = statsData;
 
-    console.log(data);
-
     // Returns new stats data
     return data;
 }
 
 // Gets influcences stats from polls
-function getPollInflunceStats(groupData) {
+function getPollInfluncesStats(groupData) {
+    // Used to shorten code
+    let group = groupData;
     
+    /* Option object with data used for the chart
+     * and data array to return later on
+     */
+    let data = [], statsData = [];
+
+    /* Proceeds to format and create stats if
+     * selected group polls is not null
+     */
+    if (group.polls != null) {
+        // Loops through selected group polls
+        for (let i = 0; i < group.polls.length; i++) {
+            // Focused poll detail section
+            let details = group.polls[i].poll.details[2];
+
+            // Creates a new stats object for current poll
+            let stats = {
+                label: details.option.selected,
+                values: [0, 0, 0]
+            };
+
+            // Determines if current poll should be skipped or not
+            let skip = false;
+
+            // Min, max and general values
+            let values = [0, 0, 0];
+
+            // Influence picker values
+            let influences = details.option.values;
+
+            /* Loops only if influences length is greater than
+             * zero and sets label to placeholder if length is zero
+             */
+            if (influences.length > 0) {
+                // Loops through submitted polls
+                for (let j = 0; j < group.submitted_polls.length; j++) {
+                    // Used to shorten code
+                    let poll = group.submitted_polls[j].poll;
+                    
+                    // Gets influence value
+                    let value = parseInt(poll.details[2].rate);
+
+                    /* Resets value if greater than max
+                    * and lesser than min value
+                    */
+                    if (value > 2) value = 2;
+                    if (value < 0) value = 0;
+
+                    // Increments values depending on rate value
+                    values[value] += 1;
+                }
+            }
+
+            // Set new label if label is empty
+            stats.label = details.option.placeholder;
+
+            // Appends influences to stats
+            stats.values = values;
+
+            // Appends stats object to data array
+            statsData.push(stats);
+        }
+    } else return;
+
+    console.log(statsData);
+
+    // Terminate if data is null
+    if (statsData == null || statsData.length <= 0) 
+        return;
+
+    // Sets new stats data
+    data = statsData;
+
+    // Returns new stats data
+    return data;
 }
 
 // Display statistics on canvas chart
@@ -125,7 +199,7 @@ function showStatistics() {
             break;
         case ChartType.Bar:
             // Gets influcences stats from polls
-            data = getPollInflunceStats(selectedGroup);
+            data = getPollInfluncesStats(selectedGroup);
             break;
         default: 
             return;
@@ -133,6 +207,13 @@ function showStatistics() {
 
     // Terminate if data is null
     if (data == null) return;
+
+    // Gets selected dates
+    let startDate   = Date.parse(selectedGroup.start_date),
+        endDate     = Date.parse(selectedGroup.end_date);
+
+    // Checks whether given input is in correct order
+    if (startDate > endDate) data = null;
 
     // Renders the statistics on a new chart
     renderChart("chart-canvas", data);
@@ -145,8 +226,8 @@ function insertFetchedGroups() {
         currentUser.admin != "1") return;
 
     // Gets the group and chart type picker element
-    let groupPicker     = getElement("group-picker");
-    let chartTypePicker = getElement("chart-type-picker");
+    let groupPicker     = getElement("group-picker"),
+        chartTypePicker = getElement("chart-type-picker");
 
     // Terminate if group picker is null
     if (groupPicker == null || chartTypePicker == null) 
@@ -251,8 +332,8 @@ function selectGroup() {
     // Gets and sets new dates to date pickers
     getGroupStats(groupTarget);
 
-    // Render date filter container if not visible
-    getElement("date-filter").style.display = "block";
+    // Sets selected chart type option
+    selectChartType();
 
     // Re renders the actual chart
     showStatistics();
@@ -276,6 +357,7 @@ function getGroupStats(group) {
     selectedGroup = {
         group: group,
         polls: group.polls,
+        selected_poll: selectedGroup.selected_poll,
         submitted_polls: groupSubmittedPolls,
         dates: pollDates,
         start_date: pollDates[0],
@@ -288,10 +370,12 @@ function getGroupStats(group) {
     // Removes all options from date pickers
     removeChildren("stat-start-date");
     removeChildren("stat-end-date");
+    removeChildren("poll-picker");
 
     // Gets both date pickers
     let startDatePicker = getElement("stat-start-date"),
-        endDatePicker   = getElement("stat-end-date");
+        endDatePicker   = getElement("stat-end-date"),
+        pollPicker      = getElement("poll-picker");
 
     // Inserts all dates to both date pickers
     for (let i = 0; i < selectedGroup.dates.length; i++) {
@@ -327,6 +411,22 @@ function getGroupStats(group) {
         addListener("stat-start-date", func, "change");
     if (getElement("stat-end-date").onchange == null)
         addListener("stat-end-date", func, "change");
+    
+    // Loops through each group poll
+    for (let i = 0; i < selectedGroup.polls.length; i++) {
+        // Creates a new option element
+        let option = createElement("option");
+        
+        // Sets option value to poll id
+        option.innerHTML = option.value = selectedGroup.polls[i].id;
+
+        // Appends option to user polls picker
+        pollPicker.add(option);
+    }
+
+    // Adds on change listener to select element
+    if (getElement("poll-picker").onchange == null)
+        addListener("poll-picker", () => selectPoll(), "change");
 }
 
 // Fetches new values from date pickers and displays new data
@@ -340,6 +440,34 @@ function selectDates() {
     selectedGroup.end_date      = endDatePicker.value;
 
     // Shows new statistics with new data
+    showStatistics();
+}
+
+// Shows poll stats if chart type is bar and not line
+function selectPoll() {
+    // Defines poll
+    let poll = null;
+
+    // Gets poll picker element
+    let pollPicker = getElement("poll-picker");
+
+    // Terminates if poll picker element is null
+    if (pollPicker == null) return;
+
+    /* Loops through fetched polls and sets poll
+     * to selected poll if found with given id
+     */
+    for (let i = 0; i < selectedGroup.polls.length; i++)
+        if (pollPicker.value == selectedGroup.polls[i].id)
+            poll = selectedGroup.polls[i];
+
+    // Terminate if poll is null
+    if (poll == null) return;
+
+    // Sets selected poll
+    selectedGroup.selected_poll = poll;
+
+    // Shows new statistics
     showStatistics();
 }
 
@@ -393,6 +521,20 @@ function selectChartType() {
 
     // Terminate if there is no group or exit is true
     if (exit || selectedGroup.group == null) return;
+
+    // Determines what filter options to show
+    switch (chartType) {
+        case ChartType.Line:
+            // Render date filter container if not visible
+            getElement("poll-filter").style.display = "none";
+            getElement("date-filter").style.display = "block";
+            break;
+        case ChartType.Bar:
+            // Render date filter container if not visible
+            getElement("date-filter").style.display = "none";
+            getElement("poll-filter").style.display = "block";
+            break;
+    }
 
     // Re renders the actual chart
     showStatistics();

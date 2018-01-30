@@ -378,6 +378,36 @@ function insertGroupUserTable(tableId, users) {
     insertTableData(tableId, userTableData);
 }
 
+// Adds group polls to a specified container
+function insertGroupPolls(containerId, polls) {
+    // Terminate if current user is not admin or super user
+    if (currentUser.super_user != "1" &&
+        currentUser.admin != "1") return;
+
+    // Gets the container element
+    let container = getElement(containerId);
+
+    /* Loops through and adds new poll block 
+     * based on current index of iteration
+     */
+    for (let i = 0; i < polls.length; i++) {
+        // Sets custom function to current poll
+        let func = function() {
+            // Sets href to poll site with id as parameter
+            location.href = `poll.html?id=${polls[i]["id"]}`;
+        }
+
+        // Gets the index from the poll data
+        let index = parseInt(polls[i]["id"].replace("AA-P-", ""));
+
+        // Creates the poll block
+        let poll = createPollBlockElement(polls[i], index, func);
+
+        // Adds a new poll block
+        container.appendChild(poll);
+    }
+}
+
 // Reloads the popup user table
 function loadPopupUserTable(groupId) {
     // Terminate if current user is not admin or super user
@@ -706,35 +736,6 @@ function appendGroup(containerId, data) {
 
     // Increments group count
     groupCount++;
-}
-
-// Adds group polls to a specified container
-function insertGroupPolls(containerId, polls) {
-    // Terminate if current user is not admin or super user
-    if (currentUser.super_user != "1" &&
-        currentUser.admin != "1") return;
-
-    // Gets the container element
-    let container = getElement(containerId);
-
-    /* Loops through and adds new poll block 
-     * based on current index of iteration
-     */
-    for (let i = 0; i < polls.length; i++) {
-        // Sets custom function to current poll
-        let func = function() {
-            location.href = `poll.html?id=${polls[i]["id"]}`;
-        }
-
-        // Gets the index from the poll data
-        let index = parseInt(polls[i]["id"].replace("AA-P-", ""));
-
-        // Creates the poll block
-        let poll = createPollBlockElement(polls[i], index, func);
-
-        // Adds a new poll block
-        container.appendChild(poll);
-    }
 }
 
 // Fetches all groups and renders them accordingly

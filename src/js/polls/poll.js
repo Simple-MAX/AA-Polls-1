@@ -96,13 +96,13 @@ function loadPoll() {
     let inputOutputIds = [
         ["general-rate-", currentPoll.general_rate],
         ["section-2-rate-3-", currentPoll.details[2].rate],
-        ["section-2-rate-4-", currentPoll.details[3].rate]
     ];
 
     // Adds listener to each input and output element
     for (let i = 0; i < inputOutputIds.length; i++) {
         // Passes input event and output id
         let func = function(e) {
+            // Adds pass new element value listener function
             passElementValueListener(e, inputOutputIds[i][0] + "output");
         }
 
