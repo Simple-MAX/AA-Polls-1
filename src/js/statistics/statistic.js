@@ -26,23 +26,31 @@ function getPollRateStats(groupData) {
      */
     if (group.polls != null) {
         // Loops through selected group polls
-        for (let i = 0; i < group.polls.length; i++) {
+        for (let i = 0; i < PollChartTypes[0].labels.length; i++) {
             // Gets selected dates
             let startDate   = Date.parse(group.start_date),
                 endDate     = Date.parse(group.end_date);
-
-            /* Continues or terminates if selected dates
-             * exceeds minimum and maximum limit
-             */
-            if (Date.parse(group.polls[i].date) < startDate ||
-                Date.parse(group.polls[i].date) > endDate)
-                continue;
 
             // Creates a new stats object for current poll
             let stats = {
                 label: group.polls[i].id,
                 values: [0, 0, 0]
             };
+
+            /* Continues or terminates if selected dates
+             * exceeds minimum and maximum limit
+             */
+            if (Date.parse(group.polls[i].date) < startDate ||
+                Date.parse(group.polls[i].date) > endDate) {
+                // Set label to nothing or empty string
+                stats.label = "";
+
+                // Pushes stats to statsData
+                statsData.push(stats);
+
+                // Skips to next iteration
+                continue;
+            }
 
             // Determines if current poll should be skipped or not
             let skip = false;
@@ -90,10 +98,12 @@ function getPollRateStats(groupData) {
     if (statsData == null || statsData.length <= 0) 
         return;
 
-    // Sets data
+    // Sets new stats data
     data = statsData;
 
-    // Returns new data
+    console.log(data);
+
+    // Returns new stats data
     return data;
 }
 
@@ -120,8 +130,6 @@ function showStatistics() {
         default: 
             return;
     }
-
-    console.log(selectedGroup);
 
     // Terminate if data is null
     if (data == null) return;

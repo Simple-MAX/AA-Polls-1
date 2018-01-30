@@ -29,19 +29,18 @@ function renderChart(canvasId, data) {
             // Attempts to insert datasets labels to data
             for (let j = 0; j < data.length; j++) {
                 // Adds poll id to labels array
-                labels.push(data[j].label);
+                if (data[j].label != "") 
+                    labels.push(data[j].label);
 
                 // Data to insert
                 let datasetData = [];
 
-                // Loops through data array again
-                for (let k = 0; k < data.length; k++) {
-                    // Exits loop if k exceeds values length
-                    if (k > data[k].values.length) break;
-
-                    // Pushes data correctly and accordingly
-                    datasetData.push(data[k].values[j]);
-                }
+                /* Loops through data array again adds
+                 * only if current label is not empty
+                 */
+                for (let k = 0; k < data.length; k++)
+                    if (data[k].label != "")
+                        datasetData.push(data[k].values[j]);
 
                 // Creates new dataset object
                 let dataset = {
@@ -59,6 +58,8 @@ function renderChart(canvasId, data) {
             }
         }
     }
+
+    console.log(datasets);
 
     // Terminate if datasets is null
     if (datasets == null || datasets.length <= 0) 
