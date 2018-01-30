@@ -16,8 +16,14 @@ function showStatistics() {
     // Used to shorten code
     let group = selectedGroup;
 
+    // Option object with data used for the chart
+    let data = {
+        labels: [],
+        datasets: [],
+    };
+        
     // Data variable to pass
-    let data = ["hee", "ehe"];
+    let statsData = [];
 
     /* Proceeds to format and create stats if
      * selected group polls is not null
@@ -35,23 +41,46 @@ function showStatistics() {
                 },
             };
 
+            // Determines if current poll should be skipped or not
+            let skip = false;
+
             // Min, max and general values
             let min = 0, max = 0, average = 0;
 
             // Loops through submitted polls
             for (let j = 0; j < group.submitted_polls.length; j++) {
-                // Used to shorten code
-                let poll = group.submitted_polls[j].poll;
-
-                /* Sets min and max value if poll min value is 
-                 * lesser than min value or if poll max value
-                 * is greater than max value
+                /* Proceed only if current poll id is same as
+                 * current submitted poll id
                  */
-                if (min == 0 || min > parseInt(poll.general_rate))
-                    min = parseInt(poll.general_rate);
-                if (max == 0 || max < parseInt(poll.general_rate))
-                    max = parseInt(poll.general_rate);
+                if (group.submitted_polls[j].id == group.polls[i].id) {
+                    // Used to shorten code
+                    let poll = group.submitted_polls[j].poll;
+
+                    /* Sets min and max value if poll min value is 
+                    * lesser than min value or if poll max value
+                    * is greater than max value
+                    */
+                    if (min == 0 || min > parseInt(poll.general_rate))
+                        min = parseInt(poll.general_rate);
+                    if (max == 0 || max < parseInt(poll.general_rate))
+                        max = parseInt(poll.general_rate);
+
+                    // Increments average value with polls general rate value
+                    average += parseInt(poll.general_rate);
+                } else {
+                    // Sets skip to true
+                    skip = true;
+
+                    // Exits current sub loop
+                    break;
+                }
             }
+
+            // Continue or terminate if skip is true
+            if (skip) continue;
+
+            // Divides average value with the amount of submitted polls
+            average /= group.submitted_polls.length;
 
             // Sets new and fetched values
             stats.values.min        = min;
@@ -59,12 +88,17 @@ function showStatistics() {
             stats.values.average    = average;
 
             // Appends stats object to data array
-            data.push(stats);
+            statsData.push(stats);
         }
     } else return;
 
     // Terminate if data is null
-    if (data == null || data.length < 1) return;
+    if (statsData == null || statsData.length <= 0) 
+        return;
+
+    // Loops through generated stats data
+    for (let i = 0; i < statsData.length; i++)
+        data.labels.push(statsData[i].label);
 
     // Renders the statistics on a new chart
     renderChart("chart-canvas", data);

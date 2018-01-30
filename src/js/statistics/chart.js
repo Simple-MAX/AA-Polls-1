@@ -23,26 +23,26 @@ function renderChart(canvasId, data) {
     const options = {
         type: chartType,
         data: {
-            labels: ["1", "2", "3"],
+            labels: data.labels,
             datasets: [{
-                label: "Medelvärde",
-                data: [12],
+                label: "",
+                data: [],
                 backgroundColor: "transparent",
                 borderColor: "#00a1ff",
                 borderWidth: 4,
                 pointRadius: 6,
                 pointBackgroundColor: "#fff",
             }, {
-                label: "Max värde",
-                data: [2],
+                label: "",
+                data: [],
                 backgroundColor: "transparent",
                 borderColor: "#0ace00",
                 borderWidth: 4,
                 pointRadius: 6,
                 pointBackgroundColor: "#fff",
             }, {
-                label: "Min värde",
-                data: [4],
+                label: "",
+                data: [],
                 backgroundColor: "transparent",
                 borderColor: "#ffe100",
                 borderWidth: 4,
