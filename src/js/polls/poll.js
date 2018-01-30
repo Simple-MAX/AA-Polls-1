@@ -294,7 +294,7 @@ function insertPollData(data, ids, disableAll = false) {
 function setNewPollData(poll, selectValues = false) {
     // Creates new array with new data
     let pollData = [
-        [poll.info_text], 
+        [poll.info_text != null ? poll.info_text : ""], 
         [poll.initial.section_title],
         [poll.initial.sub_title_1],
         [poll.initial.sub_title_2],
@@ -378,20 +378,24 @@ function getNewPollData(data, ids) {
         // Gets type of object from data
         let type = data[i][1] != null ? data[i][1] : "input";
 
-        console.log("-----------");
-        console.log(data[i]);
-        console.log(ids[i]);
-
         // Gets current id based on id
         let currentElement = getElement(ids[i][0]);
+
+        // Skip if element is null
+        if (currentElement == null) continue;
 
         // Determines what attribute to fetch from
         if (type == "input" || type == "select" || type == "placeholder") {
             // Pushes id and current element input value
             pollData.push([ids[i][0], currentElement.value]);
         } else if (type == "text") {
+            // Pushes value instead of innerHTML if it is empty
+            let value = currentElement.innerHTML != "" 
+                ? currentElement.innerHTML
+                : currentElement.value;
+
             // Pushes id and current element innerHTML value
-            pollData.push([ids[i][0], currentElement.innerHTML]);
+            pollData.push([ids[i][0], value]);
         } else {
             // Current select input parent
             let optionsInputContainer = currentElement.parentNode;

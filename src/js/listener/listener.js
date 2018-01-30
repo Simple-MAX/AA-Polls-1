@@ -268,8 +268,6 @@ function submitPollListener() {
     // Makes code shorter
     let poll = insertedCreatePollStructure;
 
-    console.log(poll); return;
-
     // Adds user id to poll
     poll["user_id"] = currentUser.id;
 
