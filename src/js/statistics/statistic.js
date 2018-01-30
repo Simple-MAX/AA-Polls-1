@@ -13,10 +13,61 @@
 
 // Display statistics on canvas chart
 function showStatistics() {
-    console.log(selectedGroup);
+    // Used to shorten code
+    let group = selectedGroup;
+
+    // Data variable to pass
+    let data = ["hee", "ehe"];
+
+    /* Proceeds to format and create stats if
+     * selected group polls is not null
+     */
+    if (group.polls != null) {
+        // Loops through selected group polls
+        for (let i = 0; i < group.polls.length; i++) {
+            // Creates a new stats object for current poll
+            let stats = {
+                label: group.polls[i].id,
+                values: {
+                    min: 0,
+                    max: 0,
+                    average: 0
+                },
+            };
+
+            // Min, max and general values
+            let min = 0, max = 0, average = 0;
+
+            // Loops through submitted polls
+            for (let j = 0; j < group.submitted_polls.length; j++) {
+                // Used to shorten code
+                let poll = group.submitted_polls[j].poll;
+
+                /* Sets min and max value if poll min value is 
+                 * lesser than min value or if poll max value
+                 * is greater than max value
+                 */
+                if (min == 0 || min > parseInt(poll.general_rate))
+                    min = parseInt(poll.general_rate);
+                if (max == 0 || max < parseInt(poll.general_rate))
+                    max = parseInt(poll.general_rate);
+            }
+
+            // Sets new and fetched values
+            stats.values.min        = min;
+            stats.values.max        = max;
+            stats.values.average    = average;
+
+            // Appends stats object to data array
+            data.push(stats);
+        }
+    } else return;
+
+    // Terminate if data is null
+    if (data == null || data.length < 1) return;
 
     // Renders the statistics on a new chart
-    renderChart("chart-canvas");
+    renderChart("chart-canvas", data);
 }
 
 // Inserts fetched groups to group picker

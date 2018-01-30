@@ -35,18 +35,6 @@ const PollChartTypes = [
     }
 ];
 
-const DEFAULT_STATS = { 
-    Chart: { 
-        Min: 0, 
-        Max: 0, 
-        Average: 0 
-    },
-    Date: { 
-        From: "", 
-        To: "" 
-    }
-};
-
 // Regular variables
 var selectedGroup = {
     group: null,

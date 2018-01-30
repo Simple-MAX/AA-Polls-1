@@ -12,7 +12,7 @@
 */
 
 // Renders a chart using the Chart.js library with given stats
-function renderChart(canvasId, stats = DEFAULT_STATS) {
+function renderChart(canvasId, data) {
     // Gets the chart canvas element
     let canvas = getElement(canvasId);
 
@@ -26,7 +26,7 @@ function renderChart(canvasId, stats = DEFAULT_STATS) {
             labels: ["1", "2", "3"],
             datasets: [{
                 label: "Medelvärde",
-                data: [12, 3, 4],
+                data: [12],
                 backgroundColor: "transparent",
                 borderColor: "#00a1ff",
                 borderWidth: 4,
@@ -34,7 +34,7 @@ function renderChart(canvasId, stats = DEFAULT_STATS) {
                 pointBackgroundColor: "#fff",
             }, {
                 label: "Max värde",
-                data: [2, 13, 6],
+                data: [2],
                 backgroundColor: "transparent",
                 borderColor: "#0ace00",
                 borderWidth: 4,
@@ -42,7 +42,7 @@ function renderChart(canvasId, stats = DEFAULT_STATS) {
                 pointBackgroundColor: "#fff",
             }, {
                 label: "Min värde",
-                data: [4, 9, 7],
+                data: [4],
                 backgroundColor: "transparent",
                 borderColor: "#ffe100",
                 borderWidth: 4,
