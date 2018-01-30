@@ -19,6 +19,31 @@ function renderChart(canvasId, data) {
     // Gets the context of the canvas element
     let context = canvas.getContext("2d");
 
+    // Creates datasets array
+    let datasets = [];
+    
+    // Loops through chart types
+    for (let i = 0; i < PollChartTypes.length; i++) {
+        // Set pollChartType to selected chart type object
+        if (chartType == PollChartTypes[i].value) {
+            // Attempts to insert datasets labels to data
+            for (let j = 0; j < data.length; j++) {
+                // Creates new dataset object
+                let dataset = {
+                    label: "nAn",
+                    
+                };
+
+                // Adds dataset to datasets array
+                datasets.push(dataset);
+            }
+        }
+    }
+
+    // Terminate if datasets is null
+    if (datasets == null || datasets.length <= 0) 
+        return;
+
     // Creates options and inserts chart data
     const options = {
         type: chartType,

@@ -11,16 +11,13 @@
 * /**************************************************
 */
 
-// Display statistics on canvas chart
-function showStatistics() {
+// Gets min, max and average stats from polls
+function getPollRateStats(groupData) {
     // Used to shorten code
     let group = selectedGroup;
 
     // Option object with data used for the chart
-    let data = {
-        labels: [],
-        datasets: [],
-    };
+    let data = [];
         
     // Data variable to pass
     let statsData = [];
@@ -34,12 +31,8 @@ function showStatistics() {
             // Creates a new stats object for current poll
             let stats = {
                 label: group.polls[i].id,
-                values: {
-                    min: 0,
-                    max: 0,
-                    average: 0
-                },
-            };
+                values: [0, 0, 0]
+            }
 
             // Determines if current poll should be skipped or not
             let skip = false;
@@ -96,9 +89,39 @@ function showStatistics() {
     if (statsData == null || statsData.length <= 0) 
         return;
 
-    // Loops through generated stats data
-    for (let i = 0; i < statsData.length; i++)
-        data.labels.push(statsData[i].label);
+    // Sets data
+    data = statsData;
+
+    // Returns new data
+    return data;
+}
+
+// Gets influcences stats from polls
+function getPollInflunceStats(groupData) {
+    
+}
+
+// Display statistics on canvas chart
+function showStatistics() {
+    // Final data variable
+    let data = null;
+
+    // Determines what data to receive based on chart type value
+    switch (chartType) {
+        case ChartType.Line:
+            // Gets min, max and average stats from polls
+            data = getPollRateStats(selectedGroup);
+            break;
+        case ChartType.Bar:
+            // Gets influcences stats from polls
+            data = getPollInflunceStats(selectedGroup);
+            break;
+        default: 
+            return;
+    }
+
+    // Terminate if data is null
+    if (data == null) return;
 
     // Renders the statistics on a new chart
     renderChart("chart-canvas", data);

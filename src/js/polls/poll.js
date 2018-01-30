@@ -92,41 +92,41 @@ function loadPoll() {
         infoText.innerHTML = currentPoll.info_text;
     }
 
+    // Input bar listeners
+    let inputOutputIds = [
+        ["general-rate-", currentPoll.general_rate],
+        ["section-2-rate-3-", currentPoll.details[2].rate],
+        ["section-2-rate-4-", currentPoll.details[3].rate]
+    ];
+
+    // Adds listener to each input and output element
+    for (let i = 0; i < inputOutputIds.length; i++) {
+        // Passes input event and output id
+        let func = function(e) {
+            passElementValueListener(e, inputOutputIds[i][0] + "output");
+        }
+
+        // Gets input and output elements
+        let output  = getElement(inputOutputIds[i][0] + "output"),
+            input   = getElement(inputOutputIds[i][0] + "input");
+
+        // Adds input and output values
+        output.value = input.value = inputOutputIds[i][1];
+
+        // Disable the input bars if poll is submitted
+        if (submitted) {
+            output.setAttribute("disabled", "");
+            input.setAttribute("disabled", "");
+        }
+
+        // Adds listener to element
+        addListener(inputOutputIds[i][0] + "input", func, "input");
+    }
+
     // Modify ids and data if poll already is submitted
     if (submitted) {
         // Removes submit button
         removeElement("submit-poll");
-
-        // Input bar listeners
-        let inputOutputIds = [
-            ["general-rate-", currentPoll.general_rate],
-            ["section-2-rate-3-", currentPoll.details[2].rate],
-            ["section-2-rate-4-", currentPoll.details[3].rate]
-        ];
-
-        // Adds listener to each input and output element
-        for (let i = 0; i < inputOutputIds.length; i++) {
-            // Passes input event and output id
-            let func = function(e) {
-                passElementValueListener(e, inputOutputIds[i][0] + "output");
-            }
-
-            // Gets input and output elements
-            let output  = getElement(inputOutputIds[i][0] + "output"),
-                input   = getElement(inputOutputIds[i][0] + "input");
-
-            // Adds input and output values
-            output.value = input.value = inputOutputIds[i][1];
-
-            // Disable the input bars if poll is submitted
-            if (submitted) {
-                output.setAttribute("disabled", "");
-                input.setAttribute("disabled", "");
-            }
-
-            // Adds listener to element
-            addListener(inputOutputIds[i][0] + "input", func, "input");
-        }
 
         // Sections sub section count
         const sectionCount = Object.keys(currentPoll).length - 1;
@@ -377,6 +377,10 @@ function getNewPollData(data, ids) {
     for (let i = 0; i < ids.length; i++) {
         // Gets type of object from data
         let type = data[i][1] != null ? data[i][1] : "input";
+
+        console.log("-----------");
+        console.log(data[i]);
+        console.log(ids[i]);
 
         // Gets current id based on id
         let currentElement = getElement(ids[i][0]);

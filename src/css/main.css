@@ -17,12 +17,12 @@
     background-color: #8a199e;
 }
 
-.nav-main .inverted {
+.nav-main.inverted {
     width: 100%;
-    height: 100px;
+    height: 60px;
     display: block;
 
-    background: #fff;
+    background: transparent;
 }
 
 .nav-container {
@@ -48,7 +48,8 @@
     font-weight: 300;
 }
 
-.nav-logo-container.inverted > h1 { color: #000; }
+.nav-main.inverted .nav-logo-container.inverted > h1 { color: #000; }
+.nav-main.inverted .nav-logo-container.inverted > h4 { color: #8a199e; }
 
 .nav-logo-container > h4 {
     display: block;

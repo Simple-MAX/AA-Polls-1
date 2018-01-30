@@ -12,13 +12,6 @@
 */
 
 // Constant variables
-const MONTHS = [
-    "January",  "February", "Mars",
-    "April",    "May",      "June",
-    "July",     "August",   "September",
-    "November", "October",  "December"
-];
-
 const ChartType = {
     Bar: "bar",
     Line: "line"
@@ -27,11 +20,31 @@ const ChartType = {
 const PollChartTypes = [
     {
         value: ChartType.Line,
-        text: "Huvudgraf"
+        text: "Huvudgraf",
+        labels: [
+            "Medelvärde",
+            "Max värde",
+            "Min värde"
+        ],
+        borderColors: [
+            "#00a1ff",
+            "#0ace00",
+            "#ffe100"
+        ]
     }, 
     {
         value: ChartType.Bar,
-        text: "Påverkningsgraf"
+        text: "Påverkningsgraf",
+        labels: [
+            "0 = ingen påverkan",
+            "1 = lite påverkan",
+            "2 = stor påverkan"
+        ],
+        borderColors: [
+            "#00a1ff",
+            "#0ace00",
+            "#ffe100"
+        ]
     }
 ];
 

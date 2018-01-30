@@ -16,9 +16,9 @@ const POLL_API_URL = `${API_URL}${Endpoint.Poll}`;
 
 const DEFAULT_POLL_STRUCTURE = {
     poll: {
-        group_id: "AA-G-0",
-        general_rate: 0,
         info_text: "",
+        group_id: "AA-G-0",
+        general_rate: 5,
         initial: {
             section_title: "Bedömning",
             sub_title_1: "Grupp",
@@ -56,7 +56,7 @@ const DEFAULT_POLL_STRUCTURE = {
             },
             2: {
                 sub_title: "Påverkandefaktorer",
-                rate: 0,
+                rate: 1,
                 option: {
                     placeholder: "Alternativ",
                     selected: "",
@@ -69,7 +69,7 @@ const DEFAULT_POLL_STRUCTURE = {
             },
             3: {
                 sub_title: "Åtgärder",
-                rate: 0,
+                rate: 1,
                 option: {
                     placeholder: "Alternativ",
                     selected: "",
@@ -145,6 +145,7 @@ var createdPollData = [
     [createdPoll.initial.value_1],
     [createdPoll.initial.value_2],
     [createdPoll.initial.value_3],
+    
     [createdPoll.details.section_title],
 
     [createdPoll.details[0].sub_title],
