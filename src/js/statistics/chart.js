@@ -19,8 +19,10 @@ function renderChart(canvasId, data) {
     // Gets the context of the canvas element
     let context = canvas.getContext("2d");
 
-    // Creates datasets array
-    let datasets = [];
+    // Creates datasets and labels array
+    let datasets = [], labels = [];
+
+    console.log(data);
     
     // Loops through chart types
     for (let i = 0; i < PollChartTypes.length; i++) {
@@ -28,10 +30,30 @@ function renderChart(canvasId, data) {
         if (chartType == PollChartTypes[i].value) {
             // Attempts to insert datasets labels to data
             for (let j = 0; j < data.length; j++) {
+                // Adds poll id to labels array
+                labels.push(data[j].label);
+
+                // Data to insert
+                let datasetData = [];
+
+                // Loops through data array again
+                for (let k = 0; k < data.length; k++) {
+                    // Exits loop if k exceeds values length
+                    if (k > data[k].values.length) break;
+
+                    // Pushes data correctly and accordingly
+                    datasetData.push(data[k].values[j]);
+                }
+
                 // Creates new dataset object
                 let dataset = {
-                    label: "nAn",
-                    
+                    label: PollChartTypes[i].labels[j],
+                    data: datasetData,
+                    backgroundColor: "transparent",
+                    borderColor: PollChartTypes[i].borderColors[j],
+                    borderWidth: 4,
+                    pointRadius: 6,
+                    pointBackgroundColor: "#fff",
                 };
 
                 // Adds dataset to datasets array
@@ -39,6 +61,8 @@ function renderChart(canvasId, data) {
             }
         }
     }
+
+    console.log(datasets);
 
     // Terminate if datasets is null
     if (datasets == null || datasets.length <= 0) 
@@ -48,32 +72,8 @@ function renderChart(canvasId, data) {
     const options = {
         type: chartType,
         data: {
-            labels: data.labels,
-            datasets: [{
-                label: "",
-                data: [],
-                backgroundColor: "transparent",
-                borderColor: "#00a1ff",
-                borderWidth: 4,
-                pointRadius: 6,
-                pointBackgroundColor: "#fff",
-            }, {
-                label: "",
-                data: [],
-                backgroundColor: "transparent",
-                borderColor: "#0ace00",
-                borderWidth: 4,
-                pointRadius: 6,
-                pointBackgroundColor: "#fff",
-            }, {
-                label: "",
-                data: [],
-                backgroundColor: "transparent",
-                borderColor: "#ffe100",
-                borderWidth: 4,
-                pointRadius: 6,
-                pointBackgroundColor: "#fff",
-            }]
+            labels: labels,
+            datasets: datasets
         },
         options: {
             scales: {

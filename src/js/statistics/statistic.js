@@ -14,13 +14,12 @@
 // Gets min, max and average stats from polls
 function getPollRateStats(groupData) {
     // Used to shorten code
-    let group = selectedGroup;
+    let group = groupData;
 
-    // Option object with data used for the chart
-    let data = [];
-        
-    // Data variable to pass
-    let statsData = [];
+    /* Option object with data used for the chart
+     * and data array to return later on
+     */
+    let data = [], statsData = [];
 
     /* Proceeds to format and create stats if
      * selected group polls is not null
@@ -32,7 +31,7 @@ function getPollRateStats(groupData) {
             let stats = {
                 label: group.polls[i].id,
                 values: [0, 0, 0]
-            }
+            };
 
             // Determines if current poll should be skipped or not
             let skip = false;
@@ -45,7 +44,7 @@ function getPollRateStats(groupData) {
                 /* Proceed only if current poll id is same as
                  * current submitted poll id
                  */
-                if (group.submitted_polls[j].id == group.polls[i].id) {
+                if (group.polls[i].id == group.submitted_polls[j].id) {
                     // Used to shorten code
                     let poll = group.submitted_polls[j].poll;
 
@@ -60,25 +59,16 @@ function getPollRateStats(groupData) {
 
                     // Increments average value with polls general rate value
                     average += parseInt(poll.general_rate);
-                } else {
-                    // Sets skip to true
-                    skip = true;
-
-                    // Exits current sub loop
-                    break;
                 }
             }
-
-            // Continue or terminate if skip is true
-            if (skip) continue;
 
             // Divides average value with the amount of submitted polls
             average /= group.submitted_polls.length;
 
             // Sets new and fetched values
-            stats.values.min        = min;
-            stats.values.max        = max;
-            stats.values.average    = average;
+            stats.values[0] = average;
+            stats.values[1] = max;
+            stats.values[2] = min;
 
             // Appends stats object to data array
             statsData.push(stats);
@@ -98,7 +88,7 @@ function getPollRateStats(groupData) {
 
 // Gets influcences stats from polls
 function getPollInflunceStats(groupData) {
-    
+    // TODO
 }
 
 // Display statistics on canvas chart
