@@ -26,7 +26,7 @@ function getPollRateStats(groupData) {
      */
     if (group.polls != null) {
         // Loops through selected group polls
-        for (let i = 0; i < PollChartTypes[0].labels.length; i++) {
+        for (let i = 0; i < group.polls.length; i++) {
             // Gets selected dates
             let startDate   = Date.parse(group.start_date),
                 endDate     = Date.parse(group.end_date);
@@ -52,16 +52,13 @@ function getPollRateStats(groupData) {
                 continue;
             }
 
-            // Determines if current poll should be skipped or not
-            let skip = false;
-
             // Min, max and general values
             let min = 0, max = 0, average = 0;
 
             // Loops through submitted polls
             for (let j = 0; j < group.submitted_polls.length; j++) {
-                /* Proceed only if current poll id is same as
-                 * current submitted poll id
+                /* Proceed only if current poll id is
+                 * same as current submitted poll id
                  */
                 if (group.polls[i].id == group.submitted_polls[j].id) {
                     // Used to shorten code
@@ -119,54 +116,40 @@ function getPollInfluncesStats(groupData) {
      * selected group polls is not null
      */
     if (group.polls != null) {
-        // Loops through selected group polls
-        for (let i = 0; i < group.polls.length; i++) {
-            // Focused poll detail section
-            let details = group.polls[i].poll.details[2];
+        // Gets poll details two
+        let details = group.selected_poll.poll.details[2];
 
+        // Loops through selected poll influences
+        for (let i = 0; i < details.option.values.length; i++) {
             // Creates a new stats object for current poll
             let stats = {
-                label: details.option.selected,
+                label: details.option.values[i],
                 values: [0, 0, 0]
             };
 
-            // Determines if current poll should be skipped or not
-            let skip = false;
-
-            // Min, max and general values
-            let values = [0, 0, 0];
-
-            // Influence picker values
-            let influences = details.option.values;
-
-            /* Loops only if influences length is greater than
-             * zero and sets label to placeholder if length is zero
-             */
-            if (influences.length > 0) {
-                // Loops through submitted polls
-                for (let j = 0; j < group.submitted_polls.length; j++) {
+            // Loops through submitted polls
+            for (let j = 0; j < group.submitted_polls.length; j++) {
+                /* Proceed only if current poll id is
+                 * same as current submitted poll id
+                 */
+                if (group.polls[i].id == group.submitted_polls[j].id) {
                     // Used to shorten code
                     let poll = group.submitted_polls[j].poll;
-                    
-                    // Gets influence value
-                    let value = parseInt(poll.details[2].rate);
 
-                    /* Resets value if greater than max
-                    * and lesser than min value
-                    */
+                    // Gets submitted poll details
+                    let subPollDetails = poll.details[2];
+
+                    // Gets rate value
+                    let value = parseInt(subPollDetails.rate);
+
+                    // Corrects value if limit exceeded
                     if (value > 2) value = 2;
                     if (value < 0) value = 0;
 
-                    // Increments values depending on rate value
-                    values[value] += 1;
+                    // Sets new rate
+                    stats.values[value] += 1;
                 }
             }
-
-            // Set new label if label is empty
-            stats.label = details.option.placeholder;
-
-            // Appends influences to stats
-            stats.values = values;
 
             // Appends stats object to data array
             statsData.push(stats);
@@ -352,12 +335,19 @@ function getGroupStats(group) {
     pollDates.sort(function(a, b) {
         return a < b ? -1 : a > b ? 1 : 0;
     });
+
+    // Defines selected poll
+    let selectedPoll = selectedGroup.selected_poll;
+
+    // Set default poll if it is null
+    if (selectedPoll == null)
+        selectedPoll = group.polls[0];
     
     // Creates new selected group object
     selectedGroup = {
         group: group,
         polls: group.polls,
-        selected_poll: selectedGroup.selected_poll,
+        selected_poll: selectedPoll,
         submitted_polls: groupSubmittedPolls,
         dates: pollDates,
         start_date: pollDates[0],

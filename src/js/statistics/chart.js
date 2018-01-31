@@ -36,20 +36,23 @@ function renderChart(canvasId, data) {
         // Set pollChartType to selected chart type object
         if (chartType == PollChartTypes[i].value) {
             // Attempts to insert datasets labels to data
-            for (let j = 0; j < data.length; j++) {
-                // Adds poll id to labels array
-                if (data[j].label != "") 
-                    labels.push(data[j].label);
-
+            for (let j = 0; j < PollChartTypes[i].labels.length; j++) {
                 // Data to insert
                 let datasetData = [];
 
                 /* Loops through data array again adds
                  * only if current label is not empty
                  */
-                for (let k = 0; k < data.length; k++)
-                    if (data[k].label != "")
+                for (let k = 0; k < data.length; k++) {
+                    // Adds if label is not empty
+                    if (data[k].label != "") {
+                        // Adds only labels if j variable is zero
+                        if (j == 0) labels.push(data[k].label);
+
+                        // Pushes data to dataset
                         datasetData.push(data[k].values[j]);
+                    }
+                }
 
                 // Defines background color
                 let bgColor = chartType != ChartType.Line
@@ -72,7 +75,7 @@ function renderChart(canvasId, data) {
             }
         }
     }
-
+    
     // Terminate if datasets is null
     if (datasets == null || datasets.length <= 0) 
         return;
