@@ -226,7 +226,7 @@ function createPollListener() {
     /* Gets inserted data from all fields and
      * stores all values accordingly and carefully
      */
-    sendPoll();
+    sendPoll(false);
 
     // Terminate if poll object is null
     if (insertedCreatePollStructure == null) {

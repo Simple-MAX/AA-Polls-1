@@ -90,7 +90,7 @@ function loadPoll() {
 
         // Sets info text
         infoText.innerHTML = currentPoll.info_text;
-    }
+    } else currentPoll["info_text"] = "";
 
     // Input bar listeners
     let inputOutputIds = [
@@ -123,76 +123,73 @@ function loadPoll() {
         addListener(inputOutputIds[i][0] + "input", func, "input");
     }
 
-    // Modify ids and data if poll already is submitted
-    if (submitted) {
-        // Removes submit button
-        removeElement("submit-poll");
+    // Sections sub section count
+    const sectionCount = Object.keys(currentPoll).length - 1;
+    
+    // Removes unused id which causes errors if not used properly
+    for (let i = 0; i < sectionCount; i++) {
+        // Gets the current section select
+        let selectId = `section-2-select-${i + 1}-option-`;
 
-        // Sections sub section count
-        const sectionCount = Object.keys(currentPoll).length - 1;
-        
-        // Removes unused id which causes errors if not used properly
-        for (let i = 0; i < sectionCount; i++) {
-            // Gets the current section select
-            let selectId = `section-2-select-${i + 1}-option-`;
+        /* Used to exit second loop and
+        * increase speed of iteration
+        */
+        let modified = false;
 
-            /* Used to exit second loop and
-            * increase speed of iteration
-            */
-            let modified = false;
+        // Loops through each id and value
+        for (let j = 0; j < modifiedIds.length; j++) {
+            // Exit current loop if ids already is modified
+            if (modified) break;
 
-            // Loops through each id and value
-            for (let j = 0; j < modifiedIds.length; j++) {
-                // Exit current loop if ids already is modified
-                if (modified) break;
+            // If first select data was found, change it
+            if (modifiedIds[j][0] == selectId + "0") {
+                // Change the current id
+                modifiedIds[j][0] = modifiedIds[j][0].replace("-option-0", "");
 
-                // If first select data was found, change it
-                if (modifiedIds[j][0] == selectId + "0") {
-                    // Change the current id
-                    modifiedIds[j][0] = modifiedIds[j][0].replace("-option-0", "");
+                // Change the current id value
+                modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "values");
 
-                    // Change the current id value
-                    modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "values");
+                // Attempts to remove next element
+                if (modifiedIds[j + 1] != null) {
+                    // Deletes the unecessary id and value
+                    modifiedIds.splice(j + 1, 1);
 
-                    // Attempts to remove next element
-                    if (modifiedIds[j + 1] != null) {
-                        // Deletes the unecessary id and value
-                        modifiedIds.splice(j + 1, 1);
-
-                        // Sets modified to true
-                        modified = true;
-                    } 
-                }
-
-                // Changes id node target from "placeholder" to "text"
-                if (stringContains(modifiedIds[j][1], "placeholder"))
-                    modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "text");
+                    // Sets modified to true
+                    modified = true;
+                } 
             }
 
-            // If info text is not empty, change type from placeholder to text
-            if (currentPoll.details[i] != undefined) {
-                // Used to shorten code
-                let details = currentPoll.details[i];
+            // Changes id node target from "placeholder" to "text"
+            if (stringContains(modifiedIds[j][1], "placeholder"))
+                modifiedIds[j][1] = modifiedIds[j][1].replace("placeholder", "text");
+        }
 
-                if (details.info.text != "") {
-                    // Loops through new poll data
-                    for (let j = 0; j < currentPollData.length; j++) {
-                        /* Proceed if element with current 
-                        * placeholder value was found
-                        */
-                        if (currentPollData[j][0] == details.info.placeholder) {
-                            // Sets the placeholder to text and changes value
-                            currentPollData[j][0] = details.info.text;
-                            currentPollData[j][1] = "text";
+        // If info text is not empty, change type from placeholder to text
+        if (currentPoll.details[i] != undefined) {
+            // Used to shorten code
+            let details = currentPoll.details[i];
 
-                            // Exits sub iteration
-                            break;
-                        }
+            if (details.info.text != "") {
+                // Loops through new poll data
+                for (let j = 0; j < currentPollData.length; j++) {
+                    /* Proceed if element with current 
+                     * placeholder value was found
+                     */
+                    if (currentPollData[j][0] == details.info.placeholder) {
+                        // Sets the placeholder to text and changes value
+                        currentPollData[j][0] = details.info.text;
+                        currentPollData[j][1] = "text";
+
+                        // Exits sub iteration
+                        break;
                     }
                 }
             }
         }
     }
+
+    // Removes submit button
+    if (submitted) removeElement("submit-poll");
 
     // Inserts poll data and values to elements
     insertPollData(currentPollData, modifiedIds, submitted);
@@ -237,7 +234,7 @@ function insertPollData(data, ids, disableAll = false) {
     if (data == null || ids == null) return;
 
     // Terminate if both array lengths are not equal
-    if (data.length != ids.length) return; 
+    if (data.length != ids.length) return;
 
     // Loops through each value in passed data variable
     for (let i = 0; i < data.length; i++) {
@@ -285,7 +282,8 @@ function insertPollData(data, ids, disableAll = false) {
             }
 
             // Disable the element if disableAll is true
-            if (disableAll) element.setAttribute("disabled", "");
+            if (disableAll && type != "select") 
+                element.setAttribute("disabled", "");
         }
     }
 }
@@ -319,24 +317,16 @@ function setNewPollData(poll, selectValues = false) {
             let sectionData = [[currentSection.sub_title]];
 
             // Gets current section option values
-            let value = currentSection.option.values;
+            let values = currentSection.option.values;
 
             /* Sets section option values to placeholder
              * if option values array length is zero
              */
-            if (value.length < 1)
-                value.push(currentSection.option.placeholder);
+            if (values.length < 1)
+                values.push(currentSection.option.placeholder);
 
             // Default select value
-            let selectData = [[value, "select"]];
-
-            // Avoid adding values if data there are no values
-            if (!selectValues) {
-                selectData = [
-                    [currentSection.option.placeholder, "text"],
-                    [currentSection.option.placeholder, "placeholder"]
-                ];
-            }
+            let selectData = [[values, "select"]];
 
             // Adds given select data accordingly
             selectData.forEach(element => sectionData.push(element));
@@ -385,7 +375,7 @@ function getNewPollData(data, ids) {
         if (currentElement == null) continue;
 
         // Determines what attribute to fetch from
-        if (type == "input" || type == "select" || type == "placeholder") {
+        if (type == "input" || type == "select" || type == "placeholder") {
             // Pushes id and current element input value
             pollData.push([ids[i][0], currentElement.value]);
         } else if (type == "text") {
@@ -419,6 +409,7 @@ function getNewPollData(data, ids) {
                 if (option.value == "") 
                     option.value = currentPollData[i][0];
                 
+                // Pushes value to inputData
                 inputData.push(option.value);
 
                 // Adds select input values to values array
@@ -476,7 +467,7 @@ function createPollInsertedObject(data, ids) {
                      * current key values array is either greater or
                      * lesser than zero to determine submission type sequence
                      */
-                    if (keys[k] == "option" && currentKey.values.length < 1) {
+                    if (keys[k] == "option" && currentKey.values.length <= 1) {
                         // Proceed if next index and value is not null or empty
                         if (insertedCreatePollData[i + 1] != null) {
                             // Determines if current data is apart of a picker
@@ -484,6 +475,9 @@ function createPollInsertedObject(data, ids) {
                                 insertedCreatePollData[i + 1].length > 0) {
                                 // Adds first value as selected value
                                 currentKey.selected = insertedCreatePollData[i + 1][0][1];
+
+                                // Removes first option element from values
+                                currentKey.values = [];
                                 
                                 // Adds select option values if there is any
                                 for (let l = 0; l < insertedCreatePollData[i + 1].length; l++) {
@@ -496,10 +490,14 @@ function createPollInsertedObject(data, ids) {
 
                                     // Adds a select option value to values array
                                     currentKey.values.push(optionValue);
-                                }            
+                                }       
+                                
+                                // Pushes default value if array length is zero
+                                if (currentKey.values.length <= 0)
+                                    currentKey.values.push(insertedCreatePollData[i + 1][0][1]);
                             }
                         }
-                    } else if (keys[k] == "option" && currentKey.values.length > 0) {
+                    } else if (keys[k] == "option" && currentKey.values.length > 1) {
                         /* Checks if current id does not contain "option" in it
                          * and attempts to add the selected value to selected key
                          */
@@ -598,8 +596,11 @@ function sendPoll(submit = false) {
 
         // Loops through each bar
         for (let i = 0; i < inputRateBars.length; i++) {
-            // Gets the input bar value
-            let value = getElementValue(inputRateBars[i][1]);
+            // Gets the input bar element
+            let input = getElement(inputRateBars[i][1]);
+
+            // Continues if value is null
+            if (input == null) continue;
 
             // Separates all node keys
             let keys = inputRateBars[i][0].split(".");
@@ -611,7 +612,7 @@ function sendPoll(submit = false) {
             for (let j = 0; j < keys.length; j++) {
                 // Proceeds if node key is equaled to "rate"
                 if (j == keys.length - 1) 
-                    currentKey[keys[j]] = value;
+                    currentKey[keys[j]] = input.value;
 
                 // Goes to the next node with current key
                 currentKey = currentKey[keys[j]];
@@ -1055,7 +1056,7 @@ function createPollBlockElement(data, index = 0, onclick = null) {
     let pollTitle = createElement("h4");
 
     // Adds title
-    pollTitle.innerHTML = `Formulär #${(index + 1)}`;
+    pollTitle.innerHTML = `Formulär #${index}`;
 
     // Poll date
     let pollDate = createElement("p");

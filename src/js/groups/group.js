@@ -386,6 +386,7 @@ function insertGroupPolls(containerId, polls) {
 
     // Gets the container element
     let container = getElement(containerId);
+    console.log(polls);
 
     /* Loops through and adds new poll block 
      * based on current index of iteration
