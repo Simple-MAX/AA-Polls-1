@@ -467,7 +467,7 @@ function loadUserTable(callback = null) {
 // Refreshes and re-renders the user table
 function refreshUserTable(tableId) {
     // Gets the group container
-    let table = getElement(table);
+    let table = getElement(tableId);
     
     // Terminate if groups container does not exist
     if (table == null) return;

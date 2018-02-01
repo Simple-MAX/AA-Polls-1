@@ -354,6 +354,9 @@ function getNewPollData(data, ids) {
     // Terminate if element ids is null
     if (data == null || ids == null) return;
 
+    console.log(data);
+    console.log(ids);
+
     // Terminate if poll data length is not same as ids length
     if (data.length != ids.length) return;
 
