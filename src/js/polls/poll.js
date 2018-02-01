@@ -71,26 +71,32 @@ function loadPoll() {
     // Determines if current poll already is submitted
     let submitted = false;
 
-    // Checks if current poll already is submitted
-    submittedPolls.forEach(function(data) {
-        // Set submitted to true if found
-        if (data.poll == currentPoll) submitted = true; 
-    });
+    if (currentPoll.user_id != undefined)
+        submitted = true;
 
     // Reformata new data and inserts it to global variable
-    currentPollData = setNewPollData(currentPoll, submitted);
+    currentPollData = setNewPollData(currentPoll, true);
 
     // Cloned ids array
     modifiedIds = DEFAULT_POLL_IDS;
 
     // Sets information text if found
-    if (currentPoll.info_text != null) {
+    if (currentPoll.info_text != "") {
         // Gets the info text paragraph element
         let infoText = getElement("poll-info-text");
 
         // Sets info text
         infoText.innerHTML = currentPoll.info_text;
-    } else currentPoll["info_text"] = "";
+    } else {
+        // Adds info_text key in poll object
+        let defaultText = "Ingen information tillgänglig";
+
+        // Adds both values
+        currentPollData[0] = currentPoll["info_text"] = [defaultText];
+    }
+
+    // Removes submit button
+    if (submitted) removeElement("submit-poll");
 
     // Input bar listeners
     let inputOutputIds = [
@@ -113,10 +119,10 @@ function loadPoll() {
         // Adds input and output values
         output.value = input.value = inputOutputIds[i][1];
 
-        // Disable the input bars if poll is submitted
+        // Disable if submitted is true
         if (submitted) {
-            output.setAttribute("disabled", "");
             input.setAttribute("disabled", "");
+            output.setAttribute("disabled", "");
         }
 
         // Adds listener to element
@@ -187,9 +193,6 @@ function loadPoll() {
             }
         }
     }
-
-    // Removes submit button
-    if (submitted) removeElement("submit-poll");
 
     // Inserts poll data and values to elements
     insertPollData(currentPollData, modifiedIds, submitted);
@@ -325,8 +328,11 @@ function setNewPollData(poll, selectValues = false) {
             if (values.length < 1)
                 values.push(currentSection.option.placeholder);
 
-            // Default select value
-            let selectData = [[values, "select"]];
+            // Defines select data and determines to add placeholder or not
+            let selectData = !selectValues ? [[values[0], "placeholder"]] : [];  
+
+            // Adds select data
+            selectData.push([values, "select"]);
 
             // Adds given select data accordingly
             selectData.forEach(element => sectionData.push(element));
@@ -354,9 +360,6 @@ function getNewPollData(data, ids) {
     // Terminate if element ids is null
     if (data == null || ids == null) return;
 
-    console.log(data);
-    console.log(ids);
-
     // Terminate if poll data length is not same as ids length
     if (data.length != ids.length) return;
 
@@ -378,7 +381,7 @@ function getNewPollData(data, ids) {
         if (currentElement == null) continue;
 
         // Determines what attribute to fetch from
-        if (type == "input" || type == "select" || type == "placeholder") {
+        if (type == "input" || type == "placeholder") {
             // Pushes id and current element input value
             pollData.push([ids[i][0], currentElement.value]);
         } else if (type == "text") {
@@ -578,12 +581,7 @@ function insertUserPollsData(containerId, polls) {
 // Attempts to get and format new poll data
 function sendPoll(submit = false) {
     // Sets default id
-    let ids = DEFAULT_POLL_IDS;
-    
-    /* Passes different values based on
-     * the type of submission
-     */
-    if (submit) ids = modifiedIds;
+    let ids = submit ? modifiedIds : DEFAULT_POLL_IDS;
 
     // Attempts to create new poll data
     createPollInsertedObject(currentPollData, ids);

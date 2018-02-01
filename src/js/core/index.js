@@ -199,7 +199,7 @@ function showChooseUserPoll(data) {
     fetchUserPolls(currentUser.token, data.id);
 
     // Terminate if group was not found
-    if (submittedPolls == null) {
+    if (submittedPolls == null || submittedPolls.length <= 0) {
         alert("Användaren har inga besvarade formulär");
 
         return;

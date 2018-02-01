@@ -228,15 +228,15 @@ function createPollListener() {
      */
     sendPoll(false);
 
+    // Makes code shorter
+    let poll = insertedCreatePollStructure;
+
     // Terminate if poll object is null
-    if (insertedCreatePollStructure == null) {
+    if (poll == null) {
         alert("Kunde inte skapa formulär");
 
         return;
     }
-
-    // Makes code shorter
-    let poll = insertedCreatePollStructure;
 
     // Attempts to create and submit poll
     let result = createPoll(currentUser.token, poll);
