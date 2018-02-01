@@ -230,7 +230,7 @@ function createPollListener() {
 
     // Makes code shorter
     let poll = insertedCreatePollStructure;
-
+    
     // Terminate if poll object is null
     if (poll == null) {
         alert("Kunde inte skapa formulär");

@@ -71,6 +71,7 @@ function loadPoll() {
     // Determines if current poll already is submitted
     let submitted = false;
 
+    // Sets submitted to true if user_id exists as key
     if (currentPoll.user_id != undefined)
         submitted = true;
 
