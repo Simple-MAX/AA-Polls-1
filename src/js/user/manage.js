@@ -213,6 +213,8 @@ function editUser(name, email, token, callback = null) {
         params.values   = [token, subParams];
     } else return data;
 
+    console.log(params);
+
     /* Executes an AJAX request (Vanilla JS, not jQuery)
      * with the given url, function contains optional arguments
      */
