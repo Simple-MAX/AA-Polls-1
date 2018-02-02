@@ -606,12 +606,12 @@ function sendPoll(submit = false) {
                 // Gets the index of the selected value
                 const optionIndex = currentPollData[i][0].indexOf(selected);
 
-                console.log(optionIndex);
+                // Sets the new data
+                currentPollData[i][0][0]            = selected;
+                currentPollData[i][0][optionIndex]  = first;
             }
         }
     }
-
-    // console.log(currentPollData);
 
     // Attempts to create new poll data
     createPollInsertedObject(currentPollData, ids);
