@@ -584,6 +584,35 @@ function sendPoll(submit = false) {
     // Sets default id
     let ids = submit ? modifiedIds : DEFAULT_POLL_IDS;
 
+    // Reformats select option array values
+    if (submit) {
+        // Loops through current poll data
+        for (let i = 0; i < currentPollData.length; i++) {
+            /* Proceeds if first index is an sub array
+             * and if second index value is "select"
+             */
+            if (typeof currentPollData[i][0] == "object" ||
+                currentPollData[i][1] == "select") {
+                // Skip if select options length is one
+                if (currentPollData[i][0].length <= 1) continue;
+                    
+                // Gets selected value of select option element
+                let select = getElement(ids[i][0]);
+
+                // Gets selected and first option
+                const first       = currentPollData[i][0][0];
+                const selected    = select.value;
+
+                // Gets the index of the selected value
+                const optionIndex = currentPollData[i][0].indexOf(selected);
+
+                console.log(optionIndex);
+            }
+        }
+    }
+
+    // console.log(currentPollData);
+
     // Attempts to create new poll data
     createPollInsertedObject(currentPollData, ids);
 
