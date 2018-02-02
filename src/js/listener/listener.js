@@ -268,8 +268,6 @@ function submitPollListener() {
         return;
     }
 
-    return;
-
     // Adds user id to poll
     poll["user_id"] = currentUser.id;
 

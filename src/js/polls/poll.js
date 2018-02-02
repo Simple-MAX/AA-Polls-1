@@ -609,6 +609,22 @@ function sendPoll(submit = false) {
                 // Sets the new data
                 currentPollData[i][0][0]            = selected;
                 currentPollData[i][0][optionIndex]  = first;
+
+                // Gets current poll object
+                let currentKey = currentPoll;
+
+                // Gets keys 
+                let keys = ids[i][1].replace(".values", ".selected").split(".");
+
+                // Sets new key each sequence in iteration
+                for (let j = 0; j < keys.length; j++) {
+                    // Add poll data select value to poll object
+                    if (j == keys.length - 1) 
+                        currentKey[keys[j]] = selected;
+
+                    // Sets the key to a new and child key
+                    currentKey = currentKey[keys[j]];
+                }
             }
         }
     }
