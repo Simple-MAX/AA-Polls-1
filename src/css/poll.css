@@ -342,14 +342,18 @@ input[type=range]:focus::-ms-fill-upper {
     filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
 }
 
-input[type = range][orient = vertical] {
+.poll-left-divider input[type = range] {
     width: 625px;
     height: 30px;
     margin-top: 5px;
     transform: 
-        translateX(-297.5px) 
-        translateY(297.5px) 
-        rotate(-90deg);
+
+        rotate(270deg);
+
+    -moz-transform: 
+
+        rotate(270deg);
+    transform-origin: 315px 315px;
 }
   
 input[type=range] {
@@ -404,7 +408,7 @@ input[type=range]::-ms-thumb {
     border: 2px #c0c0c0 solid;
 }
 
-input[type=range][orient=vertical]::-webkit-slider-thumb {
+.poll-left-divider input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 35px;
     width: 10px;
@@ -415,7 +419,7 @@ input[type=range][orient=vertical]::-webkit-slider-thumb {
     border: 2px #c0c0c0 solid;
 }
   
-input[type=range][orient=vertical]::-moz-range-thumb {
+.poll-left-divider input[type=range]::-moz-range-thumb {
     height: 35px;
     width: 10px;
     cursor: pointer;
@@ -426,7 +430,7 @@ input[type=range][orient=vertical]::-moz-range-thumb {
 }
 
 /* All the same stuff for IE */
-input[type=range][orient=vertical]::-ms-thumb {
+.poll-left-divider input[type=range]::-ms-thumb {
     -webkit-appearance: none;
     height: 35px;
     width: 10px;
@@ -466,20 +470,20 @@ input[type=range]::-ms-track {
     border: 0.5px #999 solid;
 }
 
-input[type=range][orient=vertical]::-webkit-slider-runnable-track {
+.poll-left-divider input[type=range]::-webkit-slider-runnable-track {
     background: -webkit-linear-gradient(right, #32ff5e  0%,#fff832 50%, #ff3535 100%);
 }
 
-input[type=range][orient=vertical]::-moz-range-track {
+.poll-left-divider input[type=range]::-moz-range-track {
     background: -moz-linear-gradient(right, #32ff5e  0%,#fff832 50%, #ff3535 100%);
 }
 
-input[type=range][orient=vertical]::-ms-fill-lower {
+.poll-left-divider input[type=range]::-ms-fill-lower {
     background: linear-gradient(right, #32ff5e  0%,#fff832 50%, #ff3535 100%);
     filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 );
 }
 
-input[type=range][orient=vertical]::-ms-fill-upper {
+.poll-left-divider input[type=range]::-ms-fill-upper {
     background: linear-gradient(rignt, #32ff5e  0%,#fff832 50%, #ff3535 100%);
     filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 );
 }
