@@ -53,7 +53,8 @@ function renderChart(canvasId, data) {
                         if (j == 0) labels.push(data[k].label);
 
                         // Pushes data to dataset
-                        datasetData.push(data[k].values[j]);
+                        if (data[k].values[j] != null)
+                            datasetData.push(data[k].values[j]);
                     }
                 }
 

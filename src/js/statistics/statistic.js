@@ -129,10 +129,14 @@ function getPollInfluncesStats(groupData) {
 
             // Loops through submitted polls
             for (let j = 0; j < group.submitted_polls.length; j++) {
+                // Gets the submitted poll, used to shorten code
+                let submittedPoll = group.submitted_polls[j].poll;
+
                 /* Proceed only if current poll id is
                  * same as current submitted poll id
                  */
-                if (group.selected_poll.poll.id == group.submitted_polls[j].id) {
+                if (group.selected_poll.poll.id == submittedPoll.id &&
+                    submittedPoll.details[2].option.selected == details.option.values[i]) {
                     // Used to shorten code
                     let poll = group.submitted_polls[j].poll;
 
