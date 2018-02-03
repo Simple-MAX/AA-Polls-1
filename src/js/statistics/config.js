@@ -60,3 +60,5 @@ var selectedGroup = {
 };
 
 var chartType = ChartType.Line;
+
+var chart;

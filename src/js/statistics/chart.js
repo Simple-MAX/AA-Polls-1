@@ -13,6 +13,9 @@
 
 // Renders a chart using the Chart.js library with given stats
 function renderChart(canvasId, data) {
+    // Destorys current chart
+    if (chart) destroyChart();
+
     // Gets the chart canvas element
     let canvas = getElement(canvasId);
 
@@ -91,7 +94,8 @@ function renderChart(canvasId, data) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
+                        beginAtZero: true,
+                        max: chartType == PollChartTypes[1] ? 30 : 10,
                     }
                 }]
             }
@@ -99,5 +103,11 @@ function renderChart(canvasId, data) {
     };
 
     // Renders the actual chart with options
-    let myChart = new Chart(context, options);
+    chart = new Chart(context, options);
+}
+
+// Destroys current chart
+function destroyChart() {
+    // Destorys current chart
+    if (chart) chart.destroy();
 }

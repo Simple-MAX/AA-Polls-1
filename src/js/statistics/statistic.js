@@ -132,7 +132,7 @@ function getPollInfluncesStats(groupData) {
                 /* Proceed only if current poll id is
                  * same as current submitted poll id
                  */
-                if (group.polls[i].id == group.submitted_polls[j].id) {
+                if (group.selected_poll.poll.id == group.submitted_polls[j].id) {
                     // Used to shorten code
                     let poll = group.submitted_polls[j].poll;
 
@@ -154,9 +154,7 @@ function getPollInfluncesStats(groupData) {
             // Appends stats object to data array
             statsData.push(stats);
         }
-    } else return;
-
-    console.log(statsData);
+    }
 
     // Terminate if data is null
     if (statsData == null || statsData.length <= 0) 
@@ -324,12 +322,21 @@ function selectGroup() {
 
 // Gets new dates from chosen group
 function getGroupStats(group) {
+    // Destorys current chart
+    destroyChart();
+
     // Poll creation date array from start to end
     let pollDates = [];
     
     // Pushes all poll dates to pollDates array
-    for (let i = 0; i < group.polls.length; i++)
-        pollDates.push(group.polls[i].date);
+    for (let i = 0; i < group.polls.length; i++) {
+        /* Adds date only if iteration is initiated
+         * or if previous element value is not equaled
+         * to current array element value
+         */
+        if (i == 0 || pollDates[i - 1] != group.polls[i].date)
+            pollDates.push(group.polls[i].date);
+    }
 
     // Sorts all poll dates accordingly
     pollDates.sort(function(a, b) {
@@ -353,9 +360,6 @@ function getGroupStats(group) {
         start_date: pollDates[0],
         end_date: pollDates[pollDates.length - 1]
     };
-
-    // Terminate if dates length is less than one
-    if (pollDates.length < 1) return;
 
     // Removes all options from date pickers
     removeChildren("stat-start-date");
@@ -381,8 +385,8 @@ function getGroupStats(group) {
         endOption.value     = endOption.innerHTML;
 
         /* Sets start option to selected if iteration is first
-            * and sets end option to selected if iteration is last
-            */
+         * and sets end option to selected if iteration is last
+         */
         if (i == selectedGroup.dates.length - 1)
             endOption.setAttribute("selected", "");
         else if (i == 0)
@@ -402,16 +406,19 @@ function getGroupStats(group) {
     if (getElement("stat-end-date").onchange == null)
         addListener("stat-end-date", func, "change");
     
-    // Loops through each group poll
-    for (let i = 0; i < selectedGroup.polls.length; i++) {
-        // Creates a new option element
-        let option = createElement("option");
-        
-        // Sets option value to poll id
-        option.innerHTML = option.value = selectedGroup.polls[i].id;
+    // Loop through if length is greater than zero
+    if (selectedGroup.polls.length > 0) {
+        // Loops through each group poll
+        for (let i = 0; i < selectedGroup.polls.length; i++) {
+            // Creates a new option element
+            let option = createElement("option");
+            
+            // Sets option value to poll id
+            option.innerHTML = option.value = selectedGroup.polls[i].id;
 
-        // Appends option to user polls picker
-        pollPicker.add(option);
+            // Appends option to user polls picker
+            pollPicker.add(option);
+        }
     }
 
     // Adds on change listener to select element
