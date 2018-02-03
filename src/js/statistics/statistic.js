@@ -334,12 +334,21 @@ function getGroupStats(group) {
     
     // Pushes all poll dates to pollDates array
     for (let i = 0; i < group.polls.length; i++) {
-        /* Adds date only if iteration is initiated
-         * or if previous element value is not equaled
-         * to current array element value
+        /* Adds date only if iteration is initiated or
+         * if previous element value is not equaled to
+         * current array element value
          */
-        if (i == 0 || pollDates[i - 1] != group.polls[i].date)
-            pollDates.push(group.polls[i].date);
+        if (i > 0) {
+            // Adds date if date is not the same as previous date
+            if (group.polls[i].date != group.polls[i - 1].date)
+                pollDates.push(group.polls[i].date);
+
+            // Goes to next index
+            continue;
+        }
+
+        // Pushes date if index is zero
+        pollDates.push(group.polls[i].date);
     }
 
     // Sorts all poll dates accordingly
