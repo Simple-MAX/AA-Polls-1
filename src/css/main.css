@@ -271,6 +271,7 @@ select {
     width: 90%;
     padding: 0 7px;
     -webkit-appearance: none;
+    -moz-appearance: none;
     font-size: 13px;
 }
 
