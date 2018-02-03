@@ -68,9 +68,9 @@ function getPollRateStats(groupData) {
                     * lesser than min value or if poll max value
                     * is greater than max value
                     */
-                    if (min == 0 || min > parseInt(poll.general_rate))
+                    if (j == 0 || min > parseInt(poll.general_rate))
                         min = parseInt(poll.general_rate);
-                    if (max == 0 || max < parseInt(poll.general_rate))
+                    if (j == 0 || max < parseInt(poll.general_rate))
                         max = parseInt(poll.general_rate);
 
                     // Increments average value with polls general rate value
