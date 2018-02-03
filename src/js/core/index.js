@@ -83,8 +83,13 @@ function initialize() {
                 case Pages.Poll:
                     // Remove submit button if user is admin or super user
                     if (userStatus == UserType.SuperUser || 
-                        userStatus == UserType.Admin)
+                        userStatus == UserType.Admin) {
+                        // Removes submit button
                         removeElement("submit-poll");
+
+                        // Attempts to fetch poll templates
+                        fetchPolls(currentUser.token);
+                    }
 
                     // Load finished and unfinished polls
                     loadUserPolls();
@@ -191,7 +196,7 @@ function showResetUser(data) {
 }
 
 // Shows the user poll picker popup
-function showChooseUserPoll(data) {
+function showChooseUserPoll(data, groupId) {
     // Terminates if data is invalid
     if (data == null) return;
 
@@ -217,20 +222,36 @@ function showChooseUserPoll(data) {
     // Terminate if picker is null
     if (userPollsPicker == null) return;
 
+    // Used to check whether options has been added
+    let added = false;
+
     // Adds new options
     for (let i = 0; i < submittedPolls.length; i++) {
-        // Creates a new option element
-        let option = createElement("option");
+        // Proceeds only if group id is valid
+        if (groupId == submittedPolls[i].group_id) {
+            // Creates a new option element
+            let option = createElement("option");
 
-        // Sets option value to poll id
-        option.innerHTML = submittedPolls[i].id;
+            // Sets option value to poll id
+            option.innerHTML = submittedPolls[i].id;
 
-        // Set first element as selected value
-        if (i == 0) option.setAttribute("selected", "");
+            // Set first element as selected value
+            if (i == 0) option.setAttribute("selected", "");
 
-        // Appends option to user polls picker
-        userPollsPicker.add(option);
+            // Appends option to user polls picker
+            userPollsPicker.add(option);
+
+            // Set added to true if false
+            if (!added) added = true;
+        }
     }
+
+    // Terminates if user picker options is non-existent
+    if (!added) {
+        alert("Användaren har inga besvarade formulär");
+
+        return;
+    } 
 
     // Shows the popup box
     simulateElementClick("show-user-polls");

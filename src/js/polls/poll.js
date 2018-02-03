@@ -52,23 +52,32 @@ function loadCreatePollData() {
 
 // Fetches current poll data and assigns all elements with data
 function loadPoll() {
+    // Used to check whether poll is template or not
+    let template = false;
+
     // Gets the id of the current group from url
     let pollId = getUrlParam("id");
+    let userId = getUrlParam("user_id");
 
-    console.log(getUserPoll(pollId));
+    /* Checks whether current user is a super user
+     * or an admin and sets template to true if 
+     * user id parameter is null
+     */
+    if (currentUser.super_user == "1" || currentUser.admin == "1")
+        if (userId == null) template = true;
 
     // Gets current group based on given id
-    currentPoll = getUserPoll(pollId).poll;
+    currentPoll = getUserPoll(pollId, template);
 
     // Terminate if group was not found
     if (currentPoll == null) {
         alert("Kunde inte hitta formulär");
 
         // Redirect admin back to page
-        redirectToPage(getInitialPage(currentStatus));
+        redirectToPage(getInitialPage(userStatus));
 
         return;
-    }
+    } else currentPoll = currentPoll.poll;
 
     // Determines if current poll already is submitted
     let submitted = false;
@@ -539,22 +548,25 @@ function getPollGroup(groupId) {
 }
 
 // Gets current group based on passed id
-function getUserPoll(pollId) {
+function getUserPoll(pollId, template = false) {
     // Merges non submitted and submitted polls
     let polls = submittedPolls.concat(nonSubmittedPolls);
 
+    // Sets polls to fetchedPolls if template is true
+    if (template) polls = fetchedPolls;
+
     console.log(polls);
 
-    // Loops through each group
+    // Loops through each poll
     for (let i = 0; i < polls.length; i++) {
-        // Sets currentGroup to current object in iteration
+        // Checks if poll exists
         if (pollId == polls[i].id) {
-            // Set currentGroup to object
+            // Returns matched poll
             return polls[i];
         }
     }
 
-    // Return null if not found
+    // Return null if poll was not found
     return null;
 }
 

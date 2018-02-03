@@ -31,6 +31,9 @@ function renderChart(canvasId, data) {
         return;
     }
 
+    // Used to determine highest voted value
+    let highestValue = 0;
+
     // Creates datasets and labels array
     let datasets = [], labels = [];
     
@@ -52,6 +55,12 @@ function renderChart(canvasId, data) {
                         // Adds only labels if j variable is zero
                         if (j == 0) labels.push(data[k].label);
 
+                        /* Adds new value to highestValue if
+                         * element is greater than current value
+                         */
+                        if (data[k].values[j] > highestValue)
+                            highestValue = data[k].values[j];
+
                         // Pushes data to dataset
                         if (data[k].values[j] != null)
                             datasetData.push(data[k].values[j]);
@@ -67,6 +76,7 @@ function renderChart(canvasId, data) {
                 let dataset = {
                     label: PollChartTypes[i].labels[j],
                     data: datasetData,
+                    tension: 0,
                     backgroundColor: bgColor,
                     borderColor: PollChartTypes[i].borderColors[j],
                     borderWidth: 4,
@@ -84,6 +94,9 @@ function renderChart(canvasId, data) {
     if (datasets == null || datasets.length <= 0) 
         return;
 
+    // Determines max Y axis value
+    const maxY = chartType == ChartType.Bar ? highestValue : 10;
+
     // Creates options and inserts chart data
     const options = {
         type: chartType,
@@ -96,7 +109,7 @@ function renderChart(canvasId, data) {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        max: chartType == PollChartTypes[1] ? 30 : 10,
+                        max: maxY,
                     }
                 }]
             }

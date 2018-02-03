@@ -334,6 +334,9 @@ function insertGroupUserTable(tableId, users) {
     if (currentUser.super_user != "1" &&
         currentUser.admin != "1") return;
 
+    // Gets the given group id
+    const groupId = tableId.replace("-user-table", "");
+
     // Declaration of user table data
     let userTableData = [];
 
@@ -352,14 +355,14 @@ function insertGroupUserTable(tableId, users) {
                 values: {
                     value: userName,
                     type: "text",
-                    onclick: (id, e) => showChooseUserPoll(users[i])
+                    onclick: (id, e) => showChooseUserPoll(users[i], groupId)
                 }
             },
             {
                 values: {
                     value: user.email,
                     type: "text",
-                    onclick: (id, e) => null
+                    onclick: (id, e) => showChooseUserPoll(users[i], groupId)
                 }
             },
         ];
