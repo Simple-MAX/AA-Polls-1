@@ -554,9 +554,7 @@ function getUserPoll(pollId, template = false) {
 
     // Sets polls to fetchedPolls if template is true
     if (template) polls = fetchedPolls;
-
-    console.log(polls);
-
+    
     // Loops through each poll
     for (let i = 0; i < polls.length; i++) {
         // Checks if poll exists
