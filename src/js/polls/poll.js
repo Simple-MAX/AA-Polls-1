@@ -55,6 +55,8 @@ function loadPoll() {
     // Gets the id of the current group from url
     let pollId = getUrlParam("id");
 
+    console.log(getUserPoll(pollId));
+
     // Gets current group based on given id
     currentPoll = getUserPoll(pollId).poll;
 
@@ -540,6 +542,8 @@ function getPollGroup(groupId) {
 function getUserPoll(pollId) {
     // Merges non submitted and submitted polls
     let polls = submittedPolls.concat(nonSubmittedPolls);
+
+    console.log(polls);
 
     // Loops through each group
     for (let i = 0; i < polls.length; i++) {

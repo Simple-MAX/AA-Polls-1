@@ -397,11 +397,8 @@ function insertGroupPolls(containerId, polls) {
             location.href = `poll.html?id=${polls[i]["id"]}`;
         }
 
-        // Gets the index from the poll data
-        let index = parseInt(polls[i]["id"].replace("AA-P-", ""));
-
         // Creates the poll block
-        let poll = createPollBlockElement(polls[i], index, func);
+        let poll = createPollBlockElement(polls[i], i + 1, func);
 
         // Adds a new poll block
         container.appendChild(poll);
