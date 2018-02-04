@@ -90,6 +90,7 @@ h2 { color: #810097; }
     padding: 0 7px;
     font-size: 17px;
     letter-spacing: 1px;
+    background: transparent;
 }
 
 output {
@@ -155,6 +156,8 @@ output {
     margin-right: 30%;
     padding: 7px;
 
+    background: transparent;
+
     border: 2px #c0c0c0 solid;
     border-radius: 5px;
 
@@ -201,6 +204,7 @@ output {
     resize: none;
     padding: 7px 8px;
     font-size: 13px;
+    background: transparent;
 }
  
 input[type=range] {
@@ -524,6 +528,7 @@ input[type=range]::-ms-track {
     padding: 0;
     box-sizing: border-box;
     transition: 0.3s linear all;
+    background: transparent;
 }
 
 .sub-title {
@@ -538,6 +543,7 @@ input[type=range]::-ms-track {
     padding: 0;
     box-sizing: border-box;
     transition: 0.3s linear all;
+    background: transparent;
 }
 
 .edit-input {
