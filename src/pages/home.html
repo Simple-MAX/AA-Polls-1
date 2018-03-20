@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML>
+<html lang="sv">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="../css/main.css" />
+        <link rel="stylesheet" type="text/css" href="../css/group.css" />
+        <link rel="stylesheet" type="text/css" href="../css/poll.css" />
+        <link rel="stylesheet" type="text/css" href="../css/table.css" />
+
+        <title>Home</title>
+        
+        <script type="text/javascript" src="../js/networking/config.js"></script>
+        <script type="text/javascript" src="../js/networking/backend.js"></script>
+        <script type="text/javascript" src="../js/navigation/config.js"></script>
+        <script type="text/javascript" src="../js/navigation/tabs.js"></script>
+        <script type="text/javascript" src="../js/navigation/navigation.js"></script>
+        <script type="text/javascript" src="../js/misc/table.js"></script>
+        <script type="text/javascript" src="../js/misc/element.js"></script>
+        <script type="text/javascript" src="../js/listener/config.js"></script>
+        <script type="text/javascript" src="../js/listener/listener.js"></script>
+        <script type="text/javascript" src="../js/user/config.js"></script>
+        <script type="text/javascript" src="../js/user/manage.js"></script>
+        <script type="text/javascript" src="../js/user/auth.js"></script>
+        <script type="text/javascript" src="../js/polls/config.js"></script>
+        <script type="text/javascript" src="../js/polls/poll.js"></script>
+        <script type="text/javascript" src="../js/groups/config.js"></script>
+        <script type="text/javascript" src="../js/groups/group.js"></script>
+        <script type="text/javascript" src="../js/core/store.js"></script>
+        <script type="text/javascript" src="../js/core/index.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <div class="nav-main admin-panel">
+                    <div class="nav-container">
+                        <div class="nav-logo-container">
+                            <h1>Mental Health</h1>
+                            <h4>Administration Panel</h4>
+                        </div>
+
+                        <div id="tabs-container" class="nav-menu-container"></div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="wrapper">
+                <p class="title">Home</p>
+
+                <div class="admin-option-container">
+                    <a id="refresh-polls-button" class="anchor-button">
+                        <p class="text">Reload form</p>
+                    </a> 
+                </div>
+
+                <hr class="short-spacing" />
+                
+                <div class="groups-container">
+                    <div class="group minimized" id="non-submitted">
+                        <div class="tab" id="AA-P-T-1">
+                            <p>New and unanswered forms</p>
+    
+                            <a>&#9668;</a>
+                        </div>
+    
+                        <div class="content">
+                            <div class="sub-content">
+                                <div class="group-polls-container">
+                                    <div class="polls-container" id="non-submitted-polls"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group minimized" id="submitted">
+                        <div class="tab" id="AA-P-T-2">
+                            <p>Answers</p>
+
+                            <a>&#9668;</a>
+                        </div>
+
+                        <div class="content">
+                            <div class="sub-content">
+                                <div class="group-polls-container">
+                                    <div class="polls-container" id="submitted-polls"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body> 
+</html> 

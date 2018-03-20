@@ -1,0 +1,181 @@
+﻿<!DOCTYPE HTML>
+<html lang="sv">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="../css/table.css" />
+        <link rel="stylesheet" type="text/css" href="../css/main.css" />
+
+        <title>User</title>
+        
+        <script type="text/javascript" src="../js/networking/config.js"></script>
+        <script type="text/javascript" src="../js/networking/backend.js"></script>
+        <script type="text/javascript" src="../js/navigation/config.js"></script>
+        <script type="text/javascript" src="../js/navigation/tabs.js"></script>
+        <script type="text/javascript" src="../js/navigation/navigation.js"></script>
+        <script type="text/javascript" src="../js/misc/table.js"></script>
+        <script type="text/javascript" src="../js/misc/element.js"></script>
+        <script type="text/javascript" src="../js/listener/config.js"></script>
+        <script type="text/javascript" src="../js/listener/listener.js"></script>
+        <script type="text/javascript" src="../js/user/config.js"></script>
+        <script type="text/javascript" src="../js/user/manage.js"></script>
+        <script type="text/javascript" src="../js/user/auth.js"></script>
+        <script type="text/javascript" src="../js/core/store.js"></script>
+        <script type="text/javascript" src="../js/core/index.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <div class="nav-main admin-panel">
+                    <div class="nav-container">
+                        <div class="nav-logo-container">
+                            <h1>Mental Health</h1>
+                            <h4>Administration Panel</h4>
+                        </div>
+
+                        <div id="tabs-container" class="nav-menu-container"></div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="wrapper">
+                <p class="title">User</p>
+                
+                <div class="admin-option-container">
+                    <a id="show-add-user" class="anchor-button" href="#add-user">
+                        <p class="text">New user</p> 
+                        <p class="icon-text">&plus;</p>
+                    </a>
+
+                    <a id="refresh-user-table-button" class="anchor-button">
+                        <p class="text">Update table</p> 
+                    </a>
+
+                    <a id="show-edit-user" href="#edit-user"></a>    
+                    <a id="show-reset-user" href="#reset-user"></a>    
+                </div>
+
+                <hr class="short-spacing" />
+                
+                <div class="table-container">
+                    <table id="user-table"></table>
+                </div>
+
+                <hr class="short-spacing" />
+
+                <div id="add-user" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>New user</p>
+
+                            <a id="close-add" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <div class="fields">
+                                <input type="text" id="add-name" placeholder="Name" />
+
+                                <hr class="short-spacing" />
+
+                                <input type="text" id="add-email" placeholder="Email address" />
+
+                                <hr class="short-spacing" />
+
+                                <input type="text" id="add-pass" placeholder="Password" />
+
+                                <hr class="short-spacing" />
+
+                                <input type="text" id="add-pass-conf" placeholder="Password again" />
+                            </div>
+
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
+
+                            <button class="regular-button" id="add-user-button">Add user</button>
+                            
+                            <hr class="short-spacing" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="edit-user" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>Edit users</p>
+
+                            <a id="close-edit" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <div class="fields">
+                                <input type="text" id="edit-token" style="display: none"></input>
+                                <input type="text" id="edit-name" placeholder="Name" />
+
+                                <hr class="short-spacing" />
+
+                                <input type="text" id="edit-email" placeholder="Email address" />
+                            </div>
+
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
+
+                            <button class="regular-button" id="edit-user-button">Save information</button>
+
+                            <hr class="short-spacing" />
+
+                            <button class="regular-button" id="reset-user-option-button">Reset password</button>
+                            
+                            <hr class="short-spacing" />
+
+                            <button 
+                                class="regular-button" 
+                                style="background: #dd0000" 
+                                id="delete-user-button"
+                            >Delete user</button>
+                            
+                            <hr class="short-spacing" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reset-user" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>Reset password</p>
+
+                            <a id="close-reset" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <div class="fields">
+                                <input type="text" id="reset-token" style="display: none" />
+
+                                <hr class="short-spacing" />
+
+                                <input type="text" id="reset-pass" placeholder="New password" />
+
+                                <hr class="short-spacing" />
+                            </div>
+
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
+
+                            <button class="regular-button" id="reset-user-button">Reset</button>
+
+                            <hr class="short-spacing" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body> 
+</html> 

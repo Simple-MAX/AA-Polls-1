@@ -1,0 +1,166 @@
+﻿<!DOCTYPE HTML>
+<html lang="sv">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="../css/main.css" />
+        <link rel="stylesheet" type="text/css" href="../css/group.css" />
+        <link rel="stylesheet" type="text/css" href="../css/poll.css" />
+        <link rel="stylesheet" type="text/css" href="../css/table.css" />
+
+        <title>Groups</title>
+        
+        <script type="text/javascript" src="../js/networking/config.js"></script>
+        <script type="text/javascript" src="../js/networking/backend.js"></script>
+        <script type="text/javascript" src="../js/navigation/config.js"></script>
+        <script type="text/javascript" src="../js/navigation/tabs.js"></script>
+        <script type="text/javascript" src="../js/navigation/navigation.js"></script>
+        <script type="text/javascript" src="../js/misc/table.js"></script>
+        <script type="text/javascript" src="../js/misc/element.js"></script>
+        <script type="text/javascript" src="../js/listener/config.js"></script>
+        <script type="text/javascript" src="../js/listener/listener.js"></script>
+        <script type="text/javascript" src="../js/user/config.js"></script>
+        <script type="text/javascript" src="../js/user/manage.js"></script>
+        <script type="text/javascript" src="../js/user/auth.js"></script>
+        <script type="text/javascript" src="../js/polls/config.js"></script>
+        <script type="text/javascript" src="../js/polls/poll.js"></script>
+        <script type="text/javascript" src="../js/groups/config.js"></script>
+        <script type="text/javascript" src="../js/groups/group.js"></script>
+        <script type="text/javascript" src="../js/core/store.js"></script>
+        <script type="text/javascript" src="../js/core/index.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <div class="nav-main admin-panel">
+                    <div class="nav-container">
+                        <div class="nav-logo-container">
+                            <h1>Mental Health</h1>
+                            <h4>Administration Panel</h4>
+                        </div>
+
+                        <div id="tabs-container" class="nav-menu-container"></div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="wrapper">
+                <p class="title">Groups</p>
+
+                <div class="admin-option-container">
+                    <a id="show-add-group" class="anchor-button" href="#add-group">
+                        <p class="text">New group</p> 
+                        <p class="icon-text">&plus;</p>
+                    </a>
+                    
+                    <a id="refresh-groups-button" class="anchor-button">
+                        <p class="text">Reload groups</p>
+                    </a> 
+
+                    <a id="show-user-polls" href="#user-polls"></a>
+                </div>
+
+                <hr class="short-spacing" />
+                
+                <div class="groups-container" id="groups-container"></div>
+            
+                <div id="add-group" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>New group</p>
+
+                            <a id="close-add-group" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <div class="fields">
+                                <hr class="short-spacing" />
+
+                                <input type="text" id="add-group-title" placeholder="Titel" />
+
+                                <hr class="short-spacing" />
+                            </div>
+
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
+
+                            <button class="regular-button" id="add-group-button">Add group</button>
+
+                            <hr class="short-spacing" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="edit-group-users" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>Edit users</p>
+
+                            <a id="close-edit-group-users" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <input type="text" id="edit-users-group-id" style="display: none"></input>
+
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
+
+                            <div class="table-popup-container">
+                                <table id="edit-group-users-table">
+                                </table>
+                            </div>
+
+                            <hr class="short-spacing" />
+
+                            <hr class="short-spacing" />
+                            <hr class="short-spacing" />
+
+                            <button class="regular-button" id="edit-group-users-button">Save information</button>
+
+                            <hr class="short-spacing" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="user-polls" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>Answers</p>
+
+                            <a id="close-edit-group-users" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <input type="text" id="show-user-polls-user-id" style="display: none"></input>
+
+                            <hr class="short-spacing" />
+
+                            <div class="fields">
+                                <hr class="short-spacing" />
+
+                                <select id="user-polls-picker" style="width: 100%"></select>
+
+                                <hr class="short-spacing" />
+                            </div>
+
+                            <hr class="short-spacing" />
+
+                            <button class="regular-button" id="show-user-poll-button">View form</button>
+
+                            <hr class="short-spacing" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body> 
+</html> 

@@ -1,0 +1,200 @@
+﻿<!DOCTYPE HTML>
+<html lang="sv">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../css/poll.css" />
+        <link rel="stylesheet" type="text/css" href="../css/main.css" />
+
+        <title>Submit form</title>
+
+        <script type="text/javascript" src="../js/networking/config.js"></script>
+        <script type="text/javascript" src="../js/networking/backend.js"></script>
+        <script type="text/javascript" src="../js/navigation/config.js"></script>
+        <script type="text/javascript" src="../js/navigation/tabs.js"></script>
+        <script type="text/javascript" src="../js/navigation/navigation.js"></script>
+        <script type="text/javascript" src="../js/misc/table.js"></script>
+        <script type="text/javascript" src="../js/misc/element.js"></script>
+        <script type="text/javascript" src="../js/listener/config.js"></script>
+        <script type="text/javascript" src="../js/listener/listener.js"></script>
+        <script type="text/javascript" src="../js/user/config.js"></script>
+        <script type="text/javascript" src="../js/user/manage.js"></script>
+        <script type="text/javascript" src="../js/user/auth.js"></script>
+        <script type="text/javascript" src="../js/polls/config.js"></script>
+        <script type="text/javascript" src="../js/polls/poll.js"></script>
+        <script type="text/javascript" src="../js/groups/config.js"></script>
+        <script type="text/javascript" src="../js/groups/group.js"></script>
+        <script type="text/javascript" src="../js/core/store.js"></script>
+        <script type="text/javascript" src="../js/core/index.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <div class="nav-main admin-panel">
+                    <div class="nav-container">
+                        <div class="nav-logo-container">
+                            <h1>Mental Health</h1>
+                            <h4>Administration Panel</h4>
+                        </div>
+
+                        <div id="tabs-container" class="nav-menu-container"></div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="wrapper">
+                <p class="title">Assessment</p>
+
+                <div class="poll-main">
+                    <div class="poll-wrapper">
+                        <div class="poll-left-divider">
+                            <output id="general-rate-output">5</output>
+
+                            <input 
+                                type="range" 
+                                id="general-rate-input" 
+                                min="0" 
+                                max="10"
+                            />
+                        </div>
+
+                        <div class="poll-right-divider">
+                            <div class="poll-container">
+                                <a href="#poll-info" class="poll-info-button" id="info-button">Ratings</a>
+
+                                <div class="poll-col-0">
+                                    <input id="section-1-title" class="section-title" value="Section 1 title" disabled />
+
+                                    <div class="poll-col-1-input">
+                                        <input id="section-1-sub-title-1" class="sub-title" value="Subtitle 1" placeholder="Subtitle 1" disabled />
+                                        
+                                        <input class="text-input" id="section-1-value-1" disabled />
+                                    </div>
+            
+                                    <div class="poll-col-1-input">
+                                        <input id="section-1-sub-title-2" class="sub-title" value="Subtitle 2" placeholder="Subtitle 2" disabled />
+
+                                        <input class="text-input" id="section-1-value-2" />   
+                                    </div>
+            
+                                    <div class="poll-col-1-input">
+                                        <input id="section-1-sub-title-3" class="sub-title" value="Subtitle 3" placeholder="Subtitle 3" disabled />
+
+                                        <input class="text-input" id="section-1-value-3"/>   
+                                    </div>
+                                </div>
+
+                                <hr class="short-spacing" style="width: 100%;" />
+                                <hr class="short-spacing" style="width: 100%;" />
+
+                                <div class="poll-col-2-input">
+                                    <input id="section-2-title" class="section-title" value="Section 2 title" placeholder="Section 2 title" disabled />
+
+                                    <div class="poll-col-2-input-divider">
+                                        <input id="section-2-sub-title-1" class="sub-title" value="Section 2 subtitle 1" placeholder="Section 2 subtitle 1" disabled />
+
+                                        <select id="section-2-select-1">
+                                            <option id="section-2-select-1-option-0">Select 1 option 1</option>
+                                        </select>
+
+                                        <textarea id="section-2-text-1" placeholder="Section 2 placeholder 1"></textarea>
+                                    </div>
+
+                                    <div class="poll-col-2-input-divider">
+                                        <input id="section-2-sub-title-2" class="sub-title" value="Section 2 subtitle 2" placeholder="Section 2 subtitle 2" disabled />
+
+                                        <select id="section-2-select-2">
+                                                <option id="section-2-select-2-option-0">Select 2 option 1</option>
+                                            </select>
+
+                                        <textarea id="section-2-text-2" placeholder="Section 2 placeholder 2"></textarea>
+                                    </div>
+                                </div>
+                                <a href="#poll-info-2" class="poll-info-button" id="info-button-2">Ratings</a>
+                                <div class="poll-col-2-input">
+                                    <div class="poll-col-2-input-divider">
+                                        <input id="section-2-sub-title-3" class="sub-title" value="Section 2 subtitle 3" placeholder="Section 2 subtitle 3" disabled /> 
+                                        
+                                        <input  
+                                            class="text-input"
+                                            type="range" 
+                                            id="section-2-rate-3-input" 
+                                            min="0" 
+                                            max="2"
+                                        />
+
+                                        <output id="section-2-rate-3-output">1</output>
+
+                                        <select id="section-2-select-3">
+                                            <option id="section-2-select-3-option-0">Select 3 option 1</option>
+                                        </select>
+
+                                        <textarea id="section-2-text-3" placeholder="Section 2 placeholder 3"></textarea>
+                                    </div>
+
+                                    <div class="poll-col-2-input-divider actions-color">
+                                        <input id="section-2-sub-title-4" class="sub-title" value="Section 2 subtitle 4" placeholder="Section 2 subtitle 4" disabled />
+                                        
+                                        <select id="section-2-select-4">
+                                            <option id="section-2-select-4-option-0">Select 4 option 1</option>
+                                        </select>
+
+                                        <textarea id="section-2-text-4" placeholder="Section 2 placeholder 4"></textarea>
+                                    </div>
+                                </div>    
+                            </div>
+
+                            <button class="regular-button" id="submit-poll">Submit assessment</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="poll-info" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>Info</p>
+
+                            <a id="close-info" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <hr class="short-spacing" />
+
+                            <p class="poll-info-text" id="poll-info-text">
+                                No information available
+                            </p>
+
+                            <hr class="short-spacing" />
+                        </div>
+                    </div>
+                </div>
+                <div id="poll-info-2" class="overlay">
+                    <div class="popup">
+                        <div class="head">
+                            <p>Info</p>
+
+                            <a id="close-info-2" href="#">&times;</a>
+                        </div>
+
+                        <hr class="short-spacing" />
+
+                        <div class="content">
+                            <hr class="short-spacing" />
+
+                            <p class="poll-info-text" id="poll-info-text-2">
+                                No information available
+                            </p>
+
+                            <hr class="short-spacing" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body> 
+</html> 

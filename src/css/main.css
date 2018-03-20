@@ -1,0 +1,443 @@
+﻿@charset "UTF-8";
+
+@font-face {
+    font-family: "Gunplay";
+    src: url("./gunplay.ttf");
+    src: url("./gunplay.otf");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: "Gunplay", sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.nav-main {
+    width: 100%;
+    height: 60px;
+    display: block;
+
+    background-color: #8a199e;
+}
+
+.nav-main.inverted {
+    width: 100%;
+    height: 60px;
+    display: block;
+
+    background: transparent;
+}
+
+.nav-container {
+    width: 930px;
+    height: 100%;
+    padding-left: 15px;
+    margin: auto;
+
+    display: block;
+    position: relative;
+}
+
+.nav-logo-container {
+    height: 100%;
+    margin: 5px 0;
+    display: block;
+    float: left;
+}
+
+.nav-logo-container > h1 {
+    text-align: left;
+    color: #fff;
+    font-weight: 300;
+}
+
+.nav-main.inverted .nav-logo-container.inverted > h1 { color: #000; }
+.nav-main.inverted .nav-logo-container.inverted > h4 { color: #8a199e; }
+
+.nav-logo-container > h4 {
+    display: block;
+    text-align: left;
+    color: #000;
+}
+
+.admin-panel .nav-logo-container > h4 {
+    color: #dcdcdc;
+    font-weight: 100;
+    font-size: 15px;
+    letter-spacing: 2.2px;
+}
+
+.admin-panel .nav-logo-container > h1 {
+    font-size: 26px;
+    letter-spacing: 2px;
+}
+
+.nav-menu-container {
+    display: block;
+    max-width: 75%;
+    height: 100%;
+    float: right;
+}
+
+.nav-container .small-button {
+    position: absolute;
+    top: 7.5px;
+    right: 0;
+
+    display: block;
+    max-width: 150px;
+    margin: auto;
+    padding: 5px 10px;
+    border-radius: 2.5px;
+
+    background-color: #444;
+
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.small-button:hover { opacity: 0.8 }
+
+.nav-menu-container > li {
+    width: 150px;
+    display: block;
+    height: 100%;
+
+    float: left;
+
+    transition: all 0.1s ease-in-out;
+}
+
+.nav-menu-container li > a {
+    height: 100%;
+    margin: auto;
+    display: block;
+
+    color: #fff;
+    text-align: center;
+    line-height: 60px;
+    font-size: 18px;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.nav-menu-container > .active > a { color: #fff }
+
+.nav-menu-container > li:active { background-color: #720086; }
+.nav-menu-container > li:hover { background-color: #720086; }
+.nav-menu-container > .active { background-color:#720086; }
+
+/*                    Default configurations                    */
+
+.wrapper {
+    width: 930px;
+    height: auto;
+    display: block;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.title {
+    margin: auto auto 10px;
+    width: 100%;
+
+    font-family: "Gunplay", sans-serif;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+
+    background: rgba(0, 0, 0, 0.7);
+    transition: all 0.2s ease-in-out;
+
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+
+    overflow-y: hidden;
+
+    opacity: 1;
+}
+
+.popup {
+    margin: 100px auto;
+    padding: 20px;
+    width: 450px;
+    max-height: 400px;
+    
+    background: #fff;
+    border-radius: 5px;
+
+    transition: all 5s ease-in-out;
+}
+
+.popup .head {
+    display: block;
+    padding: 0;
+    margin: 0;
+    height: 25px;
+
+    font-weight: 300;
+    font-size: 14px;
+
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+    text-align: left;
+}
+
+.popup .head p {
+    float: left;
+
+    margin: 0;
+    padding: 0;
+    height: 22.5px;
+
+    font-size: 22px;
+    font-weight: 300;
+    text-decoration: none;
+    color: #333;
+}
+
+.popup .head a {
+    float: right;
+
+    margin: 0;
+    padding: 0;
+    height: 22.5px;
+    width: 22.5px;
+
+    transition: all 200ms;
+
+    font-size: 30px;
+    font-weight: 300;
+    text-decoration: none;
+    line-height: 22px;
+    color: #333;
+}
+
+.popup .head a:hover { color: red; }
+
+.popup .content { overflow: hidden; }
+
+.popup .fields {
+    width: 90%;
+    padding: 0;
+    margin: 0;
+    margin: auto;
+}
+
+.popup .fields input {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 40px;
+    padding: 10px 0;
+
+    color: #333;
+    font-size: 17px;
+    font-weight: 300;
+
+    transition: all 0.3s ease-in-out;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 2px solid #8a199e;
+}
+
+.admin-option-container {
+    margin: 0;
+    padding: 10px 0;
+    display: block;
+    border-bottom: 1px solid #bbb;
+}
+
+select {
+    border: 2px #c0c0c0 solid;
+    border-radius: 4px;
+    color: #6b6b6b;
+    height: 30px;
+    margin: 15px 0;
+    width: 90%;
+    padding: 0 7px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: 13px;
+}
+
+.login-form {
+    width: 500px;
+    height: 350px;
+    padding: 50px;
+    margin: 20px auto;
+}
+
+.regular-button {
+    display: block;
+    
+    max-width: 300px;
+    margin: auto;
+    padding: 10px 15px;
+    border-radius: 5px;
+
+    background-color: #8a199e;
+
+    font-size: 17px;
+    font-weight: 300;
+    color: #fff;
+
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.regular-button:hover {
+    opacity: 0.8;
+}
+
+.textbox {
+    display: block;
+    margin: auto;
+    width: 100%;
+    padding: 10px 0;
+
+    color: #333;
+    font-size: 17px;
+    font-weight: 300;
+
+    transition: all 0.3s ease-in-out;
+    border-bottom: 2px solid #8a199e;
+}
+
+.anchor-button .icon-text {
+    margin: 0;
+    padding: 2.5px;
+    width: 20px;
+    height: 20px;
+    float: right;
+
+    transition: all 200ms;
+
+    font-weight: 300;
+    font-size: 25px;
+    line-height: 12.5px;
+    text-decoration: none;
+    color: #fff;
+
+    display: block;
+}
+
+.anchor-button .text {
+    margin: 0 5px 0 0;
+    padding: 0;
+    float: left;
+
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.anchor-button {
+    display: inline-block;
+    margin: 0 5px 0 0;
+    padding: 10px 10px 10px 15px;
+
+    border: 0;
+    border-radius: 5px;
+
+    text-decoration: none;
+
+    transition: all 0.3s ease-in-out;
+
+    background-color: #8a199e;
+
+    cursor: pointer;
+}
+
+.anchor-button:hover {
+    opacity: 0.8;
+}
+
+.small-anchor-button .icon-text {
+    margin: 0;
+    padding: 1.25px;
+    width: 10px;
+    height: 10px;
+    float: right;
+
+    transition: all 200ms;
+
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 9px;
+    text-decoration: none;
+    color: #fff;
+
+    display: block;
+}
+
+.small-anchor-button .text {
+    margin: 0;
+    margin-right: 2.5px;
+    padding: 0;
+    float: left;
+
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.small-anchor-button {
+    display: inline-block;
+    margin: 0;
+    margin-right: 2.5px;
+    padding: 5px 10px;
+    padding-right: 12.5px;
+
+    border: 0;
+    border-radius: 5px;
+
+    text-decoration: none;
+
+    transition: all 0.3s ease-in-out;
+
+    background-color: #8a199e;
+
+    cursor: pointer;
+}
+
+.small-anchor-button:hover {
+    opacity: 0.8;
+}
+
+.short-spacing {
+    border: none;
+    height: 15px;
+}
+
+.regular-spacing {
+    border: none;
+    height: 80px;
+}
+
+.high-spacing {
+    border: none;
+    height: 200px;
+}

@@ -1,0 +1,678 @@
+@charset "UTF-8";
+
+.poll-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    height: 800px;
+    display: block;
+}
+
+.poll-left-divider {
+    width: 30px;
+    float: left;
+    display: block;
+}
+
+.poll-right-divider {
+    width: 93%;
+    float: right;
+    display: block;
+}
+
+.poll-date-container {
+    width: 100%;
+    height: 50px;
+}
+
+.poll-container { 
+    width: 100%; 
+    position: relative;
+}
+
+.poll-info-button {
+    position: inherit;
+    top: 0;
+    right: 0;
+
+    color: #aaa;
+    font-size: 28px;
+    font-weight: 400;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.poll-info-text {
+    width: 100%;
+    max-height: 200px;
+    margin: auto;
+
+    overflow: auto;
+}
+
+.poll-info-button:hover { color: #555; }
+
+.poll-col-0 {
+    width: 100%;
+    height: 15%;
+    margin-top: 0;
+}
+
+h2 { color: #810097; }
+
+.poll-col-1 {
+    width: 100%;
+    height: 85%;
+    margin: 2.5% 0;
+}
+
+.poll-col-1-input {
+    width: 25%;
+    display: block;
+    float: left;
+    position: relative;
+}
+
+.poll-col-1-input > label {
+    display: block;
+    font-weight: bold;
+}
+
+.text-input {
+    border: 2px #c0c0c0 solid;
+    border-radius: 5px;
+    color: #6b6b6b;
+    height: 30px;
+    margin: 7px 0;
+    width: 90%;
+    padding: 0 7px;
+    font-size: 17px;
+    letter-spacing: 1px;
+    background: transparent;
+}
+
+output {
+    display: block;
+    width: 30px;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    color: #6b6b6b;
+
+    margin: 7px 3.5px;
+
+    text-align: center;
+
+    border: 2px #c0c0c0 solid;
+    border-radius: 5px;
+}
+
+.poll-left-divider output { margin: 0; }
+
+.date-wrapper {
+    width: 60%;
+    margin: 0 20%;
+    height: 40px;
+    display: block;
+}
+
+.date-wrapper span {
+    color: #ff5cf4;
+    font-size: 12px;
+}
+
+#date {
+    width: 90px;
+    margin: 5px 0;
+    margin-left: 10px;
+    color: #fff;
+    border: 0px;
+    background-color: #810097;  
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.poll-col-2-input {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
+.poll-col-2-input > select { width: 70%; }
+
+.poll-col-2-input-divider {
+    width: 50%;
+    margin: 25px 0;
+    margin-top: 0;
+    float: left;
+    display: block;
+}
+
+.poll-input-textarea {
+    width: 70%;
+    height: 140px;
+    margin-right: 30%;
+    padding: 7px;
+
+    background: transparent;
+
+    border: 2px #c0c0c0 solid;
+    border-radius: 5px;
+
+    color: #6b6b6b;
+    font-size: 13px;
+
+    resize: none;
+}
+
+.poll-input-text {
+    width: 70%;
+    height: 30px;
+    padding: 0 7px;
+    margin-right: 30%;
+
+    border: 2px #c0c0c0 solid;
+    border-radius: 5px;
+
+    color: #6b6b6b;
+    font-size: 13px;
+
+    resize: none;
+}
+
+.poll-input-button {
+    width: 32%;
+    margin: 20px 34%;
+    background-color: #6f237e;
+    color: #fff;
+    border: 0px;
+    height:40px;
+    line-height: 17px;
+    margin-bottom: 60px;
+    font-size: 17px;
+}
+
+.poll-col-2-input-divider > input { width: 90%; }
+.poll-col-2-input-divider > textarea {
+    width: 90%;
+    border: 2px #c0c0c0 solid;
+    border-radius: 4px;
+    color: #6b6b6b;
+    height: 140px;
+    resize: none;
+    padding: 7px 8px;
+    font-size: 13px;
+    background: transparent;
+}
+ 
+input[type=range] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 82%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+    border: 0px;
+    padding: 0; 
+}
+  
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; }
+input[type=range]:focus { outline: none; }
+  
+input[type=range]::-ms-track {
+    height: 100%;
+    cursor: pointer;
+
+    /* Hides the slider so custom styles can be added */
+    background: transparent; 
+    border-color: transparent;
+    color: transparent;
+}
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 36px;
+    width: 10px;
+    background: #ffffff;
+    cursor: pointer;
+    margin-top: -3.5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+}
+  
+  /* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+    height: 36px;
+    width: 10px;
+    background: #ffffff;
+    cursor: pointer;
+    border: 0.5px #999 solid ;
+    margin-top: -3.5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+}
+  
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+    height: 36px;
+    width: 10px;
+    background: #ffffff;
+    cursor: pointer;
+    border: 0.5px #999 solid ;
+    margin-top: -3.5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+    border: 3px #c0c0c0 solid;
+    border-radius: 2px;
+    background: -webkit-linear-gradient(left, #fff832 0%,#ff3535 100%); /* Chrome10-25,Safari5.1-6 */
+}
+  
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: -webkit-linear-gradient(left, #fff831 0%,#ff3530 100%); /* Chrome10-25,Safari5.1-6 */
+    border: 3px #c0c0c0 solid;
+    border-radius: 2px;
+}
+  
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+    border: 3px #c0c0c0 solid;
+    border-radius: 2px;
+    background: -moz-linear-gradient(left, #fff832 0%, #ff3535 100%); /* FF3.6-15 */
+}
+  
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+    border: 0.5px #999 solid ;
+}
+
+input[type=range]::-ms-fill-lower {
+    background: linear-gradient(to left, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+}
+
+input[type=range]:focus::-ms-fill-lower {
+    background: linear-gradient(to left, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+}
+
+input[type=range]::-ms-fill-upper {
+    background: linear-gradient(to left, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+}
+
+input[type=range]:focus::-ms-fill-upper {
+    background: linear-gradient(to left, #fff832 0%,#ff3535 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+}
+
+/*     ÅTGÄRDER  SLIDER    */
+.actions-color input[type=range]::-webkit-slider-runnable-track {
+    background: -webkit-linear-gradient(left, #fff832 0%,#32ff5e 100%); /* Chrome10-25,Safari5.1-6 */
+}
+  
+.actions-color input[type=range]:focus::-webkit-slider-runnable-track {
+    background: -webkit-linear-gradient(left, #fff831 0%,#32ff5e 100%); /* Chrome10-25,Safari5.1-6 */
+}
+
+.actions-color input[type=range]::-moz-range-track {
+    background: -moz-linear-gradient(left, #fff832 0%, #32ff5e 100%); /* FF3.6-15 */
+}
+
+.actions-color input[type=range]::-ms-fill-lower {
+    background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+}
+
+.actions-color input[type=range]:focus::-ms-fill-lower {
+    background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+}
+
+.actions-color input[type=range]::-ms-fill-upper {
+    background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+}
+
+.actionsC-clor input[type=range]:focus::-ms-fill-upper {
+    background: linear-gradient(to left, #fff832 0%,#32ff5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 ); /* IE6-9 */
+}
+
+.poll-left-divider input[type = range] {
+    width: 625px;
+    height: 30px;
+    margin-top: 5px;
+    transform: 
+
+        rotate(270deg);
+
+    -moz-transform: 
+
+        rotate(270deg);
+    transform-origin: 315px 315px;
+}
+  
+input[type=range] {
+    -webkit-appearance: none;
+    width: 82.5%;
+    border: 0px;
+    float: left;
+    padding: 0;
+}
+
+input[type=range]:focus { outline: none; }
+
+input[type=range]::-ms-track {
+    height: 100%;
+
+    background: transparent; 
+    border-color: transparent;
+    color: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 35px;
+    width: 10px;
+    cursor: pointer;
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
+}
+  
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+    height: 35px;
+    width: 10px;
+    cursor: pointer;
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+    -webkit-appearance: none;
+    height: 35px;
+    width: 10px;
+    cursor: pointer;
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
+}
+
+.poll-left-divider input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 35px;
+    width: 10px;
+    cursor: pointer;
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
+}
+  
+.poll-left-divider input[type=range]::-moz-range-thumb {
+    height: 35px;
+    width: 10px;
+    cursor: pointer;
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
+}
+
+/* All the same stuff for IE */
+.poll-left-divider input[type=range]::-ms-thumb {
+    -webkit-appearance: none;
+    height: 35px;
+    width: 10px;
+    cursor: pointer;
+
+    background: #ffffff;
+    border-radius: 2px;
+    border: 2px #c0c0c0 solid;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    height: 30px;
+    cursor: pointer;
+    border: 0.5px #999 solid;
+    background: -webkit-linear-gradient(left, #fff832 0%,#ff3535 100%);
+}
+  
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: -webkit-linear-gradient(left, #fff831 0%,#ff3530 100%);
+    border: 0.5px #999 solid;
+}
+  
+input[type=range]::-moz-range-track {
+    height: 30px;
+    cursor: pointer;
+    border: 0.5px #999 solid ;
+    background: -moz-linear-gradient(left, #fff832 0%, #ff3535 100%);
+}
+  
+input[type=range]::-ms-track {
+    height: 10px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+    border: 0.5px #999 solid;
+}
+
+.poll-left-divider input[type=range]::-webkit-slider-runnable-track {
+    background: -webkit-linear-gradient(right, #32ff5e  0%,#fff832 50%, #ff3535 100%);
+}
+
+.poll-left-divider input[type=range]::-moz-range-track {
+    background: -moz-linear-gradient(right, #32ff5e  0%,#fff832 50%, #ff3535 100%);
+}
+
+.poll-left-divider input[type=range]::-ms-fill-lower {
+    background: linear-gradient(right, #32ff5e  0%,#fff832 50%, #ff3535 100%);
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 );
+}
+
+.poll-left-divider input[type=range]::-ms-fill-upper {
+    background: linear-gradient(rignt, #32ff5e  0%,#fff832 50%, #ff3535 100%);
+    filter: progid:DXImageTranspoll.Microsoft.gradient( startColorstr='#fff832', endColorstr='#ff3535',GradientType=1 );
+}
+  
+@media (max-width: 1024px) {
+    .poll-wrapper {
+        width: 768px;
+        margin: 0 auto;
+        height: 800px;
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .poll-wrapper {
+        width: 568px;
+        margin: 0 auto;
+        height: 800px;
+        display: block;
+    }
+}
+
+@media (max-width: 568px) {
+    .poll-wrapper {
+        width: 320px;
+        margin: 0 auto;
+        height: 800px;
+        display: block;
+    }
+}
+
+.section-title {
+    border: 0;
+    font-size: 25px;
+    font-weight: bold;
+    color: #8a199e;
+    margin-right: 80%;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.3s linear all;
+    background: transparent;
+}
+
+.sub-title {
+    border: 0;
+    font-size: 17px;
+    font-weight: bold;
+    color: #000;
+    width: auto;
+    height: auto;
+    margin: 5px;
+    margin-left: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.3s linear all;
+    background: transparent;
+}
+
+.edit-input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.edit-input .content {
+    visibility: hidden;
+    width: 90%;
+    background-color: #fff;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 12px 5%;
+    position: absolute;
+    z-index: 1;
+    bottom: 10%;
+    left: 50%;
+    margin-left: -50%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.edit-input .content .main {
+    width: 85%;
+    max-height: 150px;
+    overflow: auto;
+    float: left;
+    margin: 10px 0;
+    display: block;
+
+    color: #000;
+}
+
+.edit-input .content .main > input { width: 100%; }
+
+.edit-input .content > p {
+    font-weight: 300;
+    font-size: 24px;
+    color: #000;
+}
+
+.settings {
+    width: 25px;
+    margin: 5px;
+    height: auto;
+    float: right;
+    display: block;
+}
+
+.settings .button {
+	width: 25px;
+    height: 25px;
+    margin: 5px auto;
+    padding: 5px 8px;
+    border-radius: 12.5px;
+    display: inline-block;
+    cursor: pointer;
+
+    background-color:#44c767;
+    transition: opacity 0.2s ease-in-out;
+
+    color: #fff;
+    font-size: 18px;
+    line-height: 0.67;
+}
+
+.settings .button:hover { opacity: 0.8; }
+
+.edit-input:hover .content { visibility: visible; }
+
+.group-polls-container {
+    display: inline-block;
+    width: 100%;
+}
+
+.group-polls-container > p {
+    color: #555;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.group-polls-container .polls-container {
+    height: 140px;
+    width: 100%;
+    
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.polls-container .poll {
+    position: relative;
+    height: 120px;
+    width: 200px;
+    margin: 7.5px 0 7.5px 15px;
+    padding: 10px;
+    float: left;
+
+    border-radius: 5px;
+
+    background: #8a199e;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.poll:hover { background: #751588; }
+
+.poll > h4 {
+    color: #fff;
+    font-size: 18px;
+}
+
+.poll > p {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.poll > a {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    color: #fff;
+    font-size: 14px;
+    font-weight: 300;
+    text-decoration: none;
+
+    opacity: 0.5;
+}
