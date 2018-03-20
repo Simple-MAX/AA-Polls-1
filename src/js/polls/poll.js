@@ -78,6 +78,7 @@ function loadPoll() {
 
         return;
     } else currentPoll = currentPoll.poll;
+
     // Determines if current poll already is submitted
     let submitted = false;
 
@@ -103,9 +104,10 @@ function loadPoll() {
     } else {
         // Adds info_text key in poll object
         let defaultText = "No information available";
+
         // Adds both values
         if (currentPoll.info_text === "" || currentPoll.info_text === null)
-            currentPollData[0] = currentPoll["info_text"]   = [defaultText];
+            currentPollData[0] = currentPoll["info_text"] = [defaultText];
 
         if (currentPoll.info_text_2 === "" || currentPoll.info_text_2 === null)
             currentPollData[1] = currentPoll["info_text_2"] = [defaultText];
@@ -146,7 +148,7 @@ function loadPoll() {
     }
 
     // Sections sub section count
-    const sectionCount = Object.keys(currentPoll).length - 1;
+    const sectionCount = Object.keys(currentPoll.details).length - 1;
     
     // Removes unused id which causes errors if not used properly
     for (let i = 0; i < sectionCount; i++) {
@@ -154,8 +156,8 @@ function loadPoll() {
         let selectId = `section-2-select-${i + 1}-option-`;
 
         /* Used to exit second loop and
-        * increase speed of iteration
-        */
+         * increase speed of iteration
+         */
         let modified = false;
 
         // Loops through each id and value

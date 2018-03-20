@@ -79,7 +79,59 @@ const DEFAULT_POLL_STRUCTURE = {
                     placeholder: "Further forecast",
                     text: ""
                 }
-            }
+            },
+            4: {
+                sub_title: "Influencing factors",
+                rate: 1,
+                option: {
+                    placeholder: "Alternative",
+                    selected: "",
+                    values: []
+                },
+                info: {
+                    placeholder: "Further forecast",
+                    text: ""
+                }
+            },
+            5: {
+                sub_title: "Influencing factors",
+                rate: 1,
+                option: {
+                    placeholder: "Alternative",
+                    selected: "",
+                    values: []
+                },
+                info: {
+                    placeholder: "Further forecast",
+                    text: ""
+                }
+            },
+            6: {
+                sub_title: "Influencing factors",
+                rate: 1,
+                option: {
+                    placeholder: "Alternative",
+                    selected: "",
+                    values: []
+                },
+                info: {
+                    placeholder: "Further forecast",
+                    text: ""
+                }
+            },
+            7: {
+                sub_title: "Influencing factors",
+                rate: 1,
+                option: {
+                    placeholder: "Alternative",
+                    selected: "",
+                    values: []
+                },
+                info: {
+                    placeholder: "Further forecast",
+                    text: ""
+                }
+            },
         }
     }
 };
@@ -118,6 +170,26 @@ const DEFAULT_POLL_IDS = [
     ["section-2-select-4-option-0", "details.3.option.placeholder"],
     ["section-2-select-4-option-1", "details.3.option.selected"],
     ["section-2-text-4", "details.3.info.placeholder"],
+
+    ["section-2-sub-title-5", "details.4.sub_title"],
+    ["section-2-select-5-option-0", "details.4.option.placeholder"],
+    ["section-2-select-5-option-1", "details.4.option.selected"],
+    ["section-2-text-5", "details.4.info.placeholder"],
+
+    ["section-2-sub-title-6", "details.5.sub_title"],
+    ["section-2-select-6-option-0", "details.5.option.placeholder"],
+    ["section-2-select-6-option-1", "details.5.option.selected"],
+    ["section-2-text-6", "details.5.info.placeholder"],
+
+    ["section-2-sub-title-7", "details.6.sub_title"],
+    ["section-2-select-7-option-0", "details.6.option.placeholder"],
+    ["section-2-select-7-option-1", "details.6.option.selected"],
+    ["section-2-text-7", "details.6.info.placeholder"],
+
+    ["section-2-sub-title-8", "details.7.sub_title"],
+    ["section-2-select-8-option-0", "details.7.option.placeholder"],
+    ["section-2-select-8-option-1", "details.7.option.selected"],
+    ["section-2-text-8", "details.7.info.placeholder"],
 ];
 
 // Regular variables
@@ -169,6 +241,26 @@ var createdPollData = [
     [createdPoll.details[3].option.placeholder, "text"],
     [createdPoll.details[3].option.placeholder, "placeholder"],
     [createdPoll.details[3].info.placeholder],
+
+    [createdPoll.details[4].sub_title],
+    [createdPoll.details[4].option.placeholder, "text"],
+    [createdPoll.details[4].option.placeholder, "placeholder"],
+    [createdPoll.details[4].info.placeholder],
+
+    [createdPoll.details[5].sub_title],
+    [createdPoll.details[5].option.placeholder, "text"],
+    [createdPoll.details[5].option.placeholder, "placeholder"],
+    [createdPoll.details[5].info.placeholder],
+
+    [createdPoll.details[6].sub_title],
+    [createdPoll.details[6].option.placeholder, "text"],
+    [createdPoll.details[6].option.placeholder, "placeholder"],
+    [createdPoll.details[6].info.placeholder],
+
+    [createdPoll.details[7].sub_title],
+    [createdPoll.details[7].option.placeholder, "text"],
+    [createdPoll.details[7].option.placeholder, "placeholder"],
+    [createdPoll.details[7].info.placeholder],
 ];
 
 var currentPollData = createdPollData;
