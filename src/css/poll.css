@@ -30,7 +30,7 @@
 }
 
 .poll-info-button {
-    position: inherit;
+    position: absolute;
     top: 0;
     right: 0;
 
@@ -95,18 +95,18 @@ h2 { color: #810097; }
 
 output {
     display: block;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     float: left;
-    line-height: 30px;
+    padding: 0;
+    margin: 5px;
+
     color: #6b6b6b;
-
-    margin: 7px 3.5px;
-
     text-align: center;
+    font-size: 13px;
 
     border: 2px #c0c0c0 solid;
-    border-radius: 5px;
+    border-radius: 2.5px;
 }
 
 .poll-left-divider output { margin: 0; }
@@ -143,6 +143,7 @@ output {
 .poll-col-2-input > select { width: 70%; }
 
 .poll-col-2-input-divider {
+    position: relative;
     width: 50%;
     margin: 25px 0;
     margin-top: 0;
@@ -210,9 +211,11 @@ output {
 input[type=range] {
     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
     width: 82%; /* Specific width is required for Firefox. */
+    height: auto;
     background: transparent; /* Otherwise white in Chrome */
     border: 0px;
     padding: 0; 
+    margin: 5px 0;
 }
   
 input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; }
@@ -350,13 +353,8 @@ input[type=range]:focus::-ms-fill-upper {
     width: 625px;
     height: 30px;
     margin-top: 5px;
-    transform: 
-
-        rotate(270deg);
-
-    -moz-transform: 
-
-        rotate(270deg);
+    transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
     transform-origin: 315px 315px;
 }
   
@@ -372,7 +370,6 @@ input[type=range]:focus { outline: none; }
 
 input[type=range]::-ms-track {
     height: 100%;
-
     background: transparent; 
     border-color: transparent;
     color: transparent;
@@ -380,7 +377,7 @@ input[type=range]::-ms-track {
 
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 35px;
+    height: 20px;
     width: 10px;
     cursor: pointer;
 
@@ -391,7 +388,7 @@ input[type=range]::-webkit-slider-thumb {
   
 /* All the same stuff for Firefox */
 input[type=range]::-moz-range-thumb {
-    height: 35px;
+    height: 20px;
     width: 10px;
     cursor: pointer;
 
@@ -403,7 +400,7 @@ input[type=range]::-moz-range-thumb {
 /* All the same stuff for IE */
 input[type=range]::-ms-thumb {
     -webkit-appearance: none;
-    height: 35px;
+    height: 20px;
     width: 10px;
     cursor: pointer;
 
@@ -414,7 +411,7 @@ input[type=range]::-ms-thumb {
 
 .poll-left-divider input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 35px;
+    height: 20px;
     width: 10px;
     cursor: pointer;
 
@@ -424,7 +421,7 @@ input[type=range]::-ms-thumb {
 }
   
 .poll-left-divider input[type=range]::-moz-range-thumb {
-    height: 35px;
+    height: 20px;
     width: 10px;
     cursor: pointer;
 
@@ -436,7 +433,7 @@ input[type=range]::-ms-thumb {
 /* All the same stuff for IE */
 .poll-left-divider input[type=range]::-ms-thumb {
     -webkit-appearance: none;
-    height: 35px;
+    height: 20px;
     width: 10px;
     cursor: pointer;
 
@@ -446,7 +443,7 @@ input[type=range]::-ms-thumb {
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-    height: 30px;
+    height: 20px;
     cursor: pointer;
     border: 0.5px #999 solid;
     background: -webkit-linear-gradient(left, #fff832 0%,#ff3535 100%);
@@ -458,14 +455,14 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
   
 input[type=range]::-moz-range-track {
-    height: 30px;
+    height: 20px;
     cursor: pointer;
     border: 0.5px #999 solid ;
     background: -moz-linear-gradient(left, #fff832 0%, #ff3535 100%);
 }
   
 input[type=range]::-ms-track {
-    height: 10px;
+    height: 20px;
     cursor: pointer;
     background: transparent;
     border-color: transparent;

@@ -88,6 +88,9 @@ function initialize() {
                         // Removes submit button
                         removeElement("submit-poll");
 
+                        // Fetches and appends groups
+                        loadGroups();
+
                         // Attempts to fetch poll templates
                         fetchPolls(currentUser.token);
                     }

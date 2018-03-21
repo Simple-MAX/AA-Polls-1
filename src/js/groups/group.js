@@ -715,13 +715,10 @@ function appendGroup(containerId, data) {
     deleteButton.setAttribute("style", "background: #dd0000");
 
     // Adds text to button
-    if (window.localStorage.getItem != true){
+    if (window.localStorage.getItem != true)
         deleteButton.innerHTML = "Delete group";
-    } else {
+    else
         deleteButton.innerHTML = "Ta bort grupp";
-    }
-
-    
 
     // Adds delete function to button
     deleteButton.onclick = (e) => deleteCurrentGroup(groupId);
@@ -775,12 +772,10 @@ function loadGroups(callback = null) {
     // Return nothing if users is null
     if (fetchedGroups == null) {
         // Make user aware of progress failure
-        if (window.localStorage.getItem != true){
+        if (window.localStorage.getItem != true)
             alert("Unable to retrieve groups, try again.");
-        } else {
+        else
             alert("Kunde inte hämta grupper, försök igen.");
-        }
-    
 
         // Exit function
         return;

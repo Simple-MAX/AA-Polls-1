@@ -25,7 +25,7 @@ const DEFAULT_POLL_STRUCTURE = {
             sub_title_1: "Group",
             sub_title_2: "Lowest value",
             sub_title_3: "Highest value",
-            value_1: "AA-G-0",
+            value_1: 5,
             value_2: 0,
             value_3: 10
         },

@@ -37,8 +37,7 @@ function loadCreatePollData() {
     currentPoll = createdPoll;
 
     // Inserts default values to cloned poll object
-    currentPoll.group_id        = groupId;
-    currentPoll.initial.value_1 = groupId;
+    currentPoll.group_id = groupId;
 
     // Reformat new data and inserts it to global variable
     currentPollData = setNewPollData(currentPoll);
@@ -86,6 +85,36 @@ function loadPoll() {
     if (currentPoll.user_id != undefined)
         submitted = true;
 
+    // Set section 1 value 1 to default if incorrect
+    if (!submitted) {
+        // Loops through each group
+        fetchedGroups.forEach(function(element) {
+            // Used to exit current function
+            let exit = false;
+
+            // Loops through group poll
+            element.polls.forEach(function(poll) {
+                // Return if exit is true
+                if (exit) return;
+
+                // Adds value 1 value if poll was found
+                if (pollId == poll.id) {
+                    // Sets group title if true
+                    currentPoll.initial.sub_title_1 = element.title;
+
+                    // Sets exit to true
+                    exit = true;
+                }
+            });
+
+           // Return if exit is true
+           if (exit) return;
+        });
+
+        // Sets first value to 5
+        currentPoll.initial.value_1 = 5;
+    }
+
     // Reformat new data and inserts it to the global variable
     currentPollData = setNewPollData(currentPoll, true);
 
@@ -127,7 +156,7 @@ function loadPoll() {
         // Passes input event and output id
         let func = function(e) {
             // Adds pass new element value listener function
-            passElementValueListener(e, inputOutputIds[i][0] + "output");
+            passElementValueListener(e, "section-1-value-1");
         }
 
         // Gets input and output elements
