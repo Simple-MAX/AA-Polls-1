@@ -110,53 +110,81 @@ function getPollInfluncesStats(groupData) {
     /* Option object with data used for the chart
      * and data array to return later on
      */
-    let data = [], statsData = [];
+    let data = [], statsData = [], statsKeys = [];
 
     /* Proceeds to format and create stats if
      * selected group polls is not null
      */
     if (group.polls != null) {
-        // Gets poll details two
-        let details = group.selected_poll.poll.details[2];
+        // Used to shorten code
+        let details = group.selected_poll.poll.details;
 
-        // Loops through selected poll influences
-        for (let i = 0; i < details.option.values.length; i++) {
-            // Creates a new stats object for current poll
-            let stats = {
-                label: details.option.values[i],
-                values: [0, 0, 0]
-            };
+        // Gets length of details sub section count
+        let subSectionCount = Object.keys(details).length - 1
 
-            // Loops through submitted polls
-            for (let j = 0; j < group.submitted_polls.length; j++) {
-                // Gets the submitted poll, used to shorten code
-                let submittedPoll = group.submitted_polls[j].poll;
+        // Loops through all influences sub sections
+        for (let i = 0; i < subSectionCount; i++) {
+            // Gets poll details two
+            let details = group.selected_poll.poll.details[i];
 
-                /* Proceed only if current poll id is
-                 * same as current submitted poll id
+            // Skips if sub section is not a part of influences
+            if (details.rate == undefined ||
+                details.rate == null) 
+                continue;
+
+            // Loops through selected poll influences
+            for (let j = 0; j < details.option.values.length; j++) {
+                /* Used to determine whether key or 
+                 * label exists or not.
                  */
-                if (group.selected_poll.poll.id == submittedPoll.id &&
-                    submittedPoll.details[2].option.selected == details.option.values[i]) {
-                    // Used to shorten code
-                    let poll = group.submitted_polls[j].poll;
+                let skip = false;
 
-                    // Gets submitted poll details
-                    let subPollDetails = poll.details[2];
+                // Checks whether option already is included
+                statsData.forEach(function(element) {
+                    if (details.option.values[j] == element.label)
+                        skip = true;
+                });
 
-                    // Gets rate value
-                    let value = parseInt(subPollDetails.rate);
+                // Continue if skip is true
+                if (skip) continue;
 
-                    // Corrects value if limit exceeded
-                    if (value > 2) value = 2;
-                    if (value < 0) value = 0;
+                // Creates a new stats object for current poll
+                let stats = {
+                    label: details.option.values[j],
+                    values: [0, 0, 0]
+                };
 
-                    // Sets new rate
-                    stats.values[value] += 1;
+                // Loops through submitted polls
+                for (let k = 0; k < group.submitted_polls.length; k++) {
+                    // Gets the submitted poll, used to shorten code
+                    let submittedPoll = group.submitted_polls[k].poll;
+
+                    /* Proceed only if current poll id is
+                     * same as current submitted poll id
+                     */
+                    if (group.selected_poll.poll.id == submittedPoll.id &&
+                        submittedPoll.details[2].option.selected == details.option.values[j]) {
+                        // Used to shorten code
+                        let poll = group.submitted_polls[k].poll;
+
+                        // Gets submitted poll details
+                        let subPollDetails = poll.details[2];
+
+                        // Gets rate value
+                        let value = parseInt(subPollDetails.rate);
+
+                        // Corrects value if limit exceeded
+                        if (value > 2) value = 2;
+                        if (value < 0) value = 0;
+
+                        // Sets new rate
+                        stats.values[value] += 1;
+                    }
                 }
-            }
 
-            // Appends stats object to data array
-            statsData.push(stats);
+                // Appends stats object to data array
+                statsData.push(stats);
+            }
         }
     }
 
