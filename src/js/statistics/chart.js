@@ -110,8 +110,10 @@ function renderChart(canvasId, data) {
                     ticks: {
                         beginAtZero: true,
                         max: maxY,
-                    }
-                }]
+                    },
+                    stacked: true
+                }],
+                xAxes: [{ stacked: true }]
             }
         }
     };

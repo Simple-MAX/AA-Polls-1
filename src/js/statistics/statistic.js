@@ -252,10 +252,13 @@ function insertFetchedGroups() {
     for (let i = 0; i < fetchedGroups.length; i++) {
         // Creates a new option element
         let option = createElement("option");
+
         // Sets option value to poll id
         option.innerHTML = option.value = fetchedGroups[i].id;
+
         // set option text to poll title
         option.innerHTML = option.text = fetchedGroups[i].title;
+
         // Appends option to user polls picker
         groupPicker.add(option);
     }

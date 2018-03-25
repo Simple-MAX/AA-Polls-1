@@ -115,6 +115,25 @@ function loadPoll() {
         currentPoll.initial.value_1 = 5;
     }
 
+    // Sections sub section count
+    let sectionCount = Object.keys(currentPoll.details).length - 1;
+
+    // Loops through details
+    for (let i = 0; i < sectionCount; i++) {
+        // Proceed if it's influences sub sections
+        if (i > 3) {
+            // Gets current detail
+            let detail = currentPoll.details[i];
+
+            // Skip if not an object
+            if (typeof detail !== "object") 
+                continue;
+
+            // Sets title to first value
+            detail.sub_title = detail.option.values[0];
+        }
+    }
+
     // Reformat new data and inserts it to the global variable
     currentPollData = setNewPollData(currentPoll, true);
 
@@ -177,12 +196,15 @@ function loadPoll() {
     }
 
     // Sections sub section count
-    const sectionCount = Object.keys(currentPoll.details).length - 1;
+    sectionCount = Object.keys(currentPoll.details).length - 1;
     
     // Removes unused id which causes errors if not used properly
     for (let i = 0; i < sectionCount; i++) {
         // Gets the current section select
         let selectId = `section-2-select-${i + 1}-option-`;
+
+        // Used to shorten code
+        let details = currentPoll.details[i];
 
         /* Used to exit second loop and
          * increase speed of iteration
@@ -219,9 +241,7 @@ function loadPoll() {
 
         // If info text is not empty, change type from placeholder to text
         if (currentPoll.details[i] != undefined) {
-            // Used to shorten code
-            let details = currentPoll.details[i];
-
+            // Only if text is not empty
             if (details.info.text != "") {
                 // Loops through new poll data
                 for (let j = 0; j < currentPollData.length; j++) {

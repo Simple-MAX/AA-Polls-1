@@ -22,7 +22,7 @@ const PollChartTypes = [
         value: ChartType.Line,
         text: "Main Graph",
         labels: [
-            "Averaging",
+            "Group value",
             "Max value",
             "Minimum value"
         ],
