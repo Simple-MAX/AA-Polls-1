@@ -20,7 +20,7 @@ const ChartType = {
 const PollChartTypes = [
     {
         value: ChartType.Line,
-        text: "Main Graph",
+        text: "Main graph",
         labels: [
             "Group value",
             "Max value",
@@ -31,14 +31,14 @@ const PollChartTypes = [
             "#0ace00",
             "#ffe100"
         ]
-    }, 
+    },
     {
         value: ChartType.Bar,
         text: "Impact graph",
         labels: [
-            "0 = no effect",
-            "1 = little impact",
-            "2 = big impact"
+            "No effect",
+            "Little impact",
+            "Big impact"
         ],
         borderColors: [
             "#00a1ff",
@@ -52,6 +52,7 @@ const PollChartTypes = [
 var selectedGroup = {
     group: null,
     polls: null,
+    users: null,
     selected_poll: null,
     submitted_polls: null,
     dates: null,

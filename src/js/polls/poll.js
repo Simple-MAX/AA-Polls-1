@@ -121,7 +121,7 @@ function loadPoll() {
     // Loops through details
     for (let i = 0; i < sectionCount; i++) {
         // Proceed if it's influences sub sections
-        if (i > 3) {
+        if (i == 2 || i > 3) {
             // Gets current detail
             let detail = currentPoll.details[i];
 

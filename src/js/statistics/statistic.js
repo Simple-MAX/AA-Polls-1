@@ -232,6 +232,7 @@ function showStatistics() {
     renderChart("chart-canvas", data);
 }
 
+// Inserts fetched groups
 function insertFetchedGroups() {
     // Terminate if current user is not admin or super user
     if (currentUser.super_user != "1" &&
@@ -273,13 +274,15 @@ function insertFetchedGroups() {
         let option = createElement("option");
 
         // Used to shorten code
-        let value = PollChartTypes[i].text;
-        let text   = PollChartTypes[i].text;
+        let value   = PollChartTypes[i].text;
+        let text    = PollChartTypes[i].text;
         
         // Sets option value to poll id
         option.innerHTML = option.value = value;
+
         // set option text to poll title
-        option.innerHTML = option.text  = text;
+        option.innerHTML = option.text = text;
+
         // Appends option to user polls picker
         chartTypePicker.add(option);
     }
@@ -389,16 +392,15 @@ function getGroupStats(group) {
     });
 
     // Defines selected poll
-    let selectedPoll = selectedGroup.selected_poll;
-
-    // Set default poll if it is null
-    if (selectedPoll == null)
-        selectedPoll = group.polls[0];
+    let selectedPoll = selectedGroup.selected_poll == null
+        ? group.polls[0]
+        : selectedGroup.selected_poll;
     
     // Creates new selected group object
     selectedGroup = {
         group: group,
         polls: group.polls,
+        users: group.users,
         selected_poll: selectedPoll,
         submitted_polls: groupSubmittedPolls,
         dates: pollDates,

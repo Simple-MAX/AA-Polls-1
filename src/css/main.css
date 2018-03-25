@@ -432,6 +432,11 @@ select {
     height: 15px;
 }
 
+.normal-spacing {
+    border: none;
+    height: 40px;
+}
+
 .regular-spacing {
     border: none;
     height: 100px;
