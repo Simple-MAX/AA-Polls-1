@@ -31,11 +31,11 @@ function renderChart(canvasId, data, options, randomColor = false) {
         return;
     }
 
+    // Used to determine highest voted value
+    let highestValue = 0;
+
     // Creates options if it is null or undefined
     if (options == null || options == undefined) {
-        // Used to determine highest voted value
-        let highestValue = 0;
-
         // Creates datasets and labels array
         let datasets = [], labels = [];
         
@@ -49,8 +49,8 @@ function renderChart(canvasId, data, options, randomColor = false) {
                     let datasetData = [];
 
                     /* Loops through data array again adds
-                    * only if current label is not empty
-                    */
+                     * only if current label is not empty
+                     */
                     for (let k = 0; k < data.length; k++) {
                         // Adds if label is not empty
                         if (data[k].label != "") {
@@ -58,8 +58,8 @@ function renderChart(canvasId, data, options, randomColor = false) {
                             if (j == 0) labels.push(data[k].label);
 
                             /* Adds new value to highestValue if
-                            * element is greater than current value
-                            */
+                             * element is greater than current value
+                             */
                             if (data[k].values[j] > highestValue)
                                 highestValue = data[k].values[j];
 
@@ -99,13 +99,15 @@ function renderChart(canvasId, data, options, randomColor = false) {
                 break;
             }
         }
-        
+
         // Terminate if datasets is null
         if (datasets == null || datasets.length <= 0) 
             return;
 
         // Determines max Y axis value
-        const maxY = chartType == ChartType.Bar ? highestValue : 10;
+        const maxY = chartType == ChartType.Bar 
+            ? highestValue
+            : 10;
 
         // Creates options and inserts chart data
         options = {

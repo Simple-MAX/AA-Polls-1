@@ -309,11 +309,8 @@ function showStatistics() {
              */
             if (stringContains(pollChartType.text, "Main"))
                 data = getPollRateStats(selectedGroup);
-            else {
+            else
                 data = getPollUsersRateStats(selectedGroup);
-
-                //
-            }
             break;
         case ChartType.Bar:
             // Gets influcences stats from polls
@@ -322,8 +319,6 @@ function showStatistics() {
         default:
             return;
     }
-
-    console.log(data);
 
     // Terminate if data is null
     if (data == null) return;
