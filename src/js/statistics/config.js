@@ -33,6 +33,12 @@ const PollChartTypes = [
         ]
     },
     {
+        value: ChartType.Line,
+        text: "Users rate graph",
+        labels: [],
+        borderColors: []
+    },
+    {
         value: ChartType.Bar,
         text: "Impact graph",
         labels: [
@@ -61,5 +67,7 @@ var selectedGroup = {
 };
 
 var chartType = ChartType.Line;
+
+var pollChartType = PollChartTypes[0];
 
 var chart;

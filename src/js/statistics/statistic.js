@@ -102,6 +102,97 @@ function getPollRateStats(groupData) {
     return data;
 }
 
+// Gets min, max and average stats from polls
+function getPollUsersRateStats(groupData) {
+    // Used to shorten code
+    let group = groupData;
+
+    /* Option object with data used for the chart
+     * and data array to return later on
+     */
+    let data = [], statsData = [];
+
+    /* Proceeds to format and create stats if
+     * selected group polls is not null
+     */
+    if (group.polls != null) {
+        // Loops through selected group polls
+        for (let i = 0; i < group.polls.length; i++) {
+            // Gets selected dates
+            let startDate   = Date.parse(group.start_date),
+                endDate     = Date.parse(group.end_date);
+
+            // Creates a new stats object for current poll
+            let stats = {
+                label: group.polls[i].id,
+                values: [0, 0, 0]
+            };
+
+            /* Continues or terminates if selected dates
+             * exceeds minimum and maximum limit
+             */
+            if (Date.parse(group.polls[i].date) < startDate ||
+                Date.parse(group.polls[i].date) > endDate) {
+                // Set label to nothing or empty string
+                stats.label = "";
+
+                // Pushes stats to statsData
+                statsData.push(stats);
+
+                // Skips to next iteration
+                continue;
+            }
+
+            // Min, max and general values
+            let min = 0, max = 0, average = 0;
+
+            // Loops through submitted polls
+            for (let j = 0; j < group.submitted_polls.length; j++) {
+                /* Proceed only if current poll id is
+                 * same as current submitted poll id
+                 */
+                if (group.polls[i].id == group.submitted_polls[j].id) {
+                    // Used to shorten code
+                    let poll = group.submitted_polls[j].poll;
+
+                    /* Sets min and max value if poll min value is 
+                    * lesser than min value or if poll max value
+                    * is greater than max value
+                    */
+                    if (j == 0 || min > parseInt(poll.general_rate))
+                        min = parseInt(poll.general_rate);
+                    if (j == 0 || max < parseInt(poll.general_rate))
+                        max = parseInt(poll.general_rate);
+
+                    // Increments average value with polls general rate value
+                    average += parseInt(poll.general_rate);
+                }
+            }
+
+            // Divides average value with the amount of submitted polls
+            average /= group.submitted_polls.length;
+
+            // Sets new and fetched values
+            stats.values[0] = average || 0;
+            stats.values[1] = max;
+            stats.values[2] = min;
+
+            // Appends stats object to data array
+            statsData.push(stats);
+        }
+    } else return;
+
+    // Terminate if data is null
+    if (statsData == null || statsData.length <= 0) 
+        return;
+
+    // Sets new stats data
+    data = statsData;
+
+    // Returns new stats data\
+    return data;
+}
+
 // Gets influcences stats from polls
 function getPollInfluncesStats(groupData) {
     // Used to shorten code
@@ -204,11 +295,25 @@ function showStatistics() {
     // Final data variable
     let data = null;
 
-    // Determines what data to receive based on chart type value
+    // Used to create custom options object
+    let options = null;
+
+    /* Determines what data to receive
+     * based on chart type value
+     */
     switch (chartType) {
         case ChartType.Line:
-            // Gets min, max and average stats from polls
-            data = getPollRateStats(selectedGroup);
+            /* Gets min, max and average stats from polls
+             * if the poll chart type label or text contains
+             * "Main" else, if it contains "User"
+             */
+            if (stringContains(pollChartType.text, "Main"))
+                data = getPollRateStats(selectedGroup);
+            else {
+                data = getPollUsersRateStats(selectedGroup);
+
+                //
+            }
             break;
         case ChartType.Bar:
             // Gets influcences stats from polls
@@ -217,6 +322,8 @@ function showStatistics() {
         default:
             return;
     }
+
+    console.log(data);
 
     // Terminate if data is null
     if (data == null) return;
@@ -229,10 +336,9 @@ function showStatistics() {
     if (startDate > endDate) data = null;
 
     // Renders the statistics on a new chart
-    renderChart("chart-canvas", data);
+    renderChart("chart-canvas", data, options, options != null);
 }
 
-// Inserts fetched groups
 function insertFetchedGroups() {
     // Terminate if current user is not admin or super user
     if (currentUser.super_user != "1" &&
@@ -547,6 +653,12 @@ function selectChartType() {
                     if (element.value == PollChartTypes[i].text) {
                         // Sets group target with matched id
                         chartType = PollChartTypes[i].value;
+
+                        /* Sets pollChartType to correct poll chart type
+                         * to determine whether a more specific option
+                         * is supposed to be showed
+                         */
+                        pollChartType = PollChartTypes[i];
 
                         // Terminates sub function
                         return;

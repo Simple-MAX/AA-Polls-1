@@ -524,7 +524,6 @@ function loadPopupUserTable(groupId) {
 
         // Add final structure to table data array
         userTableData.push(userDataObject);
-
     }
 
     // Format users accordingly
@@ -598,12 +597,10 @@ function appendGroup(containerId, data) {
     title = createElement("p");
 
     // Sets section title
-    
-    if (window.localStorage.getItem != true){
+    if (window.localStorage.getItem != true)
         title.innerHTML = "User";
-    } else {
+    else
         title.innerHTML = "Användare";
-    }
 
     // Appends the title and a spacing element
     groupTableContainer.appendChild(title);
@@ -637,8 +634,9 @@ function appendGroup(containerId, data) {
 
     // Gets popup user table on click
     addUserBtn.onclick = () => loadPopupUserTable(groupId);
-    groupTableContainer.appendChild(addUserBtn);
 
+    // Adds add user button
+    groupTableContainer.appendChild(addUserBtn);
 
     // Adds group table container to sub content container
     subContent.appendChild(groupTableContainer);
@@ -656,11 +654,10 @@ function appendGroup(containerId, data) {
     title = createElement("p");
     
     // Sets section title
-    if (window.localStorage.getItem != true){
+    if (window.localStorage.getItem != true)
         title.innerHTML = "All forms";
-    } else {
+    else
         title.innerHTML = "Alla formulär";
-    }
 
     // Adds all sub content children to container
     groupPollsContainer.appendChild(title);
@@ -670,10 +667,8 @@ function appendGroup(containerId, data) {
     let pollsContainer = null;
 
     // Proceed only if poll array length is greater than zero
-    if (data.polls.length > 0) {
-        // Creates a new poll container
+    if (data.polls.length > 0)
         pollsContainer = createElement("div", pollsContainerId, "polls-container");
-    }
 
     // Creates and returns an anchor button
     let addPollBtn = createAnchorButton({
@@ -687,10 +682,11 @@ function appendGroup(containerId, data) {
     if (pollsContainer != null)
         groupPollsContainer.appendChild(pollsContainer);
 
+    // Adds spacing
     groupPollsContainer.appendChild(spacing.cloneNode(true));
 
+    // Adds add poll button
     groupPollsContainer.appendChild(addPollBtn);
-
 
     // Adds group poll container to sub content container
     subContent.appendChild(groupPollsContainer);

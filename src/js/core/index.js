@@ -134,6 +134,28 @@ function initialize() {
 // Returns a boolean value based on the existance of substring
 function stringContains(string, value) { return string.includes(value); }
 
+// Generates a random integer
+function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+// Generates a random color
+function randomColor(stringFormat = false) {
+    // Generates random RGB values
+    const   r = randomInteger(0, 255),
+            g = randomInteger(0, 255),
+            b = randomInteger(0, 255);
+
+    /* Attempts to return color in a 
+     * specific way, based on string 
+     * format boolean
+     */
+    if (stringFormat)
+        return `rgb(${r}, ${g}, ${b})`;
+    else
+        return [r, g, b];
+}
+
 // Gets first param value of url with given key
 function getUrlParam(key) { 
     // Gets all user params
